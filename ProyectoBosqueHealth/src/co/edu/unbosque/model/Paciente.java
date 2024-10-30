@@ -1,5 +1,5 @@
 package co.edu.unbosque.model;
 
-public class Paciente {
-
+public class Paciente extends Persona {
+	
 }

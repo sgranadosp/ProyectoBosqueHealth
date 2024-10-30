@@ -1,5 +1,5 @@
 package co.edu.unbosque.model;
 
-public class Especialista {
+public class Especialista extends Persona{
 
 }
