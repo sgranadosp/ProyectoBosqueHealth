@@ -2,12 +2,18 @@ package co.edu.unbosque.model.persistense;
 
 import java.util.ArrayList;
 
+import co.edu.unbosque.model.Cita;
+import co.edu.unbosque.model.CitaDTO;
 import co.edu.unbosque.model.DirectorMedico;
 import co.edu.unbosque.model.DirectorMedicoDTO;
 import co.edu.unbosque.model.Especialista;
 import co.edu.unbosque.model.EspecialistaDTO;
 import co.edu.unbosque.model.Paciente;
 import co.edu.unbosque.model.PacienteDTO;
+import co.edu.unbosque.model.TratamientoMedico;
+import co.edu.unbosque.model.TratamientoMedicoDTO;
+import co.edu.unbosque.model.Turno;
+import co.edu.unbosque.model.TurnoDTO;
 
 public class DataMapper {
 	
@@ -105,5 +111,86 @@ public class DataMapper {
 		return eList;
 	}
 
+	public static Cita citaDTOToCita(CitaDTO dto) {
+		Cita e;
+		e = new Cita(dto.getEspecialista(), dto.getPaciente(), dto.getFecha(), dto.getHora(), dto.getNumeroCita(), dto.getEstado());
+		return e;
+	}
 	
+	public static CitaDTO citaToCitaDTO(Cita e) {
+		CitaDTO dto;
+		dto = new CitaDTO(e.getEspecialista(), e.getPaciente(), e.getFecha(), e.getHora(), e.getNumeroCita(), e.getEstado());
+		return dto;
+	}
+	
+	public static ArrayList<Cita> listaCitaDTOToListaCita(ArrayList<CitaDTO> dtoList){
+		ArrayList<Cita> eList = new ArrayList<>();
+		for (CitaDTO c : dtoList) {
+			eList.add(new Cita(c.getEspecialista(), c.getPaciente(), c.getFecha(), c.getHora(), c.getNumeroCita(), c.getEstado()));
+		}
+		return eList;
+	}
+	
+	public static ArrayList<CitaDTO> listaCitaToListaCitaDTO(ArrayList<Cita> eList){
+		ArrayList<CitaDTO> dtoList = new ArrayList<>();
+		for (Cita c : eList) {
+			dtoList.add(new CitaDTO(c.getEspecialista(), c.getPaciente(), c.getFecha(), c.getHora(), c.getNumeroCita(), c.getEstado()));
+		}
+		return dtoList;
+	}
+	public static Turno turnoDTOToTurno(TurnoDTO dto) {
+		Turno e;
+		e = new Turno(dto.getEspecialista(), dto.getFecha(), dto.getNumId());
+		return e;
+	}
+	
+	public static TurnoDTO turnoToTurnoDTO(Turno e) {
+		TurnoDTO dto;
+		dto = new TurnoDTO(e.getEspecialista(), e.getFecha(), e.getNumId());
+		return dto;
+	}
+	
+	public static ArrayList<Turno> listaTurnoDTOToListaTurno(ArrayList<TurnoDTO> dtoList){
+		ArrayList<Turno> eList = new ArrayList<>();
+		for (TurnoDTO t : dtoList) {
+			eList.add(new Turno(t.getEspecialista(), t.getFecha(), t.getNumId()));
+		}
+		return eList;
+	}
+	
+	public static ArrayList<TurnoDTO> listaTurnoToListaTurnoDTO(ArrayList<Turno> eList){
+		ArrayList<TurnoDTO> dtoList = new ArrayList<>();
+		for (Turno t : eList) {
+			dtoList.add(new TurnoDTO(t.getEspecialista(), t.getFecha(), t.getNumId()));
+		}
+		return dtoList;
+	}
+	
+	public static TratamientoMedico tratamientoMedicoDTOToTratamientoMedico(TratamientoMedicoDTO dto) {
+		TratamientoMedico e;
+		e = new TratamientoMedico(dto.getPaciente(),dto.getEspecialista(), dto.getFecha(), dto.getTratamiento(), dto.getExamen(), dto.getDiagnostico()) ;
+		return e;
+	}
+	
+	public static TratamientoMedicoDTO tratamientoMedicoToTratamientoMedicoDTO(TratamientoMedico e) {
+		TratamientoMedicoDTO dto;
+		dto = new TratamientoMedicoDTO(e.getPaciente(), e.getEspecialista(), e.getFecha(), e.getTratamiento(), e.getExamen(), e.getExamen());
+		return dto;
+	}
+	
+	public static ArrayList<TratamientoMedico> listaTratamientoMedicoDTOToListaTratamientoMedico(ArrayList<TratamientoMedicoDTO> dtoList){
+		ArrayList<TratamientoMedico> eList = new ArrayList<>();
+		for (TratamientoMedicoDTO t : dtoList) {
+			eList.add(new TratamientoMedico(t.getPaciente(), t.getEspecialista(), t.getFecha(), t.getTratamiento(), t.getExamen(), t.getExamen()));
+		}
+		return eList;
+	}
+	
+	public static ArrayList<TratamientoMedicoDTO> listaTratamientoMedicoToListaTratamientoMedicoDTO(ArrayList<TratamientoMedico> eList){
+		ArrayList<TratamientoMedicoDTO> dtoList = new ArrayList<>();
+		for (TratamientoMedico t : eList) {
+			dtoList.add(new TratamientoMedicoDTO(t.getPaciente(), t.getEspecialista(), t.getFecha(), t.getTratamiento(), t.getExamen(), t.getExamen()));
+		}
+		return dtoList;
+	}
 }
