@@ -2,7 +2,7 @@ package co.edu.unbosque.model.persistence;
 
 import java.util.ArrayList;
 
-public interface CRUDOperation<D, E> { // D --> DTO. E --> ENTIDAD
+public interface CRUDOperation<E, D> { // D --> DTO. E --> ENTIDAD
 
 	public String showAll();
 
