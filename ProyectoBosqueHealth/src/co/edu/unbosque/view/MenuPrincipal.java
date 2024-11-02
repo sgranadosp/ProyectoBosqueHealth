@@ -8,6 +8,7 @@ public class MenuPrincipal extends JFrame{
 	private VentanaDirector vDirector;
 	private VentanaEspecialista vEspecialista;
 	private VentanaPaciente vPaciente;
+	private VentanaSeleccion vSeleccion;
 	
 	public MenuPrincipal() {
 
@@ -40,6 +41,10 @@ public class MenuPrincipal extends JFrame{
 	public void mostrarVentanaPaciente() {
 		setContentPane(vPaciente);
 	}
+	
+	public void mostrarVentanaSeleccion() {
+		setContentPane(vSeleccion);
+	}
 
 	public VentanaDirector getvDirector() {
 		return vDirector;
@@ -48,9 +53,13 @@ public class MenuPrincipal extends JFrame{
 	public VentanaEspecialista getvEspecialista() {
 		return vEspecialista;
 	}
-	
+
 	public VentanaPaciente getvPaciente() {
 		return vPaciente;
 	}
-	
+
+	public VentanaSeleccion getvSeleccion() {
+		return vSeleccion;
+	}
+
 }

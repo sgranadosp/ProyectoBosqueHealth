@@ -1,5 +1,7 @@
 package co.edu.unbosque.view;
 
-public class VentanaEspecialista {
+import javax.swing.JPanel;
+
+public class VentanaEspecialista extends JPanel{
 
 }
