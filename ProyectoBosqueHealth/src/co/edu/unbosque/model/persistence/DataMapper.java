@@ -1,4 +1,4 @@
-package co.edu.unbosque.model.persistense;
+package co.edu.unbosque.model.persistence;
 
 import java.util.ArrayList;
 
@@ -19,6 +19,8 @@ public class DataMapper {
 	
 	public static PacienteDTO pacienteToPacienteDTO(Paciente e) {
 		
+		
+		//Paciente
 		PacienteDTO dto ;
 		dto = new PacienteDTO(e.getNombre(), e.getFechaNacimiento(), e.getGenero(), e.getId(), e.getCorreo(), e.getTratamiento());
 		return dto;
@@ -48,6 +50,8 @@ public class DataMapper {
 		}
 		return eList;
 	}
+	
+	//Especialista
 	public static EspecialistaDTO especialistaToEspecialistaDTO(Especialista e) {
 		
 		EspecialistaDTO dto ;
@@ -79,6 +83,8 @@ public class DataMapper {
 		}
 		return eList;
 	}
+	
+	//Director medico
 	public static DirectorMedicoDTO directorMedicoToDirectorMedicoDTO(DirectorMedico e) {
 		
 		DirectorMedicoDTO dto ;
@@ -111,6 +117,8 @@ public class DataMapper {
 		return eList;
 	}
 
+	
+	//Cita
 	public static Cita citaDTOToCita(CitaDTO dto) {
 		Cita e;
 		e = new Cita(dto.getEspecialista(), dto.getPaciente(), dto.getFecha(), dto.getHora(), dto.getNumeroCita(), dto.getEstado());
@@ -138,6 +146,8 @@ public class DataMapper {
 		}
 		return dtoList;
 	}
+	
+	//Turno
 	public static Turno turnoDTOToTurno(TurnoDTO dto) {
 		Turno e;
 		e = new Turno(dto.getEspecialista(), dto.getFecha(), dto.getNumId());
@@ -166,6 +176,8 @@ public class DataMapper {
 		return dtoList;
 	}
 	
+	
+	//Tratamiento medico
 	public static TratamientoMedico tratamientoMedicoDTOToTratamientoMedico(TratamientoMedicoDTO dto) {
 		TratamientoMedico e;
 		e = new TratamientoMedico(dto.getPaciente(),dto.getEspecialista(), dto.getFecha(), dto.getTratamiento(), dto.getExamen(), dto.getDiagnostico()) ;
