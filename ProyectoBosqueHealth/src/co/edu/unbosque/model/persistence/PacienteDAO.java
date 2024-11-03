@@ -17,7 +17,6 @@ public class PacienteDAO implements CRUDOperation<Paciente, PacienteDTO>{
 	private final String SERIALIZED_NAME = "pacientes.bat";
 	
 	public PacienteDAO() {
-		
 		FileHandler.checkFolder();
 		FileHandler.checkPropertiesFolder();
 	}
@@ -49,7 +48,6 @@ public class PacienteDAO implements CRUDOperation<Paciente, PacienteDTO>{
 			writeFile();
 			writeSerialized();
 			return true;
-
 		} else {
 			return false;
 		}
@@ -61,6 +59,7 @@ public class PacienteDAO implements CRUDOperation<Paciente, PacienteDTO>{
 		if (found != null) {
 			listaPacientes.remove(found);
 			writeFile();
+			writeSerialized();
 			return true;
 		} else {
 			return false;
