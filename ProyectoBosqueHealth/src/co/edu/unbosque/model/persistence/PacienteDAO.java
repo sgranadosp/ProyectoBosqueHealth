@@ -1,11 +1,14 @@
 package co.edu.unbosque.model.persistence;
 
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
 import co.edu.unbosque.model.Paciente;
 import co.edu.unbosque.model.PacienteDTO;
-import co.edu.unbosque.model.persistence.CRUDOperation;
+
 
 public class PacienteDAO implements CRUDOperation<Paciente, PacienteDTO>{
 
@@ -124,9 +127,23 @@ public class PacienteDAO implements CRUDOperation<Paciente, PacienteDTO>{
 			listaPacientes = new ArrayList<>();
 			String[] rows = content.split("\n");
 			for (String row : rows) {
+				
 				String[] cols = row.split(";");
 				Paciente temp = new Paciente();
+				SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+				Date fecha = null;
+				try {
+					fecha = df.parse(cols[1]);
+				} catch (ParseException e) {
+					e.printStackTrace();
+				}
+				int id = Integer.parseInt(cols[3]);
 				temp.setNombre(cols[0]);
+				temp.setFechaNacimiento(fecha);
+				temp.setGenero(cols[2]);
+				temp.setId(id);
+				temp.setCorreo(cols[4]);
+				temp.setTratamiento(cols[5]);
 				
 				listaPacientes.add(temp);
 			}
@@ -134,10 +151,16 @@ public class PacienteDAO implements CRUDOperation<Paciente, PacienteDTO>{
 	}
 	
 	public void writeSerialized() {
-		
+		FileHandler.writeSerialized(SERIALIZED_NAME, listaPacientes);
 	}
 	
+	@SuppressWarnings("unchecked")
 	public void readSerialized() {
-		
+		Object content = FileHandler.readSerialized(SERIALIZED_NAME);
+		if (content == null) {
+			listaPacientes = new ArrayList<>();
+		} else {
+			listaPacientes = (ArrayList<Paciente>) content;
+		}
 	}
 }
