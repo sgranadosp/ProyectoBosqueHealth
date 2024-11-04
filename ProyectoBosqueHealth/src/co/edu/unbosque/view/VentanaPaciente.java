@@ -1,5 +1,7 @@
 package co.edu.unbosque.view;
 
+import java.awt.CardLayout;
+import java.awt.Color;
 import java.awt.Image;
 
 import javax.swing.ImageIcon;
@@ -17,7 +19,28 @@ public class VentanaPaciente extends JPanel{
 	private JTextField nombrePac, documentoPac, correoPac, horaCita, numeroCita, horaCitaReagendar, numeroCitaCancelar;
 	private JCalendar fechaNacimientoPac, fechaCita, fechaCitaReagendar;
 	private JComboBox<String> generoPac, especialidad, especialista;
-	private JButton btnDatosPersonales, btnCitas, btnTratamientoMedico, btnTooltipPac, btnGuardarDatos, btnAgendar, btnGenerarCita, btnCitasGeneradas, btnReagendar, btnGenerarReagendada, btnCancelar, btnCancelarCita;
+	private JButton btnVolverMenu, btnDatosPersonales, btnCitas, btnTratamientoMedico, btnTooltipPac, btnGuardarDatos, btnAgendar, btnGenerarCita, btnCitasGeneradas, btnReagendar, btnGenerarReagendada, btnCancelar, btnCancelarCita;
+	CardLayout cardLayout = new CardLayout();
+	private JPanel panelFijo, panelArribaVariable, panelAbajoVariable;
+	
+	public void paneles() {
+		
+		panelFijo = new JPanel();
+		panelFijo.setLayout(null);
+		panelFijo.setBounds(0, 0, 1280, 720);
+		panelFijo.setBackground(Color.WHITE);
+		
+		panelArribaVariable = new JPanel();
+		panelArribaVariable.setLayout(null);
+		panelArribaVariable.setBounds(600, 100, 500, 100);
+		panelArribaVariable.setBackground(Color.WHITE);
+		
+		panelAbajoVariable = new JPanel();
+		panelAbajoVariable.setLayout(null);
+		panelAbajoVariable.setBounds(600, 100, 500, 100);
+		panelAbajoVariable.setBackground(Color.WHITE);
+		
+	}
 	
 	public VentanaPaciente() {
 		
@@ -30,6 +53,17 @@ public class VentanaPaciente extends JPanel{
 		Image redimensionado = imagenDatos.getImage().getScaledInstance(1280, 720, Image.SCALE_SMOOTH);
 		datosPers.setIcon(new ImageIcon(redimensionado));
 		datosPers.setBounds(0, 0, 1280, 720);
+		panelFijo.add(datosPers);
+		
+		btnTooltipPac = new JButton();
+		btnTooltipPac.setToolTipText("Panel de gestión para pacientes");
+		btnTooltipPac.setBounds(1200, 0, 40, 40);
+		btnTooltipPac.setOpaque(true);
+		
+		btnVolverMenu = new JButton("Volver al Menú Principal");
+		btnVolverMenu.setBounds(1100, 600, 250, 70);
+		btnVolverMenu.setOpaque(true);
+		btnVolverMenu.setActionCommand("VOLVER AL MENU");
 		
 		btnDatosPersonales = new JButton("Datos personales");
 		btnDatosPersonales.setBounds(500, 100, 250, 70);
@@ -73,11 +107,6 @@ public class VentanaPaciente extends JPanel{
 		btnGuardarDatos.setBounds(0, 530, 250, 70);
 		btnGuardarDatos.setOpaque(true);
 		btnGuardarDatos.setActionCommand("GUARDAR DATOS");
-		
-		btnTooltipPac = new JButton();
-		btnTooltipPac.setToolTipText("Panel de gestión para pacientes");
-		btnTooltipPac.setBounds(1200, 0, 40, 40);
-		btnTooltipPac.setOpaque(true);
 		
 		agendarCita = new JLabel();
 		ImageIcon imagenAgendar = new ImageIcon("media/ImgAgendarCita.png");
@@ -124,7 +153,7 @@ public class VentanaPaciente extends JPanel{
 		fechaCita.setOpaque(true);
 		
 		horaCita = new JTextField();
-		horaCita.setBounds(0, 500, 250, 70); //a
+		horaCita.setBounds(0, 500, 250, 70); 
 		horaCita.setOpaque(true);
 		
 		btnGenerarCita = new JButton("Generar cita");
@@ -138,12 +167,60 @@ public class VentanaPaciente extends JPanel{
 		mostrarCitas.setIcon(new ImageIcon(redimensionado3));
 		mostrarCitas.setBounds(0, 0, 1280, 720);
 		
+		//Aquí va el bloque de código para hacer la tabla que muestra las citas ya generadas
+		
+		
 		reagendarCita = new JLabel();
 		ImageIcon imagenReagendar = new ImageIcon("media/ImgReagendarCita.png");
 		Image redimensionado4 = imagenReagendar.getImage().getScaledInstance(1280, 720, Image.SCALE_SMOOTH);
 		reagendarCita.setIcon(new ImageIcon(redimensionado4));
 		reagendarCita.setBounds(0, 0, 1280, 720);
 		
+		numeroCita = new JTextField();
+		numeroCita.setBounds(0, 200, 250, 70);
+		numeroCita.setOpaque(true);
+		
+		fechaCitaReagendar = new JCalendar();
+		fechaCitaReagendar.setBounds(0, 300, 250, 70);
+		fechaCitaReagendar.setOpaque(true);
+		
+		horaCitaReagendar = new JTextField();
+		horaCitaReagendar.setBounds(0, 400, 250, 70);
+		horaCitaReagendar.setOpaque(true);
+		
+		btnGenerarReagendada = new JButton("Reagendar Cita");
+		btnGenerarReagendada.setBounds(0, 550, 250, 70);
+		btnGenerarReagendada.setOpaque(true);
+		btnGenerarReagendada.setActionCommand("REAGENDAR CITA");
+		
+		cancelarCita = new JLabel();
+		ImageIcon imagenCancelar= new ImageIcon("media/ImgCancelarCita.png");
+		Image redimensionado5 = imagenCancelar.getImage().getScaledInstance(1280, 720, Image.SCALE_SMOOTH);
+		cancelarCita.setIcon(new ImageIcon(redimensionado5));
+		cancelarCita.setBounds(0, 0, 1280, 720);
+		
+		numeroCitaCancelar = new JTextField();
+		numeroCitaCancelar.setBounds(0, 400, 250, 70);
+		numeroCitaCancelar.setOpaque(true);
+		
+		btnCancelarCita = new JButton("Cancelar Cita");
+		btnCancelarCita.setBounds(0, 550, 250, 70);
+		btnCancelarCita.setOpaque(true);
+		btnCancelarCita.setActionCommand("CANCELAR CITA");
+		
+		tratamiento = new JLabel();
+		ImageIcon imagenTratamiento= new ImageIcon("media/ImgTratamientoMedico.png");
+		Image redimensionado6 = imagenTratamiento.getImage().getScaledInstance(1280, 720, Image.SCALE_SMOOTH);
+		tratamiento.setIcon(new ImageIcon(redimensionado6));
+		tratamiento.setBounds(0, 0, 1280, 720);
+		
+		//Aquí va el bloque de código donde va la tabla que muestra los tratamientos
+		
+		
+		
+		add(panelFijo)
+;		add(panelArribaVariable);
+		add(panelAbajoVariable);
 	}
 	
 }
