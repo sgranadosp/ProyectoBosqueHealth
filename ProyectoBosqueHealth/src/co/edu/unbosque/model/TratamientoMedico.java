@@ -1,9 +1,14 @@
 package co.edu.unbosque.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class TratamientoMedico {
+public class TratamientoMedico implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 8957258151037367330L;
 	private Paciente paciente;
 	private Especialista especialista;
 	private Date fecha;

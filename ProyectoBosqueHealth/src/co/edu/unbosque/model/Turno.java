@@ -1,9 +1,14 @@
 package co.edu.unbosque.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Turno {
+public class Turno implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 8290188135617656552L;
 	private Especialista especialista;
 	private Date fecha;
 	private int numId;
