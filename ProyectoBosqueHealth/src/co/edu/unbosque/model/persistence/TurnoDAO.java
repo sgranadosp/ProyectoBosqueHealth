@@ -64,7 +64,7 @@ public class TurnoDAO implements CRUDOperation<Turno, TurnoDTO>{
 		Turno found = null;
 		if (!listaTurnos.isEmpty()) {
 			for (Turno turno : listaTurnos) {
-				if (turno.getNumId() == toFind.getNumId()) {
+				if (turno.getFecha().equals(toFind.getFecha())) {
 					found = turno;
 					return found;
 				} else {
