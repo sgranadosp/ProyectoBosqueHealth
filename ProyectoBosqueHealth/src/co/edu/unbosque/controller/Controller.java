@@ -19,6 +19,21 @@ public class Controller implements ActionListener {
 	
 	public void asignarLectores() {
 		
+		//Menu de personas
+		//director
+		vf.getMenuPrincipal().getvSeleccion().getBtnDirector().addActionListener(this);
+		vf.getMenuPrincipal().getvSeleccion().getBtnDirector().setActionCommand("DIRECTOR");
+		
+		//especialista
+		vf.getMenuPrincipal().getvSeleccion().getBtnEspecialista().addActionListener(this);
+		vf.getMenuPrincipal().getvSeleccion().getBtnEspecialista().setActionCommand("ESPECIALISTA");
+		
+		//paciente
+		vf.getMenuPrincipal().getvSeleccion().getBtnPaciente().addActionListener(this);
+		vf.getMenuPrincipal().getvSeleccion().getBtnPaciente().setActionCommand("PACIENTE");
+		
+		
+		
 	}
 
 	@Override
