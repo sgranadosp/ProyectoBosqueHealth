@@ -39,7 +39,14 @@ public class Controller implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		switch (e.getActionCommand()) {
-		case "":
+		case "DIRECTOR":
+			
+			break;
+		case "ESPECIALISTA":
+			
+			break;
+			
+		case "PACIENTE":
 			
 			break;
 
