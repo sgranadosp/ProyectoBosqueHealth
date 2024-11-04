@@ -124,7 +124,7 @@ public class VentanaPaciente extends JPanel{
 		fechaCita.setOpaque(true);
 		
 		horaCita = new JTextField();
-		horaCita.setBounds(0, 500, 250, 70);
+		horaCita.setBounds(0, 500, 250, 70); //a
 		horaCita.setOpaque(true);
 		
 		btnGenerarCita = new JButton("Generar cita");
