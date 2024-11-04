@@ -1,9 +1,14 @@
 package co.edu.unbosque.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Especialista extends Persona{
+public class Especialista extends Persona implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1119936467395148006L;
 	private String especialidad;
 	
 	public Especialista() {

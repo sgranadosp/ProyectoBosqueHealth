@@ -1,8 +1,14 @@
 package co.edu.unbosque.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Cita {
+public class Cita implements Serializable{
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4496922039651276720L;
 	private Especialista especialista;
 	private Paciente paciente;
 	private Date fecha;
