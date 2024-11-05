@@ -19,7 +19,8 @@ public class VentanaPaciente extends JPanel{
 	private JTextField nombrePac, documentoPac, correoPac, horaCita, numeroCita, horaCitaReagendar, numeroCitaCancelar;
 	private JCalendar fechaNacimientoPac, fechaCita, fechaCitaReagendar;
 	private JComboBox<String> generoPac, especialidad, especialista;
-	private JButton btnVolverMenu, btnDatosPersonales, btnCitas, btnTratamientoMedico, btnTooltipPac, btnGuardarDatos, btnAgendar, btnGenerarCita, btnCitasGeneradas, btnReagendar, btnGenerarReagendada, btnCancelar, btnCancelarCita;
+	private JButton btnVolverMenu, btnDatosPersonales, btnCitas, btnTratamientoMedico, btnTooltipPac, btnGuardarDatos, btnAgendar, btnGenerarCita,
+	btnCitasGeneradas, btnReagendar, btnGenerarReagendada, btnCancelar, btnCancelarCita;
 	CardLayout cardLayout = new CardLayout();
 	private JPanel panelFijo, panelArribaVariable, panelAbajoVariable;
 	private final static String DATOS = "Datos personales";
@@ -187,7 +188,7 @@ public class VentanaPaciente extends JPanel{
 		btnCancelar = new JButton();
 		btnCancelar.setBounds(300, 120, 250, 70);
 		btnCancelar.setOpaque(true);
-		btnCancelar.setActionCommand("CANCELAR CITA");
+		btnCancelar.setActionCommand("CANCELAR");
 		panelArribaVariable.add(btnCancelar);
 		
 		// Imágen, botones, etc del panel de abajp variable agendar cita
@@ -266,10 +267,10 @@ public class VentanaPaciente extends JPanel{
 		horaCitaReagendar.setOpaque(true);
 		panelAbajoVariable.add(horaCitaReagendar);
 		
-		btnGenerarReagendada = new JButton("Reagendar Cita");
+		btnGenerarReagendada = new JButton("Generar reagendar");
 		btnGenerarReagendada.setBounds(0, 550, 250, 70);
 		btnGenerarReagendada.setOpaque(true);
-		btnGenerarReagendada.setActionCommand("REAGENDAR CITA");
+		btnGenerarReagendada.setActionCommand("GENERAR REAGENDAR CITA");
 		panelAbajoVariable.add(btnGenerarReagendada);
 		
 		//Imágen, botones, etc panel variable de abajo para cancelar citas
