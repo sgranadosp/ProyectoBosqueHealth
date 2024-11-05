@@ -27,6 +27,7 @@ public class MenuPrincipal extends JFrame{
 		vDirector = new VentanaDirector();
 		vEspecialista = new VentanaEspecialista();
 		vPaciente = new VentanaPaciente();
+		vSeleccion = new VentanaSeleccion();
 
 	}
 	
