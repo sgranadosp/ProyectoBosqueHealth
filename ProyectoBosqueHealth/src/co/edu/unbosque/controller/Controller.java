@@ -14,6 +14,7 @@ public class Controller implements ActionListener {
 	public Controller() {
 		mf = new ModelFacade();
 		vf = new ViewFacade();
+		vf.getVentanaSeleccion().setVisible(true);
 		asignarLectores();
 	}
 	
@@ -89,14 +90,18 @@ public class Controller implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		switch (e.getActionCommand()) {
 		case "DIRECTOR":
-			
+			vf.getMenuPrincipal().setVisible(false);
+			vf.getVentanaDirector().setVisible(true);
 			break;
 		case "ESPECIALISTA":
-			
+			vf.getMenuPrincipal().setVisible(false);
+			vf.getVentanaEspecialista().setVisible(true);
 			break;
 			
 		case "PACIENTE":
-			
+			vf.getMenuPrincipal().setVisible(false);
+			vf.getVentanaPaciente().setVisible(true);
+			vf.getVentanaPaciente().getPanelFijo().setVisible(true);
 			break;
 
 		default:

@@ -32,6 +32,7 @@ public class VentanaPaciente extends JPanel{
 	
 	public void paneles() {
 		
+		
 		panelFijo = new JPanel();
 		panelFijo.setLayout(null);
 		panelFijo.setBounds(0, 0, 1280, 720);
@@ -64,6 +65,8 @@ public class VentanaPaciente extends JPanel{
 		setLayout(null);
 		setSize(1280, 720);
 		setVisible(true);
+		
+		paneles();
 		
 		//Fondo fijo para pacientes
 		
