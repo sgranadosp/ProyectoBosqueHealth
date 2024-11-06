@@ -1,5 +1,10 @@
 package co.edu.unbosque.view;
 
+import java.awt.CardLayout;
+import java.awt.Color;
+import java.awt.Image;
+
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
@@ -11,20 +16,33 @@ import com.toedter.calendar.JCalendar;
 public class VentanaEspecialista extends JPanel{
 	
 	private JButton btnDatosPersonales, btnCitas, btnTurnos,
-	btnTratamientoDelPaciente, btnListaDeTratamientos, btnGuardar, btnVolver,
-	btnTurnosMes, btnCambioTurno;
-	private JTextField nombreEsp, idEsp, correoEsp;
-	private JCalendar fechaNacimientoEsp, fechaDelTurnoCambiar;
-	private JComboBox<String> generoEsp, especialidadEsp, especialistaActualEsp, EspecialistaCambiarEsp;
+	btnTratamientoDelPaciente, btnListaDeTratamientos, btnGuardarDatos, btnVolver,
+	btnTurnosMes, btnCambioDeTurno, btnConfirmarCambio, btnGuardarTratamiento;
+	private JTextField nombreEsp, idEsp, correoEsp, examenTratamiento, diagnosticoTratamiento, tratamiento;
+	private JCalendar fechaNacimientoEsp, fechaDelTurnoCambiar, fechaTratamientoPaciente;
+	private JComboBox<String> generoEsp, especialidadEsp, especialistaActualEsp, especialistaNuevoEsp
+	, escogerPaciente;
 	private JLabel imgFija, imgArribaDatos, imgAbajoDatos, imgArribaCitas,
 	imgAbajoCitas, imgArribaTurnoMes, imgAbajoTurnoMes, imgArribaCambioTurno,
 	imgAbajoCambioTurno, imgArribaTratamiento, imgAbajoTratamiento,
 	imgArribaListaTratamientos, imgAbajoListaTratamientos;
 	private JPanel panelFijoEsp, panelArribaVariableEsp, panelAbajoVariableEsp;
+	CardLayout cardLayoutEsp = new CardLayout();
 	
 	public void paneles() {
 		
+		panelFijoEsp = new JPanel();
+		panelFijoEsp.setLayout(null);
+		panelFijoEsp.setBounds(0, 0, 1280, 720);
+		panelFijoEsp.setBackground(Color.WHITE);
 		
+		panelArribaVariableEsp = new JPanel(cardLayoutEsp);
+		panelArribaVariableEsp.setBounds(600, 100, 500, 100);
+		panelArribaVariableEsp.setBackground(Color.WHITE);
+		
+		panelAbajoVariableEsp = new JPanel(cardLayoutEsp);
+		panelAbajoVariableEsp.setBounds(600, 100, 500, 100);
+		panelAbajoVariableEsp.setBackground(Color.WHITE);
 		
 	}
 	
@@ -33,6 +51,13 @@ public class VentanaEspecialista extends JPanel{
 		setLayout(null);
 		setSize(1280, 720);
 		setVisible(true);
+		
+		imgFija = new JLabel();
+		ImageIcon imagenPaciente = new ImageIcon("media/imgsPaciente/ImgPacienteFija.png");
+		Image redimensionado = imagenPaciente.getImage().getScaledInstance(1280, 720, Image.SCALE_SMOOTH);
+		imgFija.setIcon(new ImageIcon(redimensionado));
+		imgFija.setBounds(0, 0, 1280, 720);
+		panelFijoEsp.add(imgFija);
 		
 		btnDatosPersonales = new JButton("datos personales");
 		btnDatosPersonales.setBounds(0, 0, 250, 70);
@@ -59,10 +84,10 @@ public class VentanaEspecialista extends JPanel{
 		btnListaDeTratamientos.setOpaque(true);
 		btnListaDeTratamientos.setActionCommand("LISTA TRATAMIENTOS");
 		
-		btnGuardar = new JButton("guardar");
-		btnGuardar.setBounds(0, 0, 250, 70);
-		btnGuardar.setOpaque(true);
-		btnGuardar.setActionCommand("GUARDAR ESP");
+		btnGuardarDatos = new JButton("guardar");
+		btnGuardarDatos.setBounds(0, 0, 250, 70);
+		btnGuardarDatos.setOpaque(true);
+		btnGuardarDatos.setActionCommand("GUARDAR ESP");
 		
 		btnVolver = new JButton("volver");
 		btnVolver.setBounds(0, 0, 250, 70);
@@ -74,10 +99,10 @@ public class VentanaEspecialista extends JPanel{
 		btnTurnosMes.setOpaque(true);
 		btnTurnosMes.setActionCommand("TURNO MES ESP");
 		
-		btnCambioTurno = new JButton("cambio de turno");
-		btnCambioTurno.setBounds(0, 0, 250, 70);
-		btnCambioTurno.setOpaque(true);
-		btnCambioTurno.setActionCommand("CAMBIO TURNO ESP");
+		btnCambioDeTurno = new JButton("cambio de turno");
+		btnCambioDeTurno.setBounds(0, 0, 250, 70);
+		btnCambioDeTurno.setOpaque(true);
+		btnCambioDeTurno.setActionCommand("CAMBIO TURNO ESP");
 		
 		nombreEsp = new JTextField();
 		nombreEsp.setBounds(0, 0, 250, 70);
@@ -120,9 +145,9 @@ public class VentanaEspecialista extends JPanel{
 		especialistaActualEsp.setBounds(0, 200, 250, 70);
 		especialistaActualEsp.addItem("");
 		
-		EspecialistaCambiarEsp = new JComboBox<String>();
-		EspecialistaCambiarEsp.setBounds(0, 200, 250, 70);
-		EspecialistaCambiarEsp.addItem("");
+		especialistaNuevoEsp = new JComboBox<String>();
+		especialistaNuevoEsp.setBounds(0, 200, 250, 70);
+		especialistaNuevoEsp.addItem("");
 		//toca hacer que se añadan los especialistas que esten
 		
 		//falta añadir las cosas de los labels
