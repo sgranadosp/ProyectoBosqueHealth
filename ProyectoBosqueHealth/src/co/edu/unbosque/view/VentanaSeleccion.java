@@ -24,23 +24,23 @@ public class VentanaSeleccion extends JPanel{
 		imagenPpal.setIcon(new ImageIcon(redimensionado));
 		imagenPpal.setBounds(0, 0, 1280, 720);
 		
-		btnDirector = new JButton("Director");
-		btnDirector.setBounds(600, 400, 300, 50);
-		btnDirector.setOpaque(true);
-		btnDirector.setActionCommand("DIRECTOR");
-		btnDirector.setToolTipText("Gestión para Director Médico");
+		btnPaciente = new JButton("Paciente");
+		btnPaciente.setBounds(372, 262, 505, 85);
+		btnPaciente.setOpaque(false);
+		btnPaciente.setActionCommand("PACIENTE");
+		btnPaciente.setToolTipText("Gestión para Pacientes");
 		
-		btnEspecialista = new JButton();
-		btnEspecialista.setBounds(600, 480, 300, 50);
-		btnEspecialista.setOpaque(true);
+		btnEspecialista = new JButton("Especialista");
+		btnEspecialista.setBounds(372, 384, 505, 85);
+		btnEspecialista.setOpaque(false);
 		btnEspecialista.setActionCommand("ESPECIALISTA");
 		btnEspecialista.setToolTipText("Gestión para Especialistas");
 		
-		btnPaciente = new JButton("Paciente");
-		btnPaciente.setBounds(600, 560, 300, 50);
-		btnPaciente.setOpaque(true);
-		btnPaciente.setActionCommand("PACIENTE");
-		btnPaciente.setToolTipText("Gestión para Pacientes");
+		btnDirector = new JButton("Director");
+		btnDirector.setBounds(372, 507, 505, 85);
+		btnDirector.setOpaque(false);
+		btnDirector.setActionCommand("DIRECTOR");
+		btnDirector.setToolTipText("Gestión para Director Médico");
 		
 		add(imagenPpal);
 		add(btnDirector);

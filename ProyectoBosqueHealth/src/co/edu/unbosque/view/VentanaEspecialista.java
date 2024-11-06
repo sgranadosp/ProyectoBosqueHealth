@@ -20,6 +20,13 @@ public class VentanaEspecialista extends JPanel{
 	imgAbajoCitas, imgArribaTurnoMes, imgAbajoTurnoMes, imgArribaCambioTurno,
 	imgAbajoCambioTurno, imgArribaTratamiento, imgAbajoTratamiento,
 	imgArribaListaTratamientos, imgAbajoListaTratamientos;
+	private JPanel panelFijoEsp, panelArribaVariableEsp, panelAbajoVariableEsp;
+	
+	public void paneles() {
+		
+		
+		
+	}
 	
 	public VentanaEspecialista() {
 		
