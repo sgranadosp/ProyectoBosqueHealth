@@ -3,126 +3,80 @@ package co.edu.unbosque.controller;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.JOptionPane;
+
 import co.edu.unbosque.model.ModelFacade;
 import co.edu.unbosque.view.ViewFacade;
 
 public class Controller implements ActionListener {
-	
+
 	private ModelFacade mf;
 	private ViewFacade vf;
+	private int numSeleccionCita = 0;
 	
 	public Controller() {
 		mf = new ModelFacade();
 		vf = new ViewFacade();
-		vf.getVentanaSeleccion().setVisible(true);
+		vf.getMenuPrincipal().setVisible(true);
 		asignarLectores();
 	}
 	
-	public void asignarLectores() {
-		
+	private void asignarLectores() {
 		//Menu de personas
 		//director
-		vf.getMenuPrincipal().getvSeleccion().getBtnDirector().addActionListener(this);
-		vf.getMenuPrincipal().getvSeleccion().getBtnDirector().setActionCommand("DIRECTOR");
+		vf.getMenuPrincipal().getBtnDirector().addActionListener(this);
+		vf.getMenuPrincipal().getBtnDirector().setActionCommand("DIRECTOR");
 		
 		//especialista
-		vf.getMenuPrincipal().getvSeleccion().getBtnEspecialista().addActionListener(this);
-		vf.getMenuPrincipal().getvSeleccion().getBtnEspecialista().setActionCommand("ESPECIALISTA");
+		vf.getMenuPrincipal().getBtnEspecialista().addActionListener(this);
+		vf.getMenuPrincipal().getBtnEspecialista().setActionCommand("ESPECIALISTA");
 		
 		//paciente
-		vf.getMenuPrincipal().getvSeleccion().getBtnPaciente().addActionListener(this);
-		vf.getMenuPrincipal().getvSeleccion().getBtnPaciente().setActionCommand("PACIENTE");
+		vf.getMenuPrincipal().getBtnPaciente().addActionListener(this);
+		vf.getMenuPrincipal().getBtnPaciente().setActionCommand("PACIENTE");
 		
-		//Ventana paciente
-		//volver al menu
-		vf.getMenuPrincipal().getvPaciente().getBtnVolverMenu().addActionListener(this);
-		vf.getMenuPrincipal().getvPaciente().getBtnVolverMenu().setActionCommand("VOLVER AL MENU");
+		vf.getVentanaPaciente().getBtnVolverMenu().addActionListener(this);
+		vf.getVentanaPaciente().getBtnVolverMenu().setActionCommand("VOLVER MENU P");
 		
-		//Datos personales
-		vf.getMenuPrincipal().getvPaciente().getBtnDatosPersonales().addActionListener(this);
-		vf.getMenuPrincipal().getvPaciente().getBtnDatosPersonales().setActionCommand("DATOS PERSONALES");
+		/*vf.getVentanaEspecialista().getBtnVolverMenu().addActionListener(this);
+		vf.getVentanaEspecialista().getBtnVolverMenu().setActionCommand("VOLVER MENU E");
 		
-		//Citas
-		vf.getMenuPrincipal().getvPaciente().getBtnCitas().addActionListener(this);
-		vf.getMenuPrincipal().getvPaciente().getBtnCitas().setActionCommand("CITAS");
+		vf.getVentanaDirector().getBtnVolverMenu().addActionListener(this);
+		vf.getVentanaDirector().getBtnVolverMenu().setActionCommand("VOLVER MENU D");*/
 		
-		//Tratamiento medico
-		vf.getMenuPrincipal().getvPaciente().getBtnTratamientoMedico().addActionListener(this);
-		vf.getMenuPrincipal().getvPaciente().getBtnTratamientoMedico().setActionCommand("TRATAMIENTO MÉDICO");
+		//MENU FIJO PACIENTES IZQ
+		//Datos personales Paciente
+		vf.getVentanaPaciente().getBtnDatosPersonales().addActionListener(this);
+		vf.getVentanaPaciente().getBtnDatosPersonales().setActionCommand("DATOS PERSONALES PACIENTE");
+		
+		//Citas Paciente
+		vf.getVentanaPaciente().getBtnCitas().addActionListener(this);
+		vf.getVentanaPaciente().getBtnCitas().setActionCommand("CITAS PACIENTE");
+		
+		//Tratamiento medico Paciente
+		vf.getVentanaPaciente().getBtnTratamientoMedico().addActionListener(this);
+		vf.getVentanaPaciente().getBtnTratamientoMedico().setActionCommand("TRATAMIENTO MEDICO PACIENTE");
+		
+		
+		//BOTONES PACIENTE CITAS
+		
+		//Agendar Cita
+		vf.getVentanaPaciente().getBtnAgendarCita().addActionListener(this);
+		vf.getVentanaPaciente().getBtnAgendarCita().setActionCommand("AGENDAR CITA");
+		
+		//Citas Agendadas
+		vf.getVentanaPaciente().getBtnCitasAgendadas().addActionListener(this);
+		vf.getVentanaPaciente().getBtnCitasAgendadas().setActionCommand("CITAS AGENDADAS");
+		
+		//ReagendarCita
+		vf.getVentanaPaciente().getBtnReagendarCitas().addActionListener(this);
+		vf.getVentanaPaciente().getBtnReagendarCitas().setActionCommand("REAGENDAR CITA");
+		
+		//Cancelar Cita
+		vf.getVentanaPaciente().getBtnCancelarCita().addActionListener(this);
+		vf.getVentanaPaciente().getBtnCancelarCita().setActionCommand("CANCELAR CITA");
+		
 
-		//guardar datos
-		vf.getMenuPrincipal().getvPaciente().getBtnGuardarDatos().addActionListener(this);
-		vf.getMenuPrincipal().getvPaciente().getBtnGuardarDatos().setActionCommand("GUARDAR DATOS");
-		
-		//Agendar cita
-		vf.getMenuPrincipal().getvPaciente().getBtnAgendar().addActionListener(this);
-		vf.getMenuPrincipal().getvPaciente().getBtnAgendar().setActionCommand("AGENDAR CITA");
-		
-		//citas agendadas
-		vf.getMenuPrincipal().getvPaciente().getBtnCitasGeneradas().addActionListener(this);
-		vf.getMenuPrincipal().getvPaciente().getBtnCitasGeneradas().setActionCommand("CITAS AGENDADAS");
-		
-		//reagendar citas
-		vf.getMenuPrincipal().getvPaciente().getBtnReagendar().addActionListener(this);
-		vf.getMenuPrincipal().getvPaciente().getBtnReagendar().setActionCommand("REAGENDAR CITA");
-		
-		//Generar reagendar cita
-		vf.getMenuPrincipal().getvPaciente().getBtnGenerarReagendada().addActionListener(this);
-		vf.getMenuPrincipal().getvPaciente().getBtnGenerarReagendada().setActionCommand("GENERAR REAGENDAR CITA");
-		
-		//Cancelar 
-		vf.getMenuPrincipal().getvPaciente().getBtnCancelar().addActionListener(this);
-		vf.getMenuPrincipal().getvPaciente().getBtnCancelar().setActionCommand("CANCELAR");
-		
-		//Cancelar cita
-		vf.getMenuPrincipal().getvPaciente().getBtnCancelarCita().addActionListener(this);
-		vf.getMenuPrincipal().getvPaciente().getBtnCancelarCita().setActionCommand("CANCELAR CITA"); 
-		
-		//generar cita
-		vf.getMenuPrincipal().getvPaciente().getBtnGenerarCita().addActionListener(this);
-		vf.getMenuPrincipal().getvPaciente().getBtnGenerarCita().setActionCommand("GENERAR CITA");
-		
-		//Ventana especialista
-		//datos personales
-		vf.getMenuPrincipal().getvEspecialista().getBtnDatosPersonales().addActionListener(this);
-		vf.getMenuPrincipal().getvEspecialista().getBtnDatosPersonales().setActionCommand("DATOS PERSONALES ESP");
-		
-		//Citas
-		vf.getMenuPrincipal().getvEspecialista().getBtnCitas().addActionListener(this);
-		vf.getMenuPrincipal().getvEspecialista().getBtnCitas().setActionCommand("CITAS ESP");
-		
-		//Turnos
-		vf.getMenuPrincipal().getvEspecialista().getBtnTurnos().addActionListener(this);
-		vf.getMenuPrincipal().getvEspecialista().getBtnTurnos().setActionCommand("TURNOS ESP");
-		
-		//tratamientos del paciente
-		vf.getMenuPrincipal().getvEspecialista().getBtnTratamientoDelPaciente().addActionListener(this);
-		vf.getMenuPrincipal().getvEspecialista().getBtnTratamientoDelPaciente().setActionCommand("TRATAMIENTO DEL PACIENTE");
-		
-		//Mostrar lista de tratamientos
-		vf.getMenuPrincipal().getvEspecialista().getBtnListaDeTratamientos().addActionListener(this);
-		vf.getMenuPrincipal().getvEspecialista().getBtnListaDeTratamientos().setActionCommand("LISTA TRATAMIENTOS");
-		
-		//Guardar datos del especialista
-		vf.getMenuPrincipal().getvEspecialista().getBtnGuardarDatos().addActionListener(this);
-		vf.getMenuPrincipal().getvEspecialista().getBtnGuardarDatos().setActionCommand("GUARDAR ESP");
-		
-		//volver al menu principal
-		vf.getMenuPrincipal().getvEspecialista().getBtnVolver().addActionListener(this);
-		vf.getMenuPrincipal().getvEspecialista().getBtnVolver().setActionCommand("VOLVER ESP");
-		
-		//turnos del mes del especialista
-		vf.getMenuPrincipal().getvEspecialista().getBtnTurnosMes().addActionListener(this);
-		vf.getMenuPrincipal().getvEspecialista().getBtnTurnosMes().setActionCommand("TURNO MES ESP");
-		
-		//Mostrar ventana de cambio de turno
-		vf.getMenuPrincipal().getvEspecialista().getBtnCambioDeTurno().addActionListener(this);
-		vf.getMenuPrincipal().getvEspecialista().getBtnCambioDeTurno().setActionCommand("CAMBIO TURNO ESP");
-		
-		//confirmar cambio de turno
-		vf.getMenuPrincipal().getvEspecialista().getBtnConfirmarCambio().addActionListener(this);
-		vf.getMenuPrincipal().getvEspecialista().getBtnConfirmarCambio().setActionCommand("CONFIRMAR CAMBIO TURNO");
-		
 		
 	}
 
@@ -130,19 +84,86 @@ public class Controller implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		switch (e.getActionCommand()) {
 		case "DIRECTOR":
+			JOptionPane.showMessageDialog(null, "Seleccionaste Director Médico");
 			vf.getMenuPrincipal().setVisible(false);
-			vf.getVentanaDirector().setVisible(true);
 			break;
 		case "ESPECIALISTA":
+			JOptionPane.showMessageDialog(null, "Seleccionaste Especialista");
 			vf.getMenuPrincipal().setVisible(false);
-			vf.getVentanaEspecialista().setVisible(true);
 			break;
-			
 		case "PACIENTE":
+			JOptionPane.showMessageDialog(null, "Seleccionaste Paciente");
 			vf.getMenuPrincipal().setVisible(false);
 			vf.getVentanaPaciente().setVisible(true);
-			vf.getVentanaPaciente().getPanelFijo().setVisible(true);
+			
+			break;	
+		case "DATOS PERSONALES PACIENTE":
+			vf.getVentanaPaciente().getPanelDerechaArriba().setVisible(true);
+			vf.getVentanaPaciente().getPanelDatosPaciente().setVisible(true);
+			vf.getVentanaPaciente().getLblTituloDatosP().setVisible(true);
+			vf.getVentanaPaciente().getLblTituloTratamientoMedico().setVisible(false);
+			vf.getVentanaPaciente().getBtnAgendarCita().setVisible(false);
+			vf.getVentanaPaciente().getBtnCancelarCita().setVisible(false);
+			vf.getVentanaPaciente().getBtnCitasAgendadas().setVisible(false);
+			vf.getVentanaPaciente().getBtnReagendarCitas().setVisible(false);
 			break;
+		case "CITAS PACIENTE":
+			vf.getVentanaPaciente().getPanelDerechaArriba().setVisible(true);
+			vf.getVentanaPaciente().getPanelDatosPaciente().setVisible(false);
+			vf.getVentanaPaciente().getLblTituloDatosP().setVisible(false);
+			vf.getVentanaPaciente().getLblTituloTratamientoMedico().setVisible(false);
+			vf.getVentanaPaciente().getBtnAgendarCita().setVisible(true);
+			vf.getVentanaPaciente().getBtnCancelarCita().setVisible(true);
+			vf.getVentanaPaciente().getBtnCitasAgendadas().setVisible(true);
+			vf.getVentanaPaciente().getBtnReagendarCitas().setVisible(true);
+			break;
+		case "TRATAMIENTO MEDICO PACIENTE":
+			JOptionPane.showMessageDialog(null, "Seleccionaste Paciente");
+			vf.getMenuPrincipal().setVisible(false);
+			vf.getVentanaPaciente().setVisible(true);
+			
+			break;
+			
+		case "AGENDAR CITA":
+			numSeleccionCita = 1;
+			vf.getVentanaPaciente().getPanelAgendarCitas().setVisible(true);
+			vf.getVentanaPaciente().getPanelCitasAgendadas().setVisible(false);
+			vf.getVentanaPaciente().getPanelReagendarCita().setVisible(false);
+			vf.getVentanaPaciente().getPanelCancelarCita().setVisible(false);
+			break;
+		
+		case "CITAS AGENDADAS":
+			numSeleccionCita = 2;
+			vf.getVentanaPaciente().getPanelCitasAgendadas().setVisible(true);
+			vf.getVentanaPaciente().getPanelAgendarCitas().setVisible(false);
+			vf.getVentanaPaciente().getPanelReagendarCita().setVisible(false);
+			vf.getVentanaPaciente().getPanelCancelarCita().setVisible(false);
+			break;
+		case "REAGENDAR CITA":
+			numSeleccionCita = 3;
+			vf.getVentanaPaciente().getPanelReagendarCita().setVisible(true);
+			vf.getVentanaPaciente().getPanelAgendarCitas().setVisible(false);
+			vf.getVentanaPaciente().getPanelCitasAgendadas().setVisible(false);
+			vf.getVentanaPaciente().getPanelCancelarCita().setVisible(false);
+			break;
+		case "CANCELAR CITA":
+			numSeleccionCita = 4;
+			vf.getVentanaPaciente().getPanelCancelarCita().setVisible(true);
+			vf.getVentanaPaciente().getPanelAgendarCitas().setVisible(false);
+			vf.getVentanaPaciente().getPanelCitasAgendadas().setVisible(false);
+			vf.getVentanaPaciente().getPanelReagendarCita().setVisible(false);
+			
+			break;	
+
+		case "VOLVER MENU P":
+			volverMenuPrincipal();
+			break;
+		case "VOLVER MENU E":
+			volverMenuPrincipal();
+			break;
+		case "VOLVER MENU D":
+			volverMenuPrincipal();
+			break;	
 
 		default:
 			break;
@@ -150,4 +171,11 @@ public class Controller implements ActionListener {
 		
 	}
 	
+	public void volverMenuPrincipal() {
+		vf.getMenuPrincipal().setVisible(true);
+		vf.getVentanaDirector().setVisible(false);
+		vf.getVentanaEspecialista().setVisible(false);
+		vf.getVentanaPaciente().setVisible(false);
+	}
+
 }
