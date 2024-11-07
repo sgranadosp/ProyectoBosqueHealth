@@ -131,6 +131,11 @@ public class VentanaEspecialista extends JPanel{
 		btnCambioDeTurno.setOpaque(true);
 		btnCambioDeTurno.setActionCommand("CAMBIO TURNO ESP");
 		
+		btnConfirmarCambio = new JButton("confirmar cambio de turno");
+		btnConfirmarCambio.setBounds(0, 0, 250, 70);
+		btnConfirmarCambio.setOpaque(true);
+		btnConfirmarCambio.setActionCommand("CONFIRMAR CAMBIO TURNO");
+		
 		nombreEsp = new JTextField();
 		nombreEsp.setBounds(0, 0, 250, 70);
 		nombreEsp.setOpaque(true);
@@ -179,4 +184,370 @@ public class VentanaEspecialista extends JPanel{
 		
 		//falta añadir las cosas de los labels
 	}
+
+	public JButton getBtnDatosPersonales() {
+		return btnDatosPersonales;
+	}
+
+	public void setBtnDatosPersonales(JButton btnDatosPersonales) {
+		this.btnDatosPersonales = btnDatosPersonales;
+	}
+
+	public JButton getBtnCitas() {
+		return btnCitas;
+	}
+
+	public void setBtnCitas(JButton btnCitas) {
+		this.btnCitas = btnCitas;
+	}
+
+	public JButton getBtnTurnos() {
+		return btnTurnos;
+	}
+
+	public void setBtnTurnos(JButton btnTurnos) {
+		this.btnTurnos = btnTurnos;
+	}
+
+	public JButton getBtnTratamientoDelPaciente() {
+		return btnTratamientoDelPaciente;
+	}
+
+	public void setBtnTratamientoDelPaciente(JButton btnTratamientoDelPaciente) {
+		this.btnTratamientoDelPaciente = btnTratamientoDelPaciente;
+	}
+
+	public JButton getBtnListaDeTratamientos() {
+		return btnListaDeTratamientos;
+	}
+
+	public void setBtnListaDeTratamientos(JButton btnListaDeTratamientos) {
+		this.btnListaDeTratamientos = btnListaDeTratamientos;
+	}
+
+	public JButton getBtnGuardarDatos() {
+		return btnGuardarDatos;
+	}
+
+	public void setBtnGuardarDatos(JButton btnGuardarDatos) {
+		this.btnGuardarDatos = btnGuardarDatos;
+	}
+
+	public JButton getBtnVolver() {
+		return btnVolver;
+	}
+
+	public void setBtnVolver(JButton btnVolver) {
+		this.btnVolver = btnVolver;
+	}
+
+	public JButton getBtnTurnosMes() {
+		return btnTurnosMes;
+	}
+
+	public void setBtnTurnosMes(JButton btnTurnosMes) {
+		this.btnTurnosMes = btnTurnosMes;
+	}
+
+	public JButton getBtnCambioDeTurno() {
+		return btnCambioDeTurno;
+	}
+
+	public void setBtnCambioDeTurno(JButton btnCambioDeTurno) {
+		this.btnCambioDeTurno = btnCambioDeTurno;
+	}
+
+	public JButton getBtnConfirmarCambio() {
+		return btnConfirmarCambio;
+	}
+
+	public void setBtnConfirmarCambio(JButton btnConfirmarCambio) {
+		this.btnConfirmarCambio = btnConfirmarCambio;
+	}
+
+	public JButton getBtnGuardarTratamiento() {
+		return btnGuardarTratamiento;
+	}
+
+	public void setBtnGuardarTratamiento(JButton btnGuardarTratamiento) {
+		this.btnGuardarTratamiento = btnGuardarTratamiento;
+	}
+
+	public JTextField getNombreEsp() {
+		return nombreEsp;
+	}
+
+	public void setNombreEsp(JTextField nombreEsp) {
+		this.nombreEsp = nombreEsp;
+	}
+
+	public JTextField getIdEsp() {
+		return idEsp;
+	}
+
+	public void setIdEsp(JTextField idEsp) {
+		this.idEsp = idEsp;
+	}
+
+	public JTextField getCorreoEsp() {
+		return correoEsp;
+	}
+
+	public void setCorreoEsp(JTextField correoEsp) {
+		this.correoEsp = correoEsp;
+	}
+
+	public JTextField getExamenTratamiento() {
+		return examenTratamiento;
+	}
+
+	public void setExamenTratamiento(JTextField examenTratamiento) {
+		this.examenTratamiento = examenTratamiento;
+	}
+
+	public JTextField getDiagnosticoTratamiento() {
+		return diagnosticoTratamiento;
+	}
+
+	public void setDiagnosticoTratamiento(JTextField diagnosticoTratamiento) {
+		this.diagnosticoTratamiento = diagnosticoTratamiento;
+	}
+
+	public JTextField getTratamiento() {
+		return tratamiento;
+	}
+
+	public void setTratamiento(JTextField tratamiento) {
+		this.tratamiento = tratamiento;
+	}
+
+	public JCalendar getFechaNacimientoEsp() {
+		return fechaNacimientoEsp;
+	}
+
+	public void setFechaNacimientoEsp(JCalendar fechaNacimientoEsp) {
+		this.fechaNacimientoEsp = fechaNacimientoEsp;
+	}
+
+	public JCalendar getFechaDelTurnoCambiar() {
+		return fechaDelTurnoCambiar;
+	}
+
+	public void setFechaDelTurnoCambiar(JCalendar fechaDelTurnoCambiar) {
+		this.fechaDelTurnoCambiar = fechaDelTurnoCambiar;
+	}
+
+	public JCalendar getFechaTratamientoPaciente() {
+		return fechaTratamientoPaciente;
+	}
+
+	public void setFechaTratamientoPaciente(JCalendar fechaTratamientoPaciente) {
+		this.fechaTratamientoPaciente = fechaTratamientoPaciente;
+	}
+
+	public JComboBox<String> getGeneroEsp() {
+		return generoEsp;
+	}
+
+	public void setGeneroEsp(JComboBox<String> generoEsp) {
+		this.generoEsp = generoEsp;
+	}
+
+	public JComboBox<String> getEspecialidadEsp() {
+		return especialidadEsp;
+	}
+
+	public void setEspecialidadEsp(JComboBox<String> especialidadEsp) {
+		this.especialidadEsp = especialidadEsp;
+	}
+
+	public JComboBox<String> getEspecialistaActualEsp() {
+		return especialistaActualEsp;
+	}
+
+	public void setEspecialistaActualEsp(JComboBox<String> especialistaActualEsp) {
+		this.especialistaActualEsp = especialistaActualEsp;
+	}
+
+	public JComboBox<String> getEspecialistaNuevoEsp() {
+		return especialistaNuevoEsp;
+	}
+
+	public void setEspecialistaNuevoEsp(JComboBox<String> especialistaNuevoEsp) {
+		this.especialistaNuevoEsp = especialistaNuevoEsp;
+	}
+
+	public JComboBox<String> getEscogerPaciente() {
+		return escogerPaciente;
+	}
+
+	public void setEscogerPaciente(JComboBox<String> escogerPaciente) {
+		this.escogerPaciente = escogerPaciente;
+	}
+
+	public JLabel getImgFija() {
+		return imgFija;
+	}
+
+	public void setImgFija(JLabel imgFija) {
+		this.imgFija = imgFija;
+	}
+
+	public JLabel getImgArribaDatos() {
+		return imgArribaDatos;
+	}
+
+	public void setImgArribaDatos(JLabel imgArribaDatos) {
+		this.imgArribaDatos = imgArribaDatos;
+	}
+
+	public JLabel getImgAbajoDatos() {
+		return imgAbajoDatos;
+	}
+
+	public void setImgAbajoDatos(JLabel imgAbajoDatos) {
+		this.imgAbajoDatos = imgAbajoDatos;
+	}
+
+	public JLabel getImgArribaCitas() {
+		return imgArribaCitas;
+	}
+
+	public void setImgArribaCitas(JLabel imgArribaCitas) {
+		this.imgArribaCitas = imgArribaCitas;
+	}
+
+	public JLabel getImgAbajoCitas() {
+		return imgAbajoCitas;
+	}
+
+	public void setImgAbajoCitas(JLabel imgAbajoCitas) {
+		this.imgAbajoCitas = imgAbajoCitas;
+	}
+
+	public JLabel getImgArribaTurnoMes() {
+		return imgArribaTurnoMes;
+	}
+
+	public void setImgArribaTurnoMes(JLabel imgArribaTurnoMes) {
+		this.imgArribaTurnoMes = imgArribaTurnoMes;
+	}
+
+	public JLabel getImgAbajoTurnoMes() {
+		return imgAbajoTurnoMes;
+	}
+
+	public void setImgAbajoTurnoMes(JLabel imgAbajoTurnoMes) {
+		this.imgAbajoTurnoMes = imgAbajoTurnoMes;
+	}
+
+	public JLabel getImgArribaCambioTurno() {
+		return imgArribaCambioTurno;
+	}
+
+	public void setImgArribaCambioTurno(JLabel imgArribaCambioTurno) {
+		this.imgArribaCambioTurno = imgArribaCambioTurno;
+	}
+
+	public JLabel getImgAbajoCambioTurno() {
+		return imgAbajoCambioTurno;
+	}
+
+	public void setImgAbajoCambioTurno(JLabel imgAbajoCambioTurno) {
+		this.imgAbajoCambioTurno = imgAbajoCambioTurno;
+	}
+
+	public JLabel getImgArribaTratamiento() {
+		return imgArribaTratamiento;
+	}
+
+	public void setImgArribaTratamiento(JLabel imgArribaTratamiento) {
+		this.imgArribaTratamiento = imgArribaTratamiento;
+	}
+
+	public JLabel getImgAbajoTratamiento() {
+		return imgAbajoTratamiento;
+	}
+
+	public void setImgAbajoTratamiento(JLabel imgAbajoTratamiento) {
+		this.imgAbajoTratamiento = imgAbajoTratamiento;
+	}
+
+	public JLabel getImgArribaListaTratamientos() {
+		return imgArribaListaTratamientos;
+	}
+
+	public void setImgArribaListaTratamientos(JLabel imgArribaListaTratamientos) {
+		this.imgArribaListaTratamientos = imgArribaListaTratamientos;
+	}
+
+	public JLabel getImgAbajoListaTratamientos() {
+		return imgAbajoListaTratamientos;
+	}
+
+	public void setImgAbajoListaTratamientos(JLabel imgAbajoListaTratamientos) {
+		this.imgAbajoListaTratamientos = imgAbajoListaTratamientos;
+	}
+
+	public JPanel getPanelFijoEsp() {
+		return panelFijoEsp;
+	}
+
+	public void setPanelFijoEsp(JPanel panelFijoEsp) {
+		this.panelFijoEsp = panelFijoEsp;
+	}
+
+	public JPanel getPanelArribaVariableEsp() {
+		return panelArribaVariableEsp;
+	}
+
+	public void setPanelArribaVariableEsp(JPanel panelArribaVariableEsp) {
+		this.panelArribaVariableEsp = panelArribaVariableEsp;
+	}
+
+	public JPanel getPanelAbajoVariableEsp() {
+		return panelAbajoVariableEsp;
+	}
+
+	public void setPanelAbajoVariableEsp(JPanel panelAbajoVariableEsp) {
+		this.panelAbajoVariableEsp = panelAbajoVariableEsp;
+	}
+
+	public CardLayout getCardLayoutEsp() {
+		return cardLayoutEsp;
+	}
+
+	public void setCardLayoutEsp(CardLayout cardLayoutEsp) {
+		this.cardLayoutEsp = cardLayoutEsp;
+	}
+
+	public static String getDatosesp() {
+		return DATOSESP;
+	}
+
+	public static String getCitasesp() {
+		return CITASESP;
+	}
+
+	public static String getTurnosesp() {
+		return TURNOSESP;
+	}
+
+	public static String getTurnosmesesp() {
+		return TURNOSMESESP;
+	}
+
+	public static String getCambioturnosesp() {
+		return CAMBIOTURNOSESP;
+	}
+
+	public static String getTratamientoesp() {
+		return TRATAMIENTOESP;
+	}
+
+	public static String getListatratamientosesp() {
+		return LISTATRATAMIENTOSESP;
+	}
+	
+	
 }
