@@ -15,7 +15,7 @@ import com.toedter.calendar.JCalendar;
 
 public class VentanaPaciente extends JPanel{
 
-	private JLabel imgFija, datosPersArriba, datosPersAbajo, citasArriba, agendarAbajo, mostrarCitasAbajo, reagendarCitaAbajo, cancelarCitaAbajo, tratamiento;
+	private JLabel imgFija, datosPersArriba, datosPersAbajo, citasArriba, tratamientoArriba, tratamientoAbajo, agendarAbajo, mostrarCitasAbajo, reagendarCitaAbajo, cancelarCitaAbajo;
 	private JTextField nombrePac, documentoPac, correoPac, horaCita, numeroCita, horaCitaReagendar, numeroCitaCancelar;
 	private JCalendar fechaNacimientoPac, fechaCita, fechaCitaReagendar;
 	private JComboBox<String> generoPac, especialidad, especialista;
@@ -32,14 +32,13 @@ public class VentanaPaciente extends JPanel{
 	
 	public void paneles() {
 		
-		
 		panelFijo = new JPanel();
 		panelFijo.setLayout(null);
 		panelFijo.setBounds(0, 0, 1280, 720);
 		panelFijo.setBackground(Color.WHITE);
 		
 		panelArribaVariable = new JPanel(cardLayout);
-		panelArribaVariable.setBounds(600, 100, 500, 100);
+		panelArribaVariable.setBounds(387, 73, 712, 150);
 		panelArribaVariable.setBackground(Color.WHITE);
 		panelArribaVariable.add(panelFijo, DATOS);
 		panelArribaVariable.add(panelFijo, AGENDARCITA);
@@ -49,7 +48,7 @@ public class VentanaPaciente extends JPanel{
 		panelArribaVariable.add(panelFijo, TRATAMIENTO);
 		
 		panelAbajoVariable = new JPanel(cardLayout);
-		panelAbajoVariable.setBounds(600, 100, 500, 100);
+		panelAbajoVariable.setBounds(387, 219, 712, 384);
 		panelAbajoVariable.setBackground(Color.WHITE);
 		panelAbajoVariable.add(panelFijo, DATOS);
 		panelAbajoVariable.add(panelFijo, AGENDARCITA);
@@ -83,7 +82,7 @@ public class VentanaPaciente extends JPanel{
 		ImageIcon imagenDatosAr = new ImageIcon("media/imgsPaciente/ImgDatosPersArriba.png");
 		Image redimensionado2 = imagenDatosAr.getImage().getScaledInstance(1280, 720, Image.SCALE_SMOOTH);
 		datosPersArriba.setIcon(new ImageIcon(redimensionado2));
-		datosPersArriba.setBounds(0, 0, 1280, 720);
+		datosPersArriba.setBounds(387, 73, 712, 150);
 		panelArribaVariable.add(datosPersArriba);
 		
 		//Botones que van fijos (citas,datos,tratamiento, volver)
@@ -124,7 +123,7 @@ public class VentanaPaciente extends JPanel{
 		ImageIcon imagenDatosAb = new ImageIcon("media/imgsPaciente/ImgDatosPersAbajo.png");
 		Image redimensionado3 = imagenDatosAb.getImage().getScaledInstance(1280, 720, Image.SCALE_SMOOTH);
 		datosPersAbajo.setIcon(new ImageIcon(redimensionado3));
-		datosPersAbajo.setBounds(0, 0, 1280, 720);
+		datosPersAbajo.setBounds(387, 219, 712, 384);
 		panelAbajoVariable.add(datosPersAbajo);
 		
 		nombrePac = new JTextField();
@@ -167,7 +166,7 @@ public class VentanaPaciente extends JPanel{
 		ImageIcon imagenAgendarAr = new ImageIcon("media/imgsPaciente/ImgCitasArribaPac.png");
 		Image redimensionado4 = imagenAgendarAr.getImage().getScaledInstance(1280, 720, Image.SCALE_SMOOTH);
 		citasArriba.setIcon(new ImageIcon(redimensionado4));
-		citasArriba.setBounds(0, 0, 1280, 720);
+		citasArriba.setBounds(387, 73, 712, 150);
 		panelArribaVariable.add(citasArriba);
 		
 		btnAgendar = new JButton();
@@ -200,7 +199,7 @@ public class VentanaPaciente extends JPanel{
 		ImageIcon imagenAgendarAb = new ImageIcon("media/imgsPaciente/ImgAgendarAbajo.png");
 		Image redimensionado5 = imagenAgendarAb.getImage().getScaledInstance(1280, 720, Image.SCALE_SMOOTH);
 		agendarAbajo.setIcon(new ImageIcon(redimensionado5));
-		agendarAbajo.setBounds(0, 0, 1280, 720);
+		agendarAbajo.setBounds(387, 219, 712, 384);
 		panelAbajoVariable.add(agendarAbajo);
 		
 		especialidad = new JComboBox<String>();
@@ -241,7 +240,7 @@ public class VentanaPaciente extends JPanel{
 		ImageIcon imagenMostrarAb = new ImageIcon("media/imgsPaciente/ImgMostrarAbajo.png");
 		Image redimensionado6 = imagenMostrarAb.getImage().getScaledInstance(1280, 720, Image.SCALE_SMOOTH);
 		mostrarCitasAbajo.setIcon(new ImageIcon(redimensionado6));
-		mostrarCitasAbajo.setBounds(0, 0, 1280, 720);
+		mostrarCitasAbajo.setBounds(387, 219, 712, 384);
 		panelAbajoVariable.add(mostrarCitasAbajo);
 		
 		//Aquí va el bloque de código para hacer la tabla que muestra las citas ya generadas
@@ -252,7 +251,7 @@ public class VentanaPaciente extends JPanel{
 		ImageIcon imagenReagendarAb = new ImageIcon("media/imgsPaciente/ImgReagendarAbajo.png");
 		Image redimensionado7 = imagenReagendarAb.getImage().getScaledInstance(1280, 720, Image.SCALE_SMOOTH);
 		reagendarCitaAbajo.setIcon(new ImageIcon(redimensionado7));
-		reagendarCitaAbajo.setBounds(0, 0, 1280, 720);
+		reagendarCitaAbajo.setBounds(387, 219, 712, 384);
 		panelAbajoVariable.add(reagendarCitaAbajo);
 		
 		numeroCita = new JTextField();
@@ -282,7 +281,7 @@ public class VentanaPaciente extends JPanel{
 		ImageIcon imagenCancelar= new ImageIcon("media/imgsPaciente/ImgCancelarAbajo.png");
 		Image redimensionado8 = imagenCancelar.getImage().getScaledInstance(1280, 720, Image.SCALE_SMOOTH);
 		cancelarCitaAbajo.setIcon(new ImageIcon(redimensionado8));
-		cancelarCitaAbajo.setBounds(0, 0, 1280, 720);
+		cancelarCitaAbajo.setBounds(387, 219, 712, 384);
 		panelAbajoVariable.add(cancelarCitaAbajo);
 		
 		numeroCitaCancelar = new JTextField();
@@ -296,14 +295,23 @@ public class VentanaPaciente extends JPanel{
 		btnCancelarCita.setActionCommand("CANCELAR CITA");
 		panelAbajoVariable.add(btnCancelarCita);
 		
+		//Imágen título de arriba para tratmiento del paciente
+		
+		tratamientoArriba = new JLabel();
+		ImageIcon imagenTratamientoAr = new ImageIcon("media/imgsPaciente/ImgArribaTratamientoPaciente.png");
+		Image redimensionado9 = imagenTratamientoAr.getImage().getScaledInstance(1280, 720, Image.SCALE_SMOOTH);
+		tratamientoArriba.setIcon(new ImageIcon(redimensionado9));
+		tratamientoArriba.setBounds(387, 73, 712, 150);
+		panelArribaVariable.add(tratamientoArriba);
+		
 		//Imágen panel variable de abajo para tratamientos
 		
-		tratamiento = new JLabel();
+		tratamientoAbajo = new JLabel();
 		ImageIcon imagenTratamiento= new ImageIcon("media/imgsPaciente/ImgMostrarAbajo.png");
-		Image redimensionado9 = imagenTratamiento.getImage().getScaledInstance(1280, 720, Image.SCALE_SMOOTH);
-		tratamiento.setIcon(new ImageIcon(redimensionado9));
-		tratamiento.setBounds(0, 0, 1280, 720);
-		panelAbajoVariable.add(tratamiento);
+		Image redimensionado10 = imagenTratamiento.getImage().getScaledInstance(1280, 720, Image.SCALE_SMOOTH);
+		tratamientoAbajo.setIcon(new ImageIcon(redimensionado10));
+		tratamientoAbajo.setBounds(387, 219, 712, 384);
+		panelAbajoVariable.add(tratamientoAbajo);
 		
 		//Aquí va el bloque de código donde va la tabla que muestra los tratamientos
 		
@@ -344,6 +352,22 @@ public class VentanaPaciente extends JPanel{
 		this.citasArriba = citasArriba;
 	}
 
+	public JLabel getTratamientoArriba() {
+		return tratamientoArriba;
+	}
+
+	public void setTratamientoArriba(JLabel tratamientoArriba) {
+		this.tratamientoArriba = tratamientoArriba;
+	}
+
+	public JLabel getTratamientoAbajo() {
+		return tratamientoAbajo;
+	}
+
+	public void setTratamientoAbajo(JLabel tratamientoAbajo) {
+		this.tratamientoAbajo = tratamientoAbajo;
+	}
+
 	public JLabel getAgendarAbajo() {
 		return agendarAbajo;
 	}
@@ -374,10 +398,6 @@ public class VentanaPaciente extends JPanel{
 
 	public void setCancelarCitaAbajo(JLabel cancelarCitaAbajo) {
 		this.cancelarCitaAbajo = cancelarCitaAbajo;
-	}
-
-	public void setTratamiento(JLabel tratamiento) {
-		this.tratamiento = tratamiento;
 	}
 
 	public JTextField getNombrePac() {

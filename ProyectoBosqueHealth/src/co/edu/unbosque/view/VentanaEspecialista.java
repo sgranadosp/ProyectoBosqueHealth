@@ -28,6 +28,13 @@ public class VentanaEspecialista extends JPanel{
 	imgArribaListaTratamientos, imgAbajoListaTratamientos;
 	private JPanel panelFijoEsp, panelArribaVariableEsp, panelAbajoVariableEsp;
 	CardLayout cardLayoutEsp = new CardLayout();
+	private final static String DATOSESP = "Datos personales del especialista";
+	private final static String CITASESP = "Citas médicas del especialista";
+	private final static String TURNOSESP = "Sección vacía de turnos";
+	private final static String TURNOSMESESP = "Turnos del mes del especialista";
+	private final static String CAMBIOTURNOSESP = "Cambio de turno entre especialistas";
+	private final static String TRATAMIENTOESP = "Tratamiento que atiende el especialista";
+	private final static String LISTATRATAMIENTOSESP = "Lista de tratamientos que atiende el especialista";
 	
 	public void paneles() {
 		
@@ -39,10 +46,24 @@ public class VentanaEspecialista extends JPanel{
 		panelArribaVariableEsp = new JPanel(cardLayoutEsp);
 		panelArribaVariableEsp.setBounds(600, 100, 500, 100);
 		panelArribaVariableEsp.setBackground(Color.WHITE);
+		panelArribaVariableEsp.add(panelFijoEsp, DATOSESP);
+		panelArribaVariableEsp.add(panelFijoEsp, CITASESP);
+		panelArribaVariableEsp.add(panelFijoEsp, TURNOSESP);
+		panelArribaVariableEsp.add(panelFijoEsp, TURNOSMESESP);
+		panelArribaVariableEsp.add(panelFijoEsp, CAMBIOTURNOSESP);
+		panelArribaVariableEsp.add(panelFijoEsp, TRATAMIENTOESP);
+		panelArribaVariableEsp.add(panelFijoEsp, LISTATRATAMIENTOSESP);
 		
 		panelAbajoVariableEsp = new JPanel(cardLayoutEsp);
 		panelAbajoVariableEsp.setBounds(600, 100, 500, 100);
 		panelAbajoVariableEsp.setBackground(Color.WHITE);
+		panelAbajoVariableEsp.add(panelFijoEsp, DATOSESP);
+		panelAbajoVariableEsp.add(panelFijoEsp, CITASESP);
+		panelAbajoVariableEsp.add(panelFijoEsp, TURNOSESP);
+		panelAbajoVariableEsp.add(panelFijoEsp, TURNOSMESESP);
+		panelAbajoVariableEsp.add(panelFijoEsp, CAMBIOTURNOSESP);
+		panelAbajoVariableEsp.add(panelFijoEsp, TRATAMIENTOESP);
+		panelAbajoVariableEsp.add(panelFijoEsp, LISTATRATAMIENTOSESP);
 		
 	}
 	
@@ -52,12 +73,18 @@ public class VentanaEspecialista extends JPanel{
 		setSize(1280, 720);
 		setVisible(true);
 		
+		paneles();
+		
+		//Fondo fijo para especialistas
+		
 		imgFija = new JLabel();
-		ImageIcon imagenPaciente = new ImageIcon("media/imgsPaciente/ImgPacienteFija.png");
+		ImageIcon imagenPaciente = new ImageIcon("media/imgsEspecialista/ImgFijaEsp.png");
 		Image redimensionado = imagenPaciente.getImage().getScaledInstance(1280, 720, Image.SCALE_SMOOTH);
 		imgFija.setIcon(new ImageIcon(redimensionado));
 		imgFija.setBounds(0, 0, 1280, 720);
 		panelFijoEsp.add(imgFija);
+		
+		//
 		
 		btnDatosPersonales = new JButton("datos personales");
 		btnDatosPersonales.setBounds(0, 0, 250, 70);

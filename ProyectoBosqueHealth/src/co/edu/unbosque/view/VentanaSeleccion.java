@@ -19,7 +19,7 @@ public class VentanaSeleccion extends JPanel{
 		setVisible(true);
 		
 		imagenPpal = new JLabel();
-		ImageIcon imagen1 = new ImageIcon("media\\ImgSeleccion.png");
+		ImageIcon imagen1 = new ImageIcon("media/ImgSeleccion.png");
 		Image redimensionado = imagen1.getImage().getScaledInstance(1280, 720, Image.SCALE_SMOOTH);
 		imagenPpal.setIcon(new ImageIcon(redimensionado));
 		imagenPpal.setBounds(0, 0, 1280, 720);
