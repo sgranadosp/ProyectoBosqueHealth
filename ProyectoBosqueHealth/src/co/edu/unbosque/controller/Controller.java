@@ -82,6 +82,46 @@ public class Controller implements ActionListener {
 		vf.getMenuPrincipal().getvPaciente().getBtnGenerarCita().addActionListener(this);
 		vf.getMenuPrincipal().getvPaciente().getBtnGenerarCita().setActionCommand("GENERAR CITA");
 		
+		//Ventana especialista
+		//datos personales
+		vf.getMenuPrincipal().getvEspecialista().getBtnDatosPersonales().addActionListener(this);
+		vf.getMenuPrincipal().getvEspecialista().getBtnDatosPersonales().setActionCommand("DATOS PERSONALES ESP");
+		
+		//Citas
+		vf.getMenuPrincipal().getvEspecialista().getBtnCitas().addActionListener(this);
+		vf.getMenuPrincipal().getvEspecialista().getBtnCitas().setActionCommand("CITAS ESP");
+		
+		//Turnos
+		vf.getMenuPrincipal().getvEspecialista().getBtnTurnos().addActionListener(this);
+		vf.getMenuPrincipal().getvEspecialista().getBtnTurnos().setActionCommand("TURNOS ESP");
+		
+		//tratamientos del paciente
+		vf.getMenuPrincipal().getvEspecialista().getBtnTratamientoDelPaciente().addActionListener(this);
+		vf.getMenuPrincipal().getvEspecialista().getBtnTratamientoDelPaciente().setActionCommand("TRATAMIENTO DEL PACIENTE");
+		
+		//Mostrar lista de tratamientos
+		vf.getMenuPrincipal().getvEspecialista().getBtnListaDeTratamientos().addActionListener(this);
+		vf.getMenuPrincipal().getvEspecialista().getBtnListaDeTratamientos().setActionCommand("LISTA TRATAMIENTOS");
+		
+		//Guardar datos del especialista
+		vf.getMenuPrincipal().getvEspecialista().getBtnGuardarDatos().addActionListener(this);
+		vf.getMenuPrincipal().getvEspecialista().getBtnGuardarDatos().setActionCommand("GUARDAR ESP");
+		
+		//volver al menu principal
+		vf.getMenuPrincipal().getvEspecialista().getBtnVolver().addActionListener(this);
+		vf.getMenuPrincipal().getvEspecialista().getBtnVolver().setActionCommand("VOLVER ESP");
+		
+		//turnos del mes del especialista
+		vf.getMenuPrincipal().getvEspecialista().getBtnTurnosMes().addActionListener(this);
+		vf.getMenuPrincipal().getvEspecialista().getBtnTurnosMes().setActionCommand("TURNO MES ESP");
+		
+		//Mostrar ventana de cambio de turno
+		vf.getMenuPrincipal().getvEspecialista().getBtnCambioDeTurno().addActionListener(this);
+		vf.getMenuPrincipal().getvEspecialista().getBtnCambioDeTurno().setActionCommand("CAMBIO TURNO ESP");
+		
+		//confirmar cambio de turno
+		vf.getMenuPrincipal().getvEspecialista().getBtnConfirmarCambio().addActionListener(this);
+		vf.getMenuPrincipal().getvEspecialista().getBtnConfirmarCambio().setActionCommand("CONFIRMAR CAMBIO TURNO");
 		
 		
 	}

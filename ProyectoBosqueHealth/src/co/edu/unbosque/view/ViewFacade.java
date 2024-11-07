@@ -6,14 +6,12 @@ public class ViewFacade {
 	private VentanaDirector ventanaDirector;
 	private VentanaEspecialista ventanaEspecialista;
 	private VentanaPaciente ventanaPaciente;
-	private VentanaSeleccion ventanaSeleccion;
 	
 	public ViewFacade() {
 		menuPrincipal = new MenuPrincipal();
 		ventanaDirector = new VentanaDirector();
 		ventanaEspecialista = new VentanaEspecialista();
 		ventanaPaciente = new VentanaPaciente();
-		ventanaSeleccion = new VentanaSeleccion();
 	}
 
 	public MenuPrincipal getMenuPrincipal() {
@@ -48,13 +46,4 @@ public class ViewFacade {
 		this.ventanaPaciente = ventanaPaciente;
 	}
 
-	public VentanaSeleccion getVentanaSeleccion() {
-		return ventanaSeleccion;
-	}
-
-	public void setVentanaSeleccion(VentanaSeleccion ventanaSeleccion) {
-		this.ventanaSeleccion = ventanaSeleccion;
-	}
-	
-	
 }
