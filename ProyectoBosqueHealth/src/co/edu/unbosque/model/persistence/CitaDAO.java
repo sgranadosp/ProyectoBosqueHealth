@@ -9,11 +9,12 @@ import co.edu.unbosque.model.CitaDTO;
 public class CitaDAO implements CRUDOperation<Cita, CitaDTO>{
 
 	private ArrayList<Cita> listaCitas;
-	private final String SERIALIZED_NAME = "citas.bat";
+	private final String SERIALIZED_NAME = "citas.dat";
 	
 	public CitaDAO() {
 		FileHandler.checkFolder();
 		FileHandler.checkPropertiesFolder();
+		readSerialized();
 	}
 	
 	@Override

@@ -8,12 +8,13 @@ import co.edu.unbosque.model.TurnoDTO;
 public class TurnoDAO implements CRUDOperation<Turno, TurnoDTO>{
 
 	private ArrayList<Turno> listaTurnos;
-	private final String SERIALIZED_NAME = "turnos.bat";
+	private final String SERIALIZED_NAME = "turnos.dat";
 	
 	public TurnoDAO() {
 		
 		FileHandler.checkFolder();
 		FileHandler.checkPropertiesFolder();
+		readSerialized();
 	}
 	
 	@Override

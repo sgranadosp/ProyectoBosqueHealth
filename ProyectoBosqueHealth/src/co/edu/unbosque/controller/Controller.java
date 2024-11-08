@@ -4,7 +4,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.DateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
@@ -44,15 +46,21 @@ public class Controller implements ActionListener {
 		vf.getMenuPrincipal().getBtnPaciente().addActionListener(this);
 		vf.getMenuPrincipal().getBtnPaciente().setActionCommand("PACIENTE");
 		
+		
+		//MENU VOLVER
+		//Volver menu paciente
 		vf.getVentanaPaciente().getBtnVolverMenu().addActionListener(this);
 		vf.getVentanaPaciente().getBtnVolverMenu().setActionCommand("VOLVER MENU P");
 		
-		/*vf.getVentanaEspecialista().getBtnVolverMenu().addActionListener(this);
+		//Volver menu especialista
+		vf.getVentanaEspecialista().getBtnVolverMenu().addActionListener(this);
 		vf.getVentanaEspecialista().getBtnVolverMenu().setActionCommand("VOLVER MENU E");
 		
+		//Volver menu director
 		vf.getVentanaDirector().getBtnVolverMenu().addActionListener(this);
-		vf.getVentanaDirector().getBtnVolverMenu().setActionCommand("VOLVER MENU D");*/
+		vf.getVentanaDirector().getBtnVolverMenu().setActionCommand("VOLVER MENU D");
 		
+		//PACIENTES
 		//MENU FIJO PACIENTES IZQ
 		//Datos personales Paciente
 		vf.getVentanaPaciente().getBtnDatosPersonales().addActionListener(this);
@@ -103,8 +111,67 @@ public class Controller implements ActionListener {
 		vf.getVentanaPaciente().getBtnGuardarReagendarCita().addActionListener(this);
 		vf.getVentanaPaciente().getBtnGuardarReagendarCita().setActionCommand("GUARDAR REAGENDAR CITA");
 		
-
 		
+		
+		//ESPECIALISTA
+		//MENU FIJO PACIENTES IZQ
+		
+		
+		
+		
+		//DIRECTOR
+		//MENU FIJO PACIENTES IZQ
+		//Datos personales director
+		vf.getVentanaDirector().getBtnDatosPersonales().addActionListener(this);
+		vf.getVentanaDirector().getBtnDatosPersonales().setActionCommand("DATOS PERSONALES DIRECTOR");
+				
+		//Reportes director
+		vf.getVentanaDirector().getBtnReportes().addActionListener(this);
+		vf.getVentanaDirector().getBtnReportes().setActionCommand("REPORTES");
+				
+		//Turnos director
+		vf.getVentanaDirector().getBtnTurnos().addActionListener(this);
+		vf.getVentanaDirector().getBtnTurnos().setActionCommand("TURNOS");
+		
+		
+		//BOTONES REPORTES SEMANAL Y MENSUAL, OTROS
+		//Boton Reporte semanal
+		vf.getVentanaDirector().getBtnReporteSemanal().addActionListener(this);
+		vf.getVentanaDirector().getBtnReporteSemanal().setActionCommand("REPORTE SEMANAL");
+				
+		//Reporte mensual
+		vf.getVentanaDirector().getBtnReporteMensual().addActionListener(this);
+		vf.getVentanaDirector().getBtnReporteMensual().setActionCommand("REPORTE MENSUAL");
+				
+		//Reporte semanal - Pacientes atendidos
+		vf.getVentanaDirector().getBtnPacientesAtendidos().addActionListener(this);
+		vf.getVentanaDirector().getBtnPacientesAtendidos().setActionCommand("PACIENTES ATENDIDOS");
+		
+		//Reporte semanal - Diagnosticos Realizados
+		vf.getVentanaDirector().getBtnDiagnosticosRealizados().addActionListener(this);
+		vf.getVentanaDirector().getBtnDiagnosticosRealizados().setActionCommand("DIAGNOSTICOS REALIZADOS");
+		
+		//Reporte semanal - EspecialistasMNC
+		vf.getVentanaDirector().getBtnEspecialistasMNC().addActionListener(this);
+		vf.getVentanaDirector().getBtnEspecialistasMNC().setActionCommand("ESPECIALISTA MNC");
+		
+		//Reporte semanal - EspecialidadMC
+		vf.getVentanaDirector().getBtnEspecialidadMC().addActionListener(this);
+		vf.getVentanaDirector().getBtnEspecialidadMC().setActionCommand("ESPECIALIDAD MC");
+		
+		//Reporte semanal - Citas canceladas
+		vf.getVentanaDirector().getBtnCitasCanceladas().addActionListener(this);
+		vf.getVentanaDirector().getBtnCitasCanceladas().setActionCommand("CITAS CANCELADAS");
+		
+		//BOTONES DE ACCION
+		//Guardar datos personales director
+		vf.getVentanaDirector().getBtnGuardarDatosP().addActionListener(this);
+		vf.getVentanaDirector().getBtnGuardarDatosP().setActionCommand("GUARDAR DATOS DIRECTOR");
+		
+		//Generar turno director
+		vf.getVentanaDirector().getBtnGenerarTurno().addActionListener(this);
+		vf.getVentanaDirector().getBtnGenerarTurno().setActionCommand("CITAS CANCELADAS");
+						
 	}
 
 	@Override
@@ -125,40 +192,15 @@ public class Controller implements ActionListener {
 			
 			break;	
 		case "DATOS PERSONALES PACIENTE":
-			vf.getVentanaPaciente().getPanelDerechaArriba().setVisible(true);
-			vf.getVentanaPaciente().getPanelDatosPaciente().setVisible(true);
-			vf.getVentanaPaciente().getPanelVariableCitas().setVisible(false);
-			vf.getVentanaPaciente().getLblTituloDatosP().setVisible(true);
-			vf.getVentanaPaciente().getPanelTratamientoMedico().setVisible(false);
-			vf.getVentanaPaciente().getLblTituloTratamientoMedico().setVisible(false);
-			vf.getVentanaPaciente().getBtnAgendarCita().setVisible(false);
-			vf.getVentanaPaciente().getBtnCancelarCita().setVisible(false);
-			vf.getVentanaPaciente().getBtnCitasAgendadas().setVisible(false);
-			vf.getVentanaPaciente().getBtnReagendarCitas().setVisible(false);
+			cambiarPanelesPacientes(true, true, false, false, true, false, false, false, false, false);
+			
 			break;
 		case "CITAS PACIENTE":
-			vf.getVentanaPaciente().getPanelDerechaArriba().setVisible(true);
-			vf.getVentanaPaciente().getPanelDatosPaciente().setVisible(false);
-			vf.getVentanaPaciente().getPanelVariableCitas().setVisible(true);
-			vf.getVentanaPaciente().getPanelTratamientoMedico().setVisible(false);
-			vf.getVentanaPaciente().getLblTituloDatosP().setVisible(false);
-			vf.getVentanaPaciente().getLblTituloTratamientoMedico().setVisible(false);
-			vf.getVentanaPaciente().getBtnAgendarCita().setVisible(true);
-			vf.getVentanaPaciente().getBtnCancelarCita().setVisible(true);
-			vf.getVentanaPaciente().getBtnCitasAgendadas().setVisible(true);
-			vf.getVentanaPaciente().getBtnReagendarCitas().setVisible(true);
+			cambiarPanelesPacientes(true, false, true, false, false, false, true, true, true, true);
+			
 			break;
 		case "TRATAMIENTO MEDICO PACIENTE":
-			vf.getVentanaPaciente().getPanelDerechaArriba().setVisible(true);
-			vf.getVentanaPaciente().getPanelDatosPaciente().setVisible(false);
-			vf.getVentanaPaciente().getPanelVariableCitas().setVisible(false);
-			vf.getVentanaPaciente().getPanelTratamientoMedico().setVisible(true);
-			vf.getVentanaPaciente().getLblTituloDatosP().setVisible(false);
-			vf.getVentanaPaciente().getLblTituloTratamientoMedico().setVisible(true);
-			vf.getVentanaPaciente().getBtnAgendarCita().setVisible(false);
-			vf.getVentanaPaciente().getBtnCancelarCita().setVisible(false);
-			vf.getVentanaPaciente().getBtnCitasAgendadas().setVisible(false);
-			vf.getVentanaPaciente().getBtnReagendarCitas().setVisible(false);
+			cambiarPanelesPacientes(true, false, false, true, false, true, false, false, false, false);
 			tablaTratamientoMedicoP();
 			
 			break;
@@ -167,13 +209,13 @@ public class Controller implements ActionListener {
 			numSeleccionCita = 1;
 			vf.getVentanaPaciente().getPanelVariableCitas().setVisible(true);
 			vf.getVentanaPaciente().getCardLayout().show(vf.getVentanaPaciente().getPanelVariableCitas(), vf.getVentanaPaciente().getAgendarcita());
-
+			
 			break;
 		
 		case "CITAS AGENDADAS":
 			numSeleccionCita = 2;
 			vf.getVentanaPaciente().getPanelVariableCitas().setVisible(true);
-			vf.getVentanaPaciente().getCardLayout().show(vf.getVentanaPaciente().getPanelVariableCitas(), vf.getVentanaPaciente().getCitasAgendadas());
+			vf.getVentanaPaciente().getCardLayout().show(vf.getVentanaPaciente().getPanelVariableCitas(), vf.getVentanaPaciente().getCitasagendadas());
 			tablaCitasAgendadasP();
 			
 			break;
@@ -190,10 +232,7 @@ public class Controller implements ActionListener {
 
 			break;
 			
-		case "GENERAR CITA PACIENTE":
-			
-			
-			break;	
+
 			
 		case "GUARDAR DATOS PACIENTE":
 			Date fecNacimientoDC = vf.getVentanaPaciente().getFechaNacimiento().getDate();
@@ -228,11 +267,16 @@ public class Controller implements ActionListener {
 			}
 			
 			break;
+		case "GENERAR CITA PACIENTE":
+			
+			
+			break;	
+			
 		case "GUARDAR CANCELAR CITA":
 
 			
-			
 			break;
+			
 		case "GUARDAR REAGENDAR CITA":
 
 			
@@ -251,6 +295,21 @@ public class Controller implements ActionListener {
 		default:
 			break;
 		}
+		
+	}
+	
+	public void cambiarPanelesPacientes(boolean vDA, boolean vDP, boolean vVC, boolean vTM, boolean vTDP,
+			boolean vTTM, boolean vBAC, boolean vBCC, boolean vBCA, boolean vBRC) {
+		vf.getVentanaPaciente().getPanelDerechaArriba().setVisible(vDA);
+		vf.getVentanaPaciente().getPanelDatosPaciente().setVisible(vDP);
+		vf.getVentanaPaciente().getPanelVariableCitas().setVisible(vVC);
+		vf.getVentanaPaciente().getPanelTratamientoMedico().setVisible(vTM);
+		vf.getVentanaPaciente().getLblTituloDatosP().setVisible(vTDP);
+		vf.getVentanaPaciente().getLblTituloTratamientoMedico().setVisible(vTTM);
+		vf.getVentanaPaciente().getBtnAgendarCita().setVisible(vBAC);
+		vf.getVentanaPaciente().getBtnCancelarCita().setVisible(vBCC);
+		vf.getVentanaPaciente().getBtnCitasAgendadas().setVisible(vBCA);
+		vf.getVentanaPaciente().getBtnReagendarCitas().setVisible(vBRC);
 		
 	}
 	
@@ -377,6 +436,22 @@ public class Controller implements ActionListener {
 		scrollPane.setBounds(10, 10, 500, 300); //validar coordenadas
 		vf.getVentanaPaciente().getPanelTratamientoMedico().add(scrollPane);
 		scrollPane.setViewportView(jtTratamientoMedico);	
+	}
+	
+	public void preparacionDeDatosEsp() {
+		ArrayList<Especialista> espList = new ArrayList<>();
+		
+		Especialista esp1 = new Especialista("David Caicedo", new GregorianCalendar(2000, Calendar.AUGUST, 4).getTime(), "Masculino" , 142139, "de.c@gmail.com", "Cirugía");
+		Especialista esp2 = new Especialista("Pedro Gomez", new GregorianCalendar(1980, Calendar.FEBRUARY, 15).getTime(), "Masculino" , 662139, "de.c@gmail.com", "Cirugía");
+		Especialista esp3 = new Especialista("Andrea Pelaez", new GregorianCalendar(1980, Calendar.APRIL, 3).getTime(), "Femenino" , 857139, "de.c@gmail.com", "Cirugía");
+		Especialista esp4 = new Especialista("Jorge Lopez", new GregorianCalendar(1990, Calendar.AUGUST, 7).getTime(), "Masculino" , 196739, "de.c@gmail.com", "Cirugía");
+		Especialista esp5 = new Especialista("Pepe Aguilar", new GregorianCalendar(1991, Calendar.APRIL, 22).getTime(), "Masculino" , 199139, "de.c@gmail.com", "Cirugía");
+		Especialista esp6 = new Especialista("Michael Jackson", new GregorianCalendar(1995, Calendar.JUNE, 12).getTime(), "Masculino" , 106739, "de.c@gmail.com", "Cirugía");
+		Especialista esp7 = new Especialista("Tom Cruise", new GregorianCalendar(1990, Calendar.JULY, 14).getTime(), "Masculino" , 102139, "de.c@gmail.com", "Cirugía");
+		Especialista esp8 = new Especialista("Super Man", new GregorianCalendar(1988, Calendar.AUGUST, 3).getTime(), "Masculino" , 102139, "de.c@gmail.com", "Cirugía");
+		Especialista esp9 = new Especialista("Linda Caicedo", new GregorianCalendar(1976, Calendar.NOVEMBER, 4).getTime(), "Femenino" , 102139, "de.c@gmail.com", "Cirugía");
+		Especialista esp10 = new Especialista("Petrona Gonzalez", new GregorianCalendar(1987, Calendar.AUGUST, 1).getTime(), "Femenino" , 102139, "de.c@gmail.com", "Cirugía");
+		Especialista esp11 = new Especialista("Oliver Caicedo", new GregorianCalendar(1999, Calendar.DECEMBER, 14).getTime(), "Masculino" , 102139, "de.c@gmail.com", "Cirugía");
 	}
 	
 	public void tablaCitasMedicasE() {

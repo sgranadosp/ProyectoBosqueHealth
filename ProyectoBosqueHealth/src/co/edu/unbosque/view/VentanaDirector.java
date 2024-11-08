@@ -4,6 +4,7 @@ import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Font;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -28,6 +29,9 @@ public class VentanaDirector extends JFrame{
 	private JButton btnDatosPersonales, btnReportes, btnTurnos, btnGuardarDatosP, btnReporteSemanal,
 	btnReporteMensual, btnPacientesAtendidos, btnDiagnosticosRealizados, btnEspecialistasMNC, 
 	btnEspecialidadMC, btnCitasCanceladas, btnGenerarTurno, btnVolverMenu;
+	private ImageIcon imgDatosPersonales, imgReportes, imgTurnos, imgGuardarDatosP, imgReporteSemanal,
+	imgReporteMensual, imgPacientesAtendidos, imgDiagnosticosRealizados, imgEspecialistasMNC, 
+	imgEspecialidadMC, imgCitasCanceladas, imgGenerarTurno, imgVolverMenu;
 	
 	private final static String PA = "Pacientes Atendidos";
 	private final static String DR = "Diagnosticos Realizados";
@@ -206,25 +210,87 @@ public class VentanaDirector extends JFrame{
 
 	public void textfield() {
 		txtNombreCompleto = new JTextField();
-		
+		txtNombreCompleto.setFont(new Font("Agency FB", Font.BOLD, 12));
+		txtNombreCompleto.setBounds(240, 35, 200, 20);
+		panelDatosDirector.add(txtNombreCompleto);	
 		
 		txtNumeroDocumento = new JTextField();
-		
+		txtNumeroDocumento.setFont(new Font("Agency FB", Font.BOLD, 12));
+		txtNumeroDocumento.setBounds(240, 35, 200, 20);
+		panelDatosDirector.add(txtNumeroDocumento);	
 		
 		txtCorreoElectronico = new JTextField();
-		
+		txtCorreoElectronico.setFont(new Font("Agency FB", Font.BOLD, 12));
+		txtCorreoElectronico.setBounds(240, 35, 200, 20);
+		panelDatosDirector.add(txtCorreoElectronico);	
 	}
 
 	public void botones() {
 		
+		imgDatosPersonales = new ImageIcon();
+		btnDatosPersonales = new JButton(imgDatosPersonales);
+		
+		imgReportes = new ImageIcon();
+		btnReportes = new JButton(imgReportes);
+		
+		imgTurnos = new ImageIcon();
+		btnTurnos = new JButton(imgTurnos);
+		
+		imgGuardarDatosP = new ImageIcon();
+		btnGuardarDatosP = new JButton(imgGuardarDatosP);
+		
+		imgReporteSemanal = new ImageIcon();
+		btnReporteSemanal = new JButton(imgReporteSemanal);
+		
+		imgReporteMensual = new ImageIcon();
+		btnReporteMensual = new JButton(imgReporteMensual);
+		
+		imgPacientesAtendidos = new ImageIcon();
+		btnPacientesAtendidos = new JButton(imgPacientesAtendidos);
+		
+		imgDiagnosticosRealizados = new ImageIcon();
+		btnDiagnosticosRealizados = new JButton(imgDiagnosticosRealizados);
+		
+		imgEspecialistasMNC = new ImageIcon();
+		btnEspecialistasMNC = new JButton(imgEspecialistasMNC);
+		
+		imgEspecialidadMC = new ImageIcon();
+		btnEspecialidadMC = new JButton(imgEspecialidadMC);
+		
+		imgCitasCanceladas = new ImageIcon();
+		btnCitasCanceladas = new JButton(imgCitasCanceladas);
+		
+		imgGenerarTurno = new ImageIcon();
+		btnGenerarTurno = new JButton(imgGenerarTurno);
+		 
+		imgVolverMenu = new ImageIcon("media\\btnVolverMenu.png"); // OJO **** PENDIENTE DEFINIR IMAGEN
+		btnVolverMenu = new JButton(imgVolverMenu);
+		btnVolverMenu.setBorder(null);
+		btnVolverMenu.setBounds(800, 475, 174, 40);
+		add(btnVolverMenu);
+		 
 	}
 
 	public void comboBox() {
+		cmbGenero = new JComboBox<String>();
+		cmbGenero.setBounds(240, 175, 200, 20);
+		cmbGenero.setToolTipText("Género del paciente");
+		cmbGenero.addItem("");
+		cmbGenero.addItem("Masculino");
+		cmbGenero.addItem("Femenino");
+		panelDatosDirector.add(cmbGenero);
 		
+		cmbNivelDirectivo = new JComboBox<String>();
+		
+		cmbEspecialidadCreacionT = new JComboBox<String>();
+		
+		cmbEspecialistaCreacionT = new JComboBox<String>();
 	}
 
 	public void calendar() {
+		fechaNacimiento = new JDateChooser();
 		
+		fechaCreacionTurno = new JDateChooser();
 	}
 
 	public JPanel getPanelFijoIzq() {

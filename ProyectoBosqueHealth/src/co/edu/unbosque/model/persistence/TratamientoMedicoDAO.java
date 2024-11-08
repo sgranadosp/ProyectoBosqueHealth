@@ -11,11 +11,12 @@ public class TratamientoMedicoDAO implements CRUDOperation<TratamientoMedico, Tr
 
 	private ArrayList<TratamientoMedico> listaTratamientosMedicos;
 	private final String FILE_NAME = "tratamientosMedicos.csv";
-	private final String SERIALIZED_NAME = "tratamientosMedicos.bat";
+	private final String SERIALIZED_NAME = "tratamientosMedicos.dat";
 	
 	public TratamientoMedicoDAO() {
 		FileHandler.checkFolder();
 		FileHandler.checkPropertiesFolder();
+		readSerialized();
 	}
 	
 	@Override

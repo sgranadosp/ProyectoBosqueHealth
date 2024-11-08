@@ -14,11 +14,12 @@ public class PacienteDAO implements CRUDOperation<Paciente, PacienteDTO>{
 
 	private ArrayList<Paciente> listaPacientes;
 	private final String FILE_NAME = "pacientes.csv";
-	private final String SERIALIZED_NAME = "pacientes.bat";
+	private final String SERIALIZED_NAME = "pacientes.dat";
 	
 	public PacienteDAO() {
 		FileHandler.checkFolder();
 		FileHandler.checkPropertiesFolder();
+		readSerialized();
 	}
 	
 	@Override
@@ -69,17 +70,19 @@ public class PacienteDAO implements CRUDOperation<Paciente, PacienteDTO>{
 	@Override
 	public Paciente find(Paciente toFind) {
 		Paciente found = null;
-		if (!listaPacientes.isEmpty()) {
-			for (Paciente paciente : listaPacientes) {
-				if (paciente.getNombre().toLowerCase().equals(toFind.getNombre().toLowerCase())) {
-					found = paciente;
-					return found;
-				} else {
-					continue;
+		if (listaPacientes!=null) {
+			if (!listaPacientes.isEmpty()) {
+				for (Paciente paciente : listaPacientes) {
+					if (paciente.getNombre().toLowerCase().equals(toFind.getNombre().toLowerCase())) {
+						found = paciente;
+						return found;
+					} else {
+						continue;
+					}
 				}
+			} else {
+				return null;
 			}
-		} else {
-			return null;
 		}
 		return null;
 	}

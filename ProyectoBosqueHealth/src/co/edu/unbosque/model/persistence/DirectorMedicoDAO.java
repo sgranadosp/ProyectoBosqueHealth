@@ -14,12 +14,13 @@ public class DirectorMedicoDAO implements CRUDOperation<DirectorMedico, Director
 
 	private ArrayList<DirectorMedico> listaDirectorMedicos;
 	private final String FILE_NAME = "DirectorMedico.csv";
-	private final String SERIALIZED_NAME = "DirectorMedico.bat";
+	private final String SERIALIZED_NAME = "DirectorMedico.dat";
 	
 	public DirectorMedicoDAO() {
 		
 		FileHandler.checkFolder();
 		FileHandler.checkPropertiesFolder();
+		readSerialized();
 	}
 	
 	@Override

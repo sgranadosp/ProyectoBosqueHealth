@@ -14,12 +14,13 @@ public class EspecialistaDAO implements CRUDOperation<Especialista, Especialista
 
 	private ArrayList<Especialista> listaEspecialistas;
 	private final String FILE_NAME = "Especialistas.csv";
-	private final String SERIALIZED_NAME = "Especialistas.bat";
+	private final String SERIALIZED_NAME = "Especialistas.dat";
 	
 	public EspecialistaDAO() {
 		
 		FileHandler.checkFolder();
 		FileHandler.checkPropertiesFolder();
+		readSerialized();
 	}
 	
 	@Override
