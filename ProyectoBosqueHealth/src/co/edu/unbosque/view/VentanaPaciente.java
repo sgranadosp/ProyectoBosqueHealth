@@ -196,11 +196,7 @@ public class VentanaPaciente extends JFrame{
 
 		
 		//Labels CITAS - REAGENDAR CITA
-		lblNumeroCitaReagendar = new JLabel("Número de cita:");
-		lblNumeroCitaReagendar.setFont(new Font("Agency FB", Font.BOLD, 15));
-		lblNumeroCitaReagendar.setForeground(new Color(78, 175, 93));
-		lblNumeroCitaReagendar.setBounds(30, 35, 180, 20);
-		panelReagendarCita.add(lblNumeroCitaReagendar);
+
 		
 		lblFechaReagendar = new JLabel("Fecha:");
 		lblFechaReagendar.setFont(new Font("Agency FB", Font.BOLD, 15));
@@ -213,6 +209,13 @@ public class VentanaPaciente extends JFrame{
 		lblHoraReagendar.setForeground(new Color(78, 175, 93));
 		lblHoraReagendar.setBounds(30, 105, 180, 20);
 		panelReagendarCita.add(lblHoraReagendar);
+	
+		lblNumeroCitaReagendar = new JLabel("Número de cita:");
+		lblNumeroCitaReagendar.setFont(new Font("Agency FB", Font.BOLD, 15));
+		lblNumeroCitaReagendar.setForeground(new Color(78, 175, 93));
+		lblNumeroCitaReagendar.setBounds(30, 35, 180, 20);
+		//panelReagendarCita.add(lblNumeroCitaReagendar);
+		panelReagendarCita.add(lblNumeroCitaReagendar);
 		
 
 		//Labels CITAS - CANCELAR CITA
@@ -220,11 +223,11 @@ public class VentanaPaciente extends JFrame{
 		lblNumeroCitaCancelar.setFont(new Font("Agency FB", Font.BOLD, 15));
 		lblNumeroCitaCancelar.setForeground(new Color(78, 175, 93));
 		lblNumeroCitaCancelar.setBounds(30, 35, 180, 20);
-		panelCancelarCita.add(lblNumeroCitaReagendar);
+		panelCancelarCita.add(lblNumeroCitaCancelar);
 		
 		
 		//Labels CITAS - TRATAMIENTO MEDICO
-		lblTituloTratamientoMedico = new JLabel("Tratamiento médico:");
+		lblTituloTratamientoMedico = new JLabel("Tratamiento médico");
 		lblTituloTratamientoMedico.setFont(new Font("Agency FB", Font.BOLD, 40));
 		lblTituloTratamientoMedico.setForeground(new Color(78, 175, 93));
 		lblTituloTratamientoMedico.setBounds(30, 40, 350, 40);
@@ -328,10 +331,10 @@ public class VentanaPaciente extends JFrame{
 		
 	
 		// botón Generar cita (Agendar cita)
-		imgBtnGenerarCita = new ImageIcon("media\\btnGuardarGenerarCita.png"); // OJO **** PENDIENTE DEFINIR IMAGEN
+		imgBtnGenerarCita = new ImageIcon("media\\btnGuardargGenerarCita2.png"); // OJO **** PENDIENTE DEFINIR IMAGEN
 		btnGenerarCita = new JButton(imgBtnGenerarCita);
 		btnGenerarCita.setBorder(null);
-		btnGenerarCita.setBounds(270, 360, 229, 27);
+		btnGenerarCita.setBounds(145,250, 229, 27);
 		panelAgendarCitas.add(btnGenerarCita);
 
 		
@@ -339,14 +342,14 @@ public class VentanaPaciente extends JFrame{
 		imgBtnReagendar = new ImageIcon("media\\btnGuardarReagendarCita.png"); // OJO **** PENDIENTE DEFINIR IMAGEN
 		btnGuardarReagendarCita = new JButton(imgBtnReagendar);
 		btnGuardarReagendarCita.setBorder(null);
-		btnGuardarReagendarCita.setBounds(270, 360,  229, 27);
+		btnGuardarReagendarCita.setBounds(145,250, 229, 27);
 		panelReagendarCita.add(btnGuardarReagendarCita);
 
 		// botón Cancelar (Cancelar cita)
 		imgBtnCancelar = new ImageIcon("media\\btnGuardarCancelarCita.png"); // OJO **** PENDIENTE DEFINIR IMAGEN
 		btnGuardarCancelarCita = new JButton(imgBtnCancelar);
 		btnGuardarCancelarCita.setBorder(null);
-		btnGuardarCancelarCita.setBounds(270, 360,  229, 27);
+		btnGuardarCancelarCita.setBounds(145,250, 229, 27);
 		panelCancelarCita.add(btnGuardarCancelarCita);
 		
 		//boton menu principal
@@ -406,7 +409,7 @@ public class VentanaPaciente extends JFrame{
 		
 		//Calendar en reagendar cita
 		fechaReagendarCita = new JDateChooser();
-		fechaReagendarCita.setBounds(240, 105, 200, 20);
+		fechaReagendarCita.setBounds(240, 70, 200, 20);
 		panelReagendarCita.add(fechaReagendarCita);
 		
 	}
