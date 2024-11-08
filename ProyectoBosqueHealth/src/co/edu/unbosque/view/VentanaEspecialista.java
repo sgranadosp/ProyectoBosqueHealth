@@ -2,7 +2,9 @@ package co.edu.unbosque.view;
 
 import java.awt.CardLayout;
 import java.awt.Color;
+import java.awt.Font;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -24,9 +26,12 @@ public class VentanaEspecialista extends JFrame {
 	private JLabel lblNombreCompleto, lblNumeroDocumento, lblFechaNacimiento, lblCorreo, lblGenero, 
 	lblEspecialidad, lblTituloDatosP, lblTituloCitasMe, lblFechaTurno, lblEspecialistaActu, 
 	lblNuevoEspecialista, lblTituloTratamientoPaciente, lblFechaTratamientoPaciente, lblEscogerPaciente,
-	lblExamenPaciente, lblDiagnosticoPaciente, lblTratamientoPaciente;
+	lblExamenPaciente, lblDiagnosticoPaciente, lblTratamientoPaciente, lblTituloListaTratamientos;
 	private JButton btnDatosPersonales, btnCitas, btnTurno, btnTratamientoPaciente, btnListaTratamientos,
-	btnGuardarDatosP, btnTurnosMes, btnCambioTurno, btnGenerarCambioTurno, btnGuardarTratamiento, btnVolverMenu;
+	btnGuardarDatosP, btnTurnosMes, btnCambioTurno, btnGenerarCambioTurno, btnGuardarTratamiento, btnVolverMenu
+	, btnTooltipEspecialista;
+	private ImageIcon imgBtnDatos, imgBtnCitas, imgBtnTurnos, imgBtnTratamiento, imgBtnListaTratamientos, imgBtnVolver
+	, imgBtnGuardarDatos, imgBtnTurnosMes, imgBtnCambioTurno, imgBtnConfirmarCambio, imgBtnGuardarTratamiento;
 	
 	private final static String TURNOSMES = "Turnos del Mes";
 	private final static String CAMBIOTURNO = "Cambio Turno";
@@ -41,6 +46,26 @@ public class VentanaEspecialista extends JFrame {
 		botones();
 		comboBox();
 		calendar();
+		
+		getPanelFijoIzq().setVisible(true);
+		getPanelDerechaArriba().setVisible(false);
+		getPanelDatosEspecialista().setVisible(false);
+		getPanelCitasMedicas().setVisible(false);
+		getPanelTurnoMes().setVisible(false);
+		getPanelCambioTurno().setVisible(false);
+		getPanelTratamientoP().setVisible(false);
+		getPanelListaTratamiento().setVisible(false);
+		getPanelVariableTurno().setVisible(false);
+		
+		add(panelFijoIzq);
+		add(panelDerechaArriba);
+		add(panelDatosEspecialista);
+		add(panelCitasMedicas);
+		add(panelTurnoMes);
+		add(panelCambioTurno);
+		add(panelTratamientoP);
+		add(panelListaTratamiento);
+		add(panelVariableTurno);
 	}
 
 	public void ventana() {
@@ -53,148 +78,309 @@ public class VentanaEspecialista extends JFrame {
 	}
 
 	public void paneles() {
-		panelFijoIzq = new JPanel();
 		
+		panelFijoIzq = new JPanel();
+		panelFijoIzq.setLayout(null);
+		panelFijoIzq.setBounds(55, 55, 200, 415);
+		panelFijoIzq.setBackground(Color.white);
 		
 		panelDerechaArriba = new JPanel();
-		
+		panelDerechaArriba.setLayout(null);
+		panelDerechaArriba.setBounds(302, 55, 560, 100);
+		panelDerechaArriba.setBackground(Color.white);
 		
 		panelDatosEspecialista = new JPanel();
-		
+		panelDatosEspecialista.setLayout(null);
+		panelDatosEspecialista.setBounds(302, 156, 560, 315);
+		panelDatosEspecialista.setBackground(Color.white);	
 		
 		panelCitasMedicas = new JPanel();
-		
+		panelCitasMedicas.setLayout(null);
+		panelCitasMedicas.setBounds(302, 156, 560, 315);
+		panelCitasMedicas.setBackground(Color.white);
 		
 		panelTurnoMes = new JPanel();
-		
+		panelTurnoMes.setLayout(null);
+		panelTurnoMes.setBounds(302, 156, 560, 315);
+		panelTurnoMes.setBackground(Color.white);
 		
 		panelCambioTurno = new JPanel();
+		panelTurnoMes.setLayout(null);
+		panelCambioTurno.setBounds(302, 156, 560, 315);
+		panelCambioTurno.setBackground(Color.white);
 		
+		panelVariableTurno = new JPanel();
+		panelVariableTurno.setBounds(302, 156, 560, 315);
+		panelVariableTurno.setBackground(Color.white);
+		panelVariableTurno.add(panelTurnoMes, TURNOSMES);
+		panelVariableTurno.add(panelCambioTurno, CAMBIOTURNO);
 		
 		panelTratamientoP = new JPanel();
-		
+		panelTratamientoP.setLayout(null);
+		panelTratamientoP.setBounds(302, 156, 560, 315);
+		panelTratamientoP.setBackground(Color.white);
 		
 		panelListaTratamiento = new JPanel();
-		
+		panelListaTratamiento.setLayout(null);
+		panelListaTratamiento.setBounds(302, 156, 560, 315);
+		panelListaTratamiento.setBackground(Color.white);
 		
 	}
 
 	public void labels() {
 	
-		lblTituloDatosP = new JLabel();
+		//Labels DATOS PERSONALES
+		lblTituloDatosP = new JLabel("Datos personales");
+		lblTituloDatosP.setFont(new Font("Agency FB", Font.BOLD, 40));
+		lblTituloDatosP.setForeground(new Color(78, 175, 93));
+		lblTituloDatosP.setBounds(154, 40, 220, 40);
+		panelDerechaArriba.add(lblTituloDatosP);
 		
+		lblNombreCompleto = new JLabel("Nombre especialista");
+		lblNombreCompleto.setFont(new Font("Agency FB", Font.BOLD, 15));
+		lblNombreCompleto.setForeground(new Color(78, 175, 93));
+		lblNombreCompleto.setBounds(13, 14, 176, 20);
+		panelDatosEspecialista.add(lblNombreCompleto);
 		
-		lblTituloCitasMe = new JLabel();
+		lblNumeroDocumento = new JLabel("Documento del especialista");
+		lblNumeroDocumento.setFont(new Font("Agency FB", Font.BOLD, 15));
+		lblNumeroDocumento.setForeground(new Color(78, 175, 93));
+		lblNumeroDocumento.setBounds(13, 58, 176, 20);
+		panelDatosEspecialista.add(lblNumeroDocumento);
 		
+		lblFechaNacimiento = new JLabel("Fecha de nacimiento del especialista");
+		lblFechaNacimiento.setFont(new Font("Agency FB", Font.BOLD, 15));
+		lblFechaNacimiento.setForeground(new Color(78, 175, 93));
+		lblFechaNacimiento.setBounds(13, 100, 176, 20);
+		panelDatosEspecialista.add(lblFechaNacimiento);
 		
-		lblTituloTratamientoPaciente = new JLabel();
-		
-		
-		lblNombreCompleto = new JLabel();
-		
-		
-		lblNumeroDocumento = new JLabel();
-		
-		
-		lblFechaNacimiento = new JLabel();
-		
-		
-		lblCorreo = new JLabel();
-		
+		lblCorreo = new JLabel("Correo del especialista");
+		lblCorreo.setFont(new Font("Agency FB", Font.BOLD, 15));
+		lblCorreo.setForeground(new Color(78, 175, 93));
+		lblCorreo.setBounds(13, 142, 176, 20);
+		panelDatosEspecialista.add(lblCorreo);
 		
 		lblGenero = new JLabel();
-		
+		lblGenero.setFont(new Font("Agency FB", Font.BOLD, 15));
+		lblGenero.setForeground(new Color(78, 175, 93));
+		lblGenero.setBounds(13, 184, 176, 20);
+		panelDatosEspecialista.add(lblGenero);
 		
 		lblEspecialidad = new JLabel();
+		lblEspecialidad.setFont(new Font("Agency FB", Font.BOLD, 15));
+		lblEspecialidad.setForeground(new Color(78, 175, 93));
+		lblEspecialidad.setBounds(13, 226, 176, 20);
+		panelDatosEspecialista.add(lblEspecialidad);
 		
+		//Label CITAS
+		lblTituloCitasMe = new JLabel();
+		lblTituloCitasMe.setFont(new Font("Agency FB", Font.BOLD, 40));
+		lblTituloCitasMe.setForeground(new Color(78, 175, 93));
+		lblTituloCitasMe.setBounds(154, 40, 220, 40);
+		panelDerechaArriba.add(lblTituloCitasMe);
+		
+		//LabelS TURNOS
 		
 		lblFechaTurno = new JLabel();
-		
+		lblFechaTurno.setFont(new Font("Agency FB", Font.BOLD, 15));
+		lblFechaTurno.setForeground(new Color(78, 175, 93));
+		lblFechaTurno.setBounds(42, 51, 122, 20);
+		panelCambioTurno.add(lblFechaTurno);
 		
 		lblEspecialistaActu = new JLabel();
-		
+		lblEspecialistaActu.setFont(new Font("Agency FB", Font.BOLD, 15));
+		lblEspecialistaActu.setForeground(new Color(78, 175, 93));
+		lblEspecialistaActu.setBounds(49, 146, 180, 40);
+		panelCambioTurno.add(lblEspecialistaActu);
 		
 		lblNuevoEspecialista = new JLabel();
+		lblNuevoEspecialista.setFont(new Font("Agency FB", Font.BOLD, 15));
+		lblNuevoEspecialista.setForeground(new Color(78, 175, 93));
+		lblNuevoEspecialista.setBounds(303, 146, 180, 40);
+		panelCambioTurno.add(lblNuevoEspecialista);
 		
+		//Labels TRATAMIENTO
+		lblTituloTratamientoPaciente = new JLabel();
+		lblTituloTratamientoPaciente.setFont(new Font("Agency FB", Font.BOLD, 40));
+		lblTituloTratamientoPaciente.setForeground(new Color(78, 175, 93));
+		lblTituloTratamientoPaciente.setBounds(154, 40, 220, 40);
+		panelDerechaArriba.add(lblTituloTratamientoPaciente);
 		
 		lblFechaTratamientoPaciente = new JLabel();
-		
+		lblFechaTratamientoPaciente.setFont(new Font("Agency FB", Font.BOLD, 15));
+		lblFechaTratamientoPaciente.setForeground(new Color(78, 175, 93));
+		lblFechaTratamientoPaciente.setBounds(22, 20, 130, 20);
+		panelTratamientoP.add(lblFechaTratamientoPaciente);
 		
 		lblEscogerPaciente = new JLabel();
-		
+		lblEscogerPaciente.setFont(new Font("Agency FB", Font.BOLD, 15));
+		lblEscogerPaciente.setForeground(new Color(78, 175, 93));
+		lblEscogerPaciente.setBounds(22, 98, 130, 20);
+		panelTratamientoP.add(lblEscogerPaciente);
 		
 		lblExamenPaciente = new JLabel();
-		
+		lblExamenPaciente.setFont(new Font("Agency FB", Font.BOLD, 15));
+		lblExamenPaciente.setForeground(new Color(78, 175, 93));
+		lblExamenPaciente.setBounds(22, 176, 130, 20);
+		panelTratamientoP.add(lblExamenPaciente);
 		
 		lblDiagnosticoPaciente = new JLabel();
-		
+		lblDiagnosticoPaciente.setFont(new Font("Agency FB", Font.BOLD, 15));
+		lblDiagnosticoPaciente.setForeground(new Color(78, 175, 93));
+		lblDiagnosticoPaciente.setBounds(22, 254, 130, 20);
+		panelTratamientoP.add(lblDiagnosticoPaciente);
 		
 		lblTratamientoPaciente = new JLabel();
+		lblTratamientoPaciente.setFont(new Font("Agency FB", Font.BOLD, 15));
+		lblTratamientoPaciente.setForeground(new Color(78, 175, 93));
+		lblTratamientoPaciente.setBounds(22, 332, 130, 20);
+		panelTratamientoP.add(lblTratamientoPaciente);
 		
-		
+		//Label LISTA DE TRATAMIENTOS
+		lblTituloListaTratamientos = new JLabel();
+		lblTituloListaTratamientos.setFont(new Font("Agency FB", Font.BOLD, 40));
+		lblTituloListaTratamientos.setForeground(new Color(78, 175, 93));
+		lblTituloListaTratamientos.setBounds(154, 40, 220, 40);
+		panelDerechaArriba.add(lblTituloListaTratamientos);
+			
 	}
 
 	public void textfield() {
 		
+		//Textfields DATOS PERSONALES
 		txtNombreCompleto = new JTextField();
-		
+		txtNombreCompleto.setFont(new Font("Agency FB", Font.BOLD, 12));
+		txtNombreCompleto.setBounds(204, 10, 185, 20);
+		panelDatosEspecialista.add(txtNombreCompleto);	
 		
 		txtNumeroDocumento = new JTextField();
-		
+		txtNumeroDocumento.setFont(new Font("Agency FB", Font.BOLD, 12));
+		txtNumeroDocumento.setBounds(204, 53, 185, 20);
+		panelDatosEspecialista.add(txtNumeroDocumento);
 		
 		txtCorreoElectronico = new JTextField();
+		txtCorreoElectronico.setFont(new Font("Agency FB", Font.BOLD, 12));
+		txtCorreoElectronico.setBounds(204, 139, 185, 20);
+		panelDatosEspecialista.add(txtCorreoElectronico);
 		
-		
+		//Textfields TRATAMIENTO PACIENTE
 		txtExamenP = new JTextField();
-		
+		txtExamenP.setFont(new Font("Agency FB", Font.BOLD, 12));
+		txtExamenP.setBounds(164, 92, 338, 25);
+		panelDatosEspecialista.add(txtExamenP);
 		
 		txtDiagnosticoP = new JTextField();
-		
+		txtExamenP.setFont(new Font("Agency FB", Font.BOLD, 12));
+		txtExamenP.setBounds(164, 132, 338, 25);
+		panelDatosEspecialista.add(txtExamenP);
 		
 		txtTratamientoP = new JTextField();
+		txtExamenP.setFont(new Font("Agency FB", Font.BOLD, 12));
+		txtExamenP.setBounds(164, 172, 338, 45);
+		panelDatosEspecialista.add(txtExamenP);
 	}
 
 	public void botones() {
 		
-		btnDatosPersonales = new JButton();
+		//BOYTONES PANEL IZQUIERDO
+		imgBtnDatos = new ImageIcon("media\\btnDatosPersonalesP.png");
+		btnDatosPersonales = new JButton(imgBtnDatos);
+		btnDatosPersonales.setBorder(null);
+		btnDatosPersonales.setBounds(3, 38, 193, 30);
+		panelFijoIzq.add(btnDatosPersonales);
+		
+		imgBtnCitas = new ImageIcon("media\\btnCitasP.png");
+		btnCitas = new JButton(imgBtnCitas);
+		btnCitas.setBorder(null);
+		btnCitas.setBounds(3, 100, 193, 30);
+		panelFijoIzq.add(btnCitas);
+		
+		imgBtnTurnos = new ImageIcon("media\\btnTurnosEsp.png");
+		btnTurno = new JButton(imgBtnTurnos);
+		btnTurno.setBorder(null);
+		btnTurno.setBounds(3, 162, 193, 30);
+		panelFijoIzq.add(btnTurno);
+		
+		imgBtnTratamiento = new ImageIcon("media\\btnTratamientoEsp.png");
+		btnTratamientoPaciente = new JButton(imgBtnTratamiento);
+		btnTratamientoPaciente.setBorder(null);
+		btnTratamientoPaciente.setBounds(3, 224, 193, 30);
+		panelFijoIzq.add(btnTratamientoPaciente);
+		
+		imgBtnListaTratamientos = new ImageIcon("media\\btnListaTratamientos.png");
+		btnListaTratamientos = new JButton(imgBtnListaTratamientos);
+		btnListaTratamientos.setBorder(null);
+		btnListaTratamientos.setBounds(3, 286, 193, 30);
+		panelFijoIzq.add(btnListaTratamientos);
 		
 		
-		btnCitas = new JButton();
+		//Botón DATOS PERSONALES
+		imgBtnGuardarDatos = new ImageIcon("media\\btnGuardarDatosEsp.png");
+		btnGuardarDatosP = new JButton(imgBtnGuardarDatos);
+		btnGuardarDatosP.setBorder(null);
+		btnGuardarDatosP.setBounds(220, 260, 152, 27);
+		panelDatosEspecialista.add(btnGuardarDatosP);
+		
+		//Botones TURNOS
+		imgBtnTurnosMes = new ImageIcon("media\\btnTurnosMes.png");
+		btnTurnosMes = new JButton(imgBtnTurnosMes);
+		btnTurnosMes.setBorder(null);
+		btnTurnosMes.setBounds(42, 32, 200, 40);
+		panelVariableTurno.add(btnTurnosMes);
+		
+		imgBtnCambioTurno = new ImageIcon("media\\btnCambioTurno.png");	
+		btnCambioTurno = new JButton(imgBtnCambioTurno);
+		btnCambioTurno.setBorder(null);
+		btnCambioTurno.setBounds(298, 32, 200, 40);
+		panelVariableTurno.add(btnCambioTurno);
+		
+		imgBtnConfirmarCambio = new ImageIcon("media\\btnGuardarCambioTurno.png");
+		btnGenerarCambioTurno = new JButton(imgBtnConfirmarCambio);
+		btnGenerarCambioTurno.setBorder(null);
+		btnGenerarCambioTurno.setBounds(151, 233, 228, 28);
+		panelCambioTurno.add(btnGenerarCambioTurno);
+		
+		//Botón TRATAMIENTO
+		imgBtnGuardarTratamiento = new ImageIcon("media\\btnGuardarTratamiento.png");
+		btnGuardarTratamiento = new JButton(imgBtnGuardarTratamiento);
+		btnGuardarTratamiento.setBorder(null);
+		btnGuardarTratamiento.setBounds(151, 250, 228, 28);
+		panelTratamientoP.add(btnGuardarTratamiento);
+		
+		//Botón volver al menú principal----------------------------------------------------
+		imgBtnVolver = new ImageIcon("");
+		btnVolverMenu = new JButton(imgBtnVolver);
+		btnVolverMenu.setBorder(null);
+		btnVolverMenu.setBounds(151, 250, 228, 28);
+		add(btnVolverMenu);
 		
 		
-		btnTurno = new JButton();
-		
-		
-		btnTratamientoPaciente = new JButton();
-		
-		
-		btnListaTratamientos = new JButton();
-		
-		
-		btnGuardarDatosP = new JButton();
-		
-		
-		btnTurnosMes = new JButton();
-		
-		
-		btnCambioTurno = new JButton();
-		
-		
-		btnGenerarCambioTurno = new JButton();
-		
-		
-		btnGuardarTratamiento = new JButton();
-		
-		
-		btnVolverMenu = new JButton();
+		btnTooltipEspecialista = new JButton();
 		
 	}
 
 	public void comboBox() {
-		cmbGenero = new JComboBox<>();
 		
+		//Combobox DATOS ESPECIALISTA
+		cmbGenero = new JComboBox<String>();
+		cmbGenero.setBounds(240, 175, 200, 20);
+		cmbGenero.setToolTipText("Género del paciente");
+		cmbGenero.addItem("");
+		cmbGenero.addItem("Masculino");
+		cmbGenero.addItem("Femenino");
+		panelDatosEspecialista.add(cmbGenero);
 		
 		cmbEspecialidadDP = new JComboBox<>();
+		cmbEspecialidadDP.setBounds(240, 35, 200, 20);
+		cmbEspecialidadDP.setToolTipText("Especialidad");
+		cmbEspecialidadDP.addItem("");
+		cmbEspecialidadDP.addItem("Cirugía");
+		cmbEspecialidadDP.addItem("Oncología");
+		cmbEspecialidadDP.addItem("Dermatología");
+		cmbEspecialidadDP.addItem("Neumología");
+		cmbEspecialidadDP.addItem("Cardiología");
+		cmbEspecialidadDP.addItem("Medicina Interna");
+		panelDatosEspecialista.add(cmbEspecialidadDP);
 		
 		
 		cmbFechaTurno = new JComboBox<>();
