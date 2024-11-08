@@ -118,7 +118,7 @@ public class Controller implements ActionListener {
 			vf.getVentanaPaciente().getBtnReagendarCitas().setVisible(true);
 			break;
 		case "TRATAMIENTO MEDICO PACIENTE":
-			JOptionPane.showMessageDialog(null, "Seleccionaste Paciente");
+			JOptionPane.showMessageDialog(null, "Tratamietno paciente");
 			vf.getMenuPrincipal().setVisible(false);
 			vf.getVentanaPaciente().setVisible(true);
 			
@@ -126,32 +126,49 @@ public class Controller implements ActionListener {
 			
 		case "AGENDAR CITA":
 			numSeleccionCita = 1;
+			vf.getVentanaPaciente().getPanelVariableCitas().setVisible(true);
+			vf.getVentanaPaciente().getCardLayout().show(vf.getVentanaPaciente().getPanelVariableCitas(), vf.getVentanaPaciente().getAgendarcita());
+			/*			
 			vf.getVentanaPaciente().getPanelAgendarCitas().setVisible(true);
 			vf.getVentanaPaciente().getPanelCitasAgendadas().setVisible(false);
 			vf.getVentanaPaciente().getPanelReagendarCita().setVisible(false);
 			vf.getVentanaPaciente().getPanelCancelarCita().setVisible(false);
+			*/
 			break;
 		
 		case "CITAS AGENDADAS":
 			numSeleccionCita = 2;
+			vf.getVentanaPaciente().getPanelVariableCitas().setVisible(true);
+			vf.getVentanaPaciente().getCardLayout().show(vf.getVentanaPaciente().getPanelVariableCitas(), vf.getVentanaPaciente().getCitasAgendadas());
+			/*
 			vf.getVentanaPaciente().getPanelCitasAgendadas().setVisible(true);
 			vf.getVentanaPaciente().getPanelAgendarCitas().setVisible(false);
 			vf.getVentanaPaciente().getPanelReagendarCita().setVisible(false);
 			vf.getVentanaPaciente().getPanelCancelarCita().setVisible(false);
+			*/
 			break;
 		case "REAGENDAR CITA":
 			numSeleccionCita = 3;
+			vf.getVentanaPaciente().getPanelVariableCitas().setVisible(true);
+			vf.getVentanaPaciente().getCardLayout().show(vf.getVentanaPaciente().getPanelVariableCitas(), vf.getVentanaPaciente().getReagendarcita());
+			/*
 			vf.getVentanaPaciente().getPanelReagendarCita().setVisible(true);
 			vf.getVentanaPaciente().getPanelAgendarCitas().setVisible(false);
 			vf.getVentanaPaciente().getPanelCitasAgendadas().setVisible(false);
 			vf.getVentanaPaciente().getPanelCancelarCita().setVisible(false);
+			*/
 			break;
 		case "CANCELAR CITA":
 			numSeleccionCita = 4;
+			vf.getVentanaPaciente().getPanelVariableCitas().setVisible(true);
+			vf.getVentanaPaciente().getCardLayout().show(vf.getVentanaPaciente().getPanelVariableCitas(), vf.getVentanaPaciente().getCancelarcita());
+
+			/*
 			vf.getVentanaPaciente().getPanelCancelarCita().setVisible(true);
 			vf.getVentanaPaciente().getPanelAgendarCitas().setVisible(false);
 			vf.getVentanaPaciente().getPanelCitasAgendadas().setVisible(false);
 			vf.getVentanaPaciente().getPanelReagendarCita().setVisible(false);
+			*/
 			
 			break;	
 

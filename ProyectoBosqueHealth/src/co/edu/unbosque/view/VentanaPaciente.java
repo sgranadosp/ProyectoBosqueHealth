@@ -35,10 +35,10 @@ public class VentanaPaciente extends JFrame{
 		imgBtnAgendarCita, imgBtnCitasAgendadas, imgBtnReagendarCita, imgBtnCancelarCita,
 		imgBtnGenerarCita, imgBtnReagendar, imgBtnCancelar, imgBtnVolverMenu;
 	
-	private final static String AGENDARCITA = "Agendar cita";
-	private final static String MOSTRARCITA = "Mostrar cita";
-	private final static String REAGENDARCITA = "Reagendar cita";
-	private final static String CANCELARCITA = "Cancelar cita";
+	private final static String AGENDARCITA = "AgendarCita";
+	private final static String CITASAGENDADAS = "CitasAgendadas";
+	private final static String REAGENDARCITA = "ReagendarCita";
+	private final static String CANCELARCITA = "CancelarCita";
 	
 	
 	CardLayout cardLayout = new CardLayout();
@@ -53,21 +53,15 @@ public class VentanaPaciente extends JFrame{
 		calendar();
 		
 		getPanelFijoIzq().setVisible(true);
-		getPanelAgendarCitas().setVisible(false);
-		getPanelCancelarCita().setVisible(false);
-		getPanelCitasAgendadas().setVisible(false);
 		getPanelDatosPaciente().setVisible(false);
 		getPanelDerechaArriba().setVisible(false);
-		getPanelReagendarCita().setVisible(false);
 		getPanelTratamientoMedico().setVisible(false);
+		getPanelVariableCitas().setVisible(false);
 		
-		add(panelAgendarCitas);
 		add(panelFijoIzq);
-		add(panelCancelarCita);
-		add(panelCitasAgendadas);
+		add(panelVariableCitas);
 		add(panelDatosPaciente);
 		add(panelDerechaArriba);
-		add(panelReagendarCita);
 		add(panelTratamientoMedico);
 	}
 	
@@ -124,10 +118,10 @@ public class VentanaPaciente extends JFrame{
 	
 		 
 		 panelVariableCitas = new JPanel(cardLayout);
-		 panelVariableCitas.setBounds(151, 510, 850, 75);
+		 panelVariableCitas.setBounds(302, 156, 560, 315);
 		 panelVariableCitas.setBackground(Color.white);
 		 panelVariableCitas.add(panelAgendarCitas, AGENDARCITA);
-		 panelVariableCitas.add(panelCitasAgendadas, MOSTRARCITA);
+		 panelVariableCitas.add(panelCitasAgendadas, CITASAGENDADAS);
 		 panelVariableCitas.add(panelCancelarCita, CANCELARCITA);
 		 panelVariableCitas.add(panelReagendarCita, REAGENDARCITA);
 		 
@@ -896,25 +890,25 @@ public class VentanaPaciente extends JFrame{
 	}
 
 
-	public static String getAgendarcita() {
+	public String getAgendarcita() {
 		return AGENDARCITA;
 	}
 
 
 
-	public static String getMostrarcita() {
-		return MOSTRARCITA;
+	public String getCitasAgendadas() {
+		return CITASAGENDADAS;
 	}
 
 
 
-	public static String getReagendarcita() {
+	public String getReagendarcita() {
 		return REAGENDARCITA;
 	}
 
 
 
-	public static String getCancelarcita() {
+	public String getCancelarcita() {
 		return CANCELARCITA;
 	}
 
