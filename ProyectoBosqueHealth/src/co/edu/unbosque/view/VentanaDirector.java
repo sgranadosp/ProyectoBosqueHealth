@@ -2,6 +2,7 @@ package co.edu.unbosque.view;
 
 import java.awt.CardLayout;
 import java.awt.Color;
+import java.awt.Font;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -16,7 +17,7 @@ public class VentanaDirector extends JFrame{
 	
 	private JPanel panelFijoIzq, panelDerechaArriba, panelCentral,panelDatosDirector, 
 	panelPacientesAtendidos, panelDiagnosticosRealizados, panelEspecialisasMNC, panelEspecialidadMC,
-	panelCitasCanceladas, panelReporteMensual, panelCreacionTurno;
+	panelCitasCanceladas, panelReporteMensual, panelCreacionTurno, panelVariableReportes;
 	private JTextField txtNombreCompleto, txtNumeroDocumento, txtCorreoElectronico;
 	private JDateChooser fechaNacimiento, fechaCreacionTurno;
 	private JComboBox<String> cmbGenero, cmbNivelDirectivo, cmbEspecialidadCreacionT, 
@@ -45,6 +46,14 @@ public class VentanaDirector extends JFrame{
 		botones();
 		comboBox();
 		calendar();
+		
+		
+		add(panelFijoIzq);
+		add(panelVariableReportes);
+		add(panelDatosDirector);
+		add(panelDerechaArriba);
+		add(panelCentral);
+		add(panelCreacionTurno);
 	}
 
 	public void ventana() {
@@ -58,22 +67,152 @@ public class VentanaDirector extends JFrame{
 
 	public void paneles() {
 		panelFijoIzq = new JPanel();
+		panelFijoIzq.setLayout(null);
+		panelFijoIzq.setBounds(55, 55, 200, 415);
+		panelFijoIzq.setBackground(Color.white);		
 		
 		panelDerechaArriba = new JPanel();
+		panelDerechaArriba.setLayout(null);
+		panelDerechaArriba.setBounds(302, 55, 560, 72);
+		panelDerechaArriba.setBackground(Color.white);
 		
 		panelCentral = new JPanel();
+		panelCentral.setLayout(null);
+		panelCentral.setBounds(302, 127, 560, 108);
+		panelCentral.setBackground(Color.white);
 		
 		panelDatosDirector = new JPanel();
+		panelDatosDirector.setLayout(null);
+		panelDatosDirector.setBounds(302, 235, 560, 236);
+		panelDatosDirector.setBackground(Color.white);
 		
+		panelPacientesAtendidos = new JPanel();
+		panelPacientesAtendidos.setLayout(null);
+		panelPacientesAtendidos.setBounds(302, 235, 560, 236);
+		panelPacientesAtendidos.setBackground(Color.white);
+		
+		panelDiagnosticosRealizados = new JPanel();
+		panelDiagnosticosRealizados.setLayout(null);
+		panelDiagnosticosRealizados.setBounds(302, 235, 560, 236);
+		panelDiagnosticosRealizados.setBackground(Color.white);
+		
+		panelEspecialisasMNC = new JPanel();
+		panelEspecialisasMNC.setLayout(null);
+		panelEspecialisasMNC.setBounds(302, 235, 560, 236);
+		panelEspecialisasMNC.setBackground(Color.white);
+		
+		panelEspecialidadMC = new JPanel();
+		panelEspecialidadMC.setLayout(null);
+		panelEspecialidadMC.setBounds(302, 235, 560, 236);
+		panelEspecialidadMC.setBackground(Color.white);
+		
+		panelCitasCanceladas = new JPanel();
+		panelCitasCanceladas.setLayout(null);
+		panelCitasCanceladas.setBounds(302, 235, 560, 236);
+		panelCitasCanceladas.setBackground(Color.white);
+		
+		panelVariableReportes = new JPanel(cardLayout);
+		panelVariableReportes.setBounds(302, 235, 560, 236);
+		panelVariableReportes.setBackground(Color.white);
+		panelVariableReportes.add(panelPacientesAtendidos, PA);
+		panelVariableReportes.add(panelDiagnosticosRealizados, DR);
+		panelVariableReportes.add(panelEspecialisasMNC, EMNC);
+		panelVariableReportes.add(panelEspecialidadMC, EMC);
+		panelVariableReportes.add(panelCitasCanceladas, CC);
+		
+		panelReporteMensual = new JPanel();
+		panelReporteMensual.setLayout(null);
+		panelReporteMensual.setBounds(302, 235, 560, 236);
+		panelReporteMensual.setBackground(Color.white);
+		
+		panelCreacionTurno = new JPanel();
+		panelCreacionTurno.setLayout(null);
+		panelCreacionTurno.setBounds(302, 235, 560, 236);
+		panelCreacionTurno.setBackground(Color.white);
 		
 	}
 
 	public void labels() {
+		//Labels DATOS PERSONALES del Director
+		lblTituloDatosP = new JLabel("Datos personales");
+		lblTituloDatosP.setFont(new Font("Agency FB", Font.BOLD, 40));
+		lblTituloDatosP.setForeground(new Color(78, 175, 93));
+		lblTituloDatosP.setBounds(30, 10, 350, 30);
+		panelDatosDirector.add(lblTituloDatosP);
+
+		lblNombreCompleto = new JLabel("Nombre completo:");
+		lblNombreCompleto.setFont(new Font("Agency FB", Font.BOLD, 15));
+		lblNombreCompleto.setForeground(new Color(78, 175, 93));
+		lblNombreCompleto.setBounds(30, 35, 180, 20);
+		panelDatosDirector.add(lblNombreCompleto);
+
+		lblNumeroDocumento = new JLabel("Número de documento:");
+		lblNumeroDocumento.setFont(new Font("Agency FB", Font.BOLD, 15));
+		lblNumeroDocumento.setForeground(new Color(78, 175, 93));
+		lblNumeroDocumento.setBounds(30, 60, 180, 20);
+		panelDatosDirector.add(lblNumeroDocumento);
+
+		lblFechaNacimiento = new JLabel("Fecha de nacimiento:");
+		lblFechaNacimiento.setFont(new Font("Agency FB", Font.BOLD, 15));
+		lblFechaNacimiento.setForeground(new Color(78, 175, 93));
+		lblFechaNacimiento.setBounds(30, 85, 180, 20);
+		panelDatosDirector.add(lblFechaNacimiento);
+
+		lblCorreo = new JLabel("Correo electrónico:");
+		lblCorreo.setFont(new Font("Agency FB", Font.BOLD, 15));
+		lblCorreo.setForeground(new Color(78, 175, 93));
+		lblCorreo.setBounds(30, 110, 180, 20);
+		panelDatosDirector.add(lblCorreo);
+		
+		lblGenero = new JLabel("Género:");
+		lblGenero.setFont(new Font("Agency FB", Font.BOLD, 15));
+		lblGenero.setForeground(new Color(78, 175, 93));
+		lblGenero.setBounds(30, 135, 180, 20);
+		panelDatosDirector.add(lblGenero);
+		
+		lblNivelDirectivo = new JLabel("Nivel directivo:");
+		lblGenero.setFont(new Font("Agency FB", Font.BOLD, 15));
+		lblGenero.setForeground(new Color(78, 175, 93));
+		lblGenero.setBounds(30, 160, 180, 20);
+		panelDatosDirector.add(lblGenero);
+		
+		
+		//Labels Turnos - Creación de Turno
+		lblTituloCreacionTurno = new JLabel("Creación de Turno");
+		lblTituloCreacionTurno.setFont(new Font("Agency FB", Font.BOLD, 40));
+		lblTituloCreacionTurno.setForeground(new Color(78, 175, 93));
+		lblTituloCreacionTurno.setBounds(30, 10, 350, 30);
+		panelCreacionTurno.add(lblTituloCreacionTurno);
+		
+		lblEspecialidadCT = new JLabel("Especialidad:");
+		lblEspecialidadCT.setFont(new Font("Agency FB", Font.BOLD, 15));
+		lblEspecialidadCT.setForeground(new Color(78, 175, 93));
+		lblEspecialidadCT.setBounds(30, 35, 180, 20);
+		panelCreacionTurno.add(lblEspecialidadCT);
+
+		lblEspecialistaCT = new JLabel("Especialista:");
+		lblEspecialistaCT.setFont(new Font("Agency FB", Font.BOLD, 15));
+		lblEspecialistaCT.setForeground(new Color(78, 175, 93));
+		lblEspecialistaCT.setBounds(30, 60, 180, 20);
+		panelCreacionTurno.add(lblEspecialistaCT);
+
+		lblFechaCreacionT = new JLabel("Fecha:");
+		lblFechaCreacionT.setFont(new Font("Agency FB", Font.BOLD, 15));
+		lblFechaCreacionT.setForeground(new Color(78, 175, 93));
+		lblFechaCreacionT.setBounds(30, 85, 180, 20);
+		panelCreacionTurno.add(lblFechaCreacionT);
 		
 	}
 
 	public void textfield() {
-	
+		txtNombreCompleto = new JTextField();
+		
+		
+		txtNumeroDocumento = new JTextField();
+		
+		
+		txtCorreoElectronico = new JTextField();
+		
 	}
 
 	public void botones() {
@@ -466,6 +605,14 @@ public class VentanaDirector extends JFrame{
 
 	public static String getCc() {
 		return CC;
+	}
+
+	public JPanel getPanelVariableReportes() {
+		return panelVariableReportes;
+	}
+
+	public void setPanelVariableReportes(JPanel panelVariableReportes) {
+		this.panelVariableReportes = panelVariableReportes;
 	}
 	
 	

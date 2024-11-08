@@ -2,7 +2,9 @@ package co.edu.unbosque.controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.DateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
@@ -11,6 +13,7 @@ import javax.swing.JTable;
 import co.edu.unbosque.model.CitaDTO;
 import co.edu.unbosque.model.Especialista;
 import co.edu.unbosque.model.ModelFacade;
+import co.edu.unbosque.model.PacienteDTO;
 import co.edu.unbosque.model.TratamientoMedicoDTO;
 import co.edu.unbosque.view.ViewFacade;
 
@@ -82,6 +85,24 @@ public class Controller implements ActionListener {
 		vf.getVentanaPaciente().getBtnCancelarCita().addActionListener(this);
 		vf.getVentanaPaciente().getBtnCancelarCita().setActionCommand("CANCELAR CITA");
 		
+		
+		//BOTONES DE ACCION (GUARDAR-CANCELAR-...)
+		//Boton guardar los datos del paciente
+		vf.getVentanaPaciente().getBtnGuardarDatosP().addActionListener(this);
+		vf.getVentanaPaciente().getBtnGuardarDatosP().setActionCommand("GUARDAR DATOS PACIENTE");
+		
+		//Boton generar cita del paciente
+		vf.getVentanaPaciente().getBtnGenerarCita().addActionListener(this);
+		vf.getVentanaPaciente().getBtnGenerarCita().setActionCommand("GENERAR CITA PACIENTE");
+		
+		//Boton para cancelar la cita
+		vf.getVentanaPaciente().getBtnGuardarCancelarCita().addActionListener(this);
+		vf.getVentanaPaciente().getBtnGuardarCancelarCita().setActionCommand("GUARDAR CANCELAR CITA");
+		
+		//Boton para reagendar la cita
+		vf.getVentanaPaciente().getBtnGuardarReagendarCita().addActionListener(this);
+		vf.getVentanaPaciente().getBtnGuardarReagendarCita().setActionCommand("GUARDAR REAGENDAR CITA");
+		
 
 		
 	}
@@ -106,6 +127,7 @@ public class Controller implements ActionListener {
 		case "DATOS PERSONALES PACIENTE":
 			vf.getVentanaPaciente().getPanelDerechaArriba().setVisible(true);
 			vf.getVentanaPaciente().getPanelDatosPaciente().setVisible(true);
+			vf.getVentanaPaciente().getPanelVariableCitas().setVisible(false);
 			vf.getVentanaPaciente().getLblTituloDatosP().setVisible(true);
 			vf.getVentanaPaciente().getPanelTratamientoMedico().setVisible(false);
 			vf.getVentanaPaciente().getLblTituloTratamientoMedico().setVisible(false);
@@ -117,6 +139,7 @@ public class Controller implements ActionListener {
 		case "CITAS PACIENTE":
 			vf.getVentanaPaciente().getPanelDerechaArriba().setVisible(true);
 			vf.getVentanaPaciente().getPanelDatosPaciente().setVisible(false);
+			vf.getVentanaPaciente().getPanelVariableCitas().setVisible(true);
 			vf.getVentanaPaciente().getPanelTratamientoMedico().setVisible(false);
 			vf.getVentanaPaciente().getLblTituloDatosP().setVisible(false);
 			vf.getVentanaPaciente().getLblTituloTratamientoMedico().setVisible(false);
@@ -128,6 +151,7 @@ public class Controller implements ActionListener {
 		case "TRATAMIENTO MEDICO PACIENTE":
 			vf.getVentanaPaciente().getPanelDerechaArriba().setVisible(true);
 			vf.getVentanaPaciente().getPanelDatosPaciente().setVisible(false);
+			vf.getVentanaPaciente().getPanelVariableCitas().setVisible(false);
 			vf.getVentanaPaciente().getPanelTratamientoMedico().setVisible(true);
 			vf.getVentanaPaciente().getLblTituloDatosP().setVisible(false);
 			vf.getVentanaPaciente().getLblTituloTratamientoMedico().setVisible(true);
@@ -164,6 +188,54 @@ public class Controller implements ActionListener {
 			vf.getVentanaPaciente().getPanelVariableCitas().setVisible(true);
 			vf.getVentanaPaciente().getCardLayout().show(vf.getVentanaPaciente().getPanelVariableCitas(), vf.getVentanaPaciente().getCancelarcita());
 
+			break;
+			
+		case "GENERAR CITA PACIENTE":
+			
+			
+			break;	
+			
+		case "GUARDAR DATOS PACIENTE":
+			Date fecNacimientoDC = vf.getVentanaPaciente().getFechaNacimiento().getDate();
+			String sFecNacimientoDC = null;
+			if (fecNacimientoDC==null)
+				sFecNacimientoDC = "";
+			else
+				sFecNacimientoDC = DateFormat.getDateInstance().format(fecNacimientoDC);
+			
+			if (vf.getVentanaPaciente().getTxtNombreCompleto().getText().trim().equals("")
+						|| vf.getVentanaPaciente().getTxtNumeroDocumento().getText().trim().equals("")
+						|| sFecNacimientoDC.equals("")
+						|| vf.getVentanaPaciente().getTxtCorreoElectronico().getText().equals("")
+						|| vf.getVentanaPaciente().getCmbGenero().getSelectedItem().toString().equals("")
+						) {
+				JOptionPane.showMessageDialog(null, "Ingrese los valores requeridos", "Error",
+						JOptionPane.ERROR_MESSAGE);
+				
+			} else {
+				String nombreCompleto = "";
+				String numeroDoc = vf.getVentanaPaciente().getTxtNumeroDocumento().getText();
+				fecNacimientoDC = vf.getVentanaPaciente().getFechaNacimiento().getDate();
+				String correo = vf.getVentanaPaciente().getTxtCorreoElectronico().getText();
+				String genero = vf.getVentanaPaciente().getCmbGenero().getSelectedItem().toString();
+				
+				int numDoc = Integer.parseInt(numeroDoc);
+				
+				mf.getPacienteDAO().add(new PacienteDTO(nombreCompleto, fecNacimientoDC, genero, numDoc, correo));
+				JOptionPane.showMessageDialog(null, "Paciente creado exitosamente");
+				
+				limpiarEntradasPacientes();
+			}
+			
+			break;
+		case "GUARDAR CANCELAR CITA":
+
+			
+			
+			break;
+		case "GUARDAR REAGENDAR CITA":
+
+			
 			break;	
 
 		case "VOLVER MENU P":
@@ -198,7 +270,7 @@ public class Controller implements ActionListener {
 		vf.getVentanaPaciente().getTxtNumeroDocumento().setText(null);
 		vf.getVentanaPaciente().getTxtNumeroReagendarCita().setText(null);
 		vf.getVentanaPaciente().getCmbEspecialidad().setSelectedIndex(0);
-		vf.getVentanaPaciente().getCmbEspecialistas().setSelectedIndex(0);
+		//vf.getVentanaPaciente().getCmbEspecialistas().setSelectedIndex(0);
 		vf.getVentanaPaciente().getCmbGenero().setSelectedIndex(0);
 		vf.getVentanaPaciente().getFechaNacimiento().setCalendar(null);
 		vf.getVentanaPaciente().getFechaAgendarCita().setCalendar(null);
