@@ -31,7 +31,7 @@ public class VentanaEspecialista extends JFrame {
 	btnGuardarDatosP, btnTurnosMes, btnCambioTurno, btnGenerarCambioTurno, btnGuardarTratamiento, btnVolverMenu
 	, btnTooltipEspecialista;
 	private ImageIcon imgBtnDatos, imgBtnCitas, imgBtnTurnos, imgBtnTratamiento, imgBtnListaTratamientos, imgBtnVolver
-	, imgBtnGuardarDatos, imgBtnTurnosMes, imgBtnCambioTurno, imgBtnConfirmarCambio, imgBtnGuardarTratamiento;
+	, imgBtnGuardarDatos, imgBtnTurnosMes, imgBtnCambioTurno, imgBtnConfirmarCambio, imgBtnGuardarTratamiento, imgBtnToolTip;
 	
 	private final static String TURNOSMES = "Turnos del Mes";
 	private final static String CAMBIOTURNO = "Cambio Turno";
@@ -267,17 +267,17 @@ public class VentanaEspecialista extends JFrame {
 		txtExamenP = new JTextField();
 		txtExamenP.setFont(new Font("Agency FB", Font.BOLD, 12));
 		txtExamenP.setBounds(164, 92, 338, 25);
-		panelDatosEspecialista.add(txtExamenP);
+		panelTratamientoP.add(txtExamenP);
 		
 		txtDiagnosticoP = new JTextField();
-		txtExamenP.setFont(new Font("Agency FB", Font.BOLD, 12));
-		txtExamenP.setBounds(164, 132, 338, 25);
-		panelDatosEspecialista.add(txtExamenP);
+		txtDiagnosticoP.setFont(new Font("Agency FB", Font.BOLD, 12));
+		txtDiagnosticoP.setBounds(164, 132, 338, 25);
+		panelTratamientoP.add(txtDiagnosticoP);
 		
 		txtTratamientoP = new JTextField();
-		txtExamenP.setFont(new Font("Agency FB", Font.BOLD, 12));
-		txtExamenP.setBounds(164, 172, 338, 45);
-		panelDatosEspecialista.add(txtExamenP);
+		txtTratamientoP.setFont(new Font("Agency FB", Font.BOLD, 12));
+		txtTratamientoP.setBounds(164, 172, 338, 45);
+		panelTratamientoP.add(txtTratamientoP);
 	}
 
 	public void botones() {
@@ -348,30 +348,33 @@ public class VentanaEspecialista extends JFrame {
 		panelTratamientoP.add(btnGuardarTratamiento);
 		
 		//Botón volver al menú principal----------------------------------------------------
-		imgBtnVolver = new ImageIcon("");
+		imgBtnVolver = new ImageIcon("media\\btnVolverMenu.png");
 		btnVolverMenu = new JButton(imgBtnVolver);
 		btnVolverMenu.setBorder(null);
-		btnVolverMenu.setBounds(151, 250, 228, 28);
+		btnVolverMenu.setBounds(806, 507, 175, 42);
 		add(btnVolverMenu);
 		
-		
-		btnTooltipEspecialista = new JButton();
-		
+		imgBtnToolTip = new ImageIcon("media\\btnToolTipEspecialista.png");
+		btnTooltipEspecialista = new JButton(imgBtnToolTip);
+		btnTooltipEspecialista.setBorder(null);
+		btnTooltipEspecialista.setBounds(931, 2, 68, 68);
+		btnTooltipEspecialista.setToolTipText("Panel de gestión para especialistas médicos");
+		add(btnTooltipEspecialista);
 	}
 
 	public void comboBox() {
 		
 		//Combobox DATOS ESPECIALISTA
 		cmbGenero = new JComboBox<String>();
-		cmbGenero.setBounds(240, 175, 200, 20);
-		cmbGenero.setToolTipText("Género del paciente");
+		cmbGenero.setBounds(204, 182, 185, 20);
+		cmbGenero.setToolTipText("Género del especialista");
 		cmbGenero.addItem("");
 		cmbGenero.addItem("Masculino");
 		cmbGenero.addItem("Femenino");
 		panelDatosEspecialista.add(cmbGenero);
 		
-		cmbEspecialidadDP = new JComboBox<>();
-		cmbEspecialidadDP.setBounds(240, 35, 200, 20);
+		cmbEspecialidadDP = new JComboBox<String>();
+		cmbEspecialidadDP.setBounds(204, 225, 185, 20);
 		cmbEspecialidadDP.setToolTipText("Especialidad");
 		cmbEspecialidadDP.addItem("");
 		cmbEspecialidadDP.addItem("Cirugía");
@@ -382,27 +385,45 @@ public class VentanaEspecialista extends JFrame {
 		cmbEspecialidadDP.addItem("Medicina Interna");
 		panelDatosEspecialista.add(cmbEspecialidadDP);
 		
+		//Combobox CAMBIO DE TURNO
+		cmbFechaTurno = new JComboBox<String>();
+		cmbFechaTurno.setBounds(174, 44, 185, 25);
+		cmbFechaTurno.setToolTipText("Fecha del turno");
+		cmbFechaTurno.addItem("");
+		panelCambioTurno.add(cmbFechaTurno);
 		
-		cmbFechaTurno = new JComboBox<>();
-		
-		
-		cmbEspecialistaActual = new JComboBox<>();
-		
+		cmbEspecialistaActual = new JComboBox<String>();
+		cmbEspecialistaActual.setBounds(49, 171, 185, 25);
+		cmbEspecialistaActual.setToolTipText("Especialista actual asignado");
+		cmbEspecialistaActual.addItem("");
+		panelCambioTurno.add(cmbEspecialistaActual);
 		
 		cmbNuevoEspecialista = new JComboBox<>();
+		cmbNuevoEspecialista.setBounds(303, 171, 185, 25);
+		cmbNuevoEspecialista.setToolTipText("Especialista nuevo");
+		cmbNuevoEspecialista.addItem("");
+		panelCambioTurno.add(cmbNuevoEspecialista);
 		
-		
-		cmbEscogerPaciente = new JComboBox<>();
+		//Combobox TRATAMIENTO
+		cmbEscogerPaciente = new JComboBox<String>();
+		cmbEscogerPaciente.setBounds(164, 52, 338, 25);
+		cmbEscogerPaciente.setToolTipText("Escoger paciente a atender");
+		cmbEscogerPaciente.addItem("");
+		panelTratamientoP.add(cmbEscogerPaciente);
 		
 	}
 
 	public void calendar() {
 		
+		//Calendar fecha de nacimiento del especialista
 		fechaNacimiento = new JDateChooser();
+		fechaNacimiento.setBounds(204, 96, 185, 20);
+		panelDatosEspecialista.add(fechaNacimiento);
 		
-		
+		//Calendar fecha para programar el tratamiento
 		fechaTratamientoP = new JDateChooser();
-		
+		fechaTratamientoP.setBounds(164, 12, 338, 25);
+		panelTratamientoP.add(fechaTratamientoP);
 		
 	}
 
@@ -726,6 +747,14 @@ public class VentanaEspecialista extends JFrame {
 		this.lblTratamientoPaciente = lblTratamientoPaciente;
 	}
 
+	public JLabel getLblTituloListaTratamientos() {
+		return lblTituloListaTratamientos;
+	}
+
+	public void setLblTituloListaTratamientos(JLabel lblTituloListaTratamientos) {
+		this.lblTituloListaTratamientos = lblTituloListaTratamientos;
+	}
+
 	public JButton getBtnDatosPersonales() {
 		return btnDatosPersonales;
 	}
@@ -814,6 +843,110 @@ public class VentanaEspecialista extends JFrame {
 		this.btnVolverMenu = btnVolverMenu;
 	}
 
+	public JButton getBtnTooltipEspecialista() {
+		return btnTooltipEspecialista;
+	}
+
+	public void setBtnTooltipEspecialista(JButton btnTooltipEspecialista) {
+		this.btnTooltipEspecialista = btnTooltipEspecialista;
+	}
+
+	public ImageIcon getImgBtnDatos() {
+		return imgBtnDatos;
+	}
+
+	public void setImgBtnDatos(ImageIcon imgBtnDatos) {
+		this.imgBtnDatos = imgBtnDatos;
+	}
+
+	public ImageIcon getImgBtnCitas() {
+		return imgBtnCitas;
+	}
+
+	public void setImgBtnCitas(ImageIcon imgBtnCitas) {
+		this.imgBtnCitas = imgBtnCitas;
+	}
+
+	public ImageIcon getImgBtnTurnos() {
+		return imgBtnTurnos;
+	}
+
+	public void setImgBtnTurnos(ImageIcon imgBtnTurnos) {
+		this.imgBtnTurnos = imgBtnTurnos;
+	}
+
+	public ImageIcon getImgBtnTratamiento() {
+		return imgBtnTratamiento;
+	}
+
+	public void setImgBtnTratamiento(ImageIcon imgBtnTratamiento) {
+		this.imgBtnTratamiento = imgBtnTratamiento;
+	}
+
+	public ImageIcon getImgBtnListaTratamientos() {
+		return imgBtnListaTratamientos;
+	}
+
+	public void setImgBtnListaTratamientos(ImageIcon imgBtnListaTratamientos) {
+		this.imgBtnListaTratamientos = imgBtnListaTratamientos;
+	}
+
+	public ImageIcon getImgBtnVolver() {
+		return imgBtnVolver;
+	}
+
+	public void setImgBtnVolver(ImageIcon imgBtnVolver) {
+		this.imgBtnVolver = imgBtnVolver;
+	}
+
+	public ImageIcon getImgBtnGuardarDatos() {
+		return imgBtnGuardarDatos;
+	}
+
+	public void setImgBtnGuardarDatos(ImageIcon imgBtnGuardarDatos) {
+		this.imgBtnGuardarDatos = imgBtnGuardarDatos;
+	}
+
+	public ImageIcon getImgBtnTurnosMes() {
+		return imgBtnTurnosMes;
+	}
+
+	public void setImgBtnTurnosMes(ImageIcon imgBtnTurnosMes) {
+		this.imgBtnTurnosMes = imgBtnTurnosMes;
+	}
+
+	public ImageIcon getImgBtnCambioTurno() {
+		return imgBtnCambioTurno;
+	}
+
+	public void setImgBtnCambioTurno(ImageIcon imgBtnCambioTurno) {
+		this.imgBtnCambioTurno = imgBtnCambioTurno;
+	}
+
+	public ImageIcon getImgBtnConfirmarCambio() {
+		return imgBtnConfirmarCambio;
+	}
+
+	public void setImgBtnConfirmarCambio(ImageIcon imgBtnConfirmarCambio) {
+		this.imgBtnConfirmarCambio = imgBtnConfirmarCambio;
+	}
+
+	public ImageIcon getImgBtnGuardarTratamiento() {
+		return imgBtnGuardarTratamiento;
+	}
+
+	public void setImgBtnGuardarTratamiento(ImageIcon imgBtnGuardarTratamiento) {
+		this.imgBtnGuardarTratamiento = imgBtnGuardarTratamiento;
+	}
+
+	public ImageIcon getImgBtnToolTip() {
+		return imgBtnToolTip;
+	}
+
+	public void setImgBtnToolTip(ImageIcon imgBtnToolTip) {
+		this.imgBtnToolTip = imgBtnToolTip;
+	}
+
 	public CardLayout getCardLayout() {
 		return cardLayout;
 	}
@@ -829,9 +962,5 @@ public class VentanaEspecialista extends JFrame {
 	public static String getCambioturno() {
 		return CAMBIOTURNO;
 	}
-	
-	
-	
-	
 
 }

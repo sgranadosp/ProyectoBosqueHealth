@@ -28,12 +28,12 @@ public class VentanaPaciente extends JFrame{
 	lblNumeroCitaReagendar, lblFechaReagendar, lblHoraReagendar, lblNumeroCitaCancelar, lblTituloTratamientoMedico;
 	private JButton btnDatosPersonales, btnCitas, btnTratamientoMedico, btnGuardarDatosP, btnGenerarCita,
 	btnAgendarCita, btnCitasAgendadas, btnReagendarCitas, btnCancelarCita, btnGuardarReagendarCita, 
-	btnGuardarCancelarCita, btnVolverMenu;
+	btnGuardarCancelarCita, btnVolverMenu, btnTooltipPaciente;
 	
 	private ImageIcon imgBtnDatosPersonales, imgBtnCitas, imgBtnTratamientoMedico,
 		imgBtnGuardarDatosPersonales,
 		imgBtnAgendarCita, imgBtnCitasAgendadas, imgBtnReagendarCita, imgBtnCancelarCita,
-		imgBtnGenerarCita, imgBtnReagendar, imgBtnCancelar, imgBtnVolverMenu;
+		imgBtnGenerarCita, imgBtnReagendar, imgBtnCancelar, imgBtnVolverMenu, imgBtnToolTip;
 	
 	private final static String AGENDARCITA = "AgendarCita";
 	private final static String CITASAGENDADAS = "CitasAgendadas";
@@ -359,7 +359,12 @@ public class VentanaPaciente extends JFrame{
 		btnVolverMenu.setBounds(800, 475, 174, 40);
 		add(btnVolverMenu);
 		
-		
+		imgBtnToolTip = new ImageIcon("media\\btnToolTipPaciente.png");
+		btnTooltipPaciente = new JButton(imgBtnToolTip);
+		btnTooltipPaciente.setBorder(null);
+		btnTooltipPaciente.setBounds(931, 2, 68, 68);
+		btnTooltipPaciente.setToolTipText("Panel de gestión para pacientes");
+		add(btnTooltipPaciente);
 		
 	}
 	
@@ -414,10 +419,12 @@ public class VentanaPaciente extends JFrame{
 		
 	}
 
-	
+
+
 	public JPanel getPanelFijoIzq() {
 		return panelFijoIzq;
 	}
+
 
 
 	public void setPanelFijoIzq(JPanel panelFijoIzq) {
@@ -425,9 +432,11 @@ public class VentanaPaciente extends JFrame{
 	}
 
 
+
 	public JPanel getPanelDerechaArriba() {
 		return panelDerechaArriba;
 	}
+
 
 
 	public void setPanelDerechaArriba(JPanel panelDerechaArriba) {
@@ -435,9 +444,11 @@ public class VentanaPaciente extends JFrame{
 	}
 
 
+
 	public JPanel getPanelDatosPaciente() {
 		return panelDatosPaciente;
 	}
+
 
 
 	public void setPanelDatosPaciente(JPanel panelDatosPaciente) {
@@ -445,9 +456,11 @@ public class VentanaPaciente extends JFrame{
 	}
 
 
+
 	public JPanel getPanelAgendarCitas() {
 		return panelAgendarCitas;
 	}
+
 
 
 	public void setPanelAgendarCitas(JPanel panelAgendarCitas) {
@@ -455,9 +468,11 @@ public class VentanaPaciente extends JFrame{
 	}
 
 
+
 	public JPanel getPanelCitasAgendadas() {
 		return panelCitasAgendadas;
 	}
+
 
 
 	public void setPanelCitasAgendadas(JPanel panelCitasAgendadas) {
@@ -465,9 +480,11 @@ public class VentanaPaciente extends JFrame{
 	}
 
 
+
 	public JPanel getPanelReagendarCita() {
 		return panelReagendarCita;
 	}
+
 
 
 	public void setPanelReagendarCita(JPanel panelReagendarCita) {
@@ -475,9 +492,11 @@ public class VentanaPaciente extends JFrame{
 	}
 
 
+
 	public JPanel getPanelCancelarCita() {
 		return panelCancelarCita;
 	}
+
 
 
 	public void setPanelCancelarCita(JPanel panelCancelarCita) {
@@ -485,9 +504,11 @@ public class VentanaPaciente extends JFrame{
 	}
 
 
+
 	public JPanel getPanelTratamientoMedico() {
 		return panelTratamientoMedico;
 	}
+
 
 
 	public void setPanelTratamientoMedico(JPanel panelTratamientoMedico) {
@@ -495,9 +516,23 @@ public class VentanaPaciente extends JFrame{
 	}
 
 
+
+	public JPanel getPanelVariableCitas() {
+		return panelVariableCitas;
+	}
+
+
+
+	public void setPanelVariableCitas(JPanel panelVariableCitas) {
+		this.panelVariableCitas = panelVariableCitas;
+	}
+
+
+
 	public JTextField getTxtNombreCompleto() {
 		return txtNombreCompleto;
 	}
+
 
 
 	public void setTxtNombreCompleto(JTextField txtNombreCompleto) {
@@ -505,9 +540,11 @@ public class VentanaPaciente extends JFrame{
 	}
 
 
+
 	public JTextField getTxtNumeroDocumento() {
 		return txtNumeroDocumento;
 	}
+
 
 
 	public void setTxtNumeroDocumento(JTextField txtNumeroDocumento) {
@@ -515,9 +552,11 @@ public class VentanaPaciente extends JFrame{
 	}
 
 
+
 	public JTextField getTxtCorreoElectronico() {
 		return txtCorreoElectronico;
 	}
+
 
 
 	public void setTxtCorreoElectronico(JTextField txtCorreoElectronico) {
@@ -525,9 +564,11 @@ public class VentanaPaciente extends JFrame{
 	}
 
 
+
 	public JTextField getTxtHora() {
 		return txtHora;
 	}
+
 
 
 	public void setTxtHora(JTextField txtHora) {
@@ -535,9 +576,11 @@ public class VentanaPaciente extends JFrame{
 	}
 
 
+
 	public JTextField getTxtNumeroReagendarCita() {
 		return txtNumeroReagendarCita;
 	}
+
 
 
 	public void setTxtNumeroReagendarCita(JTextField txtNumeroReagendarCita) {
@@ -545,14 +588,29 @@ public class VentanaPaciente extends JFrame{
 	}
 
 
+
+	public JTextField getTxtHoraReagendarCita() {
+		return txtHoraReagendarCita;
+	}
+
+
+
+	public void setTxtHoraReagendarCita(JTextField txtHoraReagendarCita) {
+		this.txtHoraReagendarCita = txtHoraReagendarCita;
+	}
+
+
+
 	public JTextField getTxtNumeroCancelarCita() {
 		return txtNumeroCancelarCita;
 	}
 
 
+
 	public void setTxtNumeroCancelarCita(JTextField txtNumeroCancelarCita) {
 		this.txtNumeroCancelarCita = txtNumeroCancelarCita;
 	}
+
 
 
 	public JDateChooser getFechaAgendarCita() {
@@ -596,9 +654,11 @@ public class VentanaPaciente extends JFrame{
 	}
 
 
+
 	public void setCmbGenero(JComboBox<String> cmbGenero) {
 		this.cmbGenero = cmbGenero;
 	}
+
 
 
 	public JComboBox<String> getCmbEspecialidad() {
@@ -606,9 +666,11 @@ public class VentanaPaciente extends JFrame{
 	}
 
 
+
 	public void setCmbEspecialidad(JComboBox<String> cmbEspecialidad) {
 		this.cmbEspecialidad = cmbEspecialidad;
 	}
+
 
 
 	public JComboBox<String> getCmbEspecialistas() {
@@ -616,9 +678,11 @@ public class VentanaPaciente extends JFrame{
 	}
 
 
+
 	public void setCmbEspecialistas(JComboBox<String> cmbEspecialistas) {
 		this.cmbEspecialistas = cmbEspecialistas;
 	}
+
 
 
 	public JLabel getLblNombreCompleto() {
@@ -626,9 +690,11 @@ public class VentanaPaciente extends JFrame{
 	}
 
 
+
 	public void setLblNombreCompleto(JLabel lblNombreCompleto) {
 		this.lblNombreCompleto = lblNombreCompleto;
 	}
+
 
 
 	public JLabel getLblNumeroDocumento() {
@@ -636,9 +702,11 @@ public class VentanaPaciente extends JFrame{
 	}
 
 
+
 	public void setLblNumeroDocumento(JLabel lblNumeroDocumento) {
 		this.lblNumeroDocumento = lblNumeroDocumento;
 	}
+
 
 
 	public JLabel getLblFechaNacimiento() {
@@ -646,9 +714,11 @@ public class VentanaPaciente extends JFrame{
 	}
 
 
+
 	public void setLblFechaNacimiento(JLabel lblFechaNacimiento) {
 		this.lblFechaNacimiento = lblFechaNacimiento;
 	}
+
 
 
 	public JLabel getLblCorreo() {
@@ -656,9 +726,11 @@ public class VentanaPaciente extends JFrame{
 	}
 
 
+
 	public void setLblCorreo(JLabel lblCorreo) {
 		this.lblCorreo = lblCorreo;
 	}
+
 
 
 	public JLabel getLblGenero() {
@@ -666,9 +738,11 @@ public class VentanaPaciente extends JFrame{
 	}
 
 
+
 	public void setLblGenero(JLabel lblGenero) {
 		this.lblGenero = lblGenero;
 	}
+
 
 
 	public JLabel getLblTituloDatosP() {
@@ -676,9 +750,11 @@ public class VentanaPaciente extends JFrame{
 	}
 
 
+
 	public void setLblTituloDatosP(JLabel lblTituloDatosP) {
 		this.lblTituloDatosP = lblTituloDatosP;
 	}
+
 
 
 	public JLabel getLblEspecialidadAgendar() {
@@ -686,9 +762,11 @@ public class VentanaPaciente extends JFrame{
 	}
 
 
+
 	public void setLblEspecialidadAgendar(JLabel lblEspecialidadAgendar) {
 		this.lblEspecialidadAgendar = lblEspecialidadAgendar;
 	}
+
 
 
 	public JLabel getLblEspecialistasAgendar() {
@@ -696,9 +774,11 @@ public class VentanaPaciente extends JFrame{
 	}
 
 
+
 	public void setLblEspecialistasAgendar(JLabel lblEspecialistasAgendar) {
 		this.lblEspecialistasAgendar = lblEspecialistasAgendar;
 	}
+
 
 
 	public JLabel getLblFechaAgendar() {
@@ -706,9 +786,11 @@ public class VentanaPaciente extends JFrame{
 	}
 
 
+
 	public void setLblFechaAgendar(JLabel lblFechaAgendar) {
 		this.lblFechaAgendar = lblFechaAgendar;
 	}
+
 
 
 	public JLabel getLblHoraAgendar() {
@@ -716,9 +798,11 @@ public class VentanaPaciente extends JFrame{
 	}
 
 
+
 	public void setLblHoraAgendar(JLabel lblHoraAgendar) {
 		this.lblHoraAgendar = lblHoraAgendar;
 	}
+
 
 
 	public JLabel getLblNumeroCitaReagendar() {
@@ -726,9 +810,11 @@ public class VentanaPaciente extends JFrame{
 	}
 
 
+
 	public void setLblNumeroCitaReagendar(JLabel lblNumeroCitaReagendar) {
 		this.lblNumeroCitaReagendar = lblNumeroCitaReagendar;
 	}
+
 
 
 	public JLabel getLblFechaReagendar() {
@@ -736,9 +822,11 @@ public class VentanaPaciente extends JFrame{
 	}
 
 
+
 	public void setLblFechaReagendar(JLabel lblFechaReagendar) {
 		this.lblFechaReagendar = lblFechaReagendar;
 	}
+
 
 
 	public JLabel getLblHoraReagendar() {
@@ -746,9 +834,11 @@ public class VentanaPaciente extends JFrame{
 	}
 
 
+
 	public void setLblHoraReagendar(JLabel lblHoraReagendar) {
 		this.lblHoraReagendar = lblHoraReagendar;
 	}
+
 
 
 	public JLabel getLblNumeroCitaCancelar() {
@@ -756,9 +846,23 @@ public class VentanaPaciente extends JFrame{
 	}
 
 
+
 	public void setLblNumeroCitaCancelar(JLabel lblNumeroCitaCancelar) {
 		this.lblNumeroCitaCancelar = lblNumeroCitaCancelar;
 	}
+
+
+
+	public JLabel getLblTituloTratamientoMedico() {
+		return lblTituloTratamientoMedico;
+	}
+
+
+
+	public void setLblTituloTratamientoMedico(JLabel lblTituloTratamientoMedico) {
+		this.lblTituloTratamientoMedico = lblTituloTratamientoMedico;
+	}
+
 
 
 	public JButton getBtnDatosPersonales() {
@@ -766,9 +870,11 @@ public class VentanaPaciente extends JFrame{
 	}
 
 
+
 	public void setBtnDatosPersonales(JButton btnDatosPersonales) {
 		this.btnDatosPersonales = btnDatosPersonales;
 	}
+
 
 
 	public JButton getBtnCitas() {
@@ -776,9 +882,11 @@ public class VentanaPaciente extends JFrame{
 	}
 
 
+
 	public void setBtnCitas(JButton btnCitas) {
 		this.btnCitas = btnCitas;
 	}
+
 
 
 	public JButton getBtnTratamientoMedico() {
@@ -786,9 +894,11 @@ public class VentanaPaciente extends JFrame{
 	}
 
 
+
 	public void setBtnTratamientoMedico(JButton btnTratamientoMedico) {
 		this.btnTratamientoMedico = btnTratamientoMedico;
 	}
+
 
 
 	public JButton getBtnGuardarDatosP() {
@@ -796,9 +906,11 @@ public class VentanaPaciente extends JFrame{
 	}
 
 
+
 	public void setBtnGuardarDatosP(JButton btnGuardarDatosP) {
 		this.btnGuardarDatosP = btnGuardarDatosP;
 	}
+
 
 
 	public JButton getBtnGenerarCita() {
@@ -806,9 +918,11 @@ public class VentanaPaciente extends JFrame{
 	}
 
 
+
 	public void setBtnGenerarCita(JButton btnGenerarCita) {
 		this.btnGenerarCita = btnGenerarCita;
 	}
+
 
 
 	public JButton getBtnAgendarCita() {
@@ -816,9 +930,11 @@ public class VentanaPaciente extends JFrame{
 	}
 
 
+
 	public void setBtnAgendarCita(JButton btnAgendarCita) {
 		this.btnAgendarCita = btnAgendarCita;
 	}
+
 
 
 	public JButton getBtnCitasAgendadas() {
@@ -826,9 +942,11 @@ public class VentanaPaciente extends JFrame{
 	}
 
 
+
 	public void setBtnCitasAgendadas(JButton btnCitasAgendadas) {
 		this.btnCitasAgendadas = btnCitasAgendadas;
 	}
+
 
 
 	public JButton getBtnReagendarCitas() {
@@ -836,9 +954,11 @@ public class VentanaPaciente extends JFrame{
 	}
 
 
+
 	public void setBtnReagendarCitas(JButton btnReagendarCitas) {
 		this.btnReagendarCitas = btnReagendarCitas;
 	}
+
 
 
 	public JButton getBtnCancelarCita() {
@@ -846,9 +966,11 @@ public class VentanaPaciente extends JFrame{
 	}
 
 
+
 	public void setBtnCancelarCita(JButton btnCancelarCita) {
 		this.btnCancelarCita = btnCancelarCita;
 	}
+
 
 
 	public JButton getBtnGuardarReagendarCita() {
@@ -856,9 +978,11 @@ public class VentanaPaciente extends JFrame{
 	}
 
 
+
 	public void setBtnGuardarReagendarCita(JButton btnGuardarReagendarCita) {
 		this.btnGuardarReagendarCita = btnGuardarReagendarCita;
 	}
+
 
 
 	public JButton getBtnGuardarCancelarCita() {
@@ -866,9 +990,11 @@ public class VentanaPaciente extends JFrame{
 	}
 
 
+
 	public void setBtnGuardarCancelarCita(JButton btnGuardarCancelarCita) {
 		this.btnGuardarCancelarCita = btnGuardarCancelarCita;
 	}
+
 
 
 	public JButton getBtnVolverMenu() {
@@ -876,8 +1002,177 @@ public class VentanaPaciente extends JFrame{
 	}
 
 
+
 	public void setBtnVolverMenu(JButton btnVolverMenu) {
 		this.btnVolverMenu = btnVolverMenu;
+	}
+
+
+
+	public JButton getBtnTooltipPaciente() {
+		return btnTooltipPaciente;
+	}
+
+
+
+	public void setBtnTooltipPaciente(JButton btnTooltipPaciente) {
+		this.btnTooltipPaciente = btnTooltipPaciente;
+	}
+
+
+
+	public ImageIcon getImgBtnDatosPersonales() {
+		return imgBtnDatosPersonales;
+	}
+
+
+
+	public void setImgBtnDatosPersonales(ImageIcon imgBtnDatosPersonales) {
+		this.imgBtnDatosPersonales = imgBtnDatosPersonales;
+	}
+
+
+
+	public ImageIcon getImgBtnCitas() {
+		return imgBtnCitas;
+	}
+
+
+
+	public void setImgBtnCitas(ImageIcon imgBtnCitas) {
+		this.imgBtnCitas = imgBtnCitas;
+	}
+
+
+
+	public ImageIcon getImgBtnTratamientoMedico() {
+		return imgBtnTratamientoMedico;
+	}
+
+
+
+	public void setImgBtnTratamientoMedico(ImageIcon imgBtnTratamientoMedico) {
+		this.imgBtnTratamientoMedico = imgBtnTratamientoMedico;
+	}
+
+
+
+	public ImageIcon getImgBtnGuardarDatosPersonales() {
+		return imgBtnGuardarDatosPersonales;
+	}
+
+
+
+	public void setImgBtnGuardarDatosPersonales(ImageIcon imgBtnGuardarDatosPersonales) {
+		this.imgBtnGuardarDatosPersonales = imgBtnGuardarDatosPersonales;
+	}
+
+
+
+	public ImageIcon getImgBtnAgendarCita() {
+		return imgBtnAgendarCita;
+	}
+
+
+
+	public void setImgBtnAgendarCita(ImageIcon imgBtnAgendarCita) {
+		this.imgBtnAgendarCita = imgBtnAgendarCita;
+	}
+
+
+
+	public ImageIcon getImgBtnCitasAgendadas() {
+		return imgBtnCitasAgendadas;
+	}
+
+
+
+	public void setImgBtnCitasAgendadas(ImageIcon imgBtnCitasAgendadas) {
+		this.imgBtnCitasAgendadas = imgBtnCitasAgendadas;
+	}
+
+
+
+	public ImageIcon getImgBtnReagendarCita() {
+		return imgBtnReagendarCita;
+	}
+
+
+
+	public void setImgBtnReagendarCita(ImageIcon imgBtnReagendarCita) {
+		this.imgBtnReagendarCita = imgBtnReagendarCita;
+	}
+
+
+
+	public ImageIcon getImgBtnCancelarCita() {
+		return imgBtnCancelarCita;
+	}
+
+
+
+	public void setImgBtnCancelarCita(ImageIcon imgBtnCancelarCita) {
+		this.imgBtnCancelarCita = imgBtnCancelarCita;
+	}
+
+
+
+	public ImageIcon getImgBtnGenerarCita() {
+		return imgBtnGenerarCita;
+	}
+
+
+
+	public void setImgBtnGenerarCita(ImageIcon imgBtnGenerarCita) {
+		this.imgBtnGenerarCita = imgBtnGenerarCita;
+	}
+
+
+
+	public ImageIcon getImgBtnReagendar() {
+		return imgBtnReagendar;
+	}
+
+
+
+	public void setImgBtnReagendar(ImageIcon imgBtnReagendar) {
+		this.imgBtnReagendar = imgBtnReagendar;
+	}
+
+
+
+	public ImageIcon getImgBtnCancelar() {
+		return imgBtnCancelar;
+	}
+
+
+
+	public void setImgBtnCancelar(ImageIcon imgBtnCancelar) {
+		this.imgBtnCancelar = imgBtnCancelar;
+	}
+
+
+
+	public ImageIcon getImgBtnVolverMenu() {
+		return imgBtnVolverMenu;
+	}
+
+
+
+	public void setImgBtnVolverMenu(ImageIcon imgBtnVolverMenu) {
+		this.imgBtnVolverMenu = imgBtnVolverMenu;
+	}
+
+
+
+	public ImageIcon getImgBtnToolTip() {
+		return imgBtnToolTip;
+	}
+
+
+
+	public void setImgBtnToolTip(ImageIcon imgBtnToolTip) {
+		this.imgBtnToolTip = imgBtnToolTip;
 	}
 
 
@@ -893,64 +1188,27 @@ public class VentanaPaciente extends JFrame{
 	}
 
 
-	public String getAgendarcita() {
+
+	public static String getAgendarcita() {
 		return AGENDARCITA;
 	}
 
 
 
-	public String getCitasAgendadas() {
+	public static String getCitasagendadas() {
 		return CITASAGENDADAS;
 	}
 
 
 
-	public String getReagendarcita() {
+	public static String getReagendarcita() {
 		return REAGENDARCITA;
 	}
 
 
 
-	public String getCancelarcita() {
+	public static String getCancelarcita() {
 		return CANCELARCITA;
 	}
-
-
-
-	public JPanel getPanelVariableCitas() {
-		return panelVariableCitas;
-	}
-
-
-
-	public void setPanelVariableCitas(JPanel panelVariableCitas) {
-		this.panelVariableCitas = panelVariableCitas;
-	}
-
-
-
-	public JTextField getTxtHoraReagendarCita() {
-		return txtHoraReagendarCita;
-	}
-
-
-
-	public void setTxtHoraReagendarCita(JTextField txtHoraReagendarCita) {
-		this.txtHoraReagendarCita = txtHoraReagendarCita;
-	}
-
-
-
-	public JLabel getLblTituloTratamientoMedico() {
-		return lblTituloTratamientoMedico;
-	}
-
-
-
-	public void setLblTituloTratamientoMedico(JLabel lblTituloTratamientoMedico) {
-		this.lblTituloTratamientoMedico = lblTituloTratamientoMedico;
-	}
 	
-	
-
 }
