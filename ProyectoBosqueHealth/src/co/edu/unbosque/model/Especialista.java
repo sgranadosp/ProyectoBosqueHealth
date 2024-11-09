@@ -28,6 +28,13 @@ public class Especialista extends Persona implements Serializable{
     private String especialidad;
 
     /**
+     *  Constructor por defecto que inicializa un objeto {@code Especialista} sin atributos.
+     */
+    public Especialista() {
+		// TODO Auto-generated constructor stub
+	}
+    
+    /**
      * Constructor por defecto que inicializa un especialista sin atributos.
      */
     /**
