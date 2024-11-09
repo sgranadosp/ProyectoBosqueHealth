@@ -61,8 +61,6 @@ public class VentanaEspecialista extends JFrame {
 		add(panelDerechaArriba);
 		add(panelDatosEspecialista);
 		add(panelCitasMedicas);
-		add(panelTurnoMes);
-		add(panelCambioTurno);
 		add(panelTratamientoP);
 		add(panelListaTratamiento);
 		add(panelVariableTurno);
@@ -105,11 +103,11 @@ public class VentanaEspecialista extends JFrame {
 		panelTurnoMes.setBackground(Color.white);
 		
 		panelCambioTurno = new JPanel();
-		panelTurnoMes.setLayout(null);
+		panelCambioTurno.setLayout(null);
 		panelCambioTurno.setBounds(302, 156, 560, 315);
 		panelCambioTurno.setBackground(Color.white);
 		
-		panelVariableTurno = new JPanel();
+		panelVariableTurno = new JPanel(cardLayout);
 		panelVariableTurno.setBounds(302, 156, 560, 315);
 		panelVariableTurno.setBackground(Color.white);
 		panelVariableTurno.add(panelTurnoMes, TURNOSMES);
@@ -133,47 +131,47 @@ public class VentanaEspecialista extends JFrame {
 		lblTituloDatosP = new JLabel("Datos personales");
 		lblTituloDatosP.setFont(new Font("Agency FB", Font.BOLD, 40));
 		lblTituloDatosP.setForeground(new Color(78, 175, 93));
-		lblTituloDatosP.setBounds(154, 40, 220, 40);
+		lblTituloDatosP.setBounds(154, 40, 280, 40);
 		panelDerechaArriba.add(lblTituloDatosP);
 		
-		lblNombreCompleto = new JLabel("Nombre especialista");
+		lblNombreCompleto = new JLabel("Nombre especialista:");
 		lblNombreCompleto.setFont(new Font("Agency FB", Font.BOLD, 15));
 		lblNombreCompleto.setForeground(new Color(78, 175, 93));
 		lblNombreCompleto.setBounds(13, 14, 176, 20);
 		panelDatosEspecialista.add(lblNombreCompleto);
 		
-		lblNumeroDocumento = new JLabel("Documento del especialista");
+		lblNumeroDocumento = new JLabel("Documento del especialista:");
 		lblNumeroDocumento.setFont(new Font("Agency FB", Font.BOLD, 15));
 		lblNumeroDocumento.setForeground(new Color(78, 175, 93));
 		lblNumeroDocumento.setBounds(13, 58, 176, 20);
 		panelDatosEspecialista.add(lblNumeroDocumento);
 		
-		lblFechaNacimiento = new JLabel("Fecha de nacimiento del especialista");
+		lblFechaNacimiento = new JLabel("Fecha de nacimiento del especialista:");
 		lblFechaNacimiento.setFont(new Font("Agency FB", Font.BOLD, 15));
 		lblFechaNacimiento.setForeground(new Color(78, 175, 93));
 		lblFechaNacimiento.setBounds(13, 100, 176, 20);
 		panelDatosEspecialista.add(lblFechaNacimiento);
 		
-		lblCorreo = new JLabel("Correo del especialista");
+		lblCorreo = new JLabel("Correo del especialista:");
 		lblCorreo.setFont(new Font("Agency FB", Font.BOLD, 15));
 		lblCorreo.setForeground(new Color(78, 175, 93));
 		lblCorreo.setBounds(13, 142, 176, 20);
 		panelDatosEspecialista.add(lblCorreo);
 		
-		lblGenero = new JLabel();
+		lblGenero = new JLabel("Género:");
 		lblGenero.setFont(new Font("Agency FB", Font.BOLD, 15));
 		lblGenero.setForeground(new Color(78, 175, 93));
 		lblGenero.setBounds(13, 184, 176, 20);
 		panelDatosEspecialista.add(lblGenero);
 		
-		lblEspecialidad = new JLabel();
+		lblEspecialidad = new JLabel("Especialidad");
 		lblEspecialidad.setFont(new Font("Agency FB", Font.BOLD, 15));
 		lblEspecialidad.setForeground(new Color(78, 175, 93));
 		lblEspecialidad.setBounds(13, 226, 176, 20);
 		panelDatosEspecialista.add(lblEspecialidad);
 		
 		//Label CITAS
-		lblTituloCitasMe = new JLabel();
+		lblTituloCitasMe = new JLabel("Citas médicas");
 		lblTituloCitasMe.setFont(new Font("Agency FB", Font.BOLD, 40));
 		lblTituloCitasMe.setForeground(new Color(78, 175, 93));
 		lblTituloCitasMe.setBounds(154, 40, 220, 40);
@@ -181,66 +179,66 @@ public class VentanaEspecialista extends JFrame {
 		
 		//LabelS TURNOS
 		
-		lblFechaTurno = new JLabel();
+		lblFechaTurno = new JLabel("Fecha del turno:");
 		lblFechaTurno.setFont(new Font("Agency FB", Font.BOLD, 15));
 		lblFechaTurno.setForeground(new Color(78, 175, 93));
-		lblFechaTurno.setBounds(42, 51, 122, 20);
+		lblFechaTurno.setBounds(42, 41, 122, 20);
 		panelCambioTurno.add(lblFechaTurno);
 		
-		lblEspecialistaActu = new JLabel();
+		lblEspecialistaActu = new JLabel("Especialista Actual:");
 		lblEspecialistaActu.setFont(new Font("Agency FB", Font.BOLD, 15));
 		lblEspecialistaActu.setForeground(new Color(78, 175, 93));
-		lblEspecialistaActu.setBounds(49, 146, 180, 40);
+		lblEspecialistaActu.setBounds(49, 136, 180, 40);
 		panelCambioTurno.add(lblEspecialistaActu);
 		
-		lblNuevoEspecialista = new JLabel();
+		lblNuevoEspecialista = new JLabel("Nuevo Especialista:");
 		lblNuevoEspecialista.setFont(new Font("Agency FB", Font.BOLD, 15));
 		lblNuevoEspecialista.setForeground(new Color(78, 175, 93));
-		lblNuevoEspecialista.setBounds(303, 146, 180, 40);
+		lblNuevoEspecialista.setBounds(303, 136, 180, 40);
 		panelCambioTurno.add(lblNuevoEspecialista);
 		
 		//Labels TRATAMIENTO
-		lblTituloTratamientoPaciente = new JLabel();
+		lblTituloTratamientoPaciente = new JLabel("Tramiento del paciente");
 		lblTituloTratamientoPaciente.setFont(new Font("Agency FB", Font.BOLD, 40));
 		lblTituloTratamientoPaciente.setForeground(new Color(78, 175, 93));
-		lblTituloTratamientoPaciente.setBounds(154, 40, 220, 40);
+		lblTituloTratamientoPaciente.setBounds(90, 40, 350, 40);
 		panelDerechaArriba.add(lblTituloTratamientoPaciente);
 		
-		lblFechaTratamientoPaciente = new JLabel();
+		lblFechaTratamientoPaciente = new JLabel("Fecha:");
 		lblFechaTratamientoPaciente.setFont(new Font("Agency FB", Font.BOLD, 15));
 		lblFechaTratamientoPaciente.setForeground(new Color(78, 175, 93));
-		lblFechaTratamientoPaciente.setBounds(22, 20, 130, 20);
+		lblFechaTratamientoPaciente.setBounds(22, 10, 130, 20);
 		panelTratamientoP.add(lblFechaTratamientoPaciente);
 		
-		lblEscogerPaciente = new JLabel();
+		lblEscogerPaciente = new JLabel("Escoger paciente:");
 		lblEscogerPaciente.setFont(new Font("Agency FB", Font.BOLD, 15));
 		lblEscogerPaciente.setForeground(new Color(78, 175, 93));
-		lblEscogerPaciente.setBounds(22, 98, 130, 20);
+		lblEscogerPaciente.setBounds(22, 52, 130, 20);
 		panelTratamientoP.add(lblEscogerPaciente);
 		
-		lblExamenPaciente = new JLabel();
+		lblExamenPaciente = new JLabel("Examen:");
 		lblExamenPaciente.setFont(new Font("Agency FB", Font.BOLD, 15));
 		lblExamenPaciente.setForeground(new Color(78, 175, 93));
-		lblExamenPaciente.setBounds(22, 176, 130, 20);
+		lblExamenPaciente.setBounds(22, 92, 130, 20);
 		panelTratamientoP.add(lblExamenPaciente);
 		
-		lblDiagnosticoPaciente = new JLabel();
+		lblDiagnosticoPaciente = new JLabel("Diagnostico:");
 		lblDiagnosticoPaciente.setFont(new Font("Agency FB", Font.BOLD, 15));
 		lblDiagnosticoPaciente.setForeground(new Color(78, 175, 93));
-		lblDiagnosticoPaciente.setBounds(22, 254, 130, 20);
+		lblDiagnosticoPaciente.setBounds(22, 132, 130, 20);
 		panelTratamientoP.add(lblDiagnosticoPaciente);
 		
-		lblTratamientoPaciente = new JLabel();
+		lblTratamientoPaciente = new JLabel("Tratamiento");
 		lblTratamientoPaciente.setFont(new Font("Agency FB", Font.BOLD, 15));
 		lblTratamientoPaciente.setForeground(new Color(78, 175, 93));
-		lblTratamientoPaciente.setBounds(22, 332, 130, 20);
+		lblTratamientoPaciente.setBounds(22, 172, 130, 20);
 		panelTratamientoP.add(lblTratamientoPaciente);
 		
 		//Label LISTA DE TRATAMIENTOS
-		lblTituloListaTratamientos = new JLabel();
+		lblTituloListaTratamientos = new JLabel("Lista de Tratamientos");
 		lblTituloListaTratamientos.setFont(new Font("Agency FB", Font.BOLD, 40));
 		lblTituloListaTratamientos.setForeground(new Color(78, 175, 93));
-		lblTituloListaTratamientos.setBounds(154, 40, 220, 40);
+		lblTituloListaTratamientos.setBounds(120, 40, 300, 40);
 		panelDerechaArriba.add(lblTituloListaTratamientos);
 			
 	}
@@ -326,13 +324,13 @@ public class VentanaEspecialista extends JFrame {
 		btnTurnosMes = new JButton(imgBtnTurnosMes);
 		btnTurnosMes.setBorder(null);
 		btnTurnosMes.setBounds(42, 32, 200, 40);
-		panelVariableTurno.add(btnTurnosMes);
+		panelDerechaArriba.add(btnTurnosMes);
 		
 		imgBtnCambioTurno = new ImageIcon("media\\btnCambioTurno.png");	
 		btnCambioTurno = new JButton(imgBtnCambioTurno);
 		btnCambioTurno.setBorder(null);
 		btnCambioTurno.setBounds(298, 32, 200, 40);
-		panelVariableTurno.add(btnCambioTurno);
+		panelDerechaArriba.add(btnCambioTurno);
 		
 		imgBtnConfirmarCambio = new ImageIcon("media\\btnGuardarCambioTurno.png");
 		btnGenerarCambioTurno = new JButton(imgBtnConfirmarCambio);
@@ -351,13 +349,13 @@ public class VentanaEspecialista extends JFrame {
 		imgBtnVolver = new ImageIcon("media\\btnVolverMenu.png");
 		btnVolverMenu = new JButton(imgBtnVolver);
 		btnVolverMenu.setBorder(null);
-		btnVolverMenu.setBounds(806, 507, 175, 42);
+		btnVolverMenu.setBounds(800, 475, 174, 40);
 		add(btnVolverMenu);
 		
 		imgBtnToolTip = new ImageIcon("media\\btnToolTipEspecialista.png");
 		btnTooltipEspecialista = new JButton(imgBtnToolTip);
 		btnTooltipEspecialista.setBorder(null);
-		btnTooltipEspecialista.setBounds(931, 2, 68, 68);
+		btnTooltipEspecialista.setBounds(915, 2, 68, 68);
 		btnTooltipEspecialista.setToolTipText("Panel de gestión para especialistas médicos");
 		add(btnTooltipEspecialista);
 	}

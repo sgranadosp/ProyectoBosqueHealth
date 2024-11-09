@@ -12,6 +12,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
+import co.edu.unbosque.model.Cita;
 import co.edu.unbosque.model.CitaDTO;
 import co.edu.unbosque.model.Especialista;
 import co.edu.unbosque.model.EspecialistaDTO;
@@ -119,9 +120,47 @@ public class Controller implements ActionListener {
 		
 		//ESPECIALISTA
 		//MENU FIJO PACIENTES IZQ
+		//Datos personales especialista
+		vf.getVentanaEspecialista().getBtnDatosPersonales().addActionListener(this);
+		vf.getVentanaEspecialista().getBtnDatosPersonales().setActionCommand("DATOS PERSONALES ESPECIALISTA");
 		
+		//CITAS ESPECIALISTA
+		vf.getVentanaEspecialista().getBtnCitas().addActionListener(this);
+		vf.getVentanaEspecialista().getBtnCitas().setActionCommand("CITAS ESPECIALISTA");
 		
+		//TURNOS ESPECIALISTAS
+		vf.getVentanaEspecialista().getBtnTurno().addActionListener(this);
+		vf.getVentanaEspecialista().getBtnTurno().setActionCommand("TURNOS ESPECIALISTA");
 		
+		//TRATAMIENTO PACIENTE ESP
+		vf.getVentanaEspecialista().getBtnTratamientoPaciente().addActionListener(this);
+		vf.getVentanaEspecialista().getBtnTratamientoPaciente().setActionCommand("TRATAMIENTO PACIENTE ESPECIALISTA");
+		
+		//LISTA TRATAMIETOS
+		vf.getVentanaEspecialista().getBtnListaTratamientos().addActionListener(this);
+		vf.getVentanaEspecialista().getBtnListaTratamientos().setActionCommand("LISTA TRATAMIENTOS ESPECIALISTA");
+		
+		//SELECCION DE BOTONES 
+		//TURNOS MES
+		vf.getVentanaEspecialista().getBtnTurnosMes().addActionListener(this);
+		vf.getVentanaEspecialista().getBtnTurnosMes().setActionCommand("TURNOS MES ESPECIALISTA");
+		
+		//CAMBIO TURNO
+		vf.getVentanaEspecialista().getBtnCambioTurno().addActionListener(this);
+		vf.getVentanaEspecialista().getBtnCambioTurno().setActionCommand("CAMBIO TURNO ESPECIALISTA");
+		
+		//GUARDAR DATOS
+		vf.getVentanaEspecialista().getBtnGuardarDatosP().addActionListener(this);
+		vf.getVentanaEspecialista().getBtnGuardarDatosP().setActionCommand("GUARDAR DATOS ESPECIALISTA");
+		
+		//GENERAR CAMBIO TURNO
+		vf.getVentanaEspecialista().getBtnGenerarCambioTurno().addActionListener(this);
+		vf.getVentanaEspecialista().getBtnGenerarCambioTurno().setActionCommand("GENERAR CAMBIO TURNO ESP");
+		
+		//GUARDAR TRATAMIENTO
+		vf.getVentanaEspecialista().getBtnGuardarTratamiento().addActionListener(this);
+		vf.getVentanaEspecialista().getBtnGuardarTratamiento().setActionCommand("GUARDAR TRATAMIENTO ESP");
+				
 		
 		//DIRECTOR
 		//MENU FIJO PACIENTES IZQ
@@ -174,7 +213,7 @@ public class Controller implements ActionListener {
 		
 		//Generar turno director
 		vf.getVentanaDirector().getBtnGenerarTurno().addActionListener(this);
-		vf.getVentanaDirector().getBtnGenerarTurno().setActionCommand("CITAS CANCELADAS");
+		vf.getVentanaDirector().getBtnGenerarTurno().setActionCommand("GENERAR TURNO DIRECTOR");
 						
 	}
 
@@ -184,10 +223,12 @@ public class Controller implements ActionListener {
 		case "DIRECTOR":
 			JOptionPane.showMessageDialog(null, "Seleccionaste Director Médico");
 			vf.getMenuPrincipal().setVisible(false);
+			vf.getVentanaDirector().setVisible(true);
 			break;
 		case "ESPECIALISTA":
 			JOptionPane.showMessageDialog(null, "Seleccionaste Especialista");
 			vf.getMenuPrincipal().setVisible(false);
+			vf.getVentanaEspecialista().setVisible(true);
 			break;
 		case "PACIENTE":
 			JOptionPane.showMessageDialog(null, "Seleccionaste Paciente");
@@ -311,15 +352,32 @@ public class Controller implements ActionListener {
 			break;	
 			
 		case "GUARDAR CANCELAR CITA":
+			JOptionPane.showMessageDialog(null, "hola");
 			String numCancelarCita = vf.getVentanaPaciente().getTxtNumeroCancelarCita().getText();
 			int numCC = Integer.parseInt(numCancelarCita);
 			
-			/*if (mf.getCitaDAO().find(numCC)) {
+			Cita citaACancelar = new Cita();
+			citaACancelar.setNumeroCita(numCC);
+			Cita citaEncontrada = mf.getCitaDAO().find(citaACancelar);
+			if (citaEncontrada!=null) {
+				//eliminar cita encontrada
+				CitaDTO citaDTOAEliminar = new CitaDTO();
+				citaDTOAEliminar.setNumeroCita(numCC);
+				//citaDTOAEliminar.
 				
+				if (mf.getCitaDAO().delete(citaDTOAEliminar)) {
+					//Eliminó
+					JOptionPane.showMessageDialog(null, "Cita No. "+numCC+"cancelada satisfactoriamente");
+					vf.getVentanaPaciente().getTxtNumeroCancelarCita().setText(null);
+				}
+				else {
+					JOptionPane.showMessageDialog(null, "Cita No. "+numCC+"NO ENCONTRADA");
+				}
 			} else {
+				JOptionPane.showMessageDialog(null, "Cita No. "+numCC+"NO ENCONTRADA");
+			}
+				
 
-			}*/
-			
 			break;
 			
 		case "GUARDAR REAGENDAR CITA":
@@ -344,6 +402,74 @@ public class Controller implements ActionListener {
 			volverMenuPrincipal();
 			break;	
 
+		case "DATOS PERSONALES ESPECIALISTA":
+			cambiarPanelesEspecialista(true, true, false, false, false, false, true, false, false, false, false, false);
+			break;	
+		case "CITAS ESPECIALISTA":
+			cambiarPanelesEspecialista(true, false, false, true, false, false, false, true, false, false, false, false);
+			break;	
+		case "TURNOS ESPECIALISTA":
+			cambiarPanelesEspecialista(true, false, false, false, false, false, false, false, false, false, true, true);
+			break;	
+		case "TRATAMIENTO PACIENTE ESPECIALISTA":
+			cambiarPanelesEspecialista(true, false, false, false, true, false, false, false, true, false, false, false);
+			break;	
+		case "LISTA TRATAMIENTOS ESPECIALISTA":
+			cambiarPanelesEspecialista(true, false, false, false, false, true, false, false, false, true, false, false);
+			break;	
+		case "TURNOS MES ESPECIALISTA":
+			vf.getVentanaEspecialista().getPanelVariableTurno().setVisible(true);
+			vf.getVentanaEspecialista().getCardLayout().show(vf.getVentanaEspecialista().getPanelVariableTurno(), vf.getVentanaEspecialista().getTurnosmes());
+			break;	
+		case "CAMBIO TURNO ESPECIALISTA":
+			vf.getVentanaEspecialista().getPanelVariableTurno().setVisible(true);
+			vf.getVentanaEspecialista().getCardLayout().show(vf.getVentanaEspecialista().getPanelVariableTurno(), vf.getVentanaEspecialista().getCambioturno());
+			break;	
+		case "GUARDAR DATOS ESPECIALISTA":
+			
+			break;	
+		case "GENERAR CAMBIO TURNO ESP":
+			
+			break;	
+		case "GUARDAR TRATAMIENTO ESP":
+			
+			break;	
+		case "DATOS PERSONALES DIRECTOR":
+			
+			break;	
+		case "REPORTES":
+			
+			break;	
+		case "TURNOS":
+			
+			break;	
+		case "REPORTE SEMANAL":
+			
+			break;				
+		case "REPORTE MENSUAL":
+			
+			break;	
+		case "PACIENTES ATENDIDOS":
+			
+			break;	
+		case "DIAGNOSTICOS REALIZADOS":
+			
+			break;	
+		case "ESPECIALISTA MNC":
+			
+			break;	
+		case "ESPECIALIDAD MC":
+			
+			break;
+		case "CITAS CANCELADAS":
+			
+			break;	
+		case "GUARDAR DATOS DIRECTOR":
+			
+			break;	
+		case "GENERAR TURNO DIRECTOR":
+			
+			break;		
 		default:
 			break;
 		}
@@ -362,6 +488,26 @@ public class Controller implements ActionListener {
 		vf.getVentanaPaciente().getBtnCancelarCita().setVisible(vBCC);
 		vf.getVentanaPaciente().getBtnCitasAgendadas().setVisible(vBCA);
 		vf.getVentanaPaciente().getBtnReagendarCitas().setVisible(vBRC);
+		
+	}
+	
+	public void cambiarPanelesEspecialista(boolean vDA, boolean vDE, boolean vVT, boolean vCM, boolean vTP,
+			boolean vLT, boolean vTDP, boolean vTCM, boolean vTTP, boolean vTLT, boolean vTM, boolean vCT) {
+		vf.getVentanaEspecialista().getPanelDerechaArriba().setVisible(vDA);
+		vf.getVentanaEspecialista().getPanelDatosEspecialista().setVisible(vDE);
+		vf.getVentanaEspecialista().getPanelVariableTurno().setVisible(vVT);
+		vf.getVentanaEspecialista().getPanelCitasMedicas().setVisible(vCM);
+		vf.getVentanaEspecialista().getPanelTratamientoP().setVisible(vTP);
+		vf.getVentanaEspecialista().getPanelListaTratamiento().setVisible(vLT);
+		vf.getVentanaEspecialista().getLblTituloDatosP().setVisible(vTDP);
+		vf.getVentanaEspecialista().getLblTituloCitasMe().setVisible(vTCM);
+		vf.getVentanaEspecialista().getLblTituloTratamientoPaciente().setVisible(vTTP);
+		vf.getVentanaEspecialista().getLblTituloListaTratamientos().setVisible(vTLT);
+		vf.getVentanaEspecialista().getBtnTurnosMes().setVisible(vTM);
+		vf.getVentanaEspecialista().getBtnCambioTurno().setVisible(vCT);
+	}
+	
+	public void cambiarPanelesDirector() {
 		
 	}
 	
