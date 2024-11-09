@@ -28,21 +28,21 @@ public class VentanaDirector extends JFrame{
 	lblFechaCreacionT;
 	private JButton btnDatosPersonales, btnReportes, btnTurnos, btnGuardarDatosP, btnReporteSemanal,
 	btnReporteMensual, btnPacientesAtendidos, btnDiagnosticosRealizados, btnEspecialistasMNC, 
-	btnEspecialidadMC, btnCitasCanceladas, btnGenerarTurno, btnVolverMenu;
+	btnEspecialidadMC, btnCitasCanceladas, btnGenerarTurno, btnVolverMenu, btnTooltipDirector;
 	private ImageIcon imgDatosPersonales, imgReportes, imgTurnos, imgGuardarDatosP, imgReporteSemanal,
 	imgReporteMensual, imgPacientesAtendidos, imgDiagnosticosRealizados, imgEspecialistasMNC, 
-	imgEspecialidadMC, imgCitasCanceladas, imgGenerarTurno, imgVolverMenu;
+	imgEspecialidadMC, imgCitasCanceladas, imgGenerarTurno, imgVolverMenu, imgBtnToolTip;
 	
 	private final static String PA = "Pacientes Atendidos";
 	private final static String DR = "Diagnosticos Realizados";
 	private final static String EMNC = "Especialistas con mayor numero de citas";
 	private final static String EMC = "Especialidad con mayor consulta";
 	private final static String CC = "Citas Canceladas";
-
 	
 	CardLayout cardLayout = new CardLayout();
 	
 	public VentanaDirector() {
+		
 		ventana();
 		paneles();
 		labels();
@@ -51,6 +51,12 @@ public class VentanaDirector extends JFrame{
 		comboBox();
 		calendar();
 		
+		getPanelFijoIzq().setVisible(true);
+		getPanelVariableReportes().setVisible(false);
+		getPanelDatosDirector().setVisible(false);
+		getPanelDerechaArriba().setVisible(false);
+		getPanelCentral().setVisible(false);
+		getPanelCreacionTurno().setVisible(false);
 		
 		add(panelFijoIzq);
 		add(panelVariableReportes);
@@ -70,6 +76,7 @@ public class VentanaDirector extends JFrame{
 	}
 
 	public void paneles() {
+		
 		panelFijoIzq = new JPanel();
 		panelFijoIzq.setLayout(null);
 		panelFijoIzq.setBounds(55, 55, 200, 415);
@@ -77,12 +84,12 @@ public class VentanaDirector extends JFrame{
 		
 		panelDerechaArriba = new JPanel();
 		panelDerechaArriba.setLayout(null);
-		panelDerechaArriba.setBounds(302, 55, 560, 72);
+		panelDerechaArriba.setBounds(302, 57, 560, 72);
 		panelDerechaArriba.setBackground(Color.white);
 		
 		panelCentral = new JPanel();
 		panelCentral.setLayout(null);
-		panelCentral.setBounds(302, 127, 560, 108);
+		panelCentral.setBounds(302, 240, 560, 108);
 		panelCentral.setBackground(Color.white);
 		
 		panelDatosDirector = new JPanel();
@@ -137,6 +144,7 @@ public class VentanaDirector extends JFrame{
 	}
 
 	public void labels() {
+		
 		//Labels DATOS PERSONALES del Director
 		lblTituloDatosP = new JLabel("Datos personales");
 		lblTituloDatosP.setFont(new Font("Agency FB", Font.BOLD, 40));
@@ -268,6 +276,9 @@ public class VentanaDirector extends JFrame{
 		btnVolverMenu.setBorder(null);
 		btnVolverMenu.setBounds(800, 475, 174, 40);
 		add(btnVolverMenu);
+		
+		imgBtnToolTip = new ImageIcon();
+		btnTooltipDirector = new JButton("");
 		 
 	}
 
