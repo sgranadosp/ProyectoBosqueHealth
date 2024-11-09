@@ -5,8 +5,9 @@ import java.util.Date;
 /**
  * Clase que representa una cita medica. Esta clase implementa la interfaz
  * {@link Serializable} para permitir la serialización de sus objetos.
- * </p>
- * 
+ *	<p>
+ * 	Un especialista tiene una especialidad, además de las características básicas de una persona.
+ * 	</p>
  * @author Sebastian Perez Herrera
  * @version 1.0
  * @since 2024-11-10

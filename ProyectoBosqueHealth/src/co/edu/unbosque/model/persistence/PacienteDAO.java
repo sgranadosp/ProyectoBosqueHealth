@@ -9,19 +9,53 @@ import java.util.Date;
 import co.edu.unbosque.model.Paciente;
 import co.edu.unbosque.model.PacienteDTO;
 
-
+/**
+ * La clase `PacienteDAO` implementa las operaciones CRUD (Crear, Leer, Actualizar, Eliminar)
+ * sobre los pacientes en un sistema. Esta clase maneja una lista de pacientes que puede
+ * ser persistida tanto en archivos de texto CSV como en archivos serializados. Utiliza el
+ * patrón Data Mapper para convertir entre los objetos de dominio (`Paciente`) y los
+ * objetos de transferencia de datos (`PacienteDTO`).
+ * 
+ * <p>Se encarga de leer y escribir los datos de los pacientes en el archivo CSV y el archivo
+ * serializado correspondiente, y ofrece una interfaz para gestionar pacientes.</p>
+ * 
+ * @author Sebastian Perez Herrera
+ * @version 1.0
+ * @since 2024-11-10
+ */
 public class PacienteDAO implements CRUDOperation<Paciente, PacienteDTO>{
 
-	private ArrayList<Paciente> listaPacientes;
-	private final String FILE_NAME = "pacientes.csv";
-	private final String SERIALIZED_NAME = "pacientes.dat";
-	
+	/**
+     * Lista que almacena los pacientes cargados desde los archivos de persistencia.
+     */
+    private ArrayList<Paciente> listaPacientes;
+
+    /**
+     * Nombre del archivo CSV donde se guardan los pacientes en formato de texto.
+     */
+    private final String FILE_NAME = "pacientes.csv";
+
+    /**
+     * Nombre del archivo serializado donde se guardan los pacientes en formato binario.
+     */
+    private final String SERIALIZED_NAME = "pacientes.dat";
+
+    /**
+     * Constructor de la clase. Inicializa las carpetas necesarias y carga los datos de pacientes
+     * desde el archivo serializado.
+     */
 	public PacienteDAO() {
 		FileHandler.checkFolder();
 		FileHandler.checkPropertiesFolder();
 		readSerialized();
 	}
 	
+	 /**
+     * Muestra todos los pacientes en formato de texto.
+     * 
+     * @return Una cadena que contiene todos los pacientes en formato legible, o un mensaje
+     *         si no hay pacientes para mostrar.
+     */
 	@Override
 	public String showAll() {
 		String rta = "";
@@ -37,11 +71,22 @@ public class PacienteDAO implements CRUDOperation<Paciente, PacienteDTO>{
 		}
 	}
 
+	/**
+     * Obtiene todos los pacientes como una lista de objetos `PacienteDTO`.
+     * 
+     * @return Una lista de objetos `PacienteDTO` que representan los pacientes.
+     */
 	@Override
 	public ArrayList<PacienteDTO> getAll() {
 		return DataMapper.listaPacienteToListaPacienteDTO(listaPacientes);
 	}
 
+	/**
+     * Agrega un nuevo paciente al sistema.
+     * 
+     * @param newData El objeto `PacienteDTO` que contiene los datos del paciente a agregar.
+     * @return true si el paciente fue agregado correctamente, o false si el paciente ya existe.
+     */
 	@Override
 	public boolean add(PacienteDTO newData) {
 		if (find(DataMapper.pacienteDTOToPaciente(newData)) == null) {
@@ -54,6 +99,12 @@ public class PacienteDAO implements CRUDOperation<Paciente, PacienteDTO>{
 		}
 	}
 
+	/**
+     * Elimina un paciente del sistema.
+     * 
+     * @param toDelete El objeto `PacienteDTO` que contiene los datos del paciente a eliminar.
+     * @return `true` si el paciente fue eliminado correctamente, o `false` si no se encuentra.
+     */
 	@Override
 	public boolean delete(PacienteDTO toDelete) {
 		Paciente found = find(DataMapper.pacienteDTOToPaciente(toDelete));
@@ -67,6 +118,12 @@ public class PacienteDAO implements CRUDOperation<Paciente, PacienteDTO>{
 		}
 	}
 
+	 /**
+     * Busca un paciente en la lista de pacientes.
+     * 
+     * @param toFind El objeto `Paciente` que contiene los datos del paciente a buscar.
+     * @return El paciente encontrado, o `null` si no se encuentra.
+     */
 	@Override
 	public Paciente find(Paciente toFind) {
 		Paciente found = null;
@@ -87,6 +144,13 @@ public class PacienteDAO implements CRUDOperation<Paciente, PacienteDTO>{
 		return null;
 	}
 
+	 /**
+     * Actualiza los datos de un paciente en el sistema.
+     * 
+     * @param previous El objeto `PacienteDTO` con los datos del paciente a actualizar.
+     * @param newData El objeto `PacienteDTO` con los nuevos datos del paciente.
+     * @return `true` si el paciente fue actualizado correctamente, o `false` si no se encuentra.
+     */
 	@Override
 	public boolean update(PacienteDTO previous, PacienteDTO newData) {
 		Paciente found = find(DataMapper.pacienteDTOToPaciente(previous));
@@ -103,6 +167,9 @@ public class PacienteDAO implements CRUDOperation<Paciente, PacienteDTO>{
 		}
 	}
 	
+	/**
+     * Escribe los datos de los pacientes en el archivo CSV.
+     */
 	public void writeFile() {
 		String content = "";
 		for (Paciente paciente : listaPacientes) {
@@ -118,6 +185,9 @@ public class PacienteDAO implements CRUDOperation<Paciente, PacienteDTO>{
 		FileHandler.writeFile(FILE_NAME, content);
 	}
 	
+	 /**
+     * Lee los datos de los pacientes desde el archivo CSV.
+     */
 	public void readFile() {
 		
 		String content = FileHandler.readFile(FILE_NAME);
@@ -152,10 +222,16 @@ public class PacienteDAO implements CRUDOperation<Paciente, PacienteDTO>{
 		}
 	}
 	
+	/**
+     * Escribe los datos de los pacientes en el archivo serializado.
+     */
 	public void writeSerialized() {
 		FileHandler.writeSerialized(SERIALIZED_NAME, listaPacientes);
 	}
 	
+	 /**
+     * Lee los datos de los pacientes desde el archivo serializado.
+     */
 	@SuppressWarnings("unchecked")
 	public void readSerialized() {
 		Object content = FileHandler.readSerialized(SERIALIZED_NAME);
