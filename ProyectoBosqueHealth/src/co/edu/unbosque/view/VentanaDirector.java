@@ -84,46 +84,46 @@ public class VentanaDirector extends JFrame{
 		
 		panelDerechaArriba = new JPanel();
 		panelDerechaArriba.setLayout(null);
-		panelDerechaArriba.setBounds(302, 57, 560, 72);
+		panelDerechaArriba.setBounds(304, 57, 560, 77);
 		panelDerechaArriba.setBackground(Color.white);
 		
 		panelCentral = new JPanel();
 		panelCentral.setLayout(null);
-		panelCentral.setBounds(302, 240, 560, 108);
+		panelCentral.setBounds(304, 130, 560, 108);
 		panelCentral.setBackground(Color.white);
 		
 		panelDatosDirector = new JPanel();
 		panelDatosDirector.setLayout(null);
-		panelDatosDirector.setBounds(302, 235, 560, 236);
+		panelDatosDirector.setBounds(304, 239, 560, 230);
 		panelDatosDirector.setBackground(Color.white);
 		
 		panelPacientesAtendidos = new JPanel();
 		panelPacientesAtendidos.setLayout(null);
-		panelPacientesAtendidos.setBounds(302, 235, 560, 236);
+		panelPacientesAtendidos.setBounds(304, 239, 560, 230);
 		panelPacientesAtendidos.setBackground(Color.white);
 		
 		panelDiagnosticosRealizados = new JPanel();
 		panelDiagnosticosRealizados.setLayout(null);
-		panelDiagnosticosRealizados.setBounds(302, 235, 560, 236);
+		panelDiagnosticosRealizados.setBounds(304, 239, 560, 230);
 		panelDiagnosticosRealizados.setBackground(Color.white);
 		
 		panelEspecialisasMNC = new JPanel();
 		panelEspecialisasMNC.setLayout(null);
-		panelEspecialisasMNC.setBounds(302, 235, 560, 236);
+		panelEspecialisasMNC.setBounds(304, 239, 560, 230);
 		panelEspecialisasMNC.setBackground(Color.white);
 		
 		panelEspecialidadMC = new JPanel();
 		panelEspecialidadMC.setLayout(null);
-		panelEspecialidadMC.setBounds(302, 235, 560, 236);
+		panelEspecialidadMC.setBounds(304, 239, 560, 230);
 		panelEspecialidadMC.setBackground(Color.white);
 		
 		panelCitasCanceladas = new JPanel();
 		panelCitasCanceladas.setLayout(null);
-		panelCitasCanceladas.setBounds(302, 235, 560, 236);
+		panelCitasCanceladas.setBounds(304, 239, 560, 230);
 		panelCitasCanceladas.setBackground(Color.white);
 		
 		panelVariableReportes = new JPanel(cardLayout);
-		panelVariableReportes.setBounds(302, 235, 560, 236);
+		panelVariableReportes.setBounds(304, 239, 560, 230);
 		panelVariableReportes.setBackground(Color.white);
 		panelVariableReportes.add(panelPacientesAtendidos, PA);
 		panelVariableReportes.add(panelDiagnosticosRealizados, DR);
@@ -133,12 +133,12 @@ public class VentanaDirector extends JFrame{
 		
 		panelReporteMensual = new JPanel();
 		panelReporteMensual.setLayout(null);
-		panelReporteMensual.setBounds(302, 235, 560, 236);
+		panelReporteMensual.setBounds(304, 239, 560, 230);
 		panelReporteMensual.setBackground(Color.white);
 		
 		panelCreacionTurno = new JPanel();
 		panelCreacionTurno.setLayout(null);
-		panelCreacionTurno.setBounds(302, 235, 560, 236);
+		panelCreacionTurno.setBounds(304, 239, 560, 230);
 		panelCreacionTurno.setBackground(Color.white);
 		
 	}
@@ -149,43 +149,43 @@ public class VentanaDirector extends JFrame{
 		lblTituloDatosP = new JLabel("Datos personales");
 		lblTituloDatosP.setFont(new Font("Agency FB", Font.BOLD, 40));
 		lblTituloDatosP.setForeground(new Color(78, 175, 93));
-		lblTituloDatosP.setBounds(30, 10, 350, 30);
-		panelDatosDirector.add(lblTituloDatosP);
+		lblTituloDatosP.setBounds(161, 24, 350, 30);
+		panelDerechaArriba.add(lblTituloDatosP);
 
 		lblNombreCompleto = new JLabel("Nombre completo:");
 		lblNombreCompleto.setFont(new Font("Agency FB", Font.BOLD, 15));
 		lblNombreCompleto.setForeground(new Color(78, 175, 93));
-		lblNombreCompleto.setBounds(30, 35, 180, 20);
+		lblNombreCompleto.setBounds(13, 14, 180, 17);
 		panelDatosDirector.add(lblNombreCompleto);
 
 		lblNumeroDocumento = new JLabel("Número de documento:");
 		lblNumeroDocumento.setFont(new Font("Agency FB", Font.BOLD, 15));
 		lblNumeroDocumento.setForeground(new Color(78, 175, 93));
-		lblNumeroDocumento.setBounds(30, 60, 180, 20);
+		lblNumeroDocumento.setBounds(13, 46, 180, 17);
 		panelDatosDirector.add(lblNumeroDocumento);
 
 		lblFechaNacimiento = new JLabel("Fecha de nacimiento:");
 		lblFechaNacimiento.setFont(new Font("Agency FB", Font.BOLD, 15));
 		lblFechaNacimiento.setForeground(new Color(78, 175, 93));
-		lblFechaNacimiento.setBounds(30, 85, 180, 20);
+		lblFechaNacimiento.setBounds(13, 78, 180, 17);
 		panelDatosDirector.add(lblFechaNacimiento);
 
 		lblCorreo = new JLabel("Correo electrónico:");
 		lblCorreo.setFont(new Font("Agency FB", Font.BOLD, 15));
 		lblCorreo.setForeground(new Color(78, 175, 93));
-		lblCorreo.setBounds(30, 110, 180, 20);
+		lblCorreo.setBounds(13, 110, 180, 17);
 		panelDatosDirector.add(lblCorreo);
 		
 		lblGenero = new JLabel("Género:");
 		lblGenero.setFont(new Font("Agency FB", Font.BOLD, 15));
 		lblGenero.setForeground(new Color(78, 175, 93));
-		lblGenero.setBounds(30, 135, 180, 20);
+		lblGenero.setBounds(13, 142, 180, 17);
 		panelDatosDirector.add(lblGenero);
 		
 		lblNivelDirectivo = new JLabel("Nivel directivo:");
 		lblGenero.setFont(new Font("Agency FB", Font.BOLD, 15));
 		lblGenero.setForeground(new Color(78, 175, 93));
-		lblGenero.setBounds(30, 160, 180, 20);
+		lblGenero.setBounds(13, 174, 180, 17);
 		panelDatosDirector.add(lblGenero);
 		
 		
@@ -193,115 +193,197 @@ public class VentanaDirector extends JFrame{
 		lblTituloCreacionTurno = new JLabel("Creación de Turno");
 		lblTituloCreacionTurno.setFont(new Font("Agency FB", Font.BOLD, 40));
 		lblTituloCreacionTurno.setForeground(new Color(78, 175, 93));
-		lblTituloCreacionTurno.setBounds(30, 10, 350, 30);
-		panelCreacionTurno.add(lblTituloCreacionTurno);
+		lblTituloCreacionTurno.setBounds(152, 29, 350, 30);
+		panelDerechaArriba.add(lblTituloCreacionTurno);
 		
 		lblEspecialidadCT = new JLabel("Especialidad:");
 		lblEspecialidadCT.setFont(new Font("Agency FB", Font.BOLD, 15));
 		lblEspecialidadCT.setForeground(new Color(78, 175, 93));
-		lblEspecialidadCT.setBounds(30, 35, 180, 20);
+		lblEspecialidadCT.setBounds(28, 27, 100, 16);
 		panelCreacionTurno.add(lblEspecialidadCT);
 
 		lblEspecialistaCT = new JLabel("Especialista:");
 		lblEspecialistaCT.setFont(new Font("Agency FB", Font.BOLD, 15));
 		lblEspecialistaCT.setForeground(new Color(78, 175, 93));
-		lblEspecialistaCT.setBounds(30, 60, 180, 20);
+		lblEspecialistaCT.setBounds(28, 75, 100, 16);
 		panelCreacionTurno.add(lblEspecialistaCT);
 
 		lblFechaCreacionT = new JLabel("Fecha:");
 		lblFechaCreacionT.setFont(new Font("Agency FB", Font.BOLD, 15));
 		lblFechaCreacionT.setForeground(new Color(78, 175, 93));
-		lblFechaCreacionT.setBounds(30, 85, 180, 20);
+		lblFechaCreacionT.setBounds(28, 123, 100, 16);
 		panelCreacionTurno.add(lblFechaCreacionT);
 		
 	}
 
 	public void textfield() {
+		
+		//Texfields DATOS PERSONALES
 		txtNombreCompleto = new JTextField();
-		txtNombreCompleto.setFont(new Font("Agency FB", Font.BOLD, 12));
-		txtNombreCompleto.setBounds(240, 35, 200, 20);
+		txtNombreCompleto.setFont(new Font("Helvetica", Font.BOLD, 12));
+		txtNombreCompleto.setBounds(206, 9, 200, 26);
 		panelDatosDirector.add(txtNombreCompleto);	
 		
 		txtNumeroDocumento = new JTextField();
-		txtNumeroDocumento.setFont(new Font("Agency FB", Font.BOLD, 12));
-		txtNumeroDocumento.setBounds(240, 35, 200, 20);
+		txtNumeroDocumento.setFont(new Font("Helvetica", Font.BOLD, 12));
+		txtNumeroDocumento.setBounds(206, 41, 200, 26);
 		panelDatosDirector.add(txtNumeroDocumento);	
 		
 		txtCorreoElectronico = new JTextField();
-		txtCorreoElectronico.setFont(new Font("Agency FB", Font.BOLD, 12));
-		txtCorreoElectronico.setBounds(240, 35, 200, 20);
+		txtCorreoElectronico.setFont(new Font("Helvetica", Font.BOLD, 12));
+		txtCorreoElectronico.setBounds(206, 105, 200, 26);
 		panelDatosDirector.add(txtCorreoElectronico);	
 	}
 
 	public void botones() {
 		
-		imgDatosPersonales = new ImageIcon();
+		//Botones panel fijo de la izquierda
+		imgDatosPersonales = new ImageIcon("media\\btnDatosPersonalesDir.png");
 		btnDatosPersonales = new JButton(imgDatosPersonales);
+		btnDatosPersonales.setBorder(null);
+		btnDatosPersonales.setBounds(1, 42, 196, 20);
+		panelFijoIzq.add(btnDatosPersonales);
 		
-		imgReportes = new ImageIcon();
+		imgReportes = new ImageIcon("media\\btnReportesDir.png");
 		btnReportes = new JButton(imgReportes);
+		btnReportes.setBorder(null);
+		btnReportes.setBounds(1, 118, 196, 20);
+		panelFijoIzq.add(btnReportes);
 		
-		imgTurnos = new ImageIcon();
+		imgTurnos = new ImageIcon("media\\btnTurnosDir.png");
 		btnTurnos = new JButton(imgTurnos);
+		btnTurnos.setBorder(null);
+		btnTurnos.setBounds(1, 190, 196, 20);
+		panelFijoIzq.add(btnTurnos);
 		
-		imgGuardarDatosP = new ImageIcon();
+		//Boton DATOS PERSONALES 	
+		imgGuardarDatosP = new ImageIcon("media\\btnGuardarDatosEsp.png");
 		btnGuardarDatosP = new JButton(imgGuardarDatosP);
+		btnGuardarDatosP.setBorder(null);
+		btnGuardarDatosP.setBounds(212, 198, 154, 28);
+		panelDatosDirector.add(btnGuardarDatosP);
 		
-		imgReporteSemanal = new ImageIcon();
+		//Botones de arriba reportes
+		imgReporteSemanal = new ImageIcon("media\\btnReporteSemanal.png");
 		btnReporteSemanal = new JButton(imgReporteSemanal);
+		btnReporteSemanal.setBorder(null);
+		btnReporteSemanal.setBounds(40, 13, 198, 40);
+		panelDerechaArriba.add(btnReporteSemanal);
 		
-		imgReporteMensual = new ImageIcon();
+		imgReporteMensual = new ImageIcon("media\\btnReporteMensual.png");
 		btnReporteMensual = new JButton(imgReporteMensual);
+		btnReporteMensual.setBorder(null);
+		btnReporteMensual.setBounds(298, 13, 198, 40);
+		panelDerechaArriba.add(btnReporteMensual);
 		
-		imgPacientesAtendidos = new ImageIcon();
+		//Botones reporte semanal panel central
+		imgPacientesAtendidos = new ImageIcon("media\\btnPacientesAtendidos.png");
 		btnPacientesAtendidos = new JButton(imgPacientesAtendidos);
+		btnPacientesAtendidos.setBorder(null);
+		btnPacientesAtendidos.setBounds(32, 26, 138, 29);
+		panelCentral.add(btnPacientesAtendidos);
 		
-		imgDiagnosticosRealizados = new ImageIcon();
+		imgDiagnosticosRealizados = new ImageIcon("media\\btnDiagnosticosRealizados.png");
 		btnDiagnosticosRealizados = new JButton(imgDiagnosticosRealizados);
+		btnDiagnosticosRealizados.setBorder(null);
+		btnDiagnosticosRealizados.setBounds(210, 26, 138, 29);
+		panelCentral.add(btnDiagnosticosRealizados);
 		
-		imgEspecialistasMNC = new ImageIcon();
+		imgEspecialistasMNC = new ImageIcon("media\\btnEspecialistasMNC.png");
 		btnEspecialistasMNC = new JButton(imgEspecialistasMNC);
+		btnEspecialistasMNC.setBorder(null);
+		btnEspecialistasMNC.setBounds(386, 26, 138, 29);
+		panelCentral.add(btnEspecialistasMNC);
 		
-		imgEspecialidadMC = new ImageIcon();
+		imgEspecialidadMC = new ImageIcon("media\\btnEspecialidadMC.png");
 		btnEspecialidadMC = new JButton(imgEspecialidadMC);
+		btnEspecialidadMC.setBorder(null);
+		btnEspecialidadMC.setBounds(111, 70, 138, 29);
+		panelCentral.add(btnEspecialidadMC);
 		
-		imgCitasCanceladas = new ImageIcon();
+		imgCitasCanceladas = new ImageIcon("media\\btnCitasCanceladas.png");
 		btnCitasCanceladas = new JButton(imgCitasCanceladas);
+		btnCitasCanceladas.setBorder(null);
+		btnCitasCanceladas.setBounds(318, 70, 138, 29);
+		panelCentral.add(btnCitasCanceladas);
 		
-		imgGenerarTurno = new ImageIcon();
+		//Boton Turnos
+		imgGenerarTurno = new ImageIcon("media\\btnGuardarTurno.png");
 		btnGenerarTurno = new JButton(imgGenerarTurno);
-		 
+		btnGenerarTurno.setBorder(null);
+		btnGenerarTurno.setBounds(164, 164, 229, 28);
+		panelCreacionTurno.add(btnGenerarTurno);
+		
+		//Volver y tooltip de la esquina
 		imgVolverMenu = new ImageIcon("media\\btnVolverMenu.png"); // OJO **** PENDIENTE DEFINIR IMAGEN
 		btnVolverMenu = new JButton(imgVolverMenu);
 		btnVolverMenu.setBorder(null);
-		btnVolverMenu.setBounds(800, 475, 174, 40);
+		btnVolverMenu.setBounds(807, 505, 174, 40);
 		add(btnVolverMenu);
 		
-		imgBtnToolTip = new ImageIcon();
-		btnTooltipDirector = new JButton("");
+		imgBtnToolTip = new ImageIcon("media\\btnToolTipDirector.png");
+		btnTooltipDirector = new JButton(imgBtnToolTip);
+		btnTooltipDirector.setBorder(null);
+		btnTooltipDirector.setBounds(929, 2, 70, 70);
+		add(btnTooltipDirector);
 		 
 	}
 
 	public void comboBox() {
+		
+		//Combobox DATOS PERSONALES
 		cmbGenero = new JComboBox<String>();
-		cmbGenero.setBounds(240, 175, 200, 20);
-		cmbGenero.setToolTipText("Género del paciente");
+		cmbGenero.setBounds(206, 137, 200, 26);
+		cmbGenero.setToolTipText("Género del Director médico");
 		cmbGenero.addItem("");
 		cmbGenero.addItem("Masculino");
 		cmbGenero.addItem("Femenino");
 		panelDatosDirector.add(cmbGenero);
 		
 		cmbNivelDirectivo = new JComboBox<String>();
+		cmbNivelDirectivo.setBounds(206, 169, 200, 26);
+		cmbNivelDirectivo.setToolTipText("Nivel directivo del director");
+		cmbNivelDirectivo.addItem("");
+		cmbNivelDirectivo.addItem("Ejecutivo");
+		cmbNivelDirectivo.addItem("Estratega");
+		cmbNivelDirectivo.addItem("Supervisor");
+		cmbNivelDirectivo.addItem("Líder de equipos");
+		cmbNivelDirectivo.addItem("Coordinadoe");
+		cmbNivelDirectivo.addItem("Consultor de políticas");
+		cmbNivelDirectivo.addItem("Representante externo");
+		panelDatosDirector.add(cmbNivelDirectivo);
 		
+		//Combobox CAMBIO DE TURNO
 		cmbEspecialidadCreacionT = new JComboBox<String>();
+		cmbEspecialidadCreacionT.setBounds(144, 23, 200, 26);
+		cmbEspecialidadCreacionT.setToolTipText("Especialidad del Especialista al que se le asignará turno");
+		cmbEspecialidadCreacionT.addItem("");
+		cmbEspecialidadCreacionT.addItem("Cirugía");
+		cmbEspecialidadCreacionT.addItem("Oncología");
+		cmbEspecialidadCreacionT.addItem("Dermatología");
+		cmbEspecialidadCreacionT.addItem("Neumología");
+		cmbEspecialidadCreacionT.addItem("Cardiología");
+		cmbEspecialidadCreacionT.addItem("Medicina Interna");
+		panelCreacionTurno.add(cmbEspecialidadCreacionT);
 		
 		cmbEspecialistaCreacionT = new JComboBox<String>();
+		cmbEspecialistaCreacionT.setBounds(144, 69, 200, 26);
+		cmbEspecialistaCreacionT.setToolTipText("Especialista al que se le asignará turno");
+		cmbEspecialistaCreacionT.addItem("");
+		panelCreacionTurno.add(cmbEspecialistaCreacionT);
 	}
 
 	public void calendar() {
-		fechaNacimiento = new JDateChooser();
 		
+		//JJcalendar DATOS ESPECIALES
+		fechaNacimiento = new JDateChooser();
+		fechaNacimiento.setBounds(206, 73, 200, 26);
+		panelDatosDirector.add(fechaNacimiento);
+		
+		//Jcalendar CREACÓN DE TURNOS
 		fechaCreacionTurno = new JDateChooser();
+		fechaCreacionTurno.setBounds(144, 115, 200, 26);
+		panelCreacionTurno.add(fechaCreacionTurno);
 	}
 
 	public JPanel getPanelFijoIzq() {
@@ -390,6 +472,14 @@ public class VentanaDirector extends JFrame{
 
 	public void setPanelCreacionTurno(JPanel panelCreacionTurno) {
 		this.panelCreacionTurno = panelCreacionTurno;
+	}
+
+	public JPanel getPanelVariableReportes() {
+		return panelVariableReportes;
+	}
+
+	public void setPanelVariableReportes(JPanel panelVariableReportes) {
+		this.panelVariableReportes = panelVariableReportes;
 	}
 
 	public JTextField getTxtNombreCompleto() {
@@ -656,6 +746,126 @@ public class VentanaDirector extends JFrame{
 		this.btnVolverMenu = btnVolverMenu;
 	}
 
+	public JButton getBtnTooltipDirector() {
+		return btnTooltipDirector;
+	}
+
+	public void setBtnTooltipDirector(JButton btnTooltipDirector) {
+		this.btnTooltipDirector = btnTooltipDirector;
+	}
+
+	public ImageIcon getImgDatosPersonales() {
+		return imgDatosPersonales;
+	}
+
+	public void setImgDatosPersonales(ImageIcon imgDatosPersonales) {
+		this.imgDatosPersonales = imgDatosPersonales;
+	}
+
+	public ImageIcon getImgReportes() {
+		return imgReportes;
+	}
+
+	public void setImgReportes(ImageIcon imgReportes) {
+		this.imgReportes = imgReportes;
+	}
+
+	public ImageIcon getImgTurnos() {
+		return imgTurnos;
+	}
+
+	public void setImgTurnos(ImageIcon imgTurnos) {
+		this.imgTurnos = imgTurnos;
+	}
+
+	public ImageIcon getImgGuardarDatosP() {
+		return imgGuardarDatosP;
+	}
+
+	public void setImgGuardarDatosP(ImageIcon imgGuardarDatosP) {
+		this.imgGuardarDatosP = imgGuardarDatosP;
+	}
+
+	public ImageIcon getImgReporteSemanal() {
+		return imgReporteSemanal;
+	}
+
+	public void setImgReporteSemanal(ImageIcon imgReporteSemanal) {
+		this.imgReporteSemanal = imgReporteSemanal;
+	}
+
+	public ImageIcon getImgReporteMensual() {
+		return imgReporteMensual;
+	}
+
+	public void setImgReporteMensual(ImageIcon imgReporteMensual) {
+		this.imgReporteMensual = imgReporteMensual;
+	}
+
+	public ImageIcon getImgPacientesAtendidos() {
+		return imgPacientesAtendidos;
+	}
+
+	public void setImgPacientesAtendidos(ImageIcon imgPacientesAtendidos) {
+		this.imgPacientesAtendidos = imgPacientesAtendidos;
+	}
+
+	public ImageIcon getImgDiagnosticosRealizados() {
+		return imgDiagnosticosRealizados;
+	}
+
+	public void setImgDiagnosticosRealizados(ImageIcon imgDiagnosticosRealizados) {
+		this.imgDiagnosticosRealizados = imgDiagnosticosRealizados;
+	}
+
+	public ImageIcon getImgEspecialistasMNC() {
+		return imgEspecialistasMNC;
+	}
+
+	public void setImgEspecialistasMNC(ImageIcon imgEspecialistasMNC) {
+		this.imgEspecialistasMNC = imgEspecialistasMNC;
+	}
+
+	public ImageIcon getImgEspecialidadMC() {
+		return imgEspecialidadMC;
+	}
+
+	public void setImgEspecialidadMC(ImageIcon imgEspecialidadMC) {
+		this.imgEspecialidadMC = imgEspecialidadMC;
+	}
+
+	public ImageIcon getImgCitasCanceladas() {
+		return imgCitasCanceladas;
+	}
+
+	public void setImgCitasCanceladas(ImageIcon imgCitasCanceladas) {
+		this.imgCitasCanceladas = imgCitasCanceladas;
+	}
+
+	public ImageIcon getImgGenerarTurno() {
+		return imgGenerarTurno;
+	}
+
+	public void setImgGenerarTurno(ImageIcon imgGenerarTurno) {
+		this.imgGenerarTurno = imgGenerarTurno;
+	}
+
+	public ImageIcon getImgVolverMenu() {
+		return imgVolverMenu;
+	}
+
+	public void setImgVolverMenu(ImageIcon imgVolverMenu) {
+		this.imgVolverMenu = imgVolverMenu;
+	}
+
+	public ImageIcon getImgBtnToolTip() {
+		return imgBtnToolTip;
+	}
+
+	public void setImgBtnToolTip(ImageIcon imgBtnToolTip) {
+		this.imgBtnToolTip = imgBtnToolTip;
+	}
+
 	public CardLayout getCardLayout() {
 		return cardLayout;
 	}
@@ -683,15 +893,5 @@ public class VentanaDirector extends JFrame{
 	public static String getCc() {
 		return CC;
 	}
-
-	public JPanel getPanelVariableReportes() {
-		return panelVariableReportes;
-	}
-
-	public void setPanelVariableReportes(JPanel panelVariableReportes) {
-		this.panelVariableReportes = panelVariableReportes;
-	}
 	
-	
-
 }
