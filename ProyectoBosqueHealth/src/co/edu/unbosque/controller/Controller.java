@@ -14,7 +14,9 @@ import javax.swing.JTable;
 
 import co.edu.unbosque.model.CitaDTO;
 import co.edu.unbosque.model.Especialista;
+import co.edu.unbosque.model.EspecialistaDTO;
 import co.edu.unbosque.model.ModelFacade;
+import co.edu.unbosque.model.Paciente;
 import co.edu.unbosque.model.PacienteDTO;
 import co.edu.unbosque.model.TratamientoMedicoDTO;
 import co.edu.unbosque.view.ViewFacade;
@@ -24,6 +26,8 @@ public class Controller implements ActionListener {
 	private ModelFacade mf;
 	private ViewFacade vf;
 	private int numSeleccionCita = 0;
+	private Paciente pacienteActual;
+	private int numCita = 0;
 	
 	public Controller() {
 		mf = new ModelFacade();
@@ -196,7 +200,7 @@ public class Controller implements ActionListener {
 			
 			break;
 		case "CITAS PACIENTE":
-			cambiarPanelesPacientes(true, false, true, false, false, false, true, true, true, true);
+			cambiarPanelesPacientes(true, false, false, false, false, false, true, true, true, true);
 			
 			break;
 		case "TRATAMIENTO MEDICO PACIENTE":
@@ -206,13 +210,17 @@ public class Controller implements ActionListener {
 			break;
 			
 		case "AGENDAR CITA":
+			vf.getVentanaPaciente().getPanelVariableCitas().setVisible(true);
 			numSeleccionCita = 1;
 			vf.getVentanaPaciente().getPanelVariableCitas().setVisible(true);
 			vf.getVentanaPaciente().getCardLayout().show(vf.getVentanaPaciente().getPanelVariableCitas(), vf.getVentanaPaciente().getAgendarcita());
+			preparacionDeDatosEsp();
+			cargarComboBoxAgendarCita();
 			
 			break;
 		
 		case "CITAS AGENDADAS":
+			vf.getVentanaPaciente().getPanelVariableCitas().setVisible(true);
 			numSeleccionCita = 2;
 			vf.getVentanaPaciente().getPanelVariableCitas().setVisible(true);
 			vf.getVentanaPaciente().getCardLayout().show(vf.getVentanaPaciente().getPanelVariableCitas(), vf.getVentanaPaciente().getCitasagendadas());
@@ -220,12 +228,14 @@ public class Controller implements ActionListener {
 			
 			break;
 		case "REAGENDAR CITA":
+			vf.getVentanaPaciente().getPanelVariableCitas().setVisible(true);
 			numSeleccionCita = 3;
 			vf.getVentanaPaciente().getPanelVariableCitas().setVisible(true);
 			vf.getVentanaPaciente().getCardLayout().show(vf.getVentanaPaciente().getPanelVariableCitas(), vf.getVentanaPaciente().getReagendarcita());
 			
 			break;
 		case "CANCELAR CITA":
+			vf.getVentanaPaciente().getPanelVariableCitas().setVisible(true);
 			numSeleccionCita = 4;
 			vf.getVentanaPaciente().getPanelVariableCitas().setVisible(true);
 			vf.getVentanaPaciente().getCardLayout().show(vf.getVentanaPaciente().getPanelVariableCitas(), vf.getVentanaPaciente().getCancelarcita());
@@ -252,7 +262,7 @@ public class Controller implements ActionListener {
 						JOptionPane.ERROR_MESSAGE);
 				
 			} else {
-				String nombreCompleto = "";
+				String nombreCompleto = vf.getVentanaPaciente().getTxtNombreCompleto().getText();
 				String numeroDoc = vf.getVentanaPaciente().getTxtNumeroDocumento().getText();
 				fecNacimientoDC = vf.getVentanaPaciente().getFechaNacimiento().getDate();
 				String correo = vf.getVentanaPaciente().getTxtCorreoElectronico().getText();
@@ -263,22 +273,64 @@ public class Controller implements ActionListener {
 				mf.getPacienteDAO().add(new PacienteDTO(nombreCompleto, fecNacimientoDC, genero, numDoc, correo));
 				JOptionPane.showMessageDialog(null, "Paciente creado exitosamente");
 				
+				pacienteActual = new Paciente(nombreCompleto, fecNacimientoDC, genero, numDoc, correo);
+				
 				limpiarEntradasPacientes();
 			}
 			
 			break;
 		case "GENERAR CITA PACIENTE":
+			Date fechaCita = vf.getVentanaPaciente().getFechaAgendarCita().getDate();
+			String fecAgendarCita = null;
+			if (fechaCita==null)
+				fecAgendarCita = "";
+			else
+				fecAgendarCita = DateFormat.getDateInstance().format(fechaCita);
 			
+			if (vf.getVentanaPaciente().getCmbEspecialidad().getSelectedItem().toString().equals("") 
+					|| vf.getVentanaPaciente().getCmbEspecialistas().getSelectedItem().toString().equals("")
+					|| fecAgendarCita.equals("")
+					|| vf.getVentanaPaciente().getTxtHora().getText().trim().equals("")) {
+				
+				JOptionPane.showMessageDialog(null, "Ingrese los valores requeridos", "Error",
+						JOptionPane.ERROR_MESSAGE);
+			} else {
+				String especialidad = vf.getVentanaPaciente().getCmbEspecialidad().getSelectedItem().toString();
+				String especialista = vf.getVentanaPaciente().getCmbEspecialistas().getSelectedItem().toString();
+				fechaCita = vf.getVentanaPaciente().getFechaAgendarCita().getDate();
+				String horaCita = vf.getVentanaPaciente().getTxtHora().getText();
+				numCita = numRandomCita();
+				
+				Especialista espCita = new Especialista(especialista, null, null, 0, null, especialidad);
+				
+				
+				mf.getCitaDAO().add(new CitaDTO(espCita, pacienteActual, fechaCita, horaCita, numCita, "Activo"));
+				JOptionPane.showMessageDialog(null, "Cita generada exitosamente");
+			}
 			
 			break;	
 			
 		case "GUARDAR CANCELAR CITA":
+			String numCancelarCita = vf.getVentanaPaciente().getTxtNumeroCancelarCita().getText();
+			int numCC = Integer.parseInt(numCancelarCita);
+			
+			/*if (mf.getCitaDAO().find(numCC)) {
+				
+			} else {
 
+			}*/
 			
 			break;
 			
 		case "GUARDAR REAGENDAR CITA":
+			String numReagendarCita = vf.getVentanaPaciente().getTxtNumeroReagendarCita().getText();
+			int numRC = Integer.parseInt(numReagendarCita);
+			
+			/*if (mf.getCitaDAO().find(numRC)) {
+				
+			} else {
 
+			}*/
 			
 			break;	
 
@@ -399,7 +451,9 @@ public class Controller implements ActionListener {
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(10, 10, 500, 300); //validar coordenadas
 		vf.getVentanaPaciente().getPanelCitasAgendadas().add(scrollPane);
-		scrollPane.setViewportView(jtCitasAgendadas);		
+		scrollPane.setViewportView(jtCitasAgendadas);
+		jtCitasAgendadas.repaint();
+		scrollPane.repaint();
 	}
 	
 	public void tablaTratamientoMedicoP() {
@@ -439,19 +493,30 @@ public class Controller implements ActionListener {
 	}
 	
 	public void preparacionDeDatosEsp() {
-		ArrayList<Especialista> espList = new ArrayList<>();
 		
-		Especialista esp1 = new Especialista("David Caicedo", new GregorianCalendar(2000, Calendar.AUGUST, 4).getTime(), "Masculino" , 142139, "de.c@gmail.com", "Cirugía");
-		Especialista esp2 = new Especialista("Pedro Gomez", new GregorianCalendar(1980, Calendar.FEBRUARY, 15).getTime(), "Masculino" , 662139, "de.c@gmail.com", "Cirugía");
-		Especialista esp3 = new Especialista("Andrea Pelaez", new GregorianCalendar(1980, Calendar.APRIL, 3).getTime(), "Femenino" , 857139, "de.c@gmail.com", "Cirugía");
-		Especialista esp4 = new Especialista("Jorge Lopez", new GregorianCalendar(1990, Calendar.AUGUST, 7).getTime(), "Masculino" , 196739, "de.c@gmail.com", "Cirugía");
-		Especialista esp5 = new Especialista("Pepe Aguilar", new GregorianCalendar(1991, Calendar.APRIL, 22).getTime(), "Masculino" , 199139, "de.c@gmail.com", "Cirugía");
-		Especialista esp6 = new Especialista("Michael Jackson", new GregorianCalendar(1995, Calendar.JUNE, 12).getTime(), "Masculino" , 106739, "de.c@gmail.com", "Cirugía");
-		Especialista esp7 = new Especialista("Tom Cruise", new GregorianCalendar(1990, Calendar.JULY, 14).getTime(), "Masculino" , 102139, "de.c@gmail.com", "Cirugía");
-		Especialista esp8 = new Especialista("Super Man", new GregorianCalendar(1988, Calendar.AUGUST, 3).getTime(), "Masculino" , 102139, "de.c@gmail.com", "Cirugía");
-		Especialista esp9 = new Especialista("Linda Caicedo", new GregorianCalendar(1976, Calendar.NOVEMBER, 4).getTime(), "Femenino" , 102139, "de.c@gmail.com", "Cirugía");
-		Especialista esp10 = new Especialista("Petrona Gonzalez", new GregorianCalendar(1987, Calendar.AUGUST, 1).getTime(), "Femenino" , 102139, "de.c@gmail.com", "Cirugía");
-		Especialista esp11 = new Especialista("Oliver Caicedo", new GregorianCalendar(1999, Calendar.DECEMBER, 14).getTime(), "Masculino" , 102139, "de.c@gmail.com", "Cirugía");
+		EspecialistaDTO esp1 = new EspecialistaDTO ("David Caicedo", new GregorianCalendar(2000, Calendar.AUGUST, 4).getTime(), "Masculino" , 142139, "dae.c@gmail.com", "Cirugía");
+		EspecialistaDTO  esp2 = new EspecialistaDTO ("Pedro Gomez", new GregorianCalendar(1980, Calendar.FEBRUARY, 15).getTime(), "Masculino" , 662139, "ee.c@gmail.com", "Oncología");
+		EspecialistaDTO  esp3 = new EspecialistaDTO ("Andrea Pelaez", new GregorianCalendar(1980, Calendar.APRIL, 3).getTime(), "Femenino" , 857139, "fr.c@gmail.com", "Dermatología");
+		EspecialistaDTO  esp4 = new EspecialistaDTO ("Jorge Lopez", new GregorianCalendar(1990, Calendar.AUGUST, 7).getTime(), "Masculino" , 196739, "tr.c@gmail.com", "Oncología");
+		EspecialistaDTO  esp5 = new EspecialistaDTO ("Pepe Aguilar", new GregorianCalendar(1991, Calendar.APRIL, 22).getTime(), "Masculino" , 199139, "yt.c@gmail.com", "Neumología");
+		EspecialistaDTO  esp6 = new EspecialistaDTO ("Michael Jackson", new GregorianCalendar(1995, Calendar.JUNE, 12).getTime(), "Masculino" , 206739, "uy.c@gmail.com", "Cardiología");
+		EspecialistaDTO  esp7 = new EspecialistaDTO ("Tom Cruise", new GregorianCalendar(1990, Calendar.JULY, 14).getTime(), "Masculino" , 302139, "oi.c@gmail.com", "Medicina Interna");
+		EspecialistaDTO  esp8 = new EspecialistaDTO ("Super Man", new GregorianCalendar(1988, Calendar.AUGUST, 3).getTime(), "Masculino" , 402139, "qw.c@gmail.com", "Oncología");
+		EspecialistaDTO  esp9 = new EspecialistaDTO ("Linda Caicedo", new GregorianCalendar(1976, Calendar.NOVEMBER, 4).getTime(), "Femenino" , 502139, "sd.c@gmail.com", "Medicina Interna");
+		EspecialistaDTO  esp10 = new EspecialistaDTO ("Petrona Gonzalez", new GregorianCalendar(1987, Calendar.AUGUST, 1).getTime(), "Femenino" , 7802139, "der.c@gmail.com", "Dermatología");
+		EspecialistaDTO  esp11 = new EspecialistaDTO ("Oliver Caicedo", new GregorianCalendar(1999, Calendar.DECEMBER, 14).getTime(), "Masculino" , 962139, "degdg.c@gmail.com", "Cirugía");
+		
+		mf.getEspecialistaDAO().add(esp1);
+		mf.getEspecialistaDAO().add(esp2);
+		mf.getEspecialistaDAO().add(esp3);
+		mf.getEspecialistaDAO().add(esp4);
+		mf.getEspecialistaDAO().add(esp5);
+		mf.getEspecialistaDAO().add(esp6);
+		mf.getEspecialistaDAO().add(esp7);
+		mf.getEspecialistaDAO().add(esp8);
+		mf.getEspecialistaDAO().add(esp9);
+		mf.getEspecialistaDAO().add(esp10);
+		mf.getEspecialistaDAO().add(esp11);
 	}
 	
 	public void tablaCitasMedicasE() {
@@ -488,6 +553,29 @@ public class Controller implements ActionListener {
 	
 	public void tablaReporteMensualDM() {
 		
+	}
+	
+	public void cargarComboBoxAgendarCita() {
+		vf.getVentanaPaciente().getCmbEspecialidad().addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				cargarEspecialistaAgendar((String )vf.getVentanaPaciente().getCmbEspecialidad().getSelectedItem());
+			}
+		});
+	}
+	public void cargarEspecialistaAgendar(String seleccionEsp) {
+		vf.getVentanaPaciente().getCmbEspecialistas().removeAllItems();
+		ArrayList<EspecialistaDTO> listaE = mf.getEspecialistaDAO().getAll();
+		for (EspecialistaDTO especialistaDTO : listaE) {
+			if (especialistaDTO.getEspecialidad().equals(seleccionEsp)) {			
+				vf.getVentanaPaciente().getCmbEspecialistas().addItem(especialistaDTO.getNombre());
+			}
+		}
+	}
+	
+	public int numRandomCita() {
+		return (int) (Math.random() * 10000 + 100);
 	}
 
 }

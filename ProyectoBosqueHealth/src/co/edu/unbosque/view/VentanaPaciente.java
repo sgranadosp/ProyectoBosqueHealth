@@ -238,40 +238,40 @@ public class VentanaPaciente extends JFrame{
 	public void textfield() {
 		//TextFields Datos personales
 		txtNombreCompleto = new JTextField();
-		txtNombreCompleto.setFont(new Font("Agency FB", Font.BOLD, 12));
+		txtNombreCompleto.setFont(new Font("Helvetica", Font.PLAIN, 12));
 		txtNombreCompleto.setBounds(240, 35, 200, 20);
 		panelDatosPaciente.add(txtNombreCompleto);	
 
 		txtNumeroDocumento = new JTextField();
-		txtNumeroDocumento.setFont(new Font("Agency FB", Font.BOLD, 12));
+		txtNumeroDocumento.setFont(new Font("Helvetica", Font.PLAIN, 12));
 		txtNumeroDocumento.setBounds(240, 70, 200, 20);
 		panelDatosPaciente.add(txtNumeroDocumento);
 	
 		txtCorreoElectronico = new JTextField();
-		txtCorreoElectronico.setFont(new Font("Agency FB", Font.BOLD, 12));
+		txtCorreoElectronico.setFont(new Font("Helvetica", Font.PLAIN, 12));
 		txtCorreoElectronico.setBounds(240, 140, 200, 20);
 		panelDatosPaciente.add(txtCorreoElectronico);
 		
 		//TextFields Citas - Agendar
 		txtHora = new JTextField();
-		txtHora.setFont(new Font("Agency FB", Font.BOLD, 12));
+		txtHora.setFont(new Font("Helvetica", Font.PLAIN, 12));
 		txtHora.setBounds(240, 140, 200, 20);
 		panelAgendarCitas.add(txtHora);
 
 		//TextFields Citas - Reagendar
 		txtNumeroReagendarCita = new JTextField();
-		txtNumeroReagendarCita.setFont(new Font("Agency FB", Font.BOLD, 12));
+		txtNumeroReagendarCita.setFont(new Font("Helvetica", Font.PLAIN, 12));
 		txtNumeroReagendarCita.setBounds(240, 35, 200, 20);
 		panelReagendarCita.add(txtNumeroReagendarCita);
 
 		txtHoraReagendarCita = new JTextField();
-		txtHoraReagendarCita.setFont(new Font("Agency FB", Font.BOLD, 12));
+		txtHoraReagendarCita.setFont(new Font("Helvetica", Font.PLAIN, 12));
 		txtHoraReagendarCita.setBounds(240, 105, 200, 20);
 		panelReagendarCita.add(txtHoraReagendarCita);
 
 		//TextFields Citas - Cancelar
 		txtNumeroCancelarCita = new JTextField();
-		txtNumeroCancelarCita.setFont(new Font("Agency FB", Font.BOLD, 12));
+		txtNumeroCancelarCita.setFont(new Font("Helvetica", Font.PLAIN, 12));
 		txtNumeroCancelarCita.setBounds(240, 35, 200, 20);
 		panelCancelarCita.add(txtNumeroCancelarCita);
 		

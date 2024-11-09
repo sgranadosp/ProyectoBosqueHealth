@@ -10,8 +10,11 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.Properties;
 import java.util.Scanner;
+
+import co.edu.unbosque.model.Especialista;
 
 public class FileHandler {
 
@@ -88,6 +91,7 @@ public class FileHandler {
 		}
 
 	}
+
 
 	public static Object readSerialized(String url) {
 

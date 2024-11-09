@@ -153,6 +153,7 @@ public class EspecialistaDAO implements CRUDOperation<Especialista, Especialista
 	
 	public void writeSerialized() {
 		FileHandler.writeSerialized(SERIALIZED_NAME, listaEspecialistas);
+		
 	}
 	
 	@SuppressWarnings("unchecked")
