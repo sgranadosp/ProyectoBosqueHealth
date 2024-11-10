@@ -14,6 +14,31 @@ import javax.swing.JTextField;
 
 import com.toedter.calendar.JDateChooser;
 
+/**
+ * La clase VentanaEspecialista representa la interfaz gráfica para la gestión de
+ * especialistas médicos.
+ * 
+ * Esta ventana permite al usuario registrar datos personales del especialista, 
+ * gestionar citas médicas, cambiar turnos, asignar tratamientos a pacientes y 
+ * visualizar una lista de tratamientos.
+ * 
+ * La clase utiliza varios paneles para organizar las diferentes secciones del sistema.
+ * 
+ * <ul>
+ * <li>Datos Personales</li>
+ * <li>Citas Médicas</li>
+ * <li>Turnos del Mes</li>
+ * <li>Cambio de Turnos</li>
+ * <li>Tratamiento de Pacientes</li>
+ * <li>Lista de Tratamientos</li>
+ * </ul>
+ * 
+ * Se utiliza un diseño basado en `CardLayout` para cambiar entre los paneles dinámicamente.
+ * 
+ * @author Santiago Granados Pascagaza
+ * @version 1.0
+ * @since 2024-11-09
+ */
 public class VentanaEspecialista extends JFrame {
 	
 	private JPanel panelFijoIzq, panelDerechaArriba, panelDatosEspecialista, panelCitasMedicas, 
@@ -38,6 +63,9 @@ public class VentanaEspecialista extends JFrame {
 	
 	CardLayout cardLayout = new CardLayout();
 	
+	 /**
+     * Constructor que inicializa la ventana y sus componentes gráficos.
+     */
 	public VentanaEspecialista() {
 		ventana();
 		paneles();
@@ -66,6 +94,9 @@ public class VentanaEspecialista extends JFrame {
 		add(panelVariableTurno);
 	}
 
+	 /**
+     * Configura las propiedades principales de la ventana.
+     */
 	public void ventana() {
         setBounds(50, 50, 1000, 561);
         setTitle("Bosque Health");
@@ -75,6 +106,9 @@ public class VentanaEspecialista extends JFrame {
         setLayout(null);
 	}
 
+	/**
+     * Inicializa y configura los paneles utilizados en la interfaz.
+     */
 	public void paneles() {
 		
 		panelFijoIzq = new JPanel();
@@ -125,6 +159,9 @@ public class VentanaEspecialista extends JFrame {
 		
 	}
 
+	/**
+     * Configura los componentes `JLabel` que se utilizarán en la ventana.
+     */
 	public void labels() {
 	
 		//Labels DATOS PERSONALES
@@ -243,6 +280,9 @@ public class VentanaEspecialista extends JFrame {
 			
 	}
 
+	/**
+     * Configura los componentes `JTextField` que permiten la entrada de datos.
+     */
 	public void textfield() {
 		
 		//Textfields DATOS PERSONALES
@@ -278,6 +318,9 @@ public class VentanaEspecialista extends JFrame {
 		panelTratamientoP.add(txtTratamientoP);
 	}
 
+	/**
+     * Configura los botones y sus acciones en la interfaz.
+     */
 	public void botones() {
 		
 		//BOYTONES PANEL IZQUIERDO
@@ -360,6 +403,9 @@ public class VentanaEspecialista extends JFrame {
 		add(btnTooltipEspecialista);
 	}
 
+	/**
+     * Configura los `JComboBox` que permiten seleccionar opciones.
+     */
 	public void comboBox() {
 		
 		//Combobox DATOS ESPECIALISTA
@@ -411,6 +457,9 @@ public class VentanaEspecialista extends JFrame {
 		
 	}
 
+	 /**
+     * Configura los calendarios utilizados para seleccionar fechas.
+     */
 	public void calendar() {
 		
 		//Calendar fecha de nacimiento del especialista
@@ -425,540 +474,1212 @@ public class VentanaEspecialista extends JFrame {
 		
 	}
 
+	/**
+	 * Obtiene el panel fijo izquierdo.
+	 * 
+	 * @return El panel fijo izquierdo.
+	 */
 	public JPanel getPanelFijoIzq() {
-		return panelFijoIzq;
+	    return panelFijoIzq;
 	}
 
+	/**
+	 * Establece el panel fijo izquierdo.
+	 * 
+	 * @param panelFijoIzq El nuevo panel fijo izquierdo.
+	 */
 	public void setPanelFijoIzq(JPanel panelFijoIzq) {
-		this.panelFijoIzq = panelFijoIzq;
+	    this.panelFijoIzq = panelFijoIzq;
 	}
 
+	/**
+	 * Obtiene el panel superior derecho.
+	 * 
+	 * @return El panel superior derecho.
+	 */
 	public JPanel getPanelDerechaArriba() {
-		return panelDerechaArriba;
+	    return panelDerechaArriba;
 	}
 
+	/**
+	 * Establece el panel superior derecho.
+	 * 
+	 * @param panelDerechaArriba El nuevo panel superior derecho.
+	 */
 	public void setPanelDerechaArriba(JPanel panelDerechaArriba) {
-		this.panelDerechaArriba = panelDerechaArriba;
+	    this.panelDerechaArriba = panelDerechaArriba;
 	}
 
+	/**
+	 * Obtiene el panel de datos del especialista.
+	 * 
+	 * @return El panel de datos del especialista.
+	 */
 	public JPanel getPanelDatosEspecialista() {
-		return panelDatosEspecialista;
+	    return panelDatosEspecialista;
 	}
 
+	/**
+	 * Establece el panel de datos del especialista.
+	 * 
+	 * @param panelDatosEspecialista El nuevo panel de datos del especialista.
+	 */
 	public void setPanelDatosEspecialista(JPanel panelDatosEspecialista) {
-		this.panelDatosEspecialista = panelDatosEspecialista;
+	    this.panelDatosEspecialista = panelDatosEspecialista;
 	}
 
+	/**
+	 * Obtiene el panel de citas médicas.
+	 * 
+	 * @return El panel de citas médicas.
+	 */
 	public JPanel getPanelCitasMedicas() {
-		return panelCitasMedicas;
+	    return panelCitasMedicas;
 	}
 
+	/**
+	 * Establece el panel de citas médicas.
+	 * 
+	 * @param panelCitasMedicas El nuevo panel de citas médicas.
+	 */
 	public void setPanelCitasMedicas(JPanel panelCitasMedicas) {
-		this.panelCitasMedicas = panelCitasMedicas;
+	    this.panelCitasMedicas = panelCitasMedicas;
 	}
 
+	/**
+	 * Obtiene el panel que muestra el turno del mes.
+	 * 
+	 * @return El panel que muestra el turno del mes.
+	 */
 	public JPanel getPanelTurnoMes() {
-		return panelTurnoMes;
+	    return panelTurnoMes;
 	}
 
+	/**
+	 * Establece el panel que muestra el turno del mes.
+	 * 
+	 * @param panelTurnoMes El nuevo panel que muestra el turno del mes.
+	 */
 	public void setPanelTurnoMes(JPanel panelTurnoMes) {
-		this.panelTurnoMes = panelTurnoMes;
+	    this.panelTurnoMes = panelTurnoMes;
 	}
 
+	/**
+	 * Obtiene el panel para cambiar el turno.
+	 * 
+	 * @return El panel para cambiar el turno.
+	 */
 	public JPanel getPanelCambioTurno() {
-		return panelCambioTurno;
+	    return panelCambioTurno;
 	}
 
+	/**
+	 * Establece el panel para cambiar el turno.
+	 * 
+	 * @param panelCambioTurno El nuevo panel para cambiar el turno.
+	 */
 	public void setPanelCambioTurno(JPanel panelCambioTurno) {
-		this.panelCambioTurno = panelCambioTurno;
+	    this.panelCambioTurno = panelCambioTurno;
 	}
 
+	/**
+	 * Obtiene el panel del tratamiento específico.
+	 * 
+	 * @return El panel del tratamiento específico.
+	 */
 	public JPanel getPanelTratamientoP() {
-		return panelTratamientoP;
+	    return panelTratamientoP;
 	}
 
+	/**
+	 * Establece el panel del tratamiento específico.
+	 * 
+	 * @param panelTratamientoP El nuevo panel del tratamiento específico.
+	 */
 	public void setPanelTratamientoP(JPanel panelTratamientoP) {
-		this.panelTratamientoP = panelTratamientoP;
+	    this.panelTratamientoP = panelTratamientoP;
 	}
 
+	/**
+	 * Obtiene el panel que lista los tratamientos.
+	 * 
+	 * @return El panel que lista los tratamientos.
+	 */
 	public JPanel getPanelListaTratamiento() {
-		return panelListaTratamiento;
+	    return panelListaTratamiento;
 	}
 
+	/**
+	 * Establece el panel que lista los tratamientos.
+	 * 
+	 * @param panelListaTratamiento El nuevo panel que lista los tratamientos.
+	 */
 	public void setPanelListaTratamiento(JPanel panelListaTratamiento) {
-		this.panelListaTratamiento = panelListaTratamiento;
+	    this.panelListaTratamiento = panelListaTratamiento;
 	}
 
+	/**
+	 * Obtiene el panel para turnos variables.
+	 * 
+	 * @return El panel para turnos variables.
+	 */
 	public JPanel getPanelVariableTurno() {
-		return panelVariableTurno;
+	    return panelVariableTurno;
 	}
 
+	/**
+	 * Establece el panel para turnos variables.
+	 * 
+	 * @param panelVariableTurno El nuevo panel para turnos variables.
+	 */
 	public void setPanelVariableTurno(JPanel panelVariableTurno) {
-		this.panelVariableTurno = panelVariableTurno;
+	    this.panelVariableTurno = panelVariableTurno;
 	}
 
+	/**
+	 * Obtiene el campo de texto para el nombre completo.
+	 * 
+	 * @return El campo de texto para el nombre completo.
+	 */
 	public JTextField getTxtNombreCompleto() {
-		return txtNombreCompleto;
+	    return txtNombreCompleto;
 	}
 
+	/**
+	 * Establece el campo de texto para el nombre completo.
+	 * 
+	 * @param txtNombreCompleto El nuevo campo de texto para el nombre completo.
+	 */
 	public void setTxtNombreCompleto(JTextField txtNombreCompleto) {
-		this.txtNombreCompleto = txtNombreCompleto;
+	    this.txtNombreCompleto = txtNombreCompleto;
 	}
 
+	/**
+	 * Obtiene el campo de texto para el número de documento.
+	 * 
+	 * @return El campo de texto para el número de documento.
+	 */
 	public JTextField getTxtNumeroDocumento() {
-		return txtNumeroDocumento;
+	    return txtNumeroDocumento;
 	}
 
+	/**
+	 * Establece el campo de texto para el número de documento.
+	 * 
+	 * @param txtNumeroDocumento El nuevo campo de texto para el número de documento.
+	 */
 	public void setTxtNumeroDocumento(JTextField txtNumeroDocumento) {
-		this.txtNumeroDocumento = txtNumeroDocumento;
+	    this.txtNumeroDocumento = txtNumeroDocumento;
 	}
 
+	/**
+	 * Obtiene el campo de texto para el correo electrónico.
+	 * 
+	 * @return El campo de texto para el correo electrónico.
+	 */
 	public JTextField getTxtCorreoElectronico() {
-		return txtCorreoElectronico;
+	    return txtCorreoElectronico;
 	}
 
+	/**
+	 * Establece el campo de texto para el correo electrónico.
+	 * 
+	 * @param txtCorreoElectronico El nuevo campo de texto para el correo electrónico.
+	 */
 	public void setTxtCorreoElectronico(JTextField txtCorreoElectronico) {
-		this.txtCorreoElectronico = txtCorreoElectronico;
+	    this.txtCorreoElectronico = txtCorreoElectronico;
 	}
 
+	/**
+	 * Obtiene el campo de texto para el examen.
+	 * 
+	 * @return El campo de texto para el examen.
+	 */
 	public JTextField getTxtExamenP() {
-		return txtExamenP;
+	    return txtExamenP;
 	}
 
+	/**
+	 * Establece el campo de texto para el examen.
+	 * 
+	 * @param txtExamenP El nuevo campo de texto para el examen.
+	 */
 	public void setTxtExamenP(JTextField txtExamenP) {
-		this.txtExamenP = txtExamenP;
+	    this.txtExamenP = txtExamenP;
 	}
 
+	/**
+	 * Obtiene el campo de texto para el diagnóstico.
+	 * 
+	 * @return El campo de texto para el diagnóstico.
+	 */
 	public JTextField getTxtDiagnosticoP() {
-		return txtDiagnosticoP;
+	    return txtDiagnosticoP;
 	}
 
+	/**
+	 * Establece el campo de texto para el diagnóstico.
+	 * 
+	 * @param txtDiagnosticoP El nuevo campo de texto para el diagnóstico.
+	 */
 	public void setTxtDiagnosticoP(JTextField txtDiagnosticoP) {
-		this.txtDiagnosticoP = txtDiagnosticoP;
+	    this.txtDiagnosticoP = txtDiagnosticoP;
 	}
 
+	/**
+	 * Obtiene el campo de texto para el tratamiento.
+	 * 
+	 * @return El campo de texto para el tratamiento.
+	 */
 	public JTextField getTxtTratamientoP() {
-		return txtTratamientoP;
+	    return txtTratamientoP;
 	}
 
+	/**
+	 * Establece el campo de texto para el tratamiento.
+	 * 
+	 * @param txtTratamientoP El nuevo campo de texto para el tratamiento.
+	 */
 	public void setTxtTratamientoP(JTextField txtTratamientoP) {
-		this.txtTratamientoP = txtTratamientoP;
+	    this.txtTratamientoP = txtTratamientoP;
 	}
 
+	/**
+	 * Obtiene el selector de fecha de nacimiento.
+	 * 
+	 * @return El selector de fecha de nacimiento.
+	 */
 	public JDateChooser getFechaNacimiento() {
-		return fechaNacimiento;
+	    return fechaNacimiento;
 	}
 
+	/**
+	 * Establece el selector de fecha de nacimiento.
+	 * 
+	 * @param fechaNacimiento El nuevo selector de fecha de nacimiento.
+	 */
 	public void setFechaNacimiento(JDateChooser fechaNacimiento) {
-		this.fechaNacimiento = fechaNacimiento;
+	    this.fechaNacimiento = fechaNacimiento;
 	}
 
+	/**
+	 * Obtiene el selector de fecha para el tratamiento.
+	 * 
+	 * @return El selector de fecha para el tratamiento.
+	 */
 	public JDateChooser getFechaTratamientoP() {
-		return fechaTratamientoP;
+	    return fechaTratamientoP;
 	}
 
+	/**
+	 * Establece el selector de fecha para el tratamiento.
+	 * 
+	 * @param fechaTratamientoP El nuevo selector de fecha para el tratamiento.
+	 */
 	public void setFechaTratamientoP(JDateChooser fechaTratamientoP) {
-		this.fechaTratamientoP = fechaTratamientoP;
+	    this.fechaTratamientoP = fechaTratamientoP;
 	}
 
+	/**
+	 * Obtiene el combo box para seleccionar el género.
+	 * 
+	 * @return El combo box para seleccionar el género.
+	 */
 	public JComboBox<String> getCmbGenero() {
-		return cmbGenero;
+	    return cmbGenero;
 	}
 
+	/**
+	 * Establece el combo box para seleccionar el género.
+	 * 
+	 * @param cmbGenero El nuevo combo box para seleccionar el género.
+	 */
 	public void setCmbGenero(JComboBox<String> cmbGenero) {
-		this.cmbGenero = cmbGenero;
+	    this.cmbGenero = cmbGenero;
 	}
 
+	/**
+	 * Obtiene el combo box para seleccionar la especialidad.
+	 * 
+	 * @return El combo box para seleccionar la especialidad.
+	 */
 	public JComboBox<String> getCmbEspecialidadDP() {
-		return cmbEspecialidadDP;
+	    return cmbEspecialidadDP;
 	}
 
+	/**
+	 * Establece el combo box para seleccionar la especialidad.
+	 * 
+	 * @param cmbEspecialidadDP El nuevo combo box para seleccionar la especialidad.
+	 */
 	public void setCmbEspecialidadDP(JComboBox<String> cmbEspecialidadDP) {
-		this.cmbEspecialidadDP = cmbEspecialidadDP;
+	    this.cmbEspecialidadDP = cmbEspecialidadDP;
 	}
 
+	/**
+	 * Obtiene el combo box para seleccionar la fecha del turno.
+	 * 
+	 * @return El combo box para seleccionar la fecha del turno.
+	 */
 	public JComboBox<String> getCmbFechaTurno() {
-		return cmbFechaTurno;
+	    return cmbFechaTurno;
 	}
 
+	/**
+	 * Establece el combo box para seleccionar la fecha del turno.
+	 * 
+	 * @param cmbFechaTurno El nuevo combo box para seleccionar la fecha del turno.
+	 */
 	public void setCmbFechaTurno(JComboBox<String> cmbFechaTurno) {
-		this.cmbFechaTurno = cmbFechaTurno;
+	    this.cmbFechaTurno = cmbFechaTurno;
 	}
 
+	/**
+	 * Obtiene el combo box para seleccionar el especialista actual.
+	 * 
+	 * @return El combo box para seleccionar el especialista actual.
+	 */
 	public JComboBox<String> getCmbEspecialistaActual() {
-		return cmbEspecialistaActual;
+	    return cmbEspecialistaActual;
 	}
 
+	/**
+	 * Establece el combo box para seleccionar el especialista actual.
+	 * 
+	 * @param cmbEspecialistaActual El nuevo combo box para seleccionar el especialista actual.
+	 */
 	public void setCmbEspecialistaActual(JComboBox<String> cmbEspecialistaActual) {
-		this.cmbEspecialistaActual = cmbEspecialistaActual;
+	    this.cmbEspecialistaActual = cmbEspecialistaActual;
 	}
 
+	/**
+	 * Obtiene el combo box para seleccionar el nuevo especialista.
+	 * 
+	 * @return El combo box para seleccionar el nuevo especialista.
+	 */
 	public JComboBox<String> getCmbNuevoEspecialista() {
-		return cmbNuevoEspecialista;
+	    return cmbNuevoEspecialista;
 	}
 
+	/**
+	 * Establece el combo box para seleccionar el nuevo especialista.
+	 * 
+	 * @param cmbNuevoEspecialista El nuevo combo box para seleccionar el nuevo especialista.
+	 */
 	public void setCmbNuevoEspecialista(JComboBox<String> cmbNuevoEspecialista) {
-		this.cmbNuevoEspecialista = cmbNuevoEspecialista;
+	    this.cmbNuevoEspecialista = cmbNuevoEspecialista;
 	}
 
+	/**
+	 * Obtiene el combo box para seleccionar un paciente.
+	 * 
+	 * @return El combo box para seleccionar un paciente.
+	 */
 	public JComboBox<String> getCmbEscogerPaciente() {
-		return cmbEscogerPaciente;
+	    return cmbEscogerPaciente;
 	}
 
+	/**
+	 * Establece el combo box para seleccionar un paciente.
+	 * 
+	 * @param cmbEscogerPaciente El nuevo combo box para seleccionar un paciente.
+	 */
 	public void setCmbEscogerPaciente(JComboBox<String> cmbEscogerPaciente) {
-		this.cmbEscogerPaciente = cmbEscogerPaciente;
+	    this.cmbEscogerPaciente = cmbEscogerPaciente;
 	}
 
+	/**
+	 * Obtiene la etiqueta que muestra el nombre completo.
+	 * 
+	 * @return La etiqueta que muestra el nombre completo.
+	 */
 	public JLabel getLblNombreCompleto() {
-		return lblNombreCompleto;
+	    return lblNombreCompleto;
 	}
 
+	/**
+	 * Establece la etiqueta que muestra el nombre completo.
+	 * 
+	 * @param lblNombreCompleto La nueva etiqueta que muestra el nombre completo.
+	 */
 	public void setLblNombreCompleto(JLabel lblNombreCompleto) {
-		this.lblNombreCompleto = lblNombreCompleto;
+	    this.lblNombreCompleto = lblNombreCompleto;
 	}
 
+	/**
+	 * Obtiene la etiqueta que muestra el número de documento.
+	 * 
+	 * @return La etiqueta que muestra el número de documento.
+	 */
 	public JLabel getLblNumeroDocumento() {
-		return lblNumeroDocumento;
+	    return lblNumeroDocumento;
 	}
 
+	/**
+	 * Establece la etiqueta que muestra el número de documento.
+	 * 
+	 * @param lblNumeroDocumento La nueva etiqueta que muestra el número de documento.
+	 */
 	public void setLblNumeroDocumento(JLabel lblNumeroDocumento) {
-		this.lblNumeroDocumento = lblNumeroDocumento;
+	    this.lblNumeroDocumento = lblNumeroDocumento;
 	}
 
+	/**
+	 * Obtiene la etiqueta que muestra la fecha de nacimiento.
+	 * 
+	 * @return La etiqueta que muestra la fecha de nacimiento.
+	 */
 	public JLabel getLblFechaNacimiento() {
-		return lblFechaNacimiento;
+	    return lblFechaNacimiento;
 	}
 
+	/**
+	 * Establece la etiqueta que muestra la fecha de nacimiento.
+	 * 
+	 * @param lblFechaNacimiento La nueva etiqueta que muestra la fecha de nacimiento.
+	 */
 	public void setLblFechaNacimiento(JLabel lblFechaNacimiento) {
-		this.lblFechaNacimiento = lblFechaNacimiento;
+	    this.lblFechaNacimiento = lblFechaNacimiento;
 	}
 
+	/**
+	 * Obtiene la etiqueta que muestra el correo electrónico.
+	 * 
+	 * @return La etiqueta que muestra el correo electrónico.
+	 */
 	public JLabel getLblCorreo() {
-		return lblCorreo;
+	    return lblCorreo;
 	}
 
+	/**
+	 * Establece la etiqueta que muestra el correo electrónico.
+	 * 
+	 * @param lblCorreo La nueva etiqueta que muestra el correo electrónico.
+	 */
 	public void setLblCorreo(JLabel lblCorreo) {
-		this.lblCorreo = lblCorreo;
+	    this.lblCorreo = lblCorreo;
 	}
 
+	/**
+	 * Obtiene la etiqueta que muestra el género.
+	 * 
+	 * @return La etiqueta que muestra el género.
+	 */
 	public JLabel getLblGenero() {
-		return lblGenero;
+	    return lblGenero;
 	}
 
+	/**
+	 * Establece la etiqueta que muestra el género.
+	 * 
+	 * @param lblGenero La nueva etiqueta que muestra el género.
+	 */
 	public void setLblGenero(JLabel lblGenero) {
-		this.lblGenero = lblGenero;
+	    this.lblGenero = lblGenero;
 	}
 
+	/**
+	 * Obtiene la etiqueta que muestra la especialidad.
+	 * 
+	 * @return La etiqueta que muestra la especialidad.
+	 */
 	public JLabel getLblEspecialidad() {
-		return lblEspecialidad;
+	    return lblEspecialidad;
 	}
 
+	/**
+	 * Establece la etiqueta que muestra la especialidad.
+	 * 
+	 * @param lblEspecialidad La nueva etiqueta que muestra la especialidad.
+	 */
 	public void setLblEspecialidad(JLabel lblEspecialidad) {
-		this.lblEspecialidad = lblEspecialidad;
+	    this.lblEspecialidad = lblEspecialidad;
 	}
 
+	/**
+	 * Obtiene la etiqueta que muestra el título de los datos del paciente.
+	 * 
+	 * @return La etiqueta que muestra el título de los datos del paciente.
+	 */
 	public JLabel getLblTituloDatosP() {
-		return lblTituloDatosP;
+	    return lblTituloDatosP;
 	}
 
+	/**
+	 * Establece la etiqueta que muestra el título de los datos del paciente.
+	 * 
+	 * @param lblTituloDatosP La nueva etiqueta que muestra el título de los datos del paciente.
+	 */
 	public void setLblTituloDatosP(JLabel lblTituloDatosP) {
-		this.lblTituloDatosP = lblTituloDatosP;
+	    this.lblTituloDatosP = lblTituloDatosP;
 	}
 
+	/**
+	 * Obtiene la etiqueta que muestra el título de las citas médicas.
+	 * 
+	 * @return La etiqueta que muestra el título de las citas médicas.
+	 */
 	public JLabel getLblTituloCitasMe() {
-		return lblTituloCitasMe;
+	    return lblTituloCitasMe;
 	}
 
+	/**
+	 * Establece la etiqueta que muestra el título de las citas médicas.
+	 * 
+	 * @param lblTituloCitasMe La nueva etiqueta que muestra el título de las citas médicas.
+	 */
 	public void setLblTituloCitasMe(JLabel lblTituloCitasMe) {
-		this.lblTituloCitasMe = lblTituloCitasMe;
+	    this.lblTituloCitasMe = lblTituloCitasMe;
 	}
 
+	/**
+	 * Obtiene la etiqueta que muestra la fecha del turno.
+	 * 
+	 * @return La etiqueta que muestra la fecha del turno.
+	 */
 	public JLabel getLblFechaTurno() {
-		return lblFechaTurno;
+	    return lblFechaTurno;
 	}
 
+	/**
+	 * Establece la etiqueta que muestra la fecha del turno.
+	 * 
+	 * @param lblFechaTurno La nueva etiqueta que muestra la fecha del turno.
+	 */
 	public void setLblFechaTurno(JLabel lblFechaTurno) {
-		this.lblFechaTurno = lblFechaTurno;
+	    this.lblFechaTurno = lblFechaTurno;
 	}
 
+	/**
+	 * Obtiene la etiqueta que muestra el especialista actual.
+	 * 
+	 * @return La etiqueta que muestra el especialista actual.
+	 */
 	public JLabel getLblEspecialistaActu() {
-		return lblEspecialistaActu;
+	    return lblEspecialistaActu;
 	}
 
+	/**
+	 * Establece la etiqueta que muestra el especialista actual.
+	 * 
+	 * @param lblEspecialistaActu La nueva etiqueta que muestra el especialista actual.
+	 */
 	public void setLblEspecialistaActu(JLabel lblEspecialistaActu) {
-		this.lblEspecialistaActu = lblEspecialistaActu;
+	    this.lblEspecialistaActu = lblEspecialistaActu;
 	}
 
+	/**
+	 * Obtiene la etiqueta que muestra el nuevo especialista.
+	 * 
+	 * @return La etiqueta que muestra el nuevo especialista.
+	 */
 	public JLabel getLblNuevoEspecialista() {
-		return lblNuevoEspecialista;
+	    return lblNuevoEspecialista;
 	}
 
+	/**
+	 * Establece la etiqueta que muestra el nuevo especialista.
+	 * 
+	 * @param lblNuevoEspecialista La nueva etiqueta que muestra el nuevo especialista.
+	 */
 	public void setLblNuevoEspecialista(JLabel lblNuevoEspecialista) {
-		this.lblNuevoEspecialista = lblNuevoEspecialista;
+	    this.lblNuevoEspecialista = lblNuevoEspecialista;
 	}
 
+	/**
+	 * Obtiene la etiqueta que muestra el título del tratamiento del paciente.
+	 * 
+	 * @return La etiqueta que muestra el título del tratamiento del paciente.
+	 */
 	public JLabel getLblTituloTratamientoPaciente() {
-		return lblTituloTratamientoPaciente;
+	    return lblTituloTratamientoPaciente;
 	}
 
+	/**
+	 * Establece la etiqueta que muestra el título del tratamiento del paciente.
+	 * 
+	 * @param lblTituloTratamientoPaciente La nueva etiqueta que muestra el título del tratamiento del paciente.
+	 */
 	public void setLblTituloTratamientoPaciente(JLabel lblTituloTratamientoPaciente) {
-		this.lblTituloTratamientoPaciente = lblTituloTratamientoPaciente;
+	    this.lblTituloTratamientoPaciente = lblTituloTratamientoPaciente;
 	}
 
+	/**
+	 * Obtiene la etiqueta que muestra la fecha del tratamiento del paciente.
+	 * 
+	 * @return La etiqueta que muestra la fecha del tratamiento del paciente.
+	 */
 	public JLabel getLblFechaTratamientoPaciente() {
-		return lblFechaTratamientoPaciente;
+	    return lblFechaTratamientoPaciente;
 	}
 
+	/**
+	 * Establece la etiqueta que muestra la fecha del tratamiento del paciente.
+	 * 
+	 * @param lblFechaTratamientoPaciente La nueva etiqueta que muestra la fecha del tratamiento del paciente.
+	 */
 	public void setLblFechaTratamientoPaciente(JLabel lblFechaTratamientoPaciente) {
-		this.lblFechaTratamientoPaciente = lblFechaTratamientoPaciente;
+	    this.lblFechaTratamientoPaciente = lblFechaTratamientoPaciente;
 	}
 
+	/**
+	 * Obtiene la etiqueta que muestra la opción de escoger un paciente.
+	 * 
+	 * @return La etiqueta que muestra la opción de escoger un paciente.
+	 */
 	public JLabel getLblEscogerPaciente() {
-		return lblEscogerPaciente;
+	    return lblEscogerPaciente;
 	}
 
+	/**
+	 * Establece la etiqueta que muestra la opción de escoger un paciente.
+	 * 
+	 * @param lblEscogerPaciente La nueva etiqueta que muestra la opción de escoger un paciente.
+	 */
 	public void setLblEscogerPaciente(JLabel lblEscogerPaciente) {
-		this.lblEscogerPaciente = lblEscogerPaciente;
+	    this.lblEscogerPaciente = lblEscogerPaciente;
 	}
 
+	/**
+	 * Obtiene la etiqueta que muestra el examen del paciente.
+	 * 
+	 * @return La etiqueta que muestra el examen del paciente.
+	 */
 	public JLabel getLblExamenPaciente() {
-		return lblExamenPaciente;
+	    return lblExamenPaciente;
 	}
 
+	/**
+	 * Establece la etiqueta que muestra el examen del paciente.
+	 * 
+	 * @param lblExamenPaciente La nueva etiqueta que muestra el examen del paciente.
+	 */
 	public void setLblExamenPaciente(JLabel lblExamenPaciente) {
-		this.lblExamenPaciente = lblExamenPaciente;
+	    this.lblExamenPaciente = lblExamenPaciente;
 	}
 
+	/**
+	 * Obtiene la etiqueta que muestra el diagnóstico del paciente.
+	 * 
+	 * @return La etiqueta que muestra el diagnóstico del paciente.
+	 */
 	public JLabel getLblDiagnosticoPaciente() {
-		return lblDiagnosticoPaciente;
+	    return lblDiagnosticoPaciente;
 	}
 
+	/**
+	 * Establece la etiqueta que muestra el diagnóstico del paciente.
+	 * 
+	 * @param lblDiagnosticoPaciente La nueva etiqueta que muestra el diagnóstico del paciente.
+	 */
 	public void setLblDiagnosticoPaciente(JLabel lblDiagnosticoPaciente) {
-		this.lblDiagnosticoPaciente = lblDiagnosticoPaciente;
+	    this.lblDiagnosticoPaciente = lblDiagnosticoPaciente;
 	}
 
+	/**
+	 * Obtiene la etiqueta que muestra el tratamiento del paciente.
+	 * 
+	 * @return La etiqueta que muestra el tratamiento del paciente.
+	 */
 	public JLabel getLblTratamientoPaciente() {
-		return lblTratamientoPaciente;
+	    return lblTratamientoPaciente;
 	}
 
+	/**
+	 * Establece la etiqueta que muestra el tratamiento del paciente.
+	 * 
+	 * @param lblTratamientoPaciente La nueva etiqueta que muestra el tratamiento del paciente.
+	 */
 	public void setLblTratamientoPaciente(JLabel lblTratamientoPaciente) {
-		this.lblTratamientoPaciente = lblTratamientoPaciente;
+	    this.lblTratamientoPaciente = lblTratamientoPaciente;
 	}
 
+	/**
+	 * Obtiene la etiqueta que muestra el título de la lista de tratamientos.
+	 * 
+	 * @return La etiqueta que muestra el título de la lista de tratamientos.
+	 */
 	public JLabel getLblTituloListaTratamientos() {
-		return lblTituloListaTratamientos;
+	    return lblTituloListaTratamientos;
 	}
 
+	/**
+	 * Establece la etiqueta que muestra el título de la lista de tratamientos.
+	 * 
+	 * @param lblTituloListaTratamientos La nueva etiqueta que muestra el título de la lista de tratamientos.
+	 */
 	public void setLblTituloListaTratamientos(JLabel lblTituloListaTratamientos) {
-		this.lblTituloListaTratamientos = lblTituloListaTratamientos;
+	    this.lblTituloListaTratamientos = lblTituloListaTratamientos;
 	}
 
+	/**
+	 * Obtiene el botón que muestra los datos personales.
+	 * 
+	 * @return El botón que muestra los datos personales.
+	 */
 	public JButton getBtnDatosPersonales() {
-		return btnDatosPersonales;
+	    return btnDatosPersonales;
 	}
 
+	/**
+	 * Establece el botón que muestra los datos personales.
+	 * 
+	 * @param btnDatosPersonales El nuevo botón que muestra los datos personales.
+	 */
 	public void setBtnDatosPersonales(JButton btnDatosPersonales) {
-		this.btnDatosPersonales = btnDatosPersonales;
+	    this.btnDatosPersonales = btnDatosPersonales;
 	}
 
+	/**
+	 * Obtiene el botón que muestra las citas.
+	 * 
+	 * @return El botón que muestra las citas.
+	 */
 	public JButton getBtnCitas() {
-		return btnCitas;
+	    return btnCitas;
 	}
 
+	/**
+	 * Establece el botón que muestra las citas.
+	 * 
+	 * @param btnCitas El nuevo botón que muestra las citas.
+	 */
 	public void setBtnCitas(JButton btnCitas) {
-		this.btnCitas = btnCitas;
+	    this.btnCitas = btnCitas;
 	}
 
+	/**
+	 * Obtiene el botón que muestra el turno.
+	 * 
+	 * @return El botón que muestra el turno.
+	 */
 	public JButton getBtnTurno() {
-		return btnTurno;
+	    return btnTurno;
 	}
 
+	/**
+	 * Establece el botón que muestra el turno.
+	 * 
+	 * @param btnTurno El nuevo botón que muestra el turno.
+	 */
 	public void setBtnTurno(JButton btnTurno) {
-		this.btnTurno = btnTurno;
+	    this.btnTurno = btnTurno;
 	}
 
+	/**
+	 * Obtiene el botón que muestra el tratamiento del paciente.
+	 * 
+	 * @return El botón que muestra el tratamiento del paciente.
+	 */
 	public JButton getBtnTratamientoPaciente() {
-		return btnTratamientoPaciente;
+	    return btnTratamientoPaciente;
 	}
 
+	/**
+	 * Establece el botón que muestra el tratamiento del paciente.
+	 * 
+	 * @param btnTratamientoPaciente El nuevo botón que muestra el tratamiento del paciente.
+	 */
 	public void setBtnTratamientoPaciente(JButton btnTratamientoPaciente) {
-		this.btnTratamientoPaciente = btnTratamientoPaciente;
+	    this.btnTratamientoPaciente = btnTratamientoPaciente;
 	}
 
+	/**
+	 * Obtiene el botón que muestra la lista de tratamientos.
+	 * 
+	 * @return El botón que muestra la lista de tratamientos.
+	 */
 	public JButton getBtnListaTratamientos() {
-		return btnListaTratamientos;
+	    return btnListaTratamientos;
 	}
 
+	/**
+	 * Establece el botón que muestra la lista de tratamientos.
+	 * 
+	 * @param btnListaTratamientos El nuevo botón que muestra la lista de tratamientos.
+	 */
 	public void setBtnListaTratamientos(JButton btnListaTratamientos) {
-		this.btnListaTratamientos = btnListaTratamientos;
+	    this.btnListaTratamientos = btnListaTratamientos;
 	}
 
+	/**
+	 * Obtiene el botón para guardar los datos del paciente.
+	 * 
+	 * @return El botón para guardar los datos del paciente.
+	 */
 	public JButton getBtnGuardarDatosP() {
-		return btnGuardarDatosP;
+	    return btnGuardarDatosP;
 	}
 
+	/**
+	 * Establece el botón para guardar los datos del paciente.
+	 * 
+	 * @param btnGuardarDatosP El nuevo botón para guardar los datos del paciente.
+	 */
 	public void setBtnGuardarDatosP(JButton btnGuardarDatosP) {
-		this.btnGuardarDatosP = btnGuardarDatosP;
+	    this.btnGuardarDatosP = btnGuardarDatosP;
 	}
 
+	/**
+	 * Obtiene el botón que muestra los turnos del mes.
+	 * 
+	 * @return El botón que muestra los turnos del mes.
+	 */
 	public JButton getBtnTurnosMes() {
-		return btnTurnosMes;
+	    return btnTurnosMes;
 	}
 
+	/**
+	 * Establece el botón que muestra los turnos del mes.
+	 * 
+	 * @param btnTurnosMes El nuevo botón que muestra los turnos del mes.
+	 */
 	public void setBtnTurnosMes(JButton btnTurnosMes) {
-		this.btnTurnosMes = btnTurnosMes;
+	    this.btnTurnosMes = btnTurnosMes;
 	}
 
+	/**
+	 * Obtiene el botón para cambiar el turno.
+	 * 
+	 * @return El botón para cambiar el turno.
+	 */
 	public JButton getBtnCambioTurno() {
-		return btnCambioTurno;
+	    return btnCambioTurno;
 	}
 
+	/**
+	 * Establece el botón para cambiar el turno.
+	 * 
+	 * @param btnCambioTurno El nuevo botón para cambiar el turno.
+	 */
 	public void setBtnCambioTurno(JButton btnCambioTurno) {
-		this.btnCambioTurno = btnCambioTurno;
+	    this.btnCambioTurno = btnCambioTurno;
 	}
 
+	/**
+	 * Obtiene el botón para generar el cambio de turno.
+	 * 
+	 * @return El botón para generar el cambio de turno.
+	 */
 	public JButton getBtnGenerarCambioTurno() {
-		return btnGenerarCambioTurno;
+	    return btnGenerarCambioTurno;
 	}
 
+	/**
+	 * Establece el botón para generar el cambio de turno.
+	 * 
+	 * @param btnGenerarCambioTurno El nuevo botón para generar el cambio de turno.
+	 */
 	public void setBtnGenerarCambioTurno(JButton btnGenerarCambioTurno) {
-		this.btnGenerarCambioTurno = btnGenerarCambioTurno;
+	    this.btnGenerarCambioTurno = btnGenerarCambioTurno;
 	}
 
+	/**
+	 * Obtiene el botón para guardar el tratamiento del paciente.
+	 * 
+	 * @return El botón para guardar el tratamiento del paciente.
+	 */
 	public JButton getBtnGuardarTratamiento() {
-		return btnGuardarTratamiento;
+	    return btnGuardarTratamiento;
 	}
 
+	/**
+	 * Establece el botón para guardar el tratamiento del paciente.
+	 * 
+	 * @param btnGuardarTratamiento El nuevo botón para guardar el tratamiento del paciente.
+	 */
 	public void setBtnGuardarTratamiento(JButton btnGuardarTratamiento) {
-		this.btnGuardarTratamiento = btnGuardarTratamiento;
+	    this.btnGuardarTratamiento = btnGuardarTratamiento;
 	}
 
+	/**
+	 * Obtiene el botón para volver al menú.
+	 * 
+	 * @return El botón para volver al menú.
+	 */
 	public JButton getBtnVolverMenu() {
-		return btnVolverMenu;
+	    return btnVolverMenu;
 	}
 
+	/**
+	 * Establece el botón para volver al menú.
+	 * 
+	 * @param btnVolverMenu El nuevo botón para volver al menú.
+	 */
 	public void setBtnVolverMenu(JButton btnVolverMenu) {
-		this.btnVolverMenu = btnVolverMenu;
+	    this.btnVolverMenu = btnVolverMenu;
 	}
 
+	/**
+	 * Obtiene el botón para mostrar un tooltip sobre el especialista.
+	 * 
+	 * @return El botón para mostrar un tooltip sobre el especialista.
+	 */
 	public JButton getBtnTooltipEspecialista() {
-		return btnTooltipEspecialista;
+	    return btnTooltipEspecialista;
 	}
 
+	/**
+	 * Establece el botón para mostrar un tooltip sobre el especialista.
+	 * 
+	 * @param btnTooltipEspecialista El nuevo botón para mostrar un tooltip sobre el especialista.
+	 */
 	public void setBtnTooltipEspecialista(JButton btnTooltipEspecialista) {
-		this.btnTooltipEspecialista = btnTooltipEspecialista;
+	    this.btnTooltipEspecialista = btnTooltipEspecialista;
 	}
 
+
+	/**
+	 * Obtiene el ícono de la imagen para el botón de datos.
+	 * 
+	 * @return El ícono de la imagen del botón de datos.
+	 */
 	public ImageIcon getImgBtnDatos() {
-		return imgBtnDatos;
+	    return imgBtnDatos;
 	}
 
+	/**
+	 * Establece el ícono de la imagen para el botón de datos.
+	 * 
+	 * @param imgBtnDatos El nuevo ícono de la imagen para el botón de datos.
+	 */
 	public void setImgBtnDatos(ImageIcon imgBtnDatos) {
-		this.imgBtnDatos = imgBtnDatos;
+	    this.imgBtnDatos = imgBtnDatos;
 	}
 
+	/**
+	 * Obtiene el ícono de la imagen para el botón de citas.
+	 * 
+	 * @return El ícono de la imagen del botón de citas.
+	 */
 	public ImageIcon getImgBtnCitas() {
-		return imgBtnCitas;
+	    return imgBtnCitas;
 	}
 
+	/**
+	 * Establece el ícono de la imagen para el botón de citas.
+	 * 
+	 * @param imgBtnCitas El nuevo ícono de la imagen para el botón de citas.
+	 */
 	public void setImgBtnCitas(ImageIcon imgBtnCitas) {
-		this.imgBtnCitas = imgBtnCitas;
+	    this.imgBtnCitas = imgBtnCitas;
 	}
 
+	/**
+	 * Obtiene el ícono de la imagen para el botón de turnos.
+	 * 
+	 * @return El ícono de la imagen del botón de turnos.
+	 */
 	public ImageIcon getImgBtnTurnos() {
-		return imgBtnTurnos;
+	    return imgBtnTurnos;
 	}
 
+	/**
+	 * Establece el ícono de la imagen para el botón de turnos.
+	 * 
+	 * @param imgBtnTurnos El nuevo ícono de la imagen para el botón de turnos.
+	 */
 	public void setImgBtnTurnos(ImageIcon imgBtnTurnos) {
-		this.imgBtnTurnos = imgBtnTurnos;
+	    this.imgBtnTurnos = imgBtnTurnos;
 	}
 
+	/**
+	 * Obtiene el ícono de la imagen para el botón de tratamiento.
+	 * 
+	 * @return El ícono de la imagen del botón de tratamiento.
+	 */
 	public ImageIcon getImgBtnTratamiento() {
-		return imgBtnTratamiento;
+	    return imgBtnTratamiento;
 	}
 
+	/**
+	 * Establece el ícono de la imagen para el botón de tratamiento.
+	 * 
+	 * @param imgBtnTratamiento El nuevo ícono de la imagen para el botón de tratamiento.
+	 */
 	public void setImgBtnTratamiento(ImageIcon imgBtnTratamiento) {
-		this.imgBtnTratamiento = imgBtnTratamiento;
+	    this.imgBtnTratamiento = imgBtnTratamiento;
 	}
 
+	/**
+	 * Obtiene el ícono de la imagen para el botón de lista de tratamientos.
+	 * 
+	 * @return El ícono de la imagen del botón de lista de tratamientos.
+	 */
 	public ImageIcon getImgBtnListaTratamientos() {
-		return imgBtnListaTratamientos;
+	    return imgBtnListaTratamientos;
 	}
 
+	/**
+	 * Establece el ícono de la imagen para el botón de lista de tratamientos.
+	 * 
+	 * @param imgBtnListaTratamientos El nuevo ícono de la imagen para el botón de lista de tratamientos.
+	 */
 	public void setImgBtnListaTratamientos(ImageIcon imgBtnListaTratamientos) {
-		this.imgBtnListaTratamientos = imgBtnListaTratamientos;
+	    this.imgBtnListaTratamientos = imgBtnListaTratamientos;
 	}
 
+	/**
+	 * Obtiene el ícono de la imagen para el botón de volver.
+	 * 
+	 * @return El ícono de la imagen del botón de volver.
+	 */
 	public ImageIcon getImgBtnVolver() {
-		return imgBtnVolver;
+	    return imgBtnVolver;
 	}
 
+	/**
+	 * Establece el ícono de la imagen para el botón de volver.
+	 * 
+	 * @param imgBtnVolver El nuevo ícono de la imagen para el botón de volver.
+	 */
 	public void setImgBtnVolver(ImageIcon imgBtnVolver) {
-		this.imgBtnVolver = imgBtnVolver;
+	    this.imgBtnVolver = imgBtnVolver;
 	}
 
+	/**
+	 * Obtiene el ícono de la imagen para el botón de guardar datos.
+	 * 
+	 * @return El ícono de la imagen del botón de guardar datos.
+	 */
 	public ImageIcon getImgBtnGuardarDatos() {
-		return imgBtnGuardarDatos;
+	    return imgBtnGuardarDatos;
 	}
 
+	/**
+	 * Establece el ícono de la imagen para el botón de guardar datos.
+	 * 
+	 * @param imgBtnGuardarDatos El nuevo ícono de la imagen para el botón de guardar datos.
+	 */
 	public void setImgBtnGuardarDatos(ImageIcon imgBtnGuardarDatos) {
-		this.imgBtnGuardarDatos = imgBtnGuardarDatos;
+	    this.imgBtnGuardarDatos = imgBtnGuardarDatos;
 	}
 
+	/**
+	 * Obtiene el ícono de la imagen para el botón de turnos del mes.
+	 * 
+	 * @return El ícono de la imagen del botón de turnos del mes.
+	 */
 	public ImageIcon getImgBtnTurnosMes() {
-		return imgBtnTurnosMes;
+	    return imgBtnTurnosMes;
 	}
 
+	/**
+	 * Establece el ícono de la imagen para el botón de turnos del mes.
+	 * 
+	 * @param imgBtnTurnosMes El nuevo ícono de la imagen para el botón de turnos del mes.
+	 */
 	public void setImgBtnTurnosMes(ImageIcon imgBtnTurnosMes) {
-		this.imgBtnTurnosMes = imgBtnTurnosMes;
+	    this.imgBtnTurnosMes = imgBtnTurnosMes;
 	}
 
+	/**
+	 * Obtiene el ícono de la imagen para el botón de cambio de turno.
+	 * 
+	 * @return El ícono de la imagen del botón de cambio de turno.
+	 */
 	public ImageIcon getImgBtnCambioTurno() {
-		return imgBtnCambioTurno;
+	    return imgBtnCambioTurno;
 	}
 
+	/**
+	 * Establece el ícono de la imagen para el botón de cambio de turno.
+	 * 
+	 * @param imgBtnCambioTurno El nuevo ícono de la imagen para el botón de cambio de turno.
+	 */
 	public void setImgBtnCambioTurno(ImageIcon imgBtnCambioTurno) {
-		this.imgBtnCambioTurno = imgBtnCambioTurno;
+	    this.imgBtnCambioTurno = imgBtnCambioTurno;
 	}
 
+	/**
+	 * Obtiene el ícono de la imagen para el botón de confirmar cambio.
+	 * 
+	 * @return El ícono de la imagen del botón de confirmar cambio.
+	 */
 	public ImageIcon getImgBtnConfirmarCambio() {
-		return imgBtnConfirmarCambio;
+	    return imgBtnConfirmarCambio;
 	}
 
+	/**
+	 * Establece el ícono de la imagen para el botón de confirmar cambio.
+	 * 
+	 * @param imgBtnConfirmarCambio El nuevo ícono de la imagen para el botón de confirmar cambio.
+	 */
 	public void setImgBtnConfirmarCambio(ImageIcon imgBtnConfirmarCambio) {
-		this.imgBtnConfirmarCambio = imgBtnConfirmarCambio;
+	    this.imgBtnConfirmarCambio = imgBtnConfirmarCambio;
 	}
 
+	/**
+	 * Obtiene el ícono de la imagen para el botón de guardar tratamiento.
+	 * 
+	 * @return El ícono de la imagen del botón de guardar tratamiento.
+	 */
 	public ImageIcon getImgBtnGuardarTratamiento() {
-		return imgBtnGuardarTratamiento;
+	    return imgBtnGuardarTratamiento;
 	}
 
+	/**
+	 * Establece el ícono de la imagen para el botón de guardar tratamiento.
+	 * 
+	 * @param imgBtnGuardarTratamiento El nuevo ícono de la imagen para el botón de guardar tratamiento.
+	 */
 	public void setImgBtnGuardarTratamiento(ImageIcon imgBtnGuardarTratamiento) {
-		this.imgBtnGuardarTratamiento = imgBtnGuardarTratamiento;
+	    this.imgBtnGuardarTratamiento = imgBtnGuardarTratamiento;
 	}
 
+	/**
+	 * Obtiene el ícono de la imagen para el botón de tooltip.
+	 * 
+	 * @return El ícono de la imagen del botón de tooltip.
+	 */
 	public ImageIcon getImgBtnToolTip() {
-		return imgBtnToolTip;
+	    return imgBtnToolTip;
 	}
 
+	/**
+	 * Establece el ícono de la imagen para el botón de tooltip.
+	 * 
+	 * @param imgBtnToolTip El nuevo ícono de la imagen para el botón de tooltip.
+	 */
 	public void setImgBtnToolTip(ImageIcon imgBtnToolTip) {
-		this.imgBtnToolTip = imgBtnToolTip;
+	    this.imgBtnToolTip = imgBtnToolTip;
 	}
 
+	/**
+	 * Obtiene el objeto `CardLayout` utilizado en la interfaz.
+	 * 
+	 * @return El objeto `CardLayout` que maneja las pantallas.
+	 */
 	public CardLayout getCardLayout() {
-		return cardLayout;
+	    return cardLayout;
 	}
 
+	/**
+	 * Establece el objeto `CardLayout` utilizado en la interfaz.
+	 * 
+	 * @param cardLayout El nuevo objeto `CardLayout` que maneja las pantallas.
+	 */
 	public void setCardLayout(CardLayout cardLayout) {
-		this.cardLayout = cardLayout;
+	    this.cardLayout = cardLayout;
 	}
 
+	/**
+	 * Obtiene el valor de la constante {@code TURNOSMES}.
+	 * 
+	 * @return El valor de la constante {@code TURNOSMES}.
+	 */
 	public static String getTurnosmes() {
-		return TURNOSMES;
+	    return TURNOSMES;
 	}
 
+	/**
+	 * Obtiene el valor de la constante {@code CAMBIOTURNO}.
+	 * 
+	 * @return El valor de la constante {@code CAMBIOTURNO}.
+	 */
 	public static String getCambioturno() {
-		return CAMBIOTURNO;
+	    return CAMBIOTURNO;
 	}
+
 
 }

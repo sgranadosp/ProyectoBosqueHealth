@@ -14,6 +14,19 @@ import javax.swing.JTextField;
 
 import com.toedter.calendar.JDateChooser;
 
+/**
+ * VentanaPaciente es una clase que representa la interfaz gráfica de usuario (GUI) para la gestión de pacientes en un sistema de salud.
+ * Permite a los pacientes ver y gestionar sus datos personales, agendar, reagendar y cancelar citas médicas, y gestionar su tratamiento médico.
+ * Esta clase extiende JFrame y contiene paneles, campos de texto, botones y comboboxes para interactuar con el usuario.
+ * 
+ * <p>
+ * Hereda de la clase {@link JFrame} y utiliza componentes como {@link JButton}, {@link JLabel} y {@link JComboBox}.
+ * <p> 
+ * 
+ * @author Santiago Granados Pascagaza
+ * @version 1.0
+ * @since 2024-11-10
+ */
 public class VentanaPaciente extends JFrame{
 	
 	private JPanel panelFijoIzq, panelDerechaArriba, panelDatosPaciente, panelAgendarCitas, 
@@ -43,6 +56,10 @@ public class VentanaPaciente extends JFrame{
 	
 	CardLayout cardLayout = new CardLayout();
 	
+	/**
+     * Constructor que inicializa la ventana, paneles, etiquetas, campos de texto, botones, 
+     * comboboxes y calendario de la interfaz.
+     */
 	public VentanaPaciente() {
 		ventana();
 		paneles();
@@ -65,8 +82,9 @@ public class VentanaPaciente extends JFrame{
 		add(panelTratamientoMedico);
 	}
 	
-
-
+	 /**
+     * Configura los parámetros de la ventana principal.
+     */
 	public void ventana() {
         setBounds(50, 50, 1000, 561);
         setTitle("Bosque Health");
@@ -75,6 +93,10 @@ public class VentanaPaciente extends JFrame{
         setResizable(false);
         setLayout(null);
 	}
+	
+	 /**
+     * Inicializa los paneles de la interfaz de usuario.
+     */
 	public void paneles() {
 		 panelFijoIzq = new JPanel();
 		 panelFijoIzq.setLayout(null);
@@ -127,7 +149,9 @@ public class VentanaPaciente extends JFrame{
 		 
 	}
 	
-	
+	/**
+     * Inicializa los labels que describen cada campo o sección de la interfaz.
+     */
 	public void labels() {
 		
 		//Labels DATOS PERSONALES
@@ -235,6 +259,10 @@ public class VentanaPaciente extends JFrame{
 
 		
 	}
+	
+	/**
+     * Inicializa los campos de texto utilizados en la interfaz.
+     */
 	public void textfield() {
 		//TextFields Datos personales
 		txtNombreCompleto = new JTextField();
@@ -277,6 +305,9 @@ public class VentanaPaciente extends JFrame{
 		
 	}
 	
+	/**
+     * Inicializa los botones de la interfaz.
+     */
 	public void botones() {
 		//BOTONES DE MENU IZQUIERDA
 		imgBtnDatosPersonales = new ImageIcon("media\\btnDatosPersonalesP.png"); // OJO **** PENDIENTE DEFINIR IMAGEN
@@ -368,7 +399,9 @@ public class VentanaPaciente extends JFrame{
 		
 	}
 	
-	
+	/**
+     * Inicializa los comboboxes que permiten seleccionar opciones.
+     */
 	public void comboBox() {
 		//Combos Datos personales
 		cmbGenero = new JComboBox<String>();
@@ -399,7 +432,9 @@ public class VentanaPaciente extends JFrame{
 		
 	}
 	
-	
+	/**
+     * Inicializa los calendarios (componentes JDateChooser) para seleccionar fechas.
+     */
 	public void calendar() {
 		
 		//Calendar en datos personales
@@ -420,795 +455,1196 @@ public class VentanaPaciente extends JFrame{
 	}
 
 
-
+	/**
+	 * Obtiene el panel de la izquierda fijo.
+	 *
+	 * @return el panel de la izquierda fijo.
+	 */
 	public JPanel getPanelFijoIzq() {
-		return panelFijoIzq;
+	    return panelFijoIzq;
 	}
 
-
-
+	/**
+	 * Establece el panel de la izquierda fijo.
+	 *
+	 * @param panelFijoIzq el nuevo panel de la izquierda fijo.
+	 */
 	public void setPanelFijoIzq(JPanel panelFijoIzq) {
-		this.panelFijoIzq = panelFijoIzq;
+	    this.panelFijoIzq = panelFijoIzq;
 	}
 
-
-
+	/**
+	 * Obtiene el panel de la parte superior derecha.
+	 *
+	 * @return el panel de la parte superior derecha.
+	 */
 	public JPanel getPanelDerechaArriba() {
-		return panelDerechaArriba;
+	    return panelDerechaArriba;
 	}
 
-
-
+	/**
+	 * Establece el panel de la parte superior derecha.
+	 *
+	 * @param panelDerechaArriba el nuevo panel de la parte superior derecha.
+	 */
 	public void setPanelDerechaArriba(JPanel panelDerechaArriba) {
-		this.panelDerechaArriba = panelDerechaArriba;
+	    this.panelDerechaArriba = panelDerechaArriba;
 	}
 
-
-
+	/**
+	 * Obtiene el panel de datos del paciente.
+	 *
+	 * @return el panel de datos del paciente.
+	 */
 	public JPanel getPanelDatosPaciente() {
-		return panelDatosPaciente;
+	    return panelDatosPaciente;
 	}
 
-
-
+	/**
+	 * Establece el panel de datos del paciente.
+	 *
+	 * @param panelDatosPaciente el nuevo panel de datos del paciente.
+	 */
 	public void setPanelDatosPaciente(JPanel panelDatosPaciente) {
-		this.panelDatosPaciente = panelDatosPaciente;
+	    this.panelDatosPaciente = panelDatosPaciente;
 	}
 
-
-
+	/**
+	 * Obtiene el panel para agendar citas.
+	 *
+	 * @return el panel para agendar citas.
+	 */
 	public JPanel getPanelAgendarCitas() {
-		return panelAgendarCitas;
+	    return panelAgendarCitas;
 	}
 
-
-
+	/**
+	 * Establece el panel para agendar citas.
+	 *
+	 * @param panelAgendarCitas el nuevo panel para agendar citas.
+	 */
 	public void setPanelAgendarCitas(JPanel panelAgendarCitas) {
-		this.panelAgendarCitas = panelAgendarCitas;
+	    this.panelAgendarCitas = panelAgendarCitas;
 	}
 
-
-
+	/**
+	 * Obtiene el panel de citas agendadas.
+	 *
+	 * @return el panel de citas agendadas.
+	 */
 	public JPanel getPanelCitasAgendadas() {
-		return panelCitasAgendadas;
+	    return panelCitasAgendadas;
 	}
 
-
-
+	/**
+	 * Establece el panel de citas agendadas.
+	 *
+	 * @param panelCitasAgendadas el nuevo panel de citas agendadas.
+	 */
 	public void setPanelCitasAgendadas(JPanel panelCitasAgendadas) {
-		this.panelCitasAgendadas = panelCitasAgendadas;
+	    this.panelCitasAgendadas = panelCitasAgendadas;
 	}
 
-
-
+	/**
+	 * Obtiene el panel para reagendar una cita.
+	 *
+	 * @return el panel para reagendar una cita.
+	 */
 	public JPanel getPanelReagendarCita() {
-		return panelReagendarCita;
+	    return panelReagendarCita;
 	}
 
-
-
+	/**
+	 * Establece el panel para reagendar una cita.
+	 *
+	 * @param panelReagendarCita el nuevo panel para reagendar una cita.
+	 */
 	public void setPanelReagendarCita(JPanel panelReagendarCita) {
-		this.panelReagendarCita = panelReagendarCita;
+	    this.panelReagendarCita = panelReagendarCita;
 	}
 
-
-
+	/**
+	 * Obtiene el panel para cancelar una cita.
+	 *
+	 * @return el panel para cancelar una cita.
+	 */
 	public JPanel getPanelCancelarCita() {
-		return panelCancelarCita;
+	    return panelCancelarCita;
 	}
 
-
-
+	/**
+	 * Establece el panel para cancelar una cita.
+	 *
+	 * @param panelCancelarCita el nuevo panel para cancelar una cita.
+	 */
 	public void setPanelCancelarCita(JPanel panelCancelarCita) {
-		this.panelCancelarCita = panelCancelarCita;
+	    this.panelCancelarCita = panelCancelarCita;
 	}
 
-
-
+	/**
+	 * Obtiene el panel de tratamiento médico.
+	 *
+	 * @return el panel de tratamiento médico.
+	 */
 	public JPanel getPanelTratamientoMedico() {
-		return panelTratamientoMedico;
+	    return panelTratamientoMedico;
 	}
 
-
-
+	/**
+	 * Establece el panel de tratamiento médico.
+	 *
+	 * @param panelTratamientoMedico el nuevo panel de tratamiento médico.
+	 */
 	public void setPanelTratamientoMedico(JPanel panelTratamientoMedico) {
-		this.panelTratamientoMedico = panelTratamientoMedico;
+	    this.panelTratamientoMedico = panelTratamientoMedico;
 	}
 
-
-
+	/**
+	 * Obtiene el panel para las variables de citas.
+	 *
+	 * @return el panel para las variables de citas.
+	 */
 	public JPanel getPanelVariableCitas() {
-		return panelVariableCitas;
+	    return panelVariableCitas;
 	}
 
-
-
+	/**
+	 * Establece el panel para las variables de citas.
+	 *
+	 * @param panelVariableCitas el nuevo panel para las variables de citas.
+	 */
 	public void setPanelVariableCitas(JPanel panelVariableCitas) {
-		this.panelVariableCitas = panelVariableCitas;
+	    this.panelVariableCitas = panelVariableCitas;
 	}
 
 
-
+	/**
+	 * Obtiene el campo de texto para el nombre completo.
+	 *
+	 * @return el campo de texto para el nombre completo.
+	 */
 	public JTextField getTxtNombreCompleto() {
-		return txtNombreCompleto;
+	    return txtNombreCompleto;
 	}
 
-
-
+	/**
+	 * Establece el campo de texto para el nombre completo.
+	 *
+	 * @param txtNombreCompleto el nuevo campo de texto para el nombre completo.
+	 */
 	public void setTxtNombreCompleto(JTextField txtNombreCompleto) {
-		this.txtNombreCompleto = txtNombreCompleto;
+	    this.txtNombreCompleto = txtNombreCompleto;
 	}
 
-
-
+	/**
+	 * Obtiene el campo de texto para el número de documento.
+	 *
+	 * @return el campo de texto para el número de documento.
+	 */
 	public JTextField getTxtNumeroDocumento() {
-		return txtNumeroDocumento;
+	    return txtNumeroDocumento;
 	}
 
-
-
+	/**
+	 * Establece el campo de texto para el número de documento.
+	 *
+	 * @param txtNumeroDocumento el nuevo campo de texto para el número de documento.
+	 */
 	public void setTxtNumeroDocumento(JTextField txtNumeroDocumento) {
-		this.txtNumeroDocumento = txtNumeroDocumento;
+	    this.txtNumeroDocumento = txtNumeroDocumento;
 	}
 
-
-
+	/**
+	 * Obtiene el campo de texto para el correo electrónico.
+	 *
+	 * @return el campo de texto para el correo electrónico.
+	 */
 	public JTextField getTxtCorreoElectronico() {
-		return txtCorreoElectronico;
+	    return txtCorreoElectronico;
 	}
 
-
-
+	/**
+	 * Establece el campo de texto para el correo electrónico.
+	 *
+	 * @param txtCorreoElectronico el nuevo campo de texto para el correo electrónico.
+	 */
 	public void setTxtCorreoElectronico(JTextField txtCorreoElectronico) {
-		this.txtCorreoElectronico = txtCorreoElectronico;
+	    this.txtCorreoElectronico = txtCorreoElectronico;
 	}
 
-
-
+	/**
+	 * Obtiene el campo de texto para la hora.
+	 *
+	 * @return el campo de texto para la hora.
+	 */
 	public JTextField getTxtHora() {
-		return txtHora;
+	    return txtHora;
 	}
 
-
-
+	/**
+	 * Establece el campo de texto para la hora.
+	 *
+	 * @param txtHora el nuevo campo de texto para la hora.
+	 */
 	public void setTxtHora(JTextField txtHora) {
-		this.txtHora = txtHora;
+	    this.txtHora = txtHora;
 	}
 
-
-
+	/**
+	 * Obtiene el campo de texto para el número de la cita a reagendar.
+	 *
+	 * @return el campo de texto para el número de la cita a reagendar.
+	 */
 	public JTextField getTxtNumeroReagendarCita() {
-		return txtNumeroReagendarCita;
+	    return txtNumeroReagendarCita;
 	}
 
-
-
+	/**
+	 * Establece el campo de texto para el número de la cita a reagendar.
+	 *
+	 * @param txtNumeroReagendarCita el nuevo campo de texto para el número de la cita a reagendar.
+	 */
 	public void setTxtNumeroReagendarCita(JTextField txtNumeroReagendarCita) {
-		this.txtNumeroReagendarCita = txtNumeroReagendarCita;
+	    this.txtNumeroReagendarCita = txtNumeroReagendarCita;
 	}
 
-
-
+	/**
+	 * Obtiene el campo de texto para la hora de la cita a reagendar.
+	 *
+	 * @return el campo de texto para la hora de la cita a reagendar.
+	 */
 	public JTextField getTxtHoraReagendarCita() {
-		return txtHoraReagendarCita;
+	    return txtHoraReagendarCita;
 	}
 
-
-
+	/**
+	 * Establece el campo de texto para la hora de la cita a reagendar.
+	 *
+	 * @param txtHoraReagendarCita el nuevo campo de texto para la hora de la cita a reagendar.
+	 */
 	public void setTxtHoraReagendarCita(JTextField txtHoraReagendarCita) {
-		this.txtHoraReagendarCita = txtHoraReagendarCita;
+	    this.txtHoraReagendarCita = txtHoraReagendarCita;
 	}
 
-
-
+	/**
+	 * Obtiene el campo de texto para el número de la cita a cancelar.
+	 *
+	 * @return el campo de texto para el número de la cita a cancelar.
+	 */
 	public JTextField getTxtNumeroCancelarCita() {
-		return txtNumeroCancelarCita;
+	    return txtNumeroCancelarCita;
 	}
 
-
-
+	/**
+	 * Establece el campo de texto para el número de la cita a cancelar.
+	 *
+	 * @param txtNumeroCancelarCita el nuevo campo de texto para el número de la cita a cancelar.
+	 */
 	public void setTxtNumeroCancelarCita(JTextField txtNumeroCancelarCita) {
-		this.txtNumeroCancelarCita = txtNumeroCancelarCita;
+	    this.txtNumeroCancelarCita = txtNumeroCancelarCita;
 	}
 
 
-
+	/**
+	 * Obtiene el selector de fecha para agendar una cita.
+	 *
+	 * @return el selector de fecha para agendar una cita.
+	 */
 	public JDateChooser getFechaAgendarCita() {
-		return fechaAgendarCita;
+	    return fechaAgendarCita;
 	}
 
-
-
+	/**
+	 * Establece el selector de fecha para agendar una cita.
+	 *
+	 * @param fechaAgendarCita el nuevo selector de fecha para agendar una cita.
+	 */
 	public void setFechaAgendarCita(JDateChooser fechaAgendarCita) {
-		this.fechaAgendarCita = fechaAgendarCita;
+	    this.fechaAgendarCita = fechaAgendarCita;
 	}
 
-
-
+	/**
+	 * Obtiene el selector de fecha para reagendar una cita.
+	 *
+	 * @return el selector de fecha para reagendar una cita.
+	 */
 	public JDateChooser getFechaReagendarCita() {
-		return fechaReagendarCita;
+	    return fechaReagendarCita;
 	}
 
-
-
+	/**
+	 * Establece el selector de fecha para reagendar una cita.
+	 *
+	 * @param fechaReagendarCita el nuevo selector de fecha para reagendar una cita.
+	 */
 	public void setFechaReagendarCita(JDateChooser fechaReagendarCita) {
-		this.fechaReagendarCita = fechaReagendarCita;
+	    this.fechaReagendarCita = fechaReagendarCita;
 	}
 
-
-
+	/**
+	 * Obtiene el selector de fecha de nacimiento del paciente.
+	 *
+	 * @return el selector de fecha de nacimiento.
+	 */
 	public JDateChooser getFechaNacimiento() {
-		return fechaNacimiento;
+	    return fechaNacimiento;
 	}
 
-
-
+	/**
+	 * Establece el selector de fecha de nacimiento del paciente.
+	 *
+	 * @param fechaNacimiento el nuevo selector de fecha de nacimiento.
+	 */
 	public void setFechaNacimiento(JDateChooser fechaNacimiento) {
-		this.fechaNacimiento = fechaNacimiento;
+	    this.fechaNacimiento = fechaNacimiento;
 	}
 
-
-
+	/**
+	 * Obtiene el combo box para seleccionar el género.
+	 *
+	 * @return el combo box para seleccionar el género.
+	 */
 	public JComboBox<String> getCmbGenero() {
-		return cmbGenero;
+	    return cmbGenero;
 	}
 
-
-
+	/**
+	 * Establece el combo box para seleccionar el género.
+	 *
+	 * @param cmbGenero el nuevo combo box para seleccionar el género.
+	 */
 	public void setCmbGenero(JComboBox<String> cmbGenero) {
-		this.cmbGenero = cmbGenero;
+	    this.cmbGenero = cmbGenero;
 	}
 
-
-
+	/**
+	 * Obtiene el combo box para seleccionar la especialidad.
+	 *
+	 * @return el combo box para seleccionar la especialidad.
+	 */
 	public JComboBox<String> getCmbEspecialidad() {
-		return cmbEspecialidad;
+	    return cmbEspecialidad;
 	}
 
-
-
+	/**
+	 * Establece el combo box para seleccionar la especialidad.
+	 *
+	 * @param cmbEspecialidad el nuevo combo box para seleccionar la especialidad.
+	 */
 	public void setCmbEspecialidad(JComboBox<String> cmbEspecialidad) {
-		this.cmbEspecialidad = cmbEspecialidad;
+	    this.cmbEspecialidad = cmbEspecialidad;
 	}
 
-
-
+	/**
+	 * Obtiene el combo box para seleccionar el especialista.
+	 *
+	 * @return el combo box para seleccionar el especialista.
+	 */
 	public JComboBox<String> getCmbEspecialistas() {
-		return cmbEspecialistas;
+	    return cmbEspecialistas;
 	}
 
-
-
+	/**
+	 * Establece el combo box para seleccionar el especialista.
+	 *
+	 * @param cmbEspecialistas el nuevo combo box para seleccionar el especialista.
+	 */
 	public void setCmbEspecialistas(JComboBox<String> cmbEspecialistas) {
-		this.cmbEspecialistas = cmbEspecialistas;
+	    this.cmbEspecialistas = cmbEspecialistas;
 	}
 
-
-
+	/**
+	 * Obtiene la etiqueta para el nombre completo.
+	 *
+	 * @return la etiqueta para el nombre completo.
+	 */
 	public JLabel getLblNombreCompleto() {
-		return lblNombreCompleto;
+	    return lblNombreCompleto;
 	}
 
-
-
+	/**
+	 * Establece la etiqueta para el nombre completo.
+	 *
+	 * @param lblNombreCompleto la nueva etiqueta para el nombre completo.
+	 */
 	public void setLblNombreCompleto(JLabel lblNombreCompleto) {
-		this.lblNombreCompleto = lblNombreCompleto;
+	    this.lblNombreCompleto = lblNombreCompleto;
 	}
 
-
-
+	/**
+	 * Obtiene la etiqueta para el número de documento.
+	 *
+	 * @return la etiqueta para el número de documento.
+	 */
 	public JLabel getLblNumeroDocumento() {
-		return lblNumeroDocumento;
+	    return lblNumeroDocumento;
 	}
 
-
-
+	/**
+	 * Establece la etiqueta para el número de documento.
+	 *
+	 * @param lblNumeroDocumento la nueva etiqueta para el número de documento.
+	 */
 	public void setLblNumeroDocumento(JLabel lblNumeroDocumento) {
-		this.lblNumeroDocumento = lblNumeroDocumento;
+	    this.lblNumeroDocumento = lblNumeroDocumento;
 	}
 
-
-
+	/**
+	 * Obtiene la etiqueta para la fecha de nacimiento.
+	 *
+	 * @return la etiqueta para la fecha de nacimiento.
+	 */
 	public JLabel getLblFechaNacimiento() {
-		return lblFechaNacimiento;
+	    return lblFechaNacimiento;
 	}
 
-
-
+	/**
+	 * Establece la etiqueta para la fecha de nacimiento.
+	 *
+	 * @param lblFechaNacimiento la nueva etiqueta para la fecha de nacimiento.
+	 */
 	public void setLblFechaNacimiento(JLabel lblFechaNacimiento) {
-		this.lblFechaNacimiento = lblFechaNacimiento;
+	    this.lblFechaNacimiento = lblFechaNacimiento;
 	}
 
-
-
+	/**
+	 * Obtiene la etiqueta para el correo electrónico.
+	 *
+	 * @return la etiqueta para el correo electrónico.
+	 */
 	public JLabel getLblCorreo() {
-		return lblCorreo;
+	    return lblCorreo;
 	}
 
-
-
+	/**
+	 * Establece la etiqueta para el correo electrónico.
+	 *
+	 * @param lblCorreo la nueva etiqueta para el correo electrónico.
+	 */
 	public void setLblCorreo(JLabel lblCorreo) {
-		this.lblCorreo = lblCorreo;
+	    this.lblCorreo = lblCorreo;
 	}
 
-
-
+	/**
+	 * Obtiene la etiqueta para el género.
+	 *
+	 * @return la etiqueta para el género.
+	 */
 	public JLabel getLblGenero() {
-		return lblGenero;
+	    return lblGenero;
 	}
 
-
-
+	/**
+	 * Establece la etiqueta para el género.
+	 *
+	 * @param lblGenero la nueva etiqueta para el género.
+	 */
 	public void setLblGenero(JLabel lblGenero) {
-		this.lblGenero = lblGenero;
+	    this.lblGenero = lblGenero;
 	}
 
-
-
+	/**
+	 * Obtiene la etiqueta para el título de datos personales.
+	 *
+	 * @return la etiqueta para el título de datos personales.
+	 */
 	public JLabel getLblTituloDatosP() {
-		return lblTituloDatosP;
+	    return lblTituloDatosP;
 	}
 
-
-
+	/**
+	 * Establece la etiqueta para el título de datos personales.
+	 *
+	 * @param lblTituloDatosP la nueva etiqueta para el título de datos personales.
+	 */
 	public void setLblTituloDatosP(JLabel lblTituloDatosP) {
-		this.lblTituloDatosP = lblTituloDatosP;
+	    this.lblTituloDatosP = lblTituloDatosP;
 	}
 
-
-
+	/**
+	 * Obtiene la etiqueta para la especialidad al agendar cita.
+	 *
+	 * @return la etiqueta para la especialidad al agendar cita.
+	 */
 	public JLabel getLblEspecialidadAgendar() {
-		return lblEspecialidadAgendar;
+	    return lblEspecialidadAgendar;
 	}
 
-
-
+	/**
+	 * Establece la etiqueta para la especialidad al agendar cita.
+	 *
+	 * @param lblEspecialidadAgendar la nueva etiqueta para la especialidad al agendar cita.
+	 */
 	public void setLblEspecialidadAgendar(JLabel lblEspecialidadAgendar) {
-		this.lblEspecialidadAgendar = lblEspecialidadAgendar;
+	    this.lblEspecialidadAgendar = lblEspecialidadAgendar;
 	}
 
-
-
+	/**
+	 * Obtiene la etiqueta para los especialistas al agendar cita.
+	 *
+	 * @return la etiqueta para los especialistas al agendar cita.
+	 */
 	public JLabel getLblEspecialistasAgendar() {
-		return lblEspecialistasAgendar;
+	    return lblEspecialistasAgendar;
 	}
 
-
-
+	/**
+	 * Establece la etiqueta para los especialistas al agendar cita.
+	 *
+	 * @param lblEspecialistasAgendar la nueva etiqueta para los especialistas al agendar cita.
+	 */
 	public void setLblEspecialistasAgendar(JLabel lblEspecialistasAgendar) {
-		this.lblEspecialistasAgendar = lblEspecialistasAgendar;
+	    this.lblEspecialistasAgendar = lblEspecialistasAgendar;
 	}
 
-
-
+	/**
+	 * Obtiene la etiqueta para la fecha al agendar cita.
+	 *
+	 * @return la etiqueta para la fecha al agendar cita.
+	 */
 	public JLabel getLblFechaAgendar() {
-		return lblFechaAgendar;
+	    return lblFechaAgendar;
 	}
 
-
-
+	/**
+	 * Establece la etiqueta para la fecha al agendar cita.
+	 *
+	 * @param lblFechaAgendar la nueva etiqueta para la fecha al agendar cita.
+	 */
 	public void setLblFechaAgendar(JLabel lblFechaAgendar) {
-		this.lblFechaAgendar = lblFechaAgendar;
+	    this.lblFechaAgendar = lblFechaAgendar;
 	}
 
-
-
+	/**
+	 * Obtiene la etiqueta para la hora al agendar cita.
+	 *
+	 * @return la etiqueta para la hora al agendar cita.
+	 */
 	public JLabel getLblHoraAgendar() {
-		return lblHoraAgendar;
+	    return lblHoraAgendar;
 	}
 
-
-
+	/**
+	 * Establece la etiqueta para la hora al agendar cita.
+	 *
+	 * @param lblHoraAgendar la nueva etiqueta para la hora al agendar cita.
+	 */
 	public void setLblHoraAgendar(JLabel lblHoraAgendar) {
-		this.lblHoraAgendar = lblHoraAgendar;
+	    this.lblHoraAgendar = lblHoraAgendar;
 	}
 
-
-
+	/**
+	 * Obtiene la etiqueta para el número de cita al reagendar.
+	 *
+	 * @return la etiqueta para el número de cita al reagendar.
+	 */
 	public JLabel getLblNumeroCitaReagendar() {
-		return lblNumeroCitaReagendar;
+	    return lblNumeroCitaReagendar;
 	}
 
-
-
+	/**
+	 * Establece la etiqueta para el número de cita al reagendar.
+	 *
+	 * @param lblNumeroCitaReagendar la nueva etiqueta para el número de cita al reagendar.
+	 */
 	public void setLblNumeroCitaReagendar(JLabel lblNumeroCitaReagendar) {
-		this.lblNumeroCitaReagendar = lblNumeroCitaReagendar;
+	    this.lblNumeroCitaReagendar = lblNumeroCitaReagendar;
 	}
 
-
-
+	/**
+	 * Obtiene la etiqueta para la fecha al reagendar cita.
+	 *
+	 * @return la etiqueta para la fecha al reagendar cita.
+	 */
 	public JLabel getLblFechaReagendar() {
-		return lblFechaReagendar;
+	    return lblFechaReagendar;
 	}
 
-
-
+	/**
+	 * Establece la etiqueta para la fecha al reagendar cita.
+	 *
+	 * @param lblFechaReagendar la nueva etiqueta para la fecha al reagendar cita.
+	 */
 	public void setLblFechaReagendar(JLabel lblFechaReagendar) {
-		this.lblFechaReagendar = lblFechaReagendar;
+	    this.lblFechaReagendar = lblFechaReagendar;
 	}
 
-
-
+	/**
+	 * Obtiene la etiqueta para la hora al reagendar cita.
+	 *
+	 * @return la etiqueta para la hora al reagendar cita.
+	 */
 	public JLabel getLblHoraReagendar() {
-		return lblHoraReagendar;
+	    return lblHoraReagendar;
 	}
 
-
-
+	/**
+	 * Establece la etiqueta para la hora al reagendar cita.
+	 *
+	 * @param lblHoraReagendar la nueva etiqueta para la hora al reagendar cita.
+	 */
 	public void setLblHoraReagendar(JLabel lblHoraReagendar) {
-		this.lblHoraReagendar = lblHoraReagendar;
+	    this.lblHoraReagendar = lblHoraReagendar;
 	}
 
-
-
+	/**
+	 * Obtiene la etiqueta para el número de cita al cancelar.
+	 *
+	 * @return la etiqueta para el número de cita al cancelar.
+	 */
 	public JLabel getLblNumeroCitaCancelar() {
-		return lblNumeroCitaCancelar;
+	    return lblNumeroCitaCancelar;
 	}
 
-
-
+	/**
+	 * Establece la etiqueta para el número de cita al cancelar.
+	 *
+	 * @param lblNumeroCitaCancelar la nueva etiqueta para el número de cita al cancelar.
+	 */
 	public void setLblNumeroCitaCancelar(JLabel lblNumeroCitaCancelar) {
-		this.lblNumeroCitaCancelar = lblNumeroCitaCancelar;
+	    this.lblNumeroCitaCancelar = lblNumeroCitaCancelar;
 	}
 
-
-
+	/**
+	 * Obtiene la etiqueta para el título del tratamiento médico.
+	 *
+	 * @return la etiqueta para el título del tratamiento médico.
+	 */
 	public JLabel getLblTituloTratamientoMedico() {
-		return lblTituloTratamientoMedico;
+	    return lblTituloTratamientoMedico;
 	}
 
-
-
+	/**
+	 * Establece la etiqueta para el título del tratamiento médico.
+	 *
+	 * @param lblTituloTratamientoMedico la nueva etiqueta para el título del tratamiento médico.
+	 */
 	public void setLblTituloTratamientoMedico(JLabel lblTituloTratamientoMedico) {
-		this.lblTituloTratamientoMedico = lblTituloTratamientoMedico;
+	    this.lblTituloTratamientoMedico = lblTituloTratamientoMedico;
 	}
 
-
-
+	/**
+	 * Obtiene el botón para los datos personales.
+	 *
+	 * @return el botón para los datos personales.
+	 */
 	public JButton getBtnDatosPersonales() {
-		return btnDatosPersonales;
+	    return btnDatosPersonales;
 	}
 
-
-
+	/**
+	 * Establece el botón para los datos personales.
+	 *
+	 * @param btnDatosPersonales el nuevo botón para los datos personales.
+	 */
 	public void setBtnDatosPersonales(JButton btnDatosPersonales) {
-		this.btnDatosPersonales = btnDatosPersonales;
+	    this.btnDatosPersonales = btnDatosPersonales;
 	}
 
-
-
+	/**
+	 * Obtiene el botón para acceder a las citas.
+	 *
+	 * @return el botón para acceder a las citas.
+	 */
 	public JButton getBtnCitas() {
-		return btnCitas;
+	    return btnCitas;
 	}
 
-
-
+	/**
+	 * Establece el botón para acceder a las citas.
+	 *
+	 * @param btnCitas el nuevo botón para acceder a las citas.
+	 */
 	public void setBtnCitas(JButton btnCitas) {
-		this.btnCitas = btnCitas;
+	    this.btnCitas = btnCitas;
 	}
 
-
-
+	/**
+	 * Obtiene el botón para acceder al tratamiento médico.
+	 *
+	 * @return el botón para acceder al tratamiento médico.
+	 */
 	public JButton getBtnTratamientoMedico() {
-		return btnTratamientoMedico;
+	    return btnTratamientoMedico;
 	}
 
-
-
+	/**
+	 * Establece el botón para acceder al tratamiento médico.
+	 *
+	 * @param btnTratamientoMedico el nuevo botón para acceder al tratamiento médico.
+	 */
 	public void setBtnTratamientoMedico(JButton btnTratamientoMedico) {
-		this.btnTratamientoMedico = btnTratamientoMedico;
+	    this.btnTratamientoMedico = btnTratamientoMedico;
 	}
 
-
-
+	/**
+	 * Obtiene el botón para guardar los datos personales.
+	 *
+	 * @return el botón para guardar los datos personales.
+	 */
 	public JButton getBtnGuardarDatosP() {
-		return btnGuardarDatosP;
+	    return btnGuardarDatosP;
 	}
 
-
-
+	/**
+	 * Establece el botón para guardar los datos personales.
+	 *
+	 * @param btnGuardarDatosP el nuevo botón para guardar los datos personales.
+	 */
 	public void setBtnGuardarDatosP(JButton btnGuardarDatosP) {
-		this.btnGuardarDatosP = btnGuardarDatosP;
+	    this.btnGuardarDatosP = btnGuardarDatosP;
 	}
 
-
-
+	/**
+	 * Obtiene el botón para generar la cita.
+	 *
+	 * @return el botón para generar la cita.
+	 */
 	public JButton getBtnGenerarCita() {
-		return btnGenerarCita;
+	    return btnGenerarCita;
 	}
 
-
-
+	/**
+	 * Establece el botón para generar la cita.
+	 *
+	 * @param btnGenerarCita el nuevo botón para generar la cita.
+	 */
 	public void setBtnGenerarCita(JButton btnGenerarCita) {
-		this.btnGenerarCita = btnGenerarCita;
+	    this.btnGenerarCita = btnGenerarCita;
 	}
 
-
-
+	/**
+	 * Obtiene el botón para agendar una cita.
+	 *
+	 * @return el botón para agendar una cita.
+	 */
 	public JButton getBtnAgendarCita() {
-		return btnAgendarCita;
+	    return btnAgendarCita;
 	}
 
-
-
+	/**
+	 * Establece el botón para agendar una cita.
+	 *
+	 * @param btnAgendarCita el nuevo botón para agendar una cita.
+	 */
 	public void setBtnAgendarCita(JButton btnAgendarCita) {
-		this.btnAgendarCita = btnAgendarCita;
+	    this.btnAgendarCita = btnAgendarCita;
 	}
 
-
-
+	/**
+	 * Obtiene el botón para ver las citas agendadas.
+	 *
+	 * @return el botón para ver las citas agendadas.
+	 */
 	public JButton getBtnCitasAgendadas() {
-		return btnCitasAgendadas;
+	    return btnCitasAgendadas;
 	}
 
-
-
+	/**
+	 * Establece el botón para ver las citas agendadas.
+	 *
+	 * @param btnCitasAgendadas el nuevo botón para ver las citas agendadas.
+	 */
 	public void setBtnCitasAgendadas(JButton btnCitasAgendadas) {
-		this.btnCitasAgendadas = btnCitasAgendadas;
+	    this.btnCitasAgendadas = btnCitasAgendadas;
 	}
 
-
-
+	/**
+	 * Obtiene el botón para reagendar una cita.
+	 *
+	 * @return el botón para reagendar una cita.
+	 */
 	public JButton getBtnReagendarCitas() {
-		return btnReagendarCitas;
+	    return btnReagendarCitas;
 	}
 
-
-
+	/**
+	 * Establece el botón para reagendar una cita.
+	 *
+	 * @param btnReagendarCitas el nuevo botón para reagendar una cita.
+	 */
 	public void setBtnReagendarCitas(JButton btnReagendarCitas) {
-		this.btnReagendarCitas = btnReagendarCitas;
+	    this.btnReagendarCitas = btnReagendarCitas;
 	}
 
-
-
+	/**
+	 * Obtiene el botón para cancelar una cita.
+	 *
+	 * @return el botón para cancelar una cita.
+	 */
 	public JButton getBtnCancelarCita() {
-		return btnCancelarCita;
+	    return btnCancelarCita;
 	}
 
-
-
+	/**
+	 * Establece el botón para cancelar una cita.
+	 *
+	 * @param btnCancelarCita el nuevo botón para cancelar una cita.
+	 */
 	public void setBtnCancelarCita(JButton btnCancelarCita) {
-		this.btnCancelarCita = btnCancelarCita;
+	    this.btnCancelarCita = btnCancelarCita;
 	}
 
-
-
+	/**
+	 * Obtiene el botón para guardar los cambios al reagendar una cita.
+	 *
+	 * @return el botón para guardar los cambios al reagendar una cita.
+	 */
 	public JButton getBtnGuardarReagendarCita() {
-		return btnGuardarReagendarCita;
+	    return btnGuardarReagendarCita;
 	}
 
-
-
+	/**
+	 * Establece el botón para guardar los cambios al reagendar una cita.
+	 *
+	 * @param btnGuardarReagendarCita el nuevo botón para guardar los cambios al reagendar una cita.
+	 */
 	public void setBtnGuardarReagendarCita(JButton btnGuardarReagendarCita) {
-		this.btnGuardarReagendarCita = btnGuardarReagendarCita;
+	    this.btnGuardarReagendarCita = btnGuardarReagendarCita;
 	}
 
-
-
+	/**
+	 * Obtiene el botón para guardar los cambios al cancelar una cita.
+	 *
+	 * @return el botón para guardar los cambios al cancelar una cita.
+	 */
 	public JButton getBtnGuardarCancelarCita() {
-		return btnGuardarCancelarCita;
+	    return btnGuardarCancelarCita;
 	}
 
-
-
+	/**
+	 * Establece el botón para guardar los cambios al cancelar una cita.
+	 *
+	 * @param btnGuardarCancelarCita el nuevo botón para guardar los cambios al cancelar una cita.
+	 */
 	public void setBtnGuardarCancelarCita(JButton btnGuardarCancelarCita) {
-		this.btnGuardarCancelarCita = btnGuardarCancelarCita;
+	    this.btnGuardarCancelarCita = btnGuardarCancelarCita;
 	}
 
-
-
+	/**
+	 * Obtiene el botón para volver al menú.
+	 *
+	 * @return el botón para volver al menú.
+	 */
 	public JButton getBtnVolverMenu() {
-		return btnVolverMenu;
+	    return btnVolverMenu;
 	}
 
-
-
+	/**
+	 * Establece el botón para volver al menú.
+	 *
+	 * @param btnVolverMenu el nuevo botón para volver al menú.
+	 */
 	public void setBtnVolverMenu(JButton btnVolverMenu) {
-		this.btnVolverMenu = btnVolverMenu;
+	    this.btnVolverMenu = btnVolverMenu;
 	}
 
-
-
+	/**
+	 * Obtiene el botón para mostrar el tooltip del paciente.
+	 *
+	 * @return el botón para mostrar el tooltip del paciente.
+	 */
 	public JButton getBtnTooltipPaciente() {
-		return btnTooltipPaciente;
+	    return btnTooltipPaciente;
 	}
 
-
-
+	/**
+	 * Establece el botón para mostrar el tooltip del paciente.
+	 *
+	 * @param btnTooltipPaciente el nuevo botón para mostrar el tooltip del paciente.
+	 */
 	public void setBtnTooltipPaciente(JButton btnTooltipPaciente) {
-		this.btnTooltipPaciente = btnTooltipPaciente;
+	    this.btnTooltipPaciente = btnTooltipPaciente;
 	}
 
-
-
+	/**
+	 * Obtiene la imagen del botón de datos personales.
+	 *
+	 * @return la imagen del botón de datos personales.
+	 */
 	public ImageIcon getImgBtnDatosPersonales() {
-		return imgBtnDatosPersonales;
+	    return imgBtnDatosPersonales;
 	}
 
-
-
+	/**
+	 * Establece la imagen del botón de datos personales.
+	 *
+	 * @param imgBtnDatosPersonales la nueva imagen del botón de datos personales.
+	 */
 	public void setImgBtnDatosPersonales(ImageIcon imgBtnDatosPersonales) {
-		this.imgBtnDatosPersonales = imgBtnDatosPersonales;
+	    this.imgBtnDatosPersonales = imgBtnDatosPersonales;
 	}
 
-
-
+	/**
+	 * Obtiene la imagen del botón de citas.
+	 *
+	 * @return la imagen del botón de citas.
+	 */
 	public ImageIcon getImgBtnCitas() {
-		return imgBtnCitas;
+	    return imgBtnCitas;
 	}
 
-
-
+	/**
+	 * Establece la imagen del botón de citas.
+	 *
+	 * @param imgBtnCitas la nueva imagen del botón de citas.
+	 */
 	public void setImgBtnCitas(ImageIcon imgBtnCitas) {
-		this.imgBtnCitas = imgBtnCitas;
+	    this.imgBtnCitas = imgBtnCitas;
 	}
 
-
-
+	/**
+	 * Obtiene la imagen del botón de tratamiento médico.
+	 *
+	 * @return la imagen del botón de tratamiento médico.
+	 */
 	public ImageIcon getImgBtnTratamientoMedico() {
-		return imgBtnTratamientoMedico;
+	    return imgBtnTratamientoMedico;
 	}
 
-
-
+	/**
+	 * Establece la imagen del botón de tratamiento médico.
+	 *
+	 * @param imgBtnTratamientoMedico la nueva imagen del botón de tratamiento médico.
+	 */
 	public void setImgBtnTratamientoMedico(ImageIcon imgBtnTratamientoMedico) {
-		this.imgBtnTratamientoMedico = imgBtnTratamientoMedico;
+	    this.imgBtnTratamientoMedico = imgBtnTratamientoMedico;
 	}
 
-
-
+	/**
+	 * Obtiene la imagen del botón para guardar los datos personales.
+	 *
+	 * @return la imagen del botón para guardar los datos personales.
+	 */
 	public ImageIcon getImgBtnGuardarDatosPersonales() {
-		return imgBtnGuardarDatosPersonales;
+	    return imgBtnGuardarDatosPersonales;
 	}
 
-
-
+	/**
+	 * Establece la imagen del botón para guardar los datos personales.
+	 *
+	 * @param imgBtnGuardarDatosPersonales la nueva imagen del botón para guardar los datos personales.
+	 */
 	public void setImgBtnGuardarDatosPersonales(ImageIcon imgBtnGuardarDatosPersonales) {
-		this.imgBtnGuardarDatosPersonales = imgBtnGuardarDatosPersonales;
+	    this.imgBtnGuardarDatosPersonales = imgBtnGuardarDatosPersonales;
 	}
 
-
-
+	/**
+	 * Obtiene la imagen del botón para agendar una cita.
+	 *
+	 * @return la imagen del botón para agendar una cita.
+	 */
 	public ImageIcon getImgBtnAgendarCita() {
-		return imgBtnAgendarCita;
+	    return imgBtnAgendarCita;
 	}
 
-
-
+	/**
+	 * Establece la imagen del botón para agendar una cita.
+	 *
+	 * @param imgBtnAgendarCita la nueva imagen del botón para agendar una cita.
+	 */
 	public void setImgBtnAgendarCita(ImageIcon imgBtnAgendarCita) {
-		this.imgBtnAgendarCita = imgBtnAgendarCita;
+	    this.imgBtnAgendarCita = imgBtnAgendarCita;
 	}
 
-
-
+	/**
+	 * Obtiene la imagen del botón para ver las citas agendadas.
+	 *
+	 * @return la imagen del botón para ver las citas agendadas.
+	 */
 	public ImageIcon getImgBtnCitasAgendadas() {
-		return imgBtnCitasAgendadas;
+	    return imgBtnCitasAgendadas;
 	}
 
-
-
+	/**
+	 * Establece la imagen del botón para ver las citas agendadas.
+	 *
+	 * @param imgBtnCitasAgendadas la nueva imagen del botón para ver las citas agendadas.
+	 */
 	public void setImgBtnCitasAgendadas(ImageIcon imgBtnCitasAgendadas) {
-		this.imgBtnCitasAgendadas = imgBtnCitasAgendadas;
+	    this.imgBtnCitasAgendadas = imgBtnCitasAgendadas;
 	}
 
-
-
+	/**
+	 * Obtiene la imagen del botón para reagendar una cita.
+	 *
+	 * @return la imagen del botón para reagendar una cita.
+	 */
 	public ImageIcon getImgBtnReagendarCita() {
-		return imgBtnReagendarCita;
+	    return imgBtnReagendarCita;
 	}
 
-
-
+	/**
+	 * Establece la imagen del botón para reagendar una cita.
+	 *
+	 * @param imgBtnReagendarCita la nueva imagen del botón para reagendar una cita.
+	 */
 	public void setImgBtnReagendarCita(ImageIcon imgBtnReagendarCita) {
-		this.imgBtnReagendarCita = imgBtnReagendarCita;
+	    this.imgBtnReagendarCita = imgBtnReagendarCita;
 	}
 
-
-
+	/**
+	 * Obtiene la imagen del botón para cancelar una cita.
+	 *
+	 * @return la imagen del botón para cancelar una cita.
+	 */
 	public ImageIcon getImgBtnCancelarCita() {
-		return imgBtnCancelarCita;
+	    return imgBtnCancelarCita;
 	}
 
-
-
+	/**
+	 * Establece la imagen del botón para cancelar una cita.
+	 *
+	 * @param imgBtnCancelarCita la nueva imagen del botón para cancelar una cita.
+	 */
 	public void setImgBtnCancelarCita(ImageIcon imgBtnCancelarCita) {
-		this.imgBtnCancelarCita = imgBtnCancelarCita;
+	    this.imgBtnCancelarCita = imgBtnCancelarCita;
 	}
 
-
-
+	/**
+	 * Obtiene la imagen del botón para generar una cita.
+	 *
+	 * @return la imagen del botón para generar una cita.
+	 */
 	public ImageIcon getImgBtnGenerarCita() {
-		return imgBtnGenerarCita;
+	    return imgBtnGenerarCita;
 	}
 
-
-
+	/**
+	 * Establece la imagen del botón para generar una cita.
+	 *
+	 * @param imgBtnGenerarCita la nueva imagen del botón para generar una cita.
+	 */
 	public void setImgBtnGenerarCita(ImageIcon imgBtnGenerarCita) {
-		this.imgBtnGenerarCita = imgBtnGenerarCita;
+	    this.imgBtnGenerarCita = imgBtnGenerarCita;
 	}
 
-
-
+	/**
+	 * Obtiene la imagen del botón para reagendar.
+	 *
+	 * @return la imagen del botón para reagendar.
+	 */
 	public ImageIcon getImgBtnReagendar() {
-		return imgBtnReagendar;
+	    return imgBtnReagendar;
 	}
 
-
-
+	/**
+	 * Establece la imagen del botón para reagendar.
+	 *
+	 * @param imgBtnReagendar la nueva imagen del botón para reagendar.
+	 */
 	public void setImgBtnReagendar(ImageIcon imgBtnReagendar) {
-		this.imgBtnReagendar = imgBtnReagendar;
+	    this.imgBtnReagendar = imgBtnReagendar;
 	}
 
-
-
+	/**
+	 * Obtiene la imagen del botón para cancelar.
+	 *
+	 * @return la imagen del botón para cancelar.
+	 */
 	public ImageIcon getImgBtnCancelar() {
-		return imgBtnCancelar;
+	    return imgBtnCancelar;
 	}
 
-
-
+	/**
+	 * Establece la imagen del botón para cancelar.
+	 *
+	 * @param imgBtnCancelar la nueva imagen del botón para cancelar.
+	 */
 	public void setImgBtnCancelar(ImageIcon imgBtnCancelar) {
-		this.imgBtnCancelar = imgBtnCancelar;
+	    this.imgBtnCancelar = imgBtnCancelar;
 	}
 
-
-
+	/**
+	 * Obtiene la imagen del botón para volver al menú.
+	 *
+	 * @return la imagen del botón para volver al menú.
+	 */
 	public ImageIcon getImgBtnVolverMenu() {
-		return imgBtnVolverMenu;
+	    return imgBtnVolverMenu;
 	}
 
-
-
+	/**
+	 * Establece la imagen del botón para volver al menú.
+	 *
+	 * @param imgBtnVolverMenu la nueva imagen del botón para volver al menú.
+	 */
 	public void setImgBtnVolverMenu(ImageIcon imgBtnVolverMenu) {
-		this.imgBtnVolverMenu = imgBtnVolverMenu;
+	    this.imgBtnVolverMenu = imgBtnVolverMenu;
 	}
 
-
-
+	/**
+	 * Obtiene la imagen del botón para mostrar el tooltip.
+	 *
+	 * @return la imagen del botón para mostrar el tooltip.
+	 */
 	public ImageIcon getImgBtnToolTip() {
-		return imgBtnToolTip;
+	    return imgBtnToolTip;
 	}
 
-
-
+	/**
+	 * Establece la imagen del botón para mostrar el tooltip.
+	 *
+	 * @param imgBtnToolTip la nueva imagen del botón para mostrar el tooltip.
+	 */
 	public void setImgBtnToolTip(ImageIcon imgBtnToolTip) {
-		this.imgBtnToolTip = imgBtnToolTip;
+	    this.imgBtnToolTip = imgBtnToolTip;
 	}
 
-
-
+	/**
+	 * Obtiene el objeto CardLayout utilizado para la gestión de paneles.
+	 *
+	 * @return el objeto CardLayout utilizado para la gestión de paneles.
+	 */
 	public CardLayout getCardLayout() {
-		return cardLayout;
+	    return cardLayout;
 	}
 
-
-
+	/**
+	 * Establece el objeto CardLayout utilizado para la gestión de paneles.
+	 *
+	 * @param cardLayout el nuevo objeto CardLayout utilizado para la gestión de paneles.
+	 */
 	public void setCardLayout(CardLayout cardLayout) {
-		this.cardLayout = cardLayout;
+	    this.cardLayout = cardLayout;
 	}
 
 
-
+	/**
+	 * Obtiene el valor de la constante AGENDARCITA.
+	 *
+	 * @return el valor de la constante AGENDARCITA.
+	 */
 	public static String getAgendarcita() {
-		return AGENDARCITA;
+	    return AGENDARCITA;
 	}
 
-
-
+	/**
+	 * Obtiene el valor de la constante CITASAGENDADAS.
+	 *
+	 * @return el valor de la constante CITASAGENDADAS.
+	 */
 	public static String getCitasagendadas() {
-		return CITASAGENDADAS;
+	    return CITASAGENDADAS;
 	}
 
-
-
+	/**
+	 * Obtiene el valor de la constante REAGENDARCITA.
+	 *
+	 * @return el valor de la constante REAGENDARCITA.
+	 */
 	public static String getReagendarcita() {
-		return REAGENDARCITA;
+	    return REAGENDARCITA;
 	}
 
-
-
+	/**
+	 * Obtiene el valor de la constante CANCELARCITA.
+	 *
+	 * @return el valor de la constante CANCELARCITA.
+	 */
 	public static String getCancelarcita() {
-		return CANCELARCITA;
+	    return CANCELARCITA;
 	}
+
 	
 }
