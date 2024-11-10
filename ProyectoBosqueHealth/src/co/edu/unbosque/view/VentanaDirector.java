@@ -57,6 +57,7 @@ public class VentanaDirector extends JFrame{
 		getPanelDerechaArriba().setVisible(false);
 		getPanelCentral().setVisible(false);
 		getPanelCreacionTurno().setVisible(false);
+		getPanelReporteMensual().setVisible(false);
 		
 		add(panelFijoIzq);
 		add(panelVariableReportes);
@@ -64,6 +65,7 @@ public class VentanaDirector extends JFrame{
 		add(panelDerechaArriba);
 		add(panelCentral);
 		add(panelCreacionTurno);
+		add(panelReporteMensual);
 	}
 
 	public void ventana() {
@@ -149,7 +151,7 @@ public class VentanaDirector extends JFrame{
 		lblTituloDatosP = new JLabel("Datos personales");
 		lblTituloDatosP.setFont(new Font("Agency FB", Font.BOLD, 40));
 		lblTituloDatosP.setForeground(new Color(78, 175, 93));
-		lblTituloDatosP.setBounds(161, 24, 350, 30);
+		lblTituloDatosP.setBounds(161, 12, 350, 40);
 		panelDerechaArriba.add(lblTituloDatosP);
 
 		lblNombreCompleto = new JLabel("Nombre completo:");
@@ -183,17 +185,17 @@ public class VentanaDirector extends JFrame{
 		panelDatosDirector.add(lblGenero);
 		
 		lblNivelDirectivo = new JLabel("Nivel directivo:");
-		lblGenero.setFont(new Font("Agency FB", Font.BOLD, 15));
-		lblGenero.setForeground(new Color(78, 175, 93));
-		lblGenero.setBounds(13, 174, 180, 17);
-		panelDatosDirector.add(lblGenero);
+		lblNivelDirectivo.setFont(new Font("Agency FB", Font.BOLD, 15));
+		lblNivelDirectivo.setForeground(new Color(78, 175, 93));
+		lblNivelDirectivo.setBounds(13, 174, 180, 17);
+		panelDatosDirector.add(lblNivelDirectivo);
 		
 		
 		//Labels Turnos - Creación de Turno
 		lblTituloCreacionTurno = new JLabel("Creación de Turno");
 		lblTituloCreacionTurno.setFont(new Font("Agency FB", Font.BOLD, 40));
 		lblTituloCreacionTurno.setForeground(new Color(78, 175, 93));
-		lblTituloCreacionTurno.setBounds(152, 29, 350, 30);
+		lblTituloCreacionTurno.setBounds(152, 12, 350, 40);
 		panelDerechaArriba.add(lblTituloCreacionTurno);
 		
 		lblEspecialidadCT = new JLabel("Especialidad:");
@@ -220,17 +222,17 @@ public class VentanaDirector extends JFrame{
 		
 		//Texfields DATOS PERSONALES
 		txtNombreCompleto = new JTextField();
-		txtNombreCompleto.setFont(new Font("Helvetica", Font.BOLD, 12));
+		txtNombreCompleto.setFont(new Font("Helvetica", Font.PLAIN, 12));
 		txtNombreCompleto.setBounds(206, 9, 200, 26);
 		panelDatosDirector.add(txtNombreCompleto);	
 		
 		txtNumeroDocumento = new JTextField();
-		txtNumeroDocumento.setFont(new Font("Helvetica", Font.BOLD, 12));
+		txtNumeroDocumento.setFont(new Font("Helvetica", Font.PLAIN, 12));
 		txtNumeroDocumento.setBounds(206, 41, 200, 26);
 		panelDatosDirector.add(txtNumeroDocumento);	
 		
 		txtCorreoElectronico = new JTextField();
-		txtCorreoElectronico.setFont(new Font("Helvetica", Font.BOLD, 12));
+		txtCorreoElectronico.setFont(new Font("Helvetica", Font.PLAIN, 12));
 		txtCorreoElectronico.setBounds(206, 105, 200, 26);
 		panelDatosDirector.add(txtCorreoElectronico);	
 	}
@@ -318,13 +320,13 @@ public class VentanaDirector extends JFrame{
 		imgVolverMenu = new ImageIcon("media\\btnVolverMenu.png"); // OJO **** PENDIENTE DEFINIR IMAGEN
 		btnVolverMenu = new JButton(imgVolverMenu);
 		btnVolverMenu.setBorder(null);
-		btnVolverMenu.setBounds(807, 505, 174, 40);
+		btnVolverMenu.setBounds(800, 475, 174, 40);
 		add(btnVolverMenu);
 		
 		imgBtnToolTip = new ImageIcon("media\\btnToolTipDirector.png");
 		btnTooltipDirector = new JButton(imgBtnToolTip);
 		btnTooltipDirector.setBorder(null);
-		btnTooltipDirector.setBounds(929, 2, 70, 70);
+		btnTooltipDirector.setBounds(915, 2, 70, 70);
 		add(btnTooltipDirector);
 		 
 	}

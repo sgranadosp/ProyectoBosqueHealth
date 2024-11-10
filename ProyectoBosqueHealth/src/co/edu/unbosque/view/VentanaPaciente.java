@@ -362,7 +362,7 @@ public class VentanaPaciente extends JFrame{
 		imgBtnToolTip = new ImageIcon("media\\btnToolTipPaciente.png");
 		btnTooltipPaciente = new JButton(imgBtnToolTip);
 		btnTooltipPaciente.setBorder(null);
-		btnTooltipPaciente.setBounds(931, 2, 68, 68);
+		btnTooltipPaciente.setBounds(915, 2, 68, 68);
 		btnTooltipPaciente.setToolTipText("Panel de gestión para pacientes");
 		add(btnTooltipPaciente);
 		

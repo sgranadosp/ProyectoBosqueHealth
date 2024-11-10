@@ -247,33 +247,33 @@ public class VentanaEspecialista extends JFrame {
 		
 		//Textfields DATOS PERSONALES
 		txtNombreCompleto = new JTextField();
-		txtNombreCompleto.setFont(new Font("Agency FB", Font.BOLD, 12));
+		txtNombreCompleto.setFont(new Font("Helvetica", Font.PLAIN, 12));
 		txtNombreCompleto.setBounds(204, 10, 185, 20);
 		panelDatosEspecialista.add(txtNombreCompleto);	
 		
 		txtNumeroDocumento = new JTextField();
-		txtNumeroDocumento.setFont(new Font("Agency FB", Font.BOLD, 12));
+		txtNumeroDocumento.setFont(new Font("Helvetica", Font.PLAIN, 12));
 		txtNumeroDocumento.setBounds(204, 53, 185, 20);
 		panelDatosEspecialista.add(txtNumeroDocumento);
 		
 		txtCorreoElectronico = new JTextField();
-		txtCorreoElectronico.setFont(new Font("Agency FB", Font.BOLD, 12));
+		txtCorreoElectronico.setFont(new Font("Helvetica", Font.PLAIN, 12));
 		txtCorreoElectronico.setBounds(204, 139, 185, 20);
 		panelDatosEspecialista.add(txtCorreoElectronico);
 		
 		//Textfields TRATAMIENTO PACIENTE
 		txtExamenP = new JTextField();
-		txtExamenP.setFont(new Font("Agency FB", Font.BOLD, 12));
+		txtExamenP.setFont(new Font("Helvetica", Font.PLAIN, 12));
 		txtExamenP.setBounds(164, 92, 338, 25);
 		panelTratamientoP.add(txtExamenP);
 		
 		txtDiagnosticoP = new JTextField();
-		txtDiagnosticoP.setFont(new Font("Agency FB", Font.BOLD, 12));
+		txtDiagnosticoP.setFont(new Font("Helvetica", Font.PLAIN, 12));
 		txtDiagnosticoP.setBounds(164, 132, 338, 25);
 		panelTratamientoP.add(txtDiagnosticoP);
 		
 		txtTratamientoP = new JTextField();
-		txtTratamientoP.setFont(new Font("Agency FB", Font.BOLD, 12));
+		txtTratamientoP.setFont(new Font("Helvetica", Font.PLAIN, 12));
 		txtTratamientoP.setBounds(164, 172, 338, 45);
 		panelTratamientoP.add(txtTratamientoP);
 	}

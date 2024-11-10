@@ -14,6 +14,7 @@ import javax.swing.JTable;
 
 import co.edu.unbosque.model.Cita;
 import co.edu.unbosque.model.CitaDTO;
+import co.edu.unbosque.model.DirectorMedicoDTO;
 import co.edu.unbosque.model.Especialista;
 import co.edu.unbosque.model.EspecialistaDTO;
 import co.edu.unbosque.model.ModelFacade;
@@ -392,6 +393,7 @@ public class Controller implements ActionListener {
 			
 			break;	
 
+			//VOLVER AL MENU
 		case "VOLVER MENU P":
 			volverMenuPrincipal();
 			break;
@@ -402,6 +404,8 @@ public class Controller implements ActionListener {
 			volverMenuPrincipal();
 			break;	
 
+			
+			//ESPECIALISTAS
 		case "DATOS PERSONALES ESPECIALISTA":
 			cambiarPanelesEspecialista(true, true, false, false, false, false, true, false, false, false, false, false);
 			break;	
@@ -427,6 +431,38 @@ public class Controller implements ActionListener {
 			break;	
 		case "GUARDAR DATOS ESPECIALISTA":
 			
+			Date fecNacimientoE = vf.getVentanaEspecialista().getFechaNacimiento().getDate();
+			String sFecNacimientoE = null;
+			if (fecNacimientoE==null)
+				sFecNacimientoE = "";
+			else
+				sFecNacimientoE = DateFormat.getDateInstance().format(fecNacimientoE);
+			
+			if (vf.getVentanaEspecialista().getTxtNombreCompleto().getText().trim().equals("")
+						|| vf.getVentanaEspecialista().getTxtNumeroDocumento().getText().trim().equals("")
+						|| sFecNacimientoE.equals("")
+						|| vf.getVentanaEspecialista().getTxtCorreoElectronico().getText().equals("")
+						|| vf.getVentanaEspecialista().getCmbGenero().getSelectedItem().toString().equals("")
+						|| vf.getVentanaEspecialista().getCmbEspecialidadDP().getSelectedItem().toString().equals("")) {
+				JOptionPane.showMessageDialog(null, "Ingrese los valores requeridos", "Error",
+						JOptionPane.ERROR_MESSAGE);
+				
+			} else {
+				String nombreCompletoE = vf.getVentanaEspecialista().getTxtNombreCompleto().getText();
+				String numeroDocE = vf.getVentanaEspecialista().getTxtNumeroDocumento().getText();
+				fecNacimientoE = vf.getVentanaEspecialista().getFechaNacimiento().getDate();
+				String correoE = vf.getVentanaEspecialista().getTxtCorreoElectronico().getText();
+				String generoE = vf.getVentanaEspecialista().getCmbGenero().getSelectedItem().toString();
+				String especialidadE = vf.getVentanaEspecialista().getCmbNuevoEspecialista().getSelectedItem().toString();
+				
+				int numDocE = Integer.parseInt(numeroDocE);
+				
+				mf.getEspecialistaDAO().add(new EspecialistaDTO(nombreCompletoE, fecNacimientoE, generoE, numDocE, correoE, especialidadE));
+				JOptionPane.showMessageDialog(null, "Especialista creado exitosamente");
+				
+				
+				limpiarEntradasEspecialistas();
+			}
 			break;	
 		case "GENERAR CAMBIO TURNO ESP":
 			
@@ -434,38 +470,79 @@ public class Controller implements ActionListener {
 		case "GUARDAR TRATAMIENTO ESP":
 			
 			break;	
-		case "DATOS PERSONALES DIRECTOR":
 			
+			
+			
+			//DIRECTOR
+		case "DATOS PERSONALES DIRECTOR":
+			cambiarPanelesDirector(true, true, false, false, false, false, true, false, false, false, false, false, false, false, false);
 			break;	
 		case "REPORTES":
-			
+			cambiarPanelesDirector(true, false, false, false, false, false, false, true, true, false, false, false, false, false, false);
 			break;	
 		case "TURNOS":
-			
+			cambiarPanelesDirector(true, false, false, false, false, true, false, false, false, false, false, false, false, true, false);
+			cargarComboBoxGenerarTurno();
 			break;	
 		case "REPORTE SEMANAL":
-			
+			cambiarPanelesDirector(true, false, false, true, false, false, false, true, true, true, true, true, true, false, true);
 			break;				
 		case "REPORTE MENSUAL":
-			
+			cambiarPanelesDirector(true, false, false, false, true, false, false, true, true, false, false, false, false, false, false);
 			break;	
 		case "PACIENTES ATENDIDOS":
-			
+			vf.getVentanaDirector().getPanelVariableReportes().setVisible(true);
+			vf.getVentanaDirector().getCardLayout().show(vf.getVentanaDirector().getPanelVariableReportes(), vf.getVentanaDirector().getPa());
 			break;	
 		case "DIAGNOSTICOS REALIZADOS":
-			
+			vf.getVentanaDirector().getPanelVariableReportes().setVisible(true);
+			vf.getVentanaDirector().getCardLayout().show(vf.getVentanaDirector().getPanelVariableReportes(), vf.getVentanaDirector().getDr());
 			break;	
 		case "ESPECIALISTA MNC":
-			
+			vf.getVentanaDirector().getPanelVariableReportes().setVisible(true);
+			vf.getVentanaDirector().getCardLayout().show(vf.getVentanaDirector().getPanelVariableReportes(), vf.getVentanaDirector().getEmnc());
 			break;	
 		case "ESPECIALIDAD MC":
-			
+			vf.getVentanaDirector().getPanelVariableReportes().setVisible(true);
+			vf.getVentanaDirector().getCardLayout().show(vf.getVentanaDirector().getPanelVariableReportes(), vf.getVentanaDirector().getEmc());
 			break;
 		case "CITAS CANCELADAS":
-			
+			vf.getVentanaDirector().getPanelVariableReportes().setVisible(true);
+			vf.getVentanaDirector().getCardLayout().show(vf.getVentanaDirector().getPanelVariableReportes(), vf.getVentanaDirector().getCc());
 			break;	
 		case "GUARDAR DATOS DIRECTOR":
+			Date fecNacimientoDM = vf.getVentanaDirector().getFechaNacimiento().getDate();
+			String sFecNacimientoDM = null;
+			if (fecNacimientoDM==null)
+				sFecNacimientoDM = "";
+			else
+				sFecNacimientoDM = DateFormat.getDateInstance().format(fecNacimientoDM);
 			
+			if (vf.getVentanaDirector().getTxtNombreCompleto().getText().trim().equals("")
+						|| vf.getVentanaDirector().getTxtNumeroDocumento().getText().trim().equals("")
+						|| sFecNacimientoDM.equals("")
+						|| vf.getVentanaDirector().getTxtCorreoElectronico().getText().equals("")
+						|| vf.getVentanaDirector().getCmbGenero().getSelectedItem().toString().equals("")
+						|| vf.getVentanaDirector().getCmbNivelDirectivo().getSelectedItem().toString().equals("")) {
+				JOptionPane.showMessageDialog(null, "Ingrese los valores requeridos", "Error",
+						JOptionPane.ERROR_MESSAGE);
+				
+			} else {
+				String nombreCompletoDM = vf.getVentanaDirector().getTxtNombreCompleto().getText();
+				String numeroDocDM = vf.getVentanaDirector().getTxtNumeroDocumento().getText();
+				fecNacimientoDM = vf.getVentanaDirector().getFechaNacimiento().getDate();
+				String correoDM = vf.getVentanaDirector().getTxtCorreoElectronico().getText();
+				String generoDM = vf.getVentanaDirector().getCmbGenero().getSelectedItem().toString();
+				String nivelD = vf.getVentanaDirector().getCmbNivelDirectivo().getSelectedItem().toString();
+				
+				int numDocDM = Integer.parseInt(numeroDocDM);
+				
+				mf.getDirectorMedicoDAO().add(new DirectorMedicoDTO(nombreCompletoDM, fecNacimientoDM, generoDM, numDocDM, correoDM, nivelD));
+				JOptionPane.showMessageDialog(null, "Director Medico creado exitosamente");
+				
+				
+				limpiarEntradasDirectorMedico();
+			}
 			break;	
 		case "GENERAR TURNO DIRECTOR":
 			
@@ -507,8 +584,23 @@ public class Controller implements ActionListener {
 		vf.getVentanaEspecialista().getBtnCambioTurno().setVisible(vCT);
 	}
 	
-	public void cambiarPanelesDirector() {
-		
+	public void cambiarPanelesDirector(boolean vDA, boolean vDD, boolean vVR, boolean vPC, boolean vRM, boolean vCT, boolean vTitDP, 
+			boolean vBRS, boolean vBRM, boolean vBPA, boolean vBDR, boolean vEMNC, boolean vBEMC, boolean vLTCT, boolean cBCC) {
+		vf.getVentanaDirector().getPanelDerechaArriba().setVisible(vDA);
+		vf.getVentanaDirector().getPanelDatosDirector().setVisible(vDD);
+		vf.getVentanaDirector().getPanelVariableReportes().setVisible(vVR);
+		vf.getVentanaDirector().getPanelCentral().setVisible(vPC);
+		vf.getVentanaDirector().getPanelReporteMensual().setVisible(vRM);
+		vf.getVentanaDirector().getPanelCreacionTurno().setVisible(vCT);
+		vf.getVentanaDirector().getLblTituloDatosP().setVisible(vTitDP);
+		vf.getVentanaDirector().getBtnReporteSemanal().setVisible(vBRS);
+		vf.getVentanaDirector().getBtnReporteMensual().setVisible(vBRM);
+		vf.getVentanaDirector().getBtnPacientesAtendidos().setVisible(vBPA);
+		vf.getVentanaDirector().getBtnDiagnosticosRealizados().setVisible(vBDR);
+		vf.getVentanaDirector().getBtnEspecialistasMNC().setVisible(vEMNC);
+		vf.getVentanaDirector().getBtnEspecialidadMC().setVisible(vBEMC);
+		vf.getVentanaDirector().getBtnCitasCanceladas().setVisible(cBCC);
+		vf.getVentanaDirector().getLblTituloCreacionTurno().setVisible(vLTCT);
 	}
 	
 	public void volverMenuPrincipal() {
@@ -636,6 +728,8 @@ public class Controller implements ActionListener {
 		scrollPane.setBounds(10, 10, 500, 300); //validar coordenadas
 		vf.getVentanaPaciente().getPanelTratamientoMedico().add(scrollPane);
 		scrollPane.setViewportView(jtTratamientoMedico);	
+		jtTratamientoMedico.repaint();
+		scrollPane.repaint();
 	}
 	
 	public void preparacionDeDatosEsp() {
@@ -666,7 +760,41 @@ public class Controller implements ActionListener {
 	}
 	
 	public void tablaCitasMedicasE() {
+		String titulosCitasMedicasE[] = { "Paciente", "Tratamiento", "Fecha", "Hora"};
+		ArrayList<TratamientoMedicoDTO> tmList = mf.getTratamientoMedicoDAO().getAll();
+		//pendiente filtrar las citas del Paciente actual
+		//.....
+		String datosCA[][] = new String[1][5];
+		if (tmList!=null) {
+			datosCA = new String[tmList.size()][5];	
+
+
+			int i = 0;
+			for (TratamientoMedicoDTO tmDTO : tmList) {
+				//recuperar el Especialista
+				Especialista esp = tmDTO.getEspecialista();
+				if (esp!=null) {
+					datosCA[i][0] = esp.getNombre();
+				}
+				if (tmDTO.getFecha()!=null)
+					datosCA[i][1] = tmDTO.getFecha().toString();
+				datosCA[i][2] = tmDTO.getExamen();
+				datosCA[i][3] = tmDTO.getDiagnostico();
+				datosCA[i][4] = tmDTO.getTratamiento();
+				
+				i++;
+			}
+		}
 		
+		JTable jtCitasMedicasE = new JTable(datosCA, titulosCitasMedicasE);
+		jtCitasMedicasE.setEnabled(true);
+		jtCitasMedicasE.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(10, 10, 500, 300); //validar coordenadas
+		vf.getVentanaPaciente().getPanelTratamientoMedico().add(scrollPane);
+		scrollPane.setViewportView(jtCitasMedicasE);
+		jtCitasMedicasE.repaint();
+		scrollPane.repaint();
 	}
 	
 	public void tablaTurnosMesE() {
@@ -716,6 +844,26 @@ public class Controller implements ActionListener {
 		for (EspecialistaDTO especialistaDTO : listaE) {
 			if (especialistaDTO.getEspecialidad().equals(seleccionEsp)) {			
 				vf.getVentanaPaciente().getCmbEspecialistas().addItem(especialistaDTO.getNombre());
+			}
+		}
+	}
+	
+	public void cargarComboBoxGenerarTurno() {
+		vf.getVentanaDirector().getCmbEspecialidadCreacionT().addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				cargarEspecialistaGenerarTurnos((String) vf.getVentanaDirector().getCmbEspecialidadCreacionT().getSelectedItem());
+			}
+		});
+	}
+	
+	public void cargarEspecialistaGenerarTurnos(String selectEsp) {
+		vf.getVentanaDirector().getCmbEspecialistaCreacionT().removeAllItems();
+		ArrayList<EspecialistaDTO> listaE = mf.getEspecialistaDAO().getAll();
+		for (EspecialistaDTO especialistaDTO : listaE) {
+			if (especialistaDTO.getEspecialidad().equals(selectEsp)) {			
+				vf.getVentanaDirector().getCmbEspecialistaCreacionT().addItem(especialistaDTO.getNombre());
 			}
 		}
 	}
