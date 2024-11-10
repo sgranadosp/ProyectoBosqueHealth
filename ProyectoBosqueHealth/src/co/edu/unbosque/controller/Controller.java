@@ -22,7 +22,14 @@ import co.edu.unbosque.model.Paciente;
 import co.edu.unbosque.model.PacienteDTO;
 import co.edu.unbosque.model.TratamientoMedico;
 import co.edu.unbosque.model.TratamientoMedicoDTO;
+import co.edu.unbosque.model.TurnoDTO;
 import co.edu.unbosque.model.persistence.DataMapper;
+import co.edu.unbosque.model.persistence.TurnoDAO;
+import co.edu.unbosque.util.exception.ExceptionChecker;
+import co.edu.unbosque.util.exception.InvalidDateException;
+import co.edu.unbosque.util.exception.MailException;
+import co.edu.unbosque.util.exception.NotSpecialCharacterException;
+import co.edu.unbosque.util.exception.PositiveIntegerException;
 import co.edu.unbosque.view.ViewFacade;
 
 public class Controller implements ActionListener {
@@ -227,6 +234,11 @@ public class Controller implements ActionListener {
 			JOptionPane.showMessageDialog(null, "Seleccionaste Director Médico");
 			vf.getMenuPrincipal().setVisible(false);
 			vf.getVentanaDirector().setVisible(true);
+			/*if (mf.getDirectorMedicoDAO().getAll()!= null) {
+				
+			} else {
+
+			}*/
 			break;
 		case "ESPECIALISTA":
 			JOptionPane.showMessageDialog(null, "Seleccionaste Especialista");
@@ -309,6 +321,7 @@ public class Controller implements ActionListener {
 				String genero = vf.getVentanaPaciente().getCmbGenero().getSelectedItem().toString();
 				
 				int numDoc = Integer.parseInt(numeroDoc);
+				
 				
 				mf.getPacienteDAO().add(new PacienteDTO(nombreCompleto, fecNacimientoDC, genero, numDoc, correo));
 				JOptionPane.showMessageDialog(null, "Paciente creado exitosamente");
@@ -435,6 +448,7 @@ public class Controller implements ActionListener {
 			break;	
 		case "TURNOS ESPECIALISTA":
 			cambiarPanelesEspecialista(true, false, false, false, false, false, false, false, false, false, true, true);
+			
 			break;	
 		case "TRATAMIENTO PACIENTE ESPECIALISTA":
 			cambiarPanelesEspecialista(true, false, false, false, true, false, false, false, true, false, false, false);
@@ -442,10 +456,12 @@ public class Controller implements ActionListener {
 			break;	
 		case "LISTA TRATAMIENTOS ESPECIALISTA":
 			cambiarPanelesEspecialista(true, false, false, false, false, true, false, false, false, true, false, false);
+			tablaListaDeTratamientosE();
 			break;	
 		case "TURNOS MES ESPECIALISTA":
 			vf.getVentanaEspecialista().getPanelVariableTurno().setVisible(true);
 			vf.getVentanaEspecialista().getCardLayout().show(vf.getVentanaEspecialista().getPanelVariableTurno(), vf.getVentanaEspecialista().getTurnosmes());
+			tablaTurnosMesE();
 			break;	
 		case "CAMBIO TURNO ESPECIALISTA":
 			vf.getVentanaEspecialista().getPanelVariableTurno().setVisible(true);
@@ -540,26 +556,32 @@ public class Controller implements ActionListener {
 			break;				
 		case "REPORTE MENSUAL":
 			cambiarPanelesDirector(true, false, false, false, true, false, false, true, true, false, false, false, false, false, false);
+			tablaReporteMensualDM();
 			break;	
 		case "PACIENTES ATENDIDOS":
 			vf.getVentanaDirector().getPanelVariableReportes().setVisible(true);
 			vf.getVentanaDirector().getCardLayout().show(vf.getVentanaDirector().getPanelVariableReportes(), vf.getVentanaDirector().getPa());
+			tablaPacientesAtendidosDM();
 			break;	
 		case "DIAGNOSTICOS REALIZADOS":
 			vf.getVentanaDirector().getPanelVariableReportes().setVisible(true);
 			vf.getVentanaDirector().getCardLayout().show(vf.getVentanaDirector().getPanelVariableReportes(), vf.getVentanaDirector().getDr());
+			tablaDiagnosticosRealizadosDM();
 			break;	
 		case "ESPECIALISTA MNC":
 			vf.getVentanaDirector().getPanelVariableReportes().setVisible(true);
 			vf.getVentanaDirector().getCardLayout().show(vf.getVentanaDirector().getPanelVariableReportes(), vf.getVentanaDirector().getEmnc());
+			tablaEspecialistasMayorNumeroCitasDM();
 			break;	
 		case "ESPECIALIDAD MC":
 			vf.getVentanaDirector().getPanelVariableReportes().setVisible(true);
 			vf.getVentanaDirector().getCardLayout().show(vf.getVentanaDirector().getPanelVariableReportes(), vf.getVentanaDirector().getEmc());
+			tablaEspecialidadMayorConsultaDM();
 			break;
 		case "CITAS CANCELADAS":
 			vf.getVentanaDirector().getPanelVariableReportes().setVisible(true);
 			vf.getVentanaDirector().getCardLayout().show(vf.getVentanaDirector().getPanelVariableReportes(), vf.getVentanaDirector().getCc());
+			tablaCitasCanceladasDM();
 			break;	
 		case "GUARDAR DATOS DIRECTOR":
 			Date fecNacimientoDM = vf.getVentanaDirector().getFechaNacimiento().getDate();
@@ -708,6 +730,8 @@ public class Controller implements ActionListener {
 		vf.getVentanaDirector().getFechaNacimiento().setCalendar(null);
 	}
 	
+	
+	//TABLA DE CITAS AGENDADAS DEL PACIENTE
 	public void tablaCitasAgendadasP() {
 		String titulosCA[] = { "Número de Cita", "Especialidad", "Especialista", "Fecha", "Hora", "Estado"};
 		ArrayList<CitaDTO> cList = mf.getCitaDAO().getAll();
@@ -745,6 +769,8 @@ public class Controller implements ActionListener {
 
 	}
 	
+	
+	//TABLA TRATAMIENTO MEDICO DEL PACIENTE
 	public void tablaTratamientoMedicoP() {
 		String titulosTM[] = { "Nombre del Especialista", "Fecha", "Examen Solicitado", "Diagnostico", "Tratamiento"};
 		ArrayList<TratamientoMedicoDTO> tmList = mf.getTratamientoMedicoDAO().getAll();
@@ -782,6 +808,7 @@ public class Controller implements ActionListener {
 
 	}
 	
+	//DATOS
 	public void preparacionDeDatosEsp() {
 		
 		EspecialistaDTO esp1 = new EspecialistaDTO ("David Caicedo", new GregorianCalendar(2000, Calendar.AUGUST, 4).getTime(), "Masculino" , 142139, "dae.c@gmail.com", "Cirugía");
@@ -809,6 +836,8 @@ public class Controller implements ActionListener {
 		mf.getEspecialistaDAO().add(esp11);
 	}
 	
+	
+	//TABLAS CITAS MEDICAS ESPECIALISTA
 	public void tablaCitasMedicasE() {
 		String titulosCitasMedicasE[] = {"Número de cita", "Paciente", "Especialista", "Fecha", "Hora"};
 		ArrayList<CitaDTO> citaMedicaList = mf.getCitaDAO().getAll();
@@ -847,34 +876,263 @@ public class Controller implements ActionListener {
 
 	}
 	
+	
+	//TABLA TURNOS DEL MES DEL ESPECIALISTA
 	public void tablaTurnosMesE() {
+		String titulosTME[] = { "Fecha", "Especialista"};
+		ArrayList<TurnoDTO> tmeList = mf.getTurnoDAO().getAll();
 		
+		
+		String datosTME[][] = new String[1][2];
+		if (tmeList!=null) {
+			datosTME = new String[tmeList.size()][2];	
+
+			int i = 0;
+			for (TurnoDTO tmeDTO : tmeList) {
+				
+				Especialista esp = tmeDTO.getEspecialista();
+				datosTME[i][0] = tmeDTO.getFecha().toString();
+				if (esp!=null) {
+					datosTME[i][1] = esp.getNombre();
+				}
+				
+				i++;
+			}
+		}
+		
+		JTable jtTurnosMes = new JTable(datosTME, titulosTME);
+		jtTurnosMes.setEnabled(true);
+		jtTurnosMes.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(10, 10, 500, 300); //validar coordenadas
+		vf.getVentanaEspecialista().getPanelTurnoMes().add(scrollPane);
+		scrollPane.setViewportView(jtTurnosMes);	
 	}
 	
+	
+	
+	//TABLA LISTA DE TRATAMIENTOS DEL ESPECIALISTA
 	public void tablaListaDeTratamientosE() {
+		String titulosLTE[] = { "Paciente", "Tratamiento"};
+		ArrayList<TratamientoMedicoDTO> lteList = mf.getTratamientoMedicoDAO().getAll();
 		
+		
+		String datosLTE[][] = new String[1][2];
+		if (lteList!=null) {
+			datosLTE = new String[lteList.size()][2];	
+
+			int i = 0;
+			for (TratamientoMedicoDTO lteDTO : lteList) {
+				//recuperar el Especialista
+				Paciente paci = lteDTO.getPaciente();
+				if (paci!=null) {
+					datosLTE[i][0] = paci.getNombre();
+				}
+				datosLTE[i][1] = lteDTO.getTratamiento();
+				
+				i++;
+			}
+		}
+		
+		JTable jtListaTratE = new JTable(datosLTE, titulosLTE);
+		jtListaTratE.setEnabled(true);
+		jtListaTratE.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(10, 10, 500, 300); //validar coordenadas
+		vf.getVentanaEspecialista().getPanelListaTratamiento().add(scrollPane);
+		scrollPane.setViewportView(jtListaTratE);	
 	}
 	
+	
+	//TABLA PACIENTES ATENDIDOS DIRECTOR MEDICO
 	public void tablaPacientesAtendidosDM() {
+		String titulosPADM[] = {"Especialista", "Paciente", "Fecha"};
+		ArrayList<CitaDTO> padmList = mf.getCitaDAO().getAll();
 		
+		
+		String datosPADM[][] = new String[1][3];
+		if (padmList!=null) {
+			datosPADM = new String[padmList.size()][3];	
+
+			int i = 0;
+			for (CitaDTO padmDTO : padmList) {
+				
+				Especialista esp = padmDTO.getEspecialista();
+				if (esp!=null) {
+					datosPADM[i][0] = esp.getNombre();
+				}
+				Paciente paci = padmDTO.getPaciente();
+				if (paci!=null) {
+					datosPADM[i][1] = paci.getNombre();
+				}
+				datosPADM[i][2] = padmDTO.getFecha().toString();
+				
+				i++;
+			}
+		}
+		
+		JTable jtPacientesAtendidosDM = new JTable(datosPADM, titulosPADM);
+		jtPacientesAtendidosDM.setEnabled(true);
+		jtPacientesAtendidosDM.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(10, 10, 500, 300); //validar coordenadas
+		vf.getVentanaDirector().getPanelPacientesAtendidos().add(scrollPane);
+		scrollPane.setViewportView(jtPacientesAtendidosDM);	
 	}
 	
+	
+	//TABLA DIAGNOSTICOS REALIZADOS DIRECTOR MEDICO
 	public void tablaDiagnosticosRealizadosDM() {
+		String titulosDRDM[] = {"Paciente", "Diagnostico", "Fecha"};
+		ArrayList<TratamientoMedicoDTO> drdmList = mf.getTratamientoMedicoDAO().getAll();
+		
+		
+		String datosDRDM[][] = new String[1][3];
+		if (drdmList!=null) {
+			datosDRDM = new String[drdmList.size()][3];	
+
+			int i = 0;
+			for (TratamientoMedicoDTO drdmDTO : drdmList) {
+				
+				Paciente paci = drdmDTO.getPaciente();
+				if (paci!=null) {
+					datosDRDM[i][0] = paci.getNombre();
+				}
+				datosDRDM[i][1] = drdmDTO.getDiagnostico();
+				datosDRDM[i][2] = drdmDTO.getFecha().toString();
+				
+				i++;
+			}
+		}
+		
+		JTable jtDiagnosticosRealizadosDM = new JTable(datosDRDM, titulosDRDM);
+		jtDiagnosticosRealizadosDM.setEnabled(true);
+		jtDiagnosticosRealizadosDM.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(10, 10, 500, 300); //validar coordenadas
+		vf.getVentanaDirector().getPanelDiagnosticosRealizados().add(scrollPane);
+		scrollPane.setViewportView(jtDiagnosticosRealizadosDM);	
+	}
+	
+	//Clase interna para facilitar el reporte
+	class EspecialistaContador {
+		public String NombreEspecialista;
+		public int cantidadCitas;
+		
+		public EspecialistaContador() {
+			// TODO Auto-generated constructor stub
+		}
+		
+		public EspecialistaContador(String nombreEspecialista, int cantidadCitas) {
+			super();
+			NombreEspecialista = nombreEspecialista;
+			this.cantidadCitas = cantidadCitas;
+		}
+		
+		public String getNombreEspecialista() {
+			return NombreEspecialista;
+		}
+		
+		public void setNombreEspecialista(String nombreEspecialista) {
+			NombreEspecialista = nombreEspecialista;
+		}
+		
+		public int getCantidadCitas() {
+			return cantidadCitas;
+		}
+		
+		public void setCantidadCitas(int cantidadCitas) {
+			this.cantidadCitas = cantidadCitas;
+		}
 		
 	}
 	
+	//TABLA ESPECIALISTAS CON MAYOR NUMERO DE CITAS DIRECTOR MEDICO
+	//PENDIENTEEEEEEE
 	public void tablaEspecialistasMayorNumeroCitasDM() {
+
+		
+		ArrayList<EspecialistaContador> contadorCitas = new ArrayList<>();
+		ArrayList<CitaDTO> emncdList = mf.getCitaDAO().getAll();
+		String nombreEspecialista = "";
+	
+		
+		for (CitaDTO citaDTO : emncdList) {
+			nombreEspecialista = citaDTO.getEspecialista().getNombre();
+			//buscar especialista en el arraylist contador de citas 
+			//si existe entonces le añado una cita
+			//si no existe, añado el especialista al arraylist y lo inicio con 1
+			
+			//recorrer el arraylist contador de citas
+			int ci=0;
+			boolean debeAgregarItem = false;
+			for (EspecialistaContador especialistaContador : contadorCitas) {
+				if (especialistaContador.getNombreEspecialista().equals(nombreEspecialista)) {
+					//lo encontró, entonces trae el contador que tenga actualmente y le añade 1
+					int cantCitasActual = especialistaContador.getCantidadCitas(); // recupera cantidadActual
+					cantCitasActual++; // le añade 1
+					//nuevo Valor a ingresar -- es el mismo update
+					EspecialistaContador espContadorActualizado = new EspecialistaContador(nombreEspecialista, cantCitasActual);
+					contadorCitas.set(ci, especialistaContador);
+				} else {
+					debeAgregarItem = true;
+					
+				}
+					
+			}
+			if (debeAgregarItem) {
+				//no lo encontró, entonces crea un nuevo item y lo añade al arreglo de acumulación
+				EspecialistaContador espContadorAgregar = new EspecialistaContador(nombreEspecialista, 1);
+				contadorCitas.add(espContadorAgregar);
+			}				
+			
+			//contadorCitas.contains(nombreEspecialista)			
+		}
+		//recorrer arreglo de citas
+		
+		
+		String titulosEMNCDM[] = {"Especialista", "Número de citas"};
+		
+		
+		String datosEMNCDM[][] = new String[1][2];
+		if (contadorCitas!=null) {
+			datosEMNCDM = new String[contadorCitas.size()][2];	
+
+			int i = 0;
+			
+			
+			for (EspecialistaContador espCont : contadorCitas) {
+			
+				datosEMNCDM[i][0] = espCont.getNombreEspecialista();
+				datosEMNCDM[i][1] = String.valueOf(espCont.getCantidadCitas());
+				
+				
+				i++;
+			}
+		}
+		
+		JTable jtEspMayorNumCitasDM = new JTable(datosEMNCDM, titulosEMNCDM);
+		jtEspMayorNumCitasDM.setEnabled(true);
+		jtEspMayorNumCitasDM.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(10, 10, 500, 300); //validar coordenadas
+		vf.getVentanaDirector().getPanelEspecialisasMNC().add(scrollPane);
+		scrollPane.setViewportView(jtEspMayorNumCitasDM);	
+	}
+	
+	
+	
+	//TABLA ESPECIALIDAD CON MAYOR CONSULTA DIRECTOR MEDICO
+	public void tablaEspecialidadMayorConsultaDM() {
 		
 	}
 	
-	public void TablaEspecialidadMayorConsultaDM() {
-		
-	}
-	
+	//TABLA CITAS CANCELADAS DIRECTOR MEDICO
 	public void tablaCitasCanceladasDM() {
 		
 	}
 	
+	//TABLA REPORTE MENSUAL DIRECTOR MEDICO
 	public void tablaReporteMensualDM() {
 		
 	}
@@ -923,6 +1181,44 @@ public class Controller implements ActionListener {
 		ArrayList<PacienteDTO> listaP = mf.getPacienteDAO().getAll();
 		for (PacienteDTO pacienteDTO : listaP) {
 				vf.getVentanaEspecialista().getCmbEscogerPaciente().addItem(pacienteDTO.getNombre());		
+		}
+	}
+	
+	public boolean verifyMail(String mail) {
+		try {
+			ExceptionChecker.mail(mail);
+			return true;
+		} catch (MailException e) {
+			return false;
+		}
+	}
+	
+
+	public boolean verifyDate (Date fecha) {
+		try {
+			ExceptionChecker.notValidBirthdateException(fecha);
+			return true;
+		} catch (InvalidDateException e) {
+			return false;
+		}
+	}
+	
+	public int verifyNumber (int num) {
+		try {
+			ExceptionChecker.notValidNumberException(num);
+		} catch (PositiveIntegerException e) {
+			
+		}
+		return num;
+	}
+	
+	public boolean verifyTxt(String txt) {
+		try {
+			ExceptionChecker.notSpecialCharacter(txt);
+			return true;
+		} catch (NotSpecialCharacterException e) {
+			
+			return false;
 		}
 	}
 	
