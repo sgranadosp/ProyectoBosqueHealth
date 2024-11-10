@@ -15,6 +15,14 @@ import java.util.Date;
  * @since 2024-11-10
  */
 public class DirectorMedico extends Persona implements Serializable{
+	
+	/**
+     * Identificador de versión para la serialización de la clase {@code Especialista}.
+     */
+    private static final long serialVersionUID = -1119936467395148006L;
+
+    /**
+	
 	/** Nivel directivo del director médico (por ejemplo, "Alto", "Medio", "Bajo") */
     private String nivelDirectivo;
 

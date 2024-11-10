@@ -15,7 +15,6 @@ import org.junit.rules.TestName;
 
 import co.edu.unbosque.model.CitaDTO;
 import co.edu.unbosque.model.Especialista;
-import co.edu.unbosque.model.MascotaDTO;
 import co.edu.unbosque.model.Paciente;
 import co.edu.unbosque.model.persistence.CitaDAO;
 import co.edu.unbosque.model.persistence.DataMapper;
@@ -223,16 +222,13 @@ public class CitaDAOTest {
 		fec = new Date(2024-11-30);
 		boolean verified = false;
 
-		String especialista = "Eduardo Portilla";
-		String paciente = "Bianca Blanco";
-		Date fecha = new Date(2024-11-30);
 	    String hora = "10 am";
 	    int numeroCita = 12345;
 	    String estado = "Activa";
 
 		FileHandler.checkFolder();
 
-		CitaDTO newData = new CitaDTO(specialist, pacient, );
+		CitaDTO newData = new CitaDTO(esp, paciente, fec, hora, numeroCita, estado);
 		CitaDTO delete = new CitaDTO(esp, paciente, fec, "10 am", 12345, "Activa");
 		cDAO.add(newData);
 		cDAO.add(delete);
@@ -250,19 +246,19 @@ public class CitaDAOTest {
 	
 	@Test
 	public void verificarReadSerialized() {
+		esp = new Especialista("Eduardo Portilla", null, null, 0, null, null);
+		paciente = new Paciente("Bianca Blanco", null, null, 0, null, null);
+		fec = new Date(2024-11-30);
 		boolean verified = false;
 
-		String especialista = "Eduardo Portilla";
-		String paciente = "Bianca Blanco";
-		Date fecha = new Date(2024-11-30);
-	    String hora = "10 am";
+		String hora = "10 am";
 	    int numeroCita = 12345;
 	    String estado = "Activa";
 
 		FileHandler.checkFolder();
 
-		CitaDTO newData = new CitaDTO(name, breed);
-		CitaDTO delete = new CitaDTO("lolo", "chino");
+		CitaDTO newData = new CitaDTO(esp, paciente, fec, hora, numeroCita, estado);
+		CitaDTO delete = new CitaDTO(esp, paciente, fec, "10 am", 12345, "Activa");
 		cDAO.add(newData);
 		cDAO.add(delete);
 
