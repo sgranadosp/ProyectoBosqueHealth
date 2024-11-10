@@ -20,15 +20,17 @@ import co.edu.unbosque.model.EspecialistaDTO;
 import co.edu.unbosque.model.ModelFacade;
 import co.edu.unbosque.model.Paciente;
 import co.edu.unbosque.model.PacienteDTO;
+import co.edu.unbosque.model.TratamientoMedico;
 import co.edu.unbosque.model.TratamientoMedicoDTO;
+import co.edu.unbosque.model.persistence.DataMapper;
 import co.edu.unbosque.view.ViewFacade;
 
 public class Controller implements ActionListener {
 
 	private ModelFacade mf;
 	private ViewFacade vf;
-	private int numSeleccionCita = 0;
 	private Paciente pacienteActual;
+	private Especialista especialistaActual;
 	private int numCita = 0;
 	
 	public Controller() {
@@ -253,7 +255,6 @@ public class Controller implements ActionListener {
 			
 		case "AGENDAR CITA":
 			vf.getVentanaPaciente().getPanelVariableCitas().setVisible(true);
-			numSeleccionCita = 1;
 			vf.getVentanaPaciente().getPanelVariableCitas().setVisible(true);
 			vf.getVentanaPaciente().getCardLayout().show(vf.getVentanaPaciente().getPanelVariableCitas(), vf.getVentanaPaciente().getAgendarcita());
 			preparacionDeDatosEsp();
@@ -263,7 +264,6 @@ public class Controller implements ActionListener {
 		
 		case "CITAS AGENDADAS":
 			vf.getVentanaPaciente().getPanelVariableCitas().setVisible(true);
-			numSeleccionCita = 2;
 			vf.getVentanaPaciente().getPanelVariableCitas().setVisible(true);
 			vf.getVentanaPaciente().getCardLayout().show(vf.getVentanaPaciente().getPanelVariableCitas(), vf.getVentanaPaciente().getCitasagendadas());
 			tablaCitasAgendadasP();
@@ -271,14 +271,12 @@ public class Controller implements ActionListener {
 			break;
 		case "REAGENDAR CITA":
 			vf.getVentanaPaciente().getPanelVariableCitas().setVisible(true);
-			numSeleccionCita = 3;
 			vf.getVentanaPaciente().getPanelVariableCitas().setVisible(true);
 			vf.getVentanaPaciente().getCardLayout().show(vf.getVentanaPaciente().getPanelVariableCitas(), vf.getVentanaPaciente().getReagendarcita());
 			
 			break;
 		case "CANCELAR CITA":
 			vf.getVentanaPaciente().getPanelVariableCitas().setVisible(true);
-			numSeleccionCita = 4;
 			vf.getVentanaPaciente().getPanelVariableCitas().setVisible(true);
 			vf.getVentanaPaciente().getCardLayout().show(vf.getVentanaPaciente().getPanelVariableCitas(), vf.getVentanaPaciente().getCancelarcita());
 
@@ -315,8 +313,7 @@ public class Controller implements ActionListener {
 				mf.getPacienteDAO().add(new PacienteDTO(nombreCompleto, fecNacimientoDC, genero, numDoc, correo));
 				JOptionPane.showMessageDialog(null, "Paciente creado exitosamente");
 				
-				pacienteActual = new Paciente(nombreCompleto, fecNacimientoDC, genero, numDoc, correo);
-				
+				pacienteActual = new Paciente(nombreCompleto, fecNacimientoDC, genero, numDoc, correo);	
 				limpiarEntradasPacientes();
 			}
 			
@@ -348,12 +345,14 @@ public class Controller implements ActionListener {
 				
 				mf.getCitaDAO().add(new CitaDTO(espCita, pacienteActual, fechaCita, horaCita, numCita, "Activo"));
 				JOptionPane.showMessageDialog(null, "Cita generada exitosamente");
+				
+				limpiarEntradasPacientes();
 			}
 			
 			break;	
 			
 		case "GUARDAR CANCELAR CITA":
-			JOptionPane.showMessageDialog(null, "hola");
+			
 			String numCancelarCita = vf.getVentanaPaciente().getTxtNumeroCancelarCita().getText();
 			int numCC = Integer.parseInt(numCancelarCita);
 			
@@ -385,11 +384,32 @@ public class Controller implements ActionListener {
 			String numReagendarCita = vf.getVentanaPaciente().getTxtNumeroReagendarCita().getText();
 			int numRC = Integer.parseInt(numReagendarCita);
 			
-			/*if (mf.getCitaDAO().find(numRC)) {
+			
+			Cita citaABuscar = new Cita();
+			citaABuscar.setNumeroCita(numRC);
+			
+			mf.getCitaDAO().find(citaABuscar);
+			
+			Cita citaEncontradaReagendar = mf.getCitaDAO().find(citaABuscar); 
+			CitaDTO cEncontradaReagendar = DataMapper.citaToCitaDTO(citaEncontradaReagendar);
+			
+			if (citaEncontradaReagendar!=null) {
+				//eliminar cita encontrada
+				
+				
+				CitaDTO citaDTOAReagendar = new CitaDTO(cEncontradaReagendar.getEspecialista(),
+						cEncontradaReagendar.getPaciente(), vf.getVentanaPaciente().getFechaReagendarCita().getDate(),
+						vf.getVentanaPaciente().getTxtHoraReagendarCita().getText(), cEncontradaReagendar.getNumeroCita(), 
+						cEncontradaReagendar.getEstado());
+				
+				mf.getCitaDAO().update(cEncontradaReagendar, citaDTOAReagendar);
+				JOptionPane.showMessageDialog(null, "Cita No. "+numRC+" fue reagendada con exito");
+				
+				limpiarEntradasPacientes();
 				
 			} else {
-
-			}*/
+				JOptionPane.showMessageDialog(null, "Cita No. "+numRC+" no pudo ser reagendada");
+			}
 			
 			break;	
 
@@ -411,12 +431,14 @@ public class Controller implements ActionListener {
 			break;	
 		case "CITAS ESPECIALISTA":
 			cambiarPanelesEspecialista(true, false, false, true, false, false, false, true, false, false, false, false);
+			tablaCitasMedicasE();
 			break;	
 		case "TURNOS ESPECIALISTA":
 			cambiarPanelesEspecialista(true, false, false, false, false, false, false, false, false, false, true, true);
 			break;	
 		case "TRATAMIENTO PACIENTE ESPECIALISTA":
 			cambiarPanelesEspecialista(true, false, false, false, true, false, false, false, true, false, false, false);
+			cargarCmbPacienteTrat();
 			break;	
 		case "LISTA TRATAMIENTOS ESPECIALISTA":
 			cambiarPanelesEspecialista(true, false, false, false, false, true, false, false, false, true, false, false);
@@ -453,13 +475,14 @@ public class Controller implements ActionListener {
 				fecNacimientoE = vf.getVentanaEspecialista().getFechaNacimiento().getDate();
 				String correoE = vf.getVentanaEspecialista().getTxtCorreoElectronico().getText();
 				String generoE = vf.getVentanaEspecialista().getCmbGenero().getSelectedItem().toString();
-				String especialidadE = vf.getVentanaEspecialista().getCmbNuevoEspecialista().getSelectedItem().toString();
+				String especialidadE = vf.getVentanaEspecialista().getCmbEspecialidadDP().getSelectedItem().toString();
 				
 				int numDocE = Integer.parseInt(numeroDocE);
 				
 				mf.getEspecialistaDAO().add(new EspecialistaDTO(nombreCompletoE, fecNacimientoE, generoE, numDocE, correoE, especialidadE));
 				JOptionPane.showMessageDialog(null, "Especialista creado exitosamente");
 				
+				especialistaActual = new Especialista(nombreCompletoE, fecNacimientoE, generoE, numDocE, correoE, especialidadE);
 				
 				limpiarEntradasEspecialistas();
 			}
@@ -468,7 +491,35 @@ public class Controller implements ActionListener {
 			
 			break;	
 		case "GUARDAR TRATAMIENTO ESP":
+			Date fecTratamientoE = vf.getVentanaEspecialista().getFechaTratamientoP().getDate();
+			String sFecTratamietoE = null;
+			if (fecTratamientoE==null)
+				sFecTratamietoE = "";
+			else
+				sFecTratamietoE = DateFormat.getDateInstance().format(fecTratamientoE);
 			
+			if (sFecTratamietoE.equals("")
+						|| vf.getVentanaEspecialista().getTxtExamenP().getText().trim().equals("")
+						|| vf.getVentanaEspecialista().getTxtDiagnosticoP().getText().equals("")
+						|| vf.getVentanaEspecialista().getTxtTratamientoP().getText().equals("")
+						|| vf.getVentanaEspecialista().getCmbEscogerPaciente().getSelectedItem().toString().equals("")) {
+				JOptionPane.showMessageDialog(null, "Ingrese los valores requeridos", "Error",
+						JOptionPane.ERROR_MESSAGE);
+				
+			} else {
+				fecTratamientoE = vf.getVentanaEspecialista().getFechaTratamientoP().getDate();
+				String pacienteTratE = vf.getVentanaEspecialista().getCmbEscogerPaciente().getSelectedItem().toString();
+				String examenTratE = vf.getVentanaEspecialista().getTxtExamenP().getText();
+				String diagnosticoE = vf.getVentanaEspecialista().getTxtNumeroDocumento().getText();
+				String tratamientoE = vf.getVentanaEspecialista().getTxtTratamientoP().getText();
+				
+				Paciente pacTemp = new Paciente(pacienteTratE, null, null, 0, null, null);
+				
+				mf.getTratamientoMedicoDAO().add(new TratamientoMedicoDTO(pacTemp, especialistaActual, fecTratamientoE, tratamientoE, examenTratE, diagnosticoE));
+				JOptionPane.showMessageDialog(null, "Tratamiento creado exitosamente");
+							
+				limpiarEntradasEspecialistas();
+			}
 			break;	
 			
 			
@@ -546,6 +597,7 @@ public class Controller implements ActionListener {
 			break;	
 		case "GENERAR TURNO DIRECTOR":
 			
+			limpiarEntradasDirectorMedico();
 			break;		
 		default:
 			break;
@@ -649,7 +701,7 @@ public class Controller implements ActionListener {
 		vf.getVentanaDirector().getTxtNombreCompleto().setText(null);
 		vf.getVentanaDirector().getTxtNumeroDocumento().setText(null);
 		vf.getVentanaDirector().getCmbEspecialidadCreacionT().setSelectedIndex(0);
-		vf.getVentanaDirector().getCmbEspecialistaCreacionT().setSelectedIndex(0);
+		//vf.getVentanaDirector().getCmbEspecialistaCreacionT().setSelectedIndex(0);
 		vf.getVentanaDirector().getCmbGenero().setSelectedIndex(0);
 		vf.getVentanaDirector().getCmbNivelDirectivo().setSelectedIndex(0);
 		vf.getVentanaDirector().getFechaCreacionTurno().setCalendar(null);
@@ -657,7 +709,7 @@ public class Controller implements ActionListener {
 	}
 	
 	public void tablaCitasAgendadasP() {
-		String titulosCA[] = { "Numero de Cita", "Especialidad", "Especialista", "Fecha", "Hora", "Estado"};
+		String titulosCA[] = { "Número de Cita", "Especialidad", "Especialista", "Fecha", "Hora", "Estado"};
 		ArrayList<CitaDTO> cList = mf.getCitaDAO().getAll();
 		//pendiente filtrar las citas del Paciente actual
 		//.....
@@ -690,8 +742,7 @@ public class Controller implements ActionListener {
 		scrollPane.setBounds(10, 10, 500, 300); //validar coordenadas
 		vf.getVentanaPaciente().getPanelCitasAgendadas().add(scrollPane);
 		scrollPane.setViewportView(jtCitasAgendadas);
-		jtCitasAgendadas.repaint();
-		scrollPane.repaint();
+
 	}
 	
 	public void tablaTratamientoMedicoP() {
@@ -728,8 +779,7 @@ public class Controller implements ActionListener {
 		scrollPane.setBounds(10, 10, 500, 300); //validar coordenadas
 		vf.getVentanaPaciente().getPanelTratamientoMedico().add(scrollPane);
 		scrollPane.setViewportView(jtTratamientoMedico);	
-		jtTratamientoMedico.repaint();
-		scrollPane.repaint();
+
 	}
 	
 	public void preparacionDeDatosEsp() {
@@ -760,41 +810,41 @@ public class Controller implements ActionListener {
 	}
 	
 	public void tablaCitasMedicasE() {
-		String titulosCitasMedicasE[] = { "Paciente", "Tratamiento", "Fecha", "Hora"};
-		ArrayList<TratamientoMedicoDTO> tmList = mf.getTratamientoMedicoDAO().getAll();
-		//pendiente filtrar las citas del Paciente actual
-		//.....
-		String datosCA[][] = new String[1][5];
-		if (tmList!=null) {
-			datosCA = new String[tmList.size()][5];	
+		String titulosCitasMedicasE[] = {"Número de cita", "Paciente", "Especialista", "Fecha", "Hora"};
+		ArrayList<CitaDTO> citaMedicaList = mf.getCitaDAO().getAll();
+
+		String datosCM[][] = new String[1][5];
+		if (citaMedicaList!=null) {
+			datosCM = new String[citaMedicaList.size()][5];	
 
 
 			int i = 0;
-			for (TratamientoMedicoDTO tmDTO : tmList) {
-				//recuperar el Especialista
-				Especialista esp = tmDTO.getEspecialista();
-				if (esp!=null) {
-					datosCA[i][0] = esp.getNombre();
+			for (CitaDTO cmedicaDTO : citaMedicaList) {
+				datosCM[i][0]=String.valueOf(cmedicaDTO.getNumeroCita());
+				Paciente paTemp = cmedicaDTO.getPaciente();
+				if (paTemp!=null) {
+					datosCM[i][1] = paTemp.getNombre();
 				}
-				if (tmDTO.getFecha()!=null)
-					datosCA[i][1] = tmDTO.getFecha().toString();
-				datosCA[i][2] = tmDTO.getExamen();
-				datosCA[i][3] = tmDTO.getDiagnostico();
-				datosCA[i][4] = tmDTO.getTratamiento();
+				Especialista espTemp = cmedicaDTO.getEspecialista();
+				if (espTemp!=null) {
+					datosCM[i][2] = espTemp.getNombre();
+				}
 				
+				datosCM[i][3]=cmedicaDTO.getFecha().toString();
+				datosCM[i][4]=cmedicaDTO.getHora();
+			
 				i++;
 			}
 		}
 		
-		JTable jtCitasMedicasE = new JTable(datosCA, titulosCitasMedicasE);
+		JTable jtCitasMedicasE = new JTable(datosCM, titulosCitasMedicasE);
 		jtCitasMedicasE.setEnabled(true);
 		jtCitasMedicasE.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(10, 10, 500, 300); //validar coordenadas
-		vf.getVentanaPaciente().getPanelTratamientoMedico().add(scrollPane);
+		vf.getVentanaEspecialista().getPanelCitasMedicas().add(scrollPane);
 		scrollPane.setViewportView(jtCitasMedicasE);
-		jtCitasMedicasE.repaint();
-		scrollPane.repaint();
+
 	}
 	
 	public void tablaTurnosMesE() {
@@ -865,6 +915,14 @@ public class Controller implements ActionListener {
 			if (especialistaDTO.getEspecialidad().equals(selectEsp)) {			
 				vf.getVentanaDirector().getCmbEspecialistaCreacionT().addItem(especialistaDTO.getNombre());
 			}
+		}
+	}
+	
+	public void cargarCmbPacienteTrat() {
+		vf.getVentanaEspecialista().getCmbEscogerPaciente().removeAllItems();
+		ArrayList<PacienteDTO> listaP = mf.getPacienteDAO().getAll();
+		for (PacienteDTO pacienteDTO : listaP) {
+				vf.getVentanaEspecialista().getCmbEscogerPaciente().addItem(pacienteDTO.getNombre());		
 		}
 	}
 	
