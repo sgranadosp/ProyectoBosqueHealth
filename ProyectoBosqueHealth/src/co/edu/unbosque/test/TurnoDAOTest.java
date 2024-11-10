@@ -163,7 +163,7 @@ public class TurnoDAOTest {
 		assertTrue(verified);
 		trDAO.delete(newData);
 		verifiedOut = verified;
-		
+		//a
 	}
 	
 	@Test
