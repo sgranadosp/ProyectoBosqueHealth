@@ -38,16 +38,43 @@ import co.edu.unbosque.util.exception.PositiveIntegerException;
 import co.edu.unbosque.util.mail.Mail;
 import co.edu.unbosque.view.ViewFacade;
 
+/**
+ * La clase Controller actúa como el controlador principal de la aplicación,
+ * gestionando la interacción entre el modelo y la vista. Implementa la interfaz
+ * {@link ActionListener} para gestionar las acciones realizadas por el usuario a
+ * través de la interfaz gráfica.
+ * 
+ * @author David Esteban Caicedo Saldaña
+ * @version 1.0
+ * @since 2024-11-10
+ */
 public class Controller implements ActionListener {
 
-	private ModelFacade mf;
-	private ViewFacade vf;
-	private Paciente pacienteActual;
-	private Especialista especialistaActual;
-	private DirectorMedico directorActual;
-	private int numCita = 0;
+	 /** Instancia de la fachada del modelo para gestionar la lógica de negocio. */
+    private ModelFacade mf;
+
+    /** Instancia de la fachada de la vista para gestionar las interfaces gráficas. */
+    private ViewFacade vf;
+
+    /** Objeto para almacenar la información del paciente actual en la sesión. */
+    private Paciente pacienteActual;
+
+    /** Objeto para almacenar la información del especialista actual en la sesión. */
+    private Especialista especialistaActual;
+
+    /** Objeto para almacenar la información del director médico actual en la sesión. */
+    private DirectorMedico directorActual;
+
+    /** Número de la cita actual gestionada por el sistema. */
+    private int numCita = 0;
+    /**Objeto que se utiliza para llamar a la clase Mail. */
 	private Mail envioEmail;
 
+	 /**
+     * Constructor de la clase Controller. Inicializa las instancias de la fachada del
+     * modelo y la vista, carga los datos iniciales y asigna los listeners a los
+     * componentes de la interfaz gráfica.
+     */
 	public Controller() {
 		mf = new ModelFacade();
 		vf = new ViewFacade();
@@ -56,6 +83,10 @@ public class Controller implements ActionListener {
 		asignarLectores();
 	}
 
+	 /**
+     * Método encargado de asignar los listeners a los botones de la interfaz gráfica
+     * para manejar las diferentes acciones que el usuario puede realizar.
+     */
 	private void asignarLectores() {
 		// Menu de personas
 		// director
@@ -229,6 +260,13 @@ public class Controller implements ActionListener {
 
 	}
 
+	 /**
+     * Método que se ejecuta cuando ocurre una acción en la interfaz gráfica.
+     * Se utiliza para manejar los eventos de los botones y ejecutar la acción
+     * correspondiente según el comando asignado.
+     *
+     * @param e El evento de acción que ocurrió.
+     */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		switch (e.getActionCommand()) {
@@ -732,6 +770,21 @@ public class Controller implements ActionListener {
 
 	}
 
+	/**
+	 * Cambia la visibilidad de los paneles y botones en la ventana del paciente.
+	 * Controla qué secciones se muestran o esconden en función de los parámetros recibidos.
+	 *
+	 * @param vDA  Visibilidad del panel de la parte superior derecha.
+	 * @param vDP  Visibilidad del panel de datos del paciente.
+	 * @param vVC  Visibilidad del panel variable de citas.
+	 * @param vTM  Visibilidad del panel de tratamiento médico.
+	 * @param vTDP Visibilidad del título de datos personales del paciente.
+	 * @param vTTM Visibilidad del título de tratamiento médico.
+	 * @param vBAC Visibilidad del botón para agendar cita.
+	 * @param vBCC Visibilidad del botón para cancelar cita.
+	 * @param vBCA Visibilidad del botón para ver citas agendadas.
+	 * @param vBRC Visibilidad del botón para reagendar cita.
+	 */
 	public void cambiarPanelesPacientes(boolean vDA, boolean vDP, boolean vVC, boolean vTM, boolean vTDP, boolean vTTM,
 			boolean vBAC, boolean vBCC, boolean vBCA, boolean vBRC) {
 		vf.getVentanaPaciente().getPanelDerechaArriba().setVisible(vDA);
@@ -747,6 +800,23 @@ public class Controller implements ActionListener {
 
 	}
 
+	/**
+	 * Cambia la visibilidad de los paneles y botones en la ventana del especialista.
+	 * Controla qué secciones se muestran o esconden en función de los parámetros recibidos.
+	 *
+	 * @param vDA  Visibilidad del panel de la parte superior derecha.
+	 * @param vDE  Visibilidad del panel de datos del especialista.
+	 * @param vVT  Visibilidad del panel variable de turnos.
+	 * @param vCM  Visibilidad del panel de citas médicas.
+	 * @param vTP  Visibilidad del panel de tratamiento del paciente.
+	 * @param vLT  Visibilidad del panel de lista de tratamientos.
+	 * @param vTDP Visibilidad del título de datos personales del especialista.
+	 * @param vTCM Visibilidad del título de citas médicas.
+	 * @param vTTP Visibilidad del título de tratamiento del paciente.
+	 * @param vTLT Visibilidad del título de lista de tratamientos.
+	 * @param vTM  Visibilidad del botón de turnos del mes.
+	 * @param vCT  Visibilidad del botón de cambio de turno.
+	 */
 	public void cambiarPanelesEspecialista(boolean vDA, boolean vDE, boolean vVT, boolean vCM, boolean vTP, boolean vLT,
 			boolean vTDP, boolean vTCM, boolean vTTP, boolean vTLT, boolean vTM, boolean vCT) {
 		vf.getVentanaEspecialista().getPanelDerechaArriba().setVisible(vDA);
@@ -763,6 +833,26 @@ public class Controller implements ActionListener {
 		vf.getVentanaEspecialista().getBtnCambioTurno().setVisible(vCT);
 	}
 
+	/**
+	 * Cambia la visibilidad de los paneles y botones en la ventana del director médico.
+	 * Controla qué secciones se muestran o esconden en función de los parámetros recibidos.
+	 *
+	 * @param vDA      Visibilidad del panel de la parte superior derecha.
+	 * @param vDD      Visibilidad del panel de datos del director.
+	 * @param vVR      Visibilidad del panel variable de reportes.
+	 * @param vPC      Visibilidad del panel central.
+	 * @param vRM      Visibilidad del panel de reporte mensual.
+	 * @param vCT      Visibilidad del panel de creación de turnos.
+	 * @param vTitDP   Visibilidad del título de datos personales.
+	 * @param vBRS     Visibilidad del botón de reporte semanal.
+	 * @param vBRM     Visibilidad del botón de reporte mensual.
+	 * @param vBPA     Visibilidad del botón de pacientes atendidos.
+	 * @param vBDR     Visibilidad del botón de diagnósticos realizados.
+	 * @param vEMNC    Visibilidad del botón de especialistas más nombrados.
+	 * @param vBEMC    Visibilidad del botón de especialidad más consultada.
+	 * @param vLTCT    Visibilidad del título de creación de turno.
+	 * @param cBCC     Visibilidad del botón de citas canceladas.
+	 */
 	public void cambiarPanelesDirector(boolean vDA, boolean vDD, boolean vVR, boolean vPC, boolean vRM, boolean vCT,
 			boolean vTitDP, boolean vBRS, boolean vBRM, boolean vBPA, boolean vBDR, boolean vEMNC, boolean vBEMC,
 			boolean vLTCT, boolean cBCC) {
@@ -783,6 +873,9 @@ public class Controller implements ActionListener {
 		vf.getVentanaDirector().getLblTituloCreacionTurno().setVisible(vLTCT);
 	}
 
+	/**
+	 * Muestra el menú principal y oculta las ventanas del paciente, especialista y director.
+	 */
 	public void volverMenuPrincipal() {
 		vf.getMenuPrincipal().setVisible(true);
 		vf.getVentanaDirector().setVisible(false);
@@ -790,6 +883,9 @@ public class Controller implements ActionListener {
 		vf.getVentanaPaciente().setVisible(false);
 	}
 
+	/**
+	 * Limpia todos los campos de entrada en la ventana del paciente.
+	 */
 	public void limpiarEntradasPacientes() {
 		vf.getVentanaPaciente().getTxtCorreoElectronico().setText(null);
 		vf.getVentanaPaciente().getTxtHora().setText(null);
@@ -807,6 +903,9 @@ public class Controller implements ActionListener {
 
 	}
 
+	/**
+	 * Limpia todos los campos de entrada en la ventana del especialista.
+	 */
 	public void limpiarEntradasEspecialistas() {
 		vf.getVentanaEspecialista().getTxtCorreoElectronico().setText(null);
 		vf.getVentanaEspecialista().getTxtDiagnosticoP().setText(null);
@@ -823,7 +922,11 @@ public class Controller implements ActionListener {
 		vf.getVentanaEspecialista().getFechaNacimiento().setCalendar(null);
 		vf.getVentanaEspecialista().getFechaTratamientoP().setCalendar(null);
 	}
-
+	/**
+	 * Limpia todas las entradas de datos en la ventana del Director Médico.
+	 * Este método restablece todos los campos de texto, selecciona los valores
+	 * por defecto en los combobox y limpia los calendarios de la interfaz.
+	 */
 	public void limpiarEntradasDirectorMedico() {
 		vf.getVentanaDirector().getTxtCorreoElectronico().setText(null);
 		vf.getVentanaDirector().getTxtNombreCompleto().setText(null);
@@ -836,6 +939,19 @@ public class Controller implements ActionListener {
 		vf.getVentanaDirector().getFechaNacimiento().setCalendar(null);
 	}
 
+	/**
+	 * Genera y muestra la tabla de citas agendadas del paciente en la interfaz.
+	 * La tabla incluye las siguientes columnas:
+	 * - Número de Cita
+	 * - Especialidad
+	 * - Especialista
+	 * - Fecha
+	 * - Hora
+	 * - Estado
+	 * 
+	 * Obtiene todas las citas de la base de datos y las presenta en una tabla.
+	 * Pendiente de filtrar las citas para el paciente actual.
+	 */
 	// TABLA DE CITAS AGENDADAS DEL PACIENTE
 	public void tablaCitasAgendadasP() {
 		String titulosCA[] = { "Número de Cita", "Especialidad", "Especialista", "Fecha", "Hora", "Estado" };
@@ -873,6 +989,18 @@ public class Controller implements ActionListener {
 
 	}
 
+	/**
+	 * Genera y muestra la tabla de tratamientos médicos del paciente en la interfaz.
+	 * La tabla incluye las siguientes columnas:
+	 * - Nombre del Especialista
+	 * - Fecha
+	 * - Examen Solicitado
+	 * - Diagnóstico
+	 * - Tratamiento
+	 * 
+	 * Obtiene todos los tratamientos médicos de la base de datos y los presenta en una tabla.
+	 * Pendiente de filtrar los tratamientos para el paciente actual.
+	 */
 	// TABLA TRATAMIENTO MEDICO DEL PACIENTE
 	public void tablaTratamientoMedicoP() {
 		String titulosTM[] = { "Nombre del Especialista", "Fecha", "Examen Solicitado", "Diagnostico", "Tratamiento" };
@@ -910,6 +1038,13 @@ public class Controller implements ActionListener {
 
 	}
 
+	/**
+	 * Prepara y carga una lista de especialistas en la base de datos.
+	 * Se añaden varios especialistas con sus respectivos nombres, fechas de nacimiento,
+	 * géneros, números de documento, correos electrónicos y especialidades.
+	 * 
+	 * Esta lista se utiliza para simular datos en la aplicación.
+	 */
 	// DATOS
 	public void preparacionDeDatosEsp() {
 
@@ -1091,6 +1226,15 @@ public class Controller implements ActionListener {
 
 	}
 
+	/**
+	 * Genera y muestra una tabla que lista los turnos asignados del mes actual
+	 * para un especialista en la interfaz. 
+	 * La tabla contiene las siguientes columnas:
+	 * - Fecha
+	 * - Especialista
+	 * 
+	 * Obtiene todos los turnos de la base de datos y los presenta en una tabla.
+	 */
 	// TABLA TURNOS DEL MES DEL ESPECIALISTA
 	public void tablaTurnosMesE() {
 		String titulosTME[] = { "Fecha", "Especialista" };
@@ -1122,6 +1266,15 @@ public class Controller implements ActionListener {
 		scrollPane.setViewportView(jtTurnosMes);
 	}
 
+	/**
+	 * Genera y muestra una tabla con la lista de tratamientos proporcionados 
+	 * por el especialista en la interfaz.
+	 * La tabla contiene las siguientes columnas:
+	 * - Paciente
+	 * - Tratamiento
+	 * 
+	 * Obtiene todos los tratamientos médicos de la base de datos y los presenta en una tabla.
+	 */
 	// TABLA LISTA DE TRATAMIENTOS DEL ESPECIALISTA
 	public void tablaListaDeTratamientosE() {
 		String titulosLTE[] = { "Paciente", "Tratamiento" };
@@ -1153,6 +1306,16 @@ public class Controller implements ActionListener {
 		scrollPane.setViewportView(jtListaTratE);
 	}
 
+	/**
+	 * Genera y muestra una tabla que lista los pacientes atendidos bajo la supervisión
+	 * del Director Médico en la interfaz.
+	 * La tabla contiene las siguientes columnas:
+	 * - Especialista
+	 * - Paciente
+	 * - Fecha
+	 * 
+	 * Obtiene todas las citas de la base de datos y las presenta en una tabla.
+	 */
 	// TABLA PACIENTES ATENDIDOS DIRECTOR MEDICO
 	public void tablaPacientesAtendidosDM() {
 		String titulosPADM[] = { "Especialista", "Paciente", "Fecha" };
@@ -1188,6 +1351,16 @@ public class Controller implements ActionListener {
 		scrollPane.setViewportView(jtPacientesAtendidosDM);
 	}
 
+	/**
+	 * Genera y muestra una tabla que lista los diagnósticos realizados por el
+	 * Director Médico en la interfaz.
+	 * La tabla contiene las siguientes columnas:
+	 * - Paciente
+	 * - Diagnóstico
+	 * - Fecha
+	 * 
+	 * Obtiene todos los tratamientos médicos de la base de datos y los presenta en una tabla.
+	 */
 	// TABLA DIAGNOSTICOS REALIZADOS DIRECTOR MEDICO
 	public void tablaDiagnosticosRealizadosDM() {
 		String titulosDRDM[] = { "Paciente", "Diagnostico", "Fecha" };
@@ -1220,73 +1393,174 @@ public class Controller implements ActionListener {
 		scrollPane.setViewportView(jtDiagnosticosRealizadosDM);
 	}
 
+	/**
+	 * Clase auxiliar para llevar un conteo de citas asignadas a un especialista.
+	 * Esta clase es utilizada para generar reportes relacionados con la cantidad
+	 * de citas atendidas por cada especialista.
+	 */
 	// Clase interna para facilitar el reporte
 	class EspecialistaContador {
-		public String NombreEspecialista;
-		public int cantidadCitas;
+		 /**
+	     * Nombre del especialista.
+	     */
+	    private String NombreEspecialista;
 
+	    /**
+	     * Cantidad de citas asignadas al especialista.
+	     */
+	    private int cantidadCitas;
+
+	    /**
+	     * Constructor por defecto de la clase {@code EspecialistaContador}.
+	     * Inicializa los atributos con valores por defecto.
+	     */
 		public EspecialistaContador() {
 			// TODO Auto-generated constructor stub
 		}
 
+		 /**
+	     * Constructor que inicializa un objeto {@code EspecialistaContador} con los
+	     * valores proporcionados.
+	     *
+	     * @param nombreEspecialista El nombre del especialista.
+	     * @param cantidadCitas      La cantidad de citas asignadas al especialista.
+	     */
 		public EspecialistaContador(String nombreEspecialista, int cantidadCitas) {
 			super();
 			NombreEspecialista = nombreEspecialista;
 			this.cantidadCitas = cantidadCitas;
 		}
 
+		 /**
+	     * Obtiene el nombre del especialista.
+	     *
+	     * @return El nombre del especialista.
+	     */
 		public String getNombreEspecialista() {
 			return NombreEspecialista;
 		}
 
+		  /**
+	     * Establece el nombre del especialista.
+	     *
+	     * @param nombreEspecialista El nombre del especialista.
+	     */
 		public void setNombreEspecialista(String nombreEspecialista) {
 			NombreEspecialista = nombreEspecialista;
 		}
 
+
+	    /**
+	     * Obtiene la cantidad de citas asignadas al especialista.
+	     *
+	     * @return La cantidad de citas.
+	     */
 		public int getCantidadCitas() {
 			return cantidadCitas;
 		}
 
+		/**
+	     * Establece la cantidad de citas asignadas al especialista.
+	     *
+	     * @param cantidadCitas La cantidad de citas.
+	     */
 		public void setCantidadCitas(int cantidadCitas) {
 			this.cantidadCitas = cantidadCitas;
 		}
 
 	}
 
+	/**
+	 * Clase auxiliar para llevar un conteo de turnos asignados a un especialista.
+	 * Esta clase se utiliza para generar reportes sobre la cantidad de turnos que
+	 * ha atendido cada especialista en un periodo de tiempo determinado.
+	 */
 	class EspecialistaContadorT {
-		public String NombreEspecialista;
-		public int cantidadTurnos;
 
-		public EspecialistaContadorT() {
-			// TODO Auto-generated constructor stub
-		}
+	    /**
+	     * Nombre del especialista.
+	     */
+	    private String NombreEspecialista;
 
-		public EspecialistaContadorT(String nombreEspecialista, int cantidadTurnos) {
-			super();
-			NombreEspecialista = nombreEspecialista;
-			this.cantidadTurnos = cantidadTurnos;
-		}
+	    /**
+	     * Cantidad de turnos asignados al especialista.
+	     */
+	    private int cantidadTurnos;
 
-		public String getNombreEspecialista() {
-			return NombreEspecialista;
-		}
+	    /**
+	     * Constructor por defecto de la clase {@code EspecialistaContadorT}.
+	     * Inicializa los atributos con valores por defecto.
+	     */
+	    public EspecialistaContadorT() {
+	        // Constructor vacío
+	    }
 
-		public void setNombreEspecialista(String nombreEspecialista) {
-			NombreEspecialista = nombreEspecialista;
-		}
+	    /**
+	     * Constructor que inicializa un objeto {@code EspecialistaContadorT} con los
+	     * valores proporcionados.
+	     *
+	     * @param nombreEspecialista El nombre del especialista.
+	     * @param cantidadTurnos     La cantidad de turnos asignados al especialista.
+	     */
+	    public EspecialistaContadorT(String nombreEspecialista, int cantidadTurnos) {
+	        this.NombreEspecialista = nombreEspecialista;
+	        this.cantidadTurnos = cantidadTurnos;
+	    }
 
-		public int getCantidadTurnos() {
-			return cantidadTurnos;
-		}
+	    /**
+	     * Obtiene el nombre del especialista.
+	     *
+	     * @return El nombre del especialista.
+	     */
+	    public String getNombreEspecialista() {
+	        return NombreEspecialista;
+	    }
 
-		public void setCantidadTurnos(int cantidadTurnos) {
-			this.cantidadTurnos = cantidadTurnos;
-		}
+	    /**
+	     * Establece el nombre del especialista.
+	     *
+	     * @param nombreEspecialista El nombre del especialista.
+	     */
+	    public void setNombreEspecialista(String nombreEspecialista) {
+	        this.NombreEspecialista = nombreEspecialista;
+	    }
 
+	    /**
+	     * Obtiene la cantidad de turnos asignados al especialista.
+	     *
+	     * @return La cantidad de turnos.
+	     */
+	    public int getCantidadTurnos() {
+	        return cantidadTurnos;
+	    }
+
+	    /**
+	     * Establece la cantidad de turnos asignados al especialista.
+	     *
+	     * @param cantidadTurnos La cantidad de turnos.
+	     */
+	    public void setCantidadTurnos(int cantidadTurnos) {
+	        this.cantidadTurnos = cantidadTurnos;
+	    }
 	}
 
 	// TABLA ESPECIALISTAS CON MAYOR NUMERO DE CITAS DIRECTOR MEDICO
 
+	/**
+	 * Método que genera una tabla con los especialistas que tienen el mayor número
+	 * de citas asignadas. Realiza un conteo de las citas por especialista y muestra
+	 * los resultados en un JTable dentro del panel correspondiente.
+	 * 
+	 * <p>El método sigue los siguientes pasos:</p>
+	 * <ol>
+	 * <li>Obtiene todas las citas de la base de datos.</li>
+	 * <li>Cuenta cuántas citas tiene cada especialista.</li>
+	 * <li>Genera una tabla con los especialistas y la cantidad de citas asignadas.</li>
+	 * </ol>
+	 * 
+	 * <p>El resultado se visualiza en el panel correspondiente de la ventana del
+	 * director médico.</p>
+	 */
 	public void tablaEspecialistasMayorNumeroCitasDM() {
 
 		ArrayList<EspecialistaContador> contadorCitas = new ArrayList<>();
@@ -1357,6 +1631,17 @@ public class Controller implements ActionListener {
 		scrollPane.setViewportView(jtEspMayorNumCitasDM);
 	}
 
+	/**
+	 * Método que genera una tabla con las especialidades que tienen el mayor número
+	 * de consultas registradas. Utiliza un JTable para mostrar la información dentro
+	 * del panel correspondiente en la interfaz del director médico.
+	 * 
+	 * <p>Actualmente, el método no está completamente implementado, ya que no se 
+	 * realiza ninguna consulta a la base de datos para obtener los datos necesarios.</p>
+	 * 
+	 * <p>El resultado se visualiza en el panel correspondiente de la ventana del
+	 * director médico.</p>
+	 */
 	// TABLA ESPECIALIDAD CON MAYOR CONSULTA DIRECTOR MEDICO
 	public void tablaEspecialidadMayorConsultaDM() {
 		String titulosEMCDM[] = { "Especialidad", "Número de consultas" };
@@ -1385,6 +1670,18 @@ public class Controller implements ActionListener {
 		scrollPane.setViewportView(jtEMCDM);
 	}
 
+	/**
+	 * Método que genera una tabla con las citas canceladas, mostrando la
+	 * especialidad, el nombre del paciente y la fecha de la cita cancelada.
+	 * Utiliza un JTable para mostrar la información dentro del panel correspondiente
+	 * en la interfaz del director médico.
+	 * 
+	 * <p>Actualmente, el método no está completamente implementado, ya que no se 
+	 * realiza ninguna consulta a la base de datos para obtener los datos necesarios.</p>
+	 * 
+	 * <p>El resultado se visualiza en el panel correspondiente de la ventana del
+	 * director médico.</p>
+	 */
 	// TABLA CITAS CANCELADAS DIRECTOR MEDICO
 	public void tablaCitasCanceladasDM() {
 		String titulosCCDM[] = { "Especialidad", "Paciente", "Fecha" };
@@ -1413,6 +1710,20 @@ public class Controller implements ActionListener {
 		scrollPane.setViewportView(jtCC);
 	}
 
+	/**
+	 * Método que genera una tabla con un reporte mensual para el Director Médico,
+	 * mostrando la cantidad de turnos asignados por cada especialista.
+	 * 
+	 * <p>El método realiza los siguientes pasos:</p>
+	 * <ol>
+	 * <li>Obtiene todos los turnos de la base de datos.</li>
+	 * <li>Cuenta cuántos turnos tiene cada especialista.</li>
+	 * <li>Genera una tabla que muestra los especialistas y la cantidad de turnos asignados.</li>
+	 * </ol>
+	 * 
+	 * <p>El resultado se muestra en un JTable dentro del panel correspondiente en la
+	 * interfaz del Director Médico.</p>
+	 */	
 	// TABLA REPORTE MENSUAL DIRECTOR MEDICO
 	public void tablaReporteMensualDM() {
 		ArrayList<EspecialistaContadorT> contadorTurnos = new ArrayList<>();
@@ -1483,6 +1794,11 @@ public class Controller implements ActionListener {
 		scrollPane.setViewportView(jtDirectorRMDM);
 	}
 
+	/**
+	 * Método que carga un JComboBox con las especialidades disponibles para agendar
+	 * una cita. Agrega un ActionListener al JComboBox para cargar los especialistas
+	 * correspondientes a la especialidad seleccionada.
+	 */
 	public void cargarComboBoxAgendarCita() {
 		vf.getVentanaPaciente().getCmbEspecialidad().addActionListener(new ActionListener() {
 
@@ -1493,6 +1809,12 @@ public class Controller implements ActionListener {
 		});
 	}
 
+	/**
+	 * Método que carga un JComboBox con los especialistas disponibles para una
+	 * especialidad seleccionada al agendar una cita.
+	 * 
+	 * @param seleccionEsp Especialidad seleccionada por el usuario.
+	 */
 	public void cargarEspecialistaAgendar(String seleccionEsp) {
 		vf.getVentanaPaciente().getCmbEspecialistas().removeAllItems();
 		ArrayList<EspecialistaDTO> listaE = mf.getEspecialistaDAO().getAll();
@@ -1503,6 +1825,11 @@ public class Controller implements ActionListener {
 		}
 	}
 
+	/**
+	 * Método que carga un JComboBox con las especialidades disponibles para la
+	 * creación de turnos. Agrega un ActionListener para cargar los especialistas
+	 * correspondientes a la especialidad seleccionada.
+	 */
 	public void cargarComboBoxGenerarTurno() {
 		vf.getVentanaDirector().getCmbEspecialidadCreacionT().addActionListener(new ActionListener() {
 
@@ -1514,6 +1841,12 @@ public class Controller implements ActionListener {
 		});
 	}
 
+	/**
+	 * Método que carga un JComboBox con los especialistas disponibles para la
+	 * especialidad seleccionada al generar un turno.
+	 * 
+	 * @param selectEsp Especialidad seleccionada por el usuario.
+	 */
 	public void cargarEspecialistaGenerarTurnos(String selectEsp) {
 		vf.getVentanaDirector().getCmbEspecialistaCreacionT().removeAllItems();
 		ArrayList<EspecialistaDTO> listaE = mf.getEspecialistaDAO().getAll();
@@ -1524,6 +1857,11 @@ public class Controller implements ActionListener {
 		}
 	}
 
+	/**
+	 * Método que carga los JComboBox en la interfaz del especialista con los
+	 * pacientes registrados en la base de datos. También carga los especialistas
+	 * actuales y nuevos disponibles para la asignación de tratamientos.
+	 */
 	public void cargarCmbPacienteTrat() {
 		vf.getVentanaEspecialista().getCmbEscogerPaciente().removeAllItems();
 		vf.getVentanaEspecialista().getCmbEspecialistaActual().removeAllItems();
@@ -1534,6 +1872,14 @@ public class Controller implements ActionListener {
 		}
 	}
 
+	/**
+	 * Método que carga un JComboBox con las fechas de los turnos disponibles. Incluye
+	 * el número de identificación del turno y la fecha correspondiente.
+	 * 
+	 * <p>Agrega un ActionListener para actualizar los especialistas disponibles
+	 * según el turno seleccionado y cargar la lista de especialistas actuales y
+	 * posibles nuevos para reasignar.</p>
+	 */
 	public void cargarCmbFechaTurno() {
 		vf.getVentanaEspecialista().getCmbFechaTurno().removeAllItems();
 		vf.getVentanaEspecialista().getCmbFechaTurno().addItem("");
@@ -1587,6 +1933,13 @@ public class Controller implements ActionListener {
 		});
 	}
 
+	/**
+	 * Método que verifica la validez de un correo electrónico utilizando una
+	 * verificación personalizada a través de la clase ExceptionChecker.
+	 * 
+	 * @param mail Correo electrónico que se desea validar.
+	 * @return true si el correo es válido, false en caso contrario.
+	 */
 	public boolean verifyMail(String mail) {
 		try {
 			ExceptionChecker.mail(mail);
@@ -1596,6 +1949,17 @@ public class Controller implements ActionListener {
 		}
 	}
 
+	/**
+	 * Verifica si la fecha proporcionada es válida según las reglas definidas en 
+	 * {@link ExceptionChecker#notValidBirthdateException(Date)}.
+	 * 
+	 * <p>Este método valida si la fecha de nacimiento es válida. Si la fecha es válida, 
+	 * retorna true, de lo contrario, lanza una excepción {@link InvalidDateException} 
+	 * y retorna false.</p>
+	 * 
+	 * @param fecha La fecha a verificar.
+	 * @return true si la fecha es válida, false si no lo es.
+	 */
 	public boolean verifyDate(Date fecha) {
 		try {
 			ExceptionChecker.notValidBirthdateException(fecha);
@@ -1605,6 +1969,17 @@ public class Controller implements ActionListener {
 		}
 	}
 
+	/**
+	 * Verifica si el número proporcionado es válido según las reglas definidas en 
+	 * {@link ExceptionChecker#notValidNumberException(int)}.
+	 * 
+	 * <p>Este método valida si el número es un número positivo. Si es un número válido, 
+	 * retorna true, de lo contrario, lanza una excepción {@link PositiveIntegerException} 
+	 * y retorna false.</p>
+	 * 
+	 * @param num El número a verificar.
+	 * @return true si el número es válido, false si no lo es.
+	 */
 	public boolean verifyNumber(int num) {
 		try {
 			ExceptionChecker.notValidNumberException(num);
@@ -1614,6 +1989,16 @@ public class Controller implements ActionListener {
 		}
 	}
 
+	/**
+	 * Verifica si el texto proporcionado contiene caracteres especiales.
+	 * 
+	 * <p>Este método valida si el texto contiene algún carácter especial. Si no 
+	 * contiene caracteres especiales, retorna true, de lo contrario, lanza una 
+	 * excepción {@link NotSpecialCharacterException} y retorna false.</p>
+	 * 
+	 * @param txt El texto a verificar.
+	 * @return true si el texto no contiene caracteres especiales, false si los contiene.
+	 */
 	public boolean verifyTxt(String txt) {
 		try {
 			ExceptionChecker.notSpecialCharacter(txt);
@@ -1624,6 +2009,14 @@ public class Controller implements ActionListener {
 		}
 	}
 
+	/**
+	 * Carga la información inicial de los últimos pacientes, especialistas y 
+	 * directores médicos en el sistema.
+	 * 
+	 * <p>Este método obtiene el último registro de Paciente, Especialista y Director Médico 
+	 * de la base de datos y los asigna a las variables de instancia correspondientes 
+	 * {@link pacienteActual}, {@link especialistaActual} y {@link directorActual}.</p>
+	 */
 	public void cargarPEDinicial() {
 		// NivelesPersona nivelesPersona =
 		// listNivelesPersona2.get(listNivelesPersona2.size() -1 );
@@ -1651,6 +2044,7 @@ public class Controller implements ActionListener {
 		}
 	}
 
+	
 	public int numRandom() {
 		return (int) (Math.random() * 10000 + 100);
 	}
