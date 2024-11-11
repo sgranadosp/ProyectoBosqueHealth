@@ -2044,7 +2044,14 @@ public class Controller implements ActionListener {
 		}
 	}
 
-	
+	/**
+	 * Genera un número aleatorio entre 100 y 10000.
+	 * 
+	 * <p>Este método genera un número aleatorio utilizando la función 
+	 * {@link Math#random()} y lo ajusta para que esté en el rango de 100 a 10000.</p>
+	 * 
+	 * @return Un número aleatorio entre 100 y 10000.
+	 */
 	public int numRandom() {
 		return (int) (Math.random() * 10000 + 100);
 	}
