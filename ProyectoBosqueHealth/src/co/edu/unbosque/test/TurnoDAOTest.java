@@ -22,6 +22,15 @@ import co.edu.unbosque.model.persistence.FileHandler;
 import co.edu.unbosque.model.persistence.TratamientoMedicoDAO;
 import co.edu.unbosque.model.persistence.TurnoDAO;
 
+/**
+ * Clase de prueba unitaria para la clase {@link TurnoDAO}.
+ * Contiene pruebas que verifican las funcionalidades de la clase {@link TurnoDAO},
+ * como la adición, eliminación, actualización, búsqueda y serialización de objetos {@link TurnoDTO}.
+ * 
+ * @since 2024-11-10
+ * @author Santiago Granados Pascagaza
+ * @version 1.0
+ */
 public class TurnoDAOTest {
 
 	static int numeroPrueba = 1;
@@ -34,17 +43,27 @@ public class TurnoDAOTest {
 	@Rule
 	public TestName testName = new TestName();
 	
+	/**
+     * Método que se ejecuta antes de todas las pruebas. Inicializa el objeto {@link TurnoDAO}.
+     */
 	@BeforeClass //solo una vez
 	public static void antesDeTodo () {
 		trDAO = new TurnoDAO();
 		System.out.println("Iniciando las pruebas TurnoDAO");
 	}
 	
+	 /**
+     * Método que se ejecuta antes de cada prueba. Imprime un mensaje indicando el inicio de la prueba.
+     */
 	@Before
 	public void antesDeCadaPrueba() {
 		System.out.println("Iniciando la prueba " + testName.getMethodName() + " #" + numeroPrueba);
 	}
 	
+	 /**
+     * Verifica que el método {@link TurnoDAO#showAll()} muestra correctamente todos los turnos.
+     * Se crea un nuevo turno y se verifica que la información se presente correctamente en la salida.
+     */
 	@Test 
 	public void verificarShowAll() {
 		
@@ -93,8 +112,11 @@ public class TurnoDAOTest {
 		
 	}
 	
+	/**
+     * Verifica el funcionamiento del método {@link TurnoDAO#getAll()}.
+     * Añade un turno, lo recupera con {@code getAll} y verifica que la lista no esté vacía.
+     */
 	@Test
-	
 	public void verificarGetAll() {
 		esp = new Especialista("Eduardo Portilla", null, null, 0, null, null);
 		fec = new Date(2024-9-21);
@@ -112,6 +134,10 @@ public class TurnoDAOTest {
 		verifiedOut = verified;
 	}
 	
+	  /**
+     * Verifica el funcionamiento del método {@link TurnoDAO#add(TurnoDTO)}.
+     * Añade un turno y verifica que se haya agregado correctamente.
+     */
 	@Test
 	public void verificarAdd() {
 		esp = new Especialista("Eduardo Portilla", null, null, 0, null, null);
@@ -130,6 +156,10 @@ public class TurnoDAOTest {
 		
 	}
 	
+	 /**
+     * Verifica el funcionamiento del método {@link TurnoDAO#delete(TurnoDTO)}.
+     * Añade un turno, lo elimina y verifica que haya sido eliminado correctamente.
+     */
 	@Test
 	public void verificarDelete() {
 		esp = new Especialista("Eduardo Portilla", null, null, 0, null, null);
@@ -147,6 +177,10 @@ public class TurnoDAOTest {
 		
 	}
 	
+	 /**
+     * Verifica el funcionamiento del método {@link TurnoDAO#find(Object)}.
+     * Añade un turno y verifica que se pueda encontrar correctamente en la base de datos.
+     */
 	@Test
 	public void verificarFind() {
 		esp = new Especialista("Eduardo Portilla", null, null, 0, null, null);
@@ -166,6 +200,10 @@ public class TurnoDAOTest {
 		//a
 	}
 	
+	 /**
+     * Verifica el funcionamiento del método {@link TurnoDAO#update(TurnoDTO, TurnoDTO)}.
+     * Añade un turno, lo actualiza y verifica que el cambio se haya realizado correctamente.
+     */
 	@Test
 	public void verificarUpdate() {
 		esp = new Especialista("Mario Rodríguez", null, null, 0, null, null);
@@ -188,6 +226,11 @@ public class TurnoDAOTest {
 		
 	}
 	
+	/**
+     * Verifica la correcta serialización de los datos de turno en archivos.
+     * Este método comprueba si los datos serializados se pueden escribir y leer correctamente
+     * desde el sistema de archivos.
+     */
 	@Test
 	public void verificarWriteSerialized() {
 		esp = new Especialista("Eduardo Portilla", null, null, 0, null, null);
@@ -214,6 +257,11 @@ public class TurnoDAOTest {
 		
 	}
 	
+	/**
+     * Verifica la correcta deserialización de los datos de turno desde archivos.
+     * Este método comprueba si los datos deserializados se pueden leer correctamente desde el sistema
+     * de archivos y verificarlos en la base de datos.
+     */
 	@Test
 	public void verificarReadSerialized() {
 		esp = new Especialista("Eduardo Portilla", null, null, 0, null, null);
@@ -239,6 +287,9 @@ public class TurnoDAOTest {
 		verifiedOut = verified;
 	}
 	
+	/**
+     * Método que se ejecuta después de cada prueba. Imprime un mensaje indicando si la prueba fue aprobada o denegada.
+     */
 	@After
 	public void despuesDeCadaPueba() {
 		if (verifiedOut == true) {
@@ -251,6 +302,9 @@ public class TurnoDAOTest {
 		System.out.println();
 	}
 	
+	/**
+     * Método que se ejecuta después de todas las pruebas. Imprime un mensaje indicando que las pruebas han finalizado.
+     */
 	@AfterClass
 	public static void despuesDeTodo() {
 		System.out.println("Finalizando las pruebas de la clase TurnoDAO");
