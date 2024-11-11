@@ -44,12 +44,19 @@ public class ExceptionChecker {
      */
 	public static void mail(String mail) throws MailException {
 		
-		Pattern p = Pattern.compile("^[\\w!#$%&amp;'*+/=?`{|}~^-]+(?:\\.[\\w!#$%&amp;'*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$");
+		//Pattern p = Pattern.compile("^[\\w!#$%&amp;'*+/=?`{|}~^-]+(?:\\.[\\w!#$%&amp;'*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$");
+		//Pattern p = Pattern.compile("^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+$");
+		
+		Pattern p = Pattern.compile("^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$");
 		Matcher m = p.matcher(mail);
 		
-		if (m.find()) {
+		if (!m.matches()) {
 			throw new MailException();
 		}
+		/*
+		if (m.find()) {
+			throw new MailException();
+		}*/
 	}
 	
 	 /**

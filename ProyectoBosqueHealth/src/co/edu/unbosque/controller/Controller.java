@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.lang.reflect.Array;
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -34,6 +35,7 @@ import co.edu.unbosque.util.exception.InvalidDateException;
 import co.edu.unbosque.util.exception.MailException;
 import co.edu.unbosque.util.exception.NotSpecialCharacterException;
 import co.edu.unbosque.util.exception.PositiveIntegerException;
+import co.edu.unbosque.util.mail.Mail;
 import co.edu.unbosque.view.ViewFacade;
 
 public class Controller implements ActionListener {
@@ -44,6 +46,7 @@ public class Controller implements ActionListener {
 	private Especialista especialistaActual;
 	private DirectorMedico directorActual;
 	private int numCita = 0;
+	private Mail envioEmail;
 
 	public Controller() {
 		mf = new ModelFacade();
@@ -316,13 +319,20 @@ public class Controller implements ActionListener {
 				String correo = vf.getVentanaPaciente().getTxtCorreoElectronico().getText();
 				String genero = vf.getVentanaPaciente().getCmbGenero().getSelectedItem().toString();
 
-				int numDoc = Integer.parseInt(numeroDoc);
+				if (verifyMail(correo)) {
 
-				mf.getPacienteDAO().add(new PacienteDTO(nombreCompleto, fecNacimientoDC, genero, numDoc, correo));
-				JOptionPane.showMessageDialog(null, "Paciente creado exitosamente");
+					int numDoc = Integer.parseInt(numeroDoc);
 
-				pacienteActual = new Paciente(nombreCompleto, fecNacimientoDC, genero, numDoc, correo);
-				limpiarEntradasPacientes();
+					mf.getPacienteDAO().add(new PacienteDTO(nombreCompleto, fecNacimientoDC, genero, numDoc, correo));
+					JOptionPane.showMessageDialog(null, "Paciente creado exitosamente");
+
+					pacienteActual = new Paciente(nombreCompleto, fecNacimientoDC, genero, numDoc, correo);
+					limpiarEntradasPacientes();
+				} else {
+					JOptionPane.showMessageDialog(null, "Formato inválido de correo", "Error",
+							JOptionPane.ERROR_MESSAGE);
+				}
+
 			}
 
 			break;
@@ -352,7 +362,16 @@ public class Controller implements ActionListener {
 				mf.getCitaDAO().add(new CitaDTO(espCita, pacienteActual, fechaCita, horaCita, numCita, "Activo"));
 				JOptionPane.showMessageDialog(null, "Cita generada exitosamente");
 
+				// Enviar correo
+				envioEmail = new Mail();
+				String subject = "Nueva cita creada";
+				String content = "Estimado " + pacienteActual.getNombre() + ", su cita de " + espCita.getEspecialidad()
+						+ " fué programada para la siguiente fecha y hora " + "\n--> Fecha: " + fechaCita
+						+ "\n--> Hora: " + horaCita;
+				envioEmail.enviarC(pacienteActual.getCorreo(), subject, content);
+
 				limpiarEntradasPacientes();
+
 			}
 
 			break;
@@ -485,6 +504,8 @@ public class Controller implements ActionListener {
 				String especialidadE = vf.getVentanaEspecialista().getCmbEspecialidadDP().getSelectedItem().toString();
 
 				int numDocE = Integer.parseInt(numeroDocE);
+				
+				if (verifyMail(correoE)) {
 
 				mf.getEspecialistaDAO().add(
 						new EspecialistaDTO(nombreCompletoE, fecNacimientoE, generoE, numDocE, correoE, especialidadE));
@@ -494,11 +515,13 @@ public class Controller implements ActionListener {
 						especialidadE);
 
 				limpiarEntradasEspecialistas();
+				}else {
+					JOptionPane.showMessageDialog(null, "Formato inválido de correo", "Error",
+							JOptionPane.ERROR_MESSAGE);
+				}
 			}
 			break;
 		case "GENERAR CAMBIO TURNO ESP":
-			
-
 
 			if (vf.getVentanaEspecialista().getCmbFechaTurno().getSelectedItem().toString().equals("")
 					|| vf.getVentanaEspecialista().getCmbEspecialistaActual().getSelectedItem().toString().equals("")
@@ -509,25 +532,48 @@ public class Controller implements ActionListener {
 			} else {
 
 				String fechaTurno = vf.getVentanaEspecialista().getCmbFechaTurno().getSelectedItem().toString();
-				String [] splitFecha = fechaTurno.split(" : ");
-					int turnoId = Integer.parseInt(splitFecha[0]);
-					String fechaTCT = splitFecha[1];
-					
-				/*Date fechaTurno = 	
+				String[] splitFecha = fechaTurno.split(" : ");
+
+				int turnoId = Integer.parseInt(splitFecha[0]);
+				SimpleDateFormat formaFecha = new SimpleDateFormat("dd/MM/yyyy");
+				String fechaTCT = splitFecha[1];
+				Date fechaTurnoa = null;
+				try {
+					fechaTurnoa = formaFecha.parse(fechaTCT);
+				} catch (ParseException e1) {
+
+				}
 				String espActu = vf.getVentanaEspecialista().getCmbEspecialistaActual().getSelectedItem().toString();
 				String nuevoEsp = vf.getVentanaEspecialista().getCmbNuevoEspecialista().getSelectedItem().toString();
 
-				Especialista espNuevoTemp = new Especialista(nuevoEsp, null, null, 0, null, null);
-				
-				
-				
-				
-				mf.getTurnoDAO().update(null, null);
-				JOptionPane.showMessageDialog(null, "Cambio de Turno generado exitosamente");
+				// cambiar turno
+				// buscar el Turno en la lista de Turnos con el turnoId
 
-				limpiarEntradasEspecialistas();*/
+				Turno turnoEncontrado = mf.getTurnoDAO().find(new Turno(null, null, turnoId));
+
+				if (turnoEncontrado != null) {
+					// lo encontró
+					// turnoEncontrado es el turno Anterior
+					// lo cambio a DTO
+					TurnoDTO turnoDTOEncontradoAnterior = DataMapper.turnoToTurnoDTO(turnoEncontrado);
+
+					// ahora preparo el turno nuevo
+
+					Especialista espNuevoTemp = new Especialista(nuevoEsp, null, null, 0, null,
+							turnoDTOEncontradoAnterior.getEspecialista().getEspecialidad());
+
+					TurnoDTO turnoNuevo = new TurnoDTO(espNuevoTemp, fechaTurnoa, turnoId);
+
+					mf.getTurnoDAO().update(turnoDTOEncontradoAnterior, turnoNuevo);
+					JOptionPane.showMessageDialog(null, "Cambio de Turno generado exitosamente");
+
+					limpiarEntradasEspecialistas();
+				}
+
+				
+
 			}
-			
+
 			break;
 		case "GUARDAR TRATAMIENTO ESP":
 			Date fecTratamientoE = vf.getVentanaEspecialista().getFechaTratamientoP().getDate();
@@ -641,11 +687,12 @@ public class Controller implements ActionListener {
 
 				int numDocDM = Integer.parseInt(numeroDocDM);
 
-				mf.getDirectorMedicoDAO().add(
-						new DirectorMedicoDTO(nombreCompletoDM, fecNacimientoDM, generoDM, numDocDM, correoDM, nivelD));
-				JOptionPane.showMessageDialog(null, "Director Medico creado exitosamente");
+							mf.getDirectorMedicoDAO().add(new DirectorMedicoDTO(nombreCompletoDM, fecNacimientoDM,
+									generoDM, numDocDM, correoDM, nivelD));
+							JOptionPane.showMessageDialog(null, "Director Medico creado exitosamente");
 
-				limpiarEntradasDirectorMedico();
+							limpiarEntradasDirectorMedico();
+						
 			}
 			break;
 		case "GENERAR TURNO DIRECTOR":
@@ -866,39 +913,112 @@ public class Controller implements ActionListener {
 	// DATOS
 	public void preparacionDeDatosEsp() {
 
-		EspecialistaDTO esp1 = new EspecialistaDTO("David Caicedo",
-				new GregorianCalendar(2000, Calendar.AUGUST, 4).getTime(), "Masculino", 142139, "dae.c@gmail.com",
-				"Cirugía");
-		EspecialistaDTO esp2 = new EspecialistaDTO("Pedro Gomez",
-				new GregorianCalendar(1980, Calendar.FEBRUARY, 15).getTime(), "Masculino", 662139, "ee.c@gmail.com",
-				"Oncología");
-		EspecialistaDTO esp3 = new EspecialistaDTO("Andrea Pelaez",
-				new GregorianCalendar(1980, Calendar.APRIL, 3).getTime(), "Femenino", 857139, "fr.c@gmail.com",
-				"Dermatología");
-		EspecialistaDTO esp4 = new EspecialistaDTO("Jorge Lopez",
-				new GregorianCalendar(1990, Calendar.AUGUST, 7).getTime(), "Masculino", 196739, "tr.c@gmail.com",
-				"Oncología");
-		EspecialistaDTO esp5 = new EspecialistaDTO("Pepe Aguilar",
-				new GregorianCalendar(1991, Calendar.APRIL, 22).getTime(), "Masculino", 199139, "yt.c@gmail.com",
-				"Neumología");
-		EspecialistaDTO esp6 = new EspecialistaDTO("Michael Jackson",
-				new GregorianCalendar(1995, Calendar.JUNE, 12).getTime(), "Masculino", 206739, "uy.c@gmail.com",
-				"Cardiología");
-		EspecialistaDTO esp7 = new EspecialistaDTO("Tom Cruise",
-				new GregorianCalendar(1990, Calendar.JULY, 14).getTime(), "Masculino", 302139, "oi.c@gmail.com",
-				"Medicina Interna");
-		EspecialistaDTO esp8 = new EspecialistaDTO("Super Man",
-				new GregorianCalendar(1988, Calendar.AUGUST, 3).getTime(), "Masculino", 402139, "qw.c@gmail.com",
-				"Oncología");
-		EspecialistaDTO esp9 = new EspecialistaDTO("Linda Caicedo",
-				new GregorianCalendar(1976, Calendar.NOVEMBER, 4).getTime(), "Femenino", 502139, "sd.c@gmail.com",
-				"Medicina Interna");
-		EspecialistaDTO esp10 = new EspecialistaDTO("Petrona Gonzalez",
-				new GregorianCalendar(1987, Calendar.AUGUST, 1).getTime(), "Femenino", 7802139, "der.c@gmail.com",
-				"Dermatología");
-		EspecialistaDTO esp11 = new EspecialistaDTO("Oliver Caicedo",
-				new GregorianCalendar(1999, Calendar.DECEMBER, 14).getTime(), "Masculino", 962139, "degdg.c@gmail.com",
-				"Cirugía");
+		// NEUMOLOGÍA
+
+		EspecialistaDTO esp1 = new EspecialistaDTO("Sofía Sequea",
+				new GregorianCalendar(2001, Calendar.APRIL, 5).getTime(), "Femenino", 452136097,
+				"dcaicedos@unbosque.edu.co", "Neumología");
+		EspecialistaDTO esp2 = new EspecialistaDTO("Alejandra Díaz",
+				new GregorianCalendar(2000, Calendar.AUGUST, 6).getTime(), "Femenino", 213645879,
+				"dcaicedos@unbosque.edu.co", "Neumología");
+		EspecialistaDTO esp3 = new EspecialistaDTO("Bredy Daza",
+				new GregorianCalendar(1998, Calendar.DECEMBER, 30).getTime(), "Masculino", 754819613,
+				"dcaicedos@unbosque.edu.co", "Neumología");
+		EspecialistaDTO esp4 = new EspecialistaDTO("Nicolás Moncada",
+				new GregorianCalendar(2002, Calendar.MAY, 18).getTime(), "Masculino", 854697238,
+				"dcaicedos@unbosque.edu.co", "Neumología");
+		EspecialistaDTO esp5 = new EspecialistaDTO("Jerónimo Vega",
+				new GregorianCalendar(1999, Calendar.JULY, 3).getTime(), "Masculino", 2013469853,
+				"dcaicedos@unbosque.edu.co", "Neumología");
+
+		// CARDIOLOGÍA
+		EspecialistaDTO esp6 = new EspecialistaDTO("Andrés Toquica",
+				new GregorianCalendar(1997, Calendar.AUGUST, 8).getTime(), "Masculino", 987654321,
+				"sperezhe@unbosque.edu.co", "Cardiología");
+		EspecialistaDTO esp7 = new EspecialistaDTO("Alejandra Villa",
+				new GregorianCalendar(1998, Calendar.FEBRUARY, 9).getTime(), "Femenino", 876543210,
+				"sperezhe@unbosque.edu.co", "Cardiología");
+		EspecialistaDTO esp8 = new EspecialistaDTO("Manuela Villalba",
+				new GregorianCalendar(1995, Calendar.NOVEMBER, 15).getTime(), "Femenino", 765432109,
+				"sperezhe@unbosque.edu.co", "Cardiología");
+		EspecialistaDTO esp9 = new EspecialistaDTO("Estefany Silva",
+				new GregorianCalendar(1990, Calendar.MARCH, 21).getTime(), "Femenino", 654321097,
+				"sperezhe@unbosque.edu.co", "Cardiología");
+		EspecialistaDTO esp10 = new EspecialistaDTO("Nicholas Olaya",
+				new GregorianCalendar(1992, Calendar.JANUARY, 11).getTime(), "Masculino", 561243048,
+				"sperezhe@unbosque.edu.co", "Cardiología");
+
+		// MEDICINA INTERNA
+
+		EspecialistaDTO esp11 = new EspecialistaDTO("Nicolás Gutiérrez",
+				new GregorianCalendar(1996, Calendar.JUNE, 2).getTime(), "Masculino", 1541564154,
+				"sgranadosp@unbosque.edu.co", "Medicina Interna");
+		EspecialistaDTO esp12 = new EspecialistaDTO("Alexandra Cardona",
+				new GregorianCalendar(2001, Calendar.SEPTEMBER, 1).getTime(), "Femenino", 484564845,
+				"sgranadosp@unbosque.edu.co", "Medicina Interna");
+		EspecialistaDTO esp13 = new EspecialistaDTO("Daniel Sánchez",
+				new GregorianCalendar(2002, Calendar.NOVEMBER, 19).getTime(), "Masculino", 789789741,
+				"sgranadosp@unbosque.edu.co", "Medicina Interna");
+		EspecialistaDTO esp14 = new EspecialistaDTO("Fernando Hernández",
+				new GregorianCalendar(1997, Calendar.DECEMBER, 7).getTime(), "Masculino", 791264551,
+				"sgranadosp@unbosque.edu.co", "Medicina Interna");
+		EspecialistaDTO esp15 = new EspecialistaDTO("Luis Díaz",
+				new GregorianCalendar(1989, Calendar.JANUARY, 26).getTime(), "Masculino", 315489987,
+				"sgranadosp@unbosque.edu.co", "Medicina Interna");
+
+		// CIRUGÍA
+
+		EspecialistaDTO esp16 = new EspecialistaDTO("Ginna Romero",
+				new GregorianCalendar(2001, Calendar.APRIL, 4).getTime(), "Femenino", 1234567891,
+				"dcaicedos@unbosque.edu.co", "Cirugía");
+		EspecialistaDTO esp17 = new EspecialistaDTO("Alejandra Wage",
+				new GregorianCalendar(2000, Calendar.AUGUST, 5).getTime(), "Femenino", 234567912,
+				"dcaicedos@unbosque.edu.co", "Cirugía");
+		EspecialistaDTO esp18 = new EspecialistaDTO("Mario Rodriguez",
+				new GregorianCalendar(1998, Calendar.DECEMBER, 29).getTime(), "Masculino", 34789123,
+				"dcaicedos@unbosque.edu.co", "Cirugía");
+		EspecialistaDTO esp19 = new EspecialistaDTO("Nicolás Zambrano",
+				new GregorianCalendar(2002, Calendar.MAY, 17).getTime(), "Masculino", 456791234,
+				"dcaicedos@unbosque.edu.co", "Cirugía");
+		EspecialistaDTO esp20 = new EspecialistaDTO("Sebastián Pérez",
+				new GregorianCalendar(1999, Calendar.JULY, 4).getTime(), "Masculino", 569712345,
+				"dcaicedos@unbosque.edu.co", "Cirugía");
+
+		// ONCOLOGÍA
+
+		EspecialistaDTO esp21 = new EspecialistaDTO("Julio Avendaño",
+				new GregorianCalendar(1997, Calendar.AUGUST, 7).getTime(), "Masculino", 654783258,
+				"sperezhe@unbosque.edu.co", "Oncología");
+		EspecialistaDTO esp22 = new EspecialistaDTO("Luisa Suárez",
+				new GregorianCalendar(1998, Calendar.FEBRUARY, 8).getTime(), "Femenino", 452184324,
+				"sperezhe@unbosque.edu.co", "Oncología");
+		EspecialistaDTO esp23 = new EspecialistaDTO("Lizeth Estevez",
+				new GregorianCalendar(1995, Calendar.NOVEMBER, 14).getTime(), "Femenino", 754964287,
+				"sperezhe@unbosque.edu.co", "Oncología");
+		EspecialistaDTO esp24 = new EspecialistaDTO("Esperanza Valderrama",
+				new GregorianCalendar(1990, Calendar.MARCH, 20).getTime(), "Femenino", 325489102,
+				"sperezhe@unbosque.edu.co", "Oncología");
+		EspecialistaDTO esp25 = new EspecialistaDTO("Eduardo Peña",
+				new GregorianCalendar(1992, Calendar.JANUARY, 10).getTime(), "Masculino", 1025478967,
+				"sperezhe@unbosque.edu.co", "Oncología");
+
+		// DERMATOLOGÍA
+
+		EspecialistaDTO esp26 = new EspecialistaDTO("Mauricio Pedraza",
+				new GregorianCalendar(1996, Calendar.JUNE, 1).getTime(), "Masculino", 458793214,
+				"sgranadosp@unbosque.edu.co", "Dermatología");
+		EspecialistaDTO esp27 = new EspecialistaDTO("Diana Olaya",
+				new GregorianCalendar(2001, Calendar.SEPTEMBER, 2).getTime(), "Femenino", 852314960,
+				"sgranadosp@unbosque.edu.co", "Dermatología");
+		EspecialistaDTO esp28 = new EspecialistaDTO("Cesar Díaz",
+				new GregorianCalendar(2002, Calendar.NOVEMBER, 13).getTime(), "Masculino", 1023456879,
+				"sgranadosp@unbosque.edu.co", "Dermatología");
+		EspecialistaDTO esp29 = new EspecialistaDTO("Leonardo Bernal",
+				new GregorianCalendar(1997, Calendar.DECEMBER, 22).getTime(), "Masculino", 256340897,
+				"sgranadosp@unbosque.edu.co", "Dermatología");
+		EspecialistaDTO esp30 = new EspecialistaDTO("Yimmy Chará",
+				new GregorianCalendar(1989, Calendar.JANUARY, 25).getTime(), "Masculino", 302148586,
+				"sgranadosp@unbosque.edu.co", "Dermatología");
 
 		mf.getEspecialistaDAO().add(esp1);
 		mf.getEspecialistaDAO().add(esp2);
@@ -911,6 +1031,26 @@ public class Controller implements ActionListener {
 		mf.getEspecialistaDAO().add(esp9);
 		mf.getEspecialistaDAO().add(esp10);
 		mf.getEspecialistaDAO().add(esp11);
+		mf.getEspecialistaDAO().add(esp12);
+		mf.getEspecialistaDAO().add(esp13);
+		mf.getEspecialistaDAO().add(esp14);
+		mf.getEspecialistaDAO().add(esp15);
+		mf.getEspecialistaDAO().add(esp16);
+		mf.getEspecialistaDAO().add(esp17);
+		mf.getEspecialistaDAO().add(esp18);
+		mf.getEspecialistaDAO().add(esp19);
+		mf.getEspecialistaDAO().add(esp20);
+		mf.getEspecialistaDAO().add(esp21);
+		mf.getEspecialistaDAO().add(esp22);
+		mf.getEspecialistaDAO().add(esp23);
+		mf.getEspecialistaDAO().add(esp24);
+		mf.getEspecialistaDAO().add(esp25);
+		mf.getEspecialistaDAO().add(esp26);
+		mf.getEspecialistaDAO().add(esp27);
+		mf.getEspecialistaDAO().add(esp28);
+		mf.getEspecialistaDAO().add(esp29);
+		mf.getEspecialistaDAO().add(esp30);
+
 	}
 
 	// TABLAS CITAS MEDICAS ESPECIALISTA
@@ -1113,8 +1253,40 @@ public class Controller implements ActionListener {
 
 	}
 
+	class EspecialistaContadorT {
+		public String NombreEspecialista;
+		public int cantidadTurnos;
+
+		public EspecialistaContadorT() {
+			// TODO Auto-generated constructor stub
+		}
+
+		public EspecialistaContadorT(String nombreEspecialista, int cantidadTurnos) {
+			super();
+			NombreEspecialista = nombreEspecialista;
+			this.cantidadTurnos = cantidadTurnos;
+		}
+
+		public String getNombreEspecialista() {
+			return NombreEspecialista;
+		}
+
+		public void setNombreEspecialista(String nombreEspecialista) {
+			NombreEspecialista = nombreEspecialista;
+		}
+
+		public int getCantidadTurnos() {
+			return cantidadTurnos;
+		}
+
+		public void setCantidadTurnos(int cantidadTurnos) {
+			this.cantidadTurnos = cantidadTurnos;
+		}
+
+	}
+
 	// TABLA ESPECIALISTAS CON MAYOR NUMERO DE CITAS DIRECTOR MEDICO
-	// PENDIENTEEEEEEE
+
 	public void tablaEspecialistasMayorNumeroCitasDM() {
 
 		ArrayList<EspecialistaContador> contadorCitas = new ArrayList<>();
@@ -1187,17 +1359,128 @@ public class Controller implements ActionListener {
 
 	// TABLA ESPECIALIDAD CON MAYOR CONSULTA DIRECTOR MEDICO
 	public void tablaEspecialidadMayorConsultaDM() {
+		String titulosEMCDM[] = { "Especialidad", "Número de consultas" };
+		// ArrayList<TratamientoMedicoDTO> drdmList =
+		// mf.getTratamientoMedicoDAO().getAll();
 
+		String datosEMCDM[][] = new String[1][2];
+		/*
+		 * if (drdmList != null) { datosEMCDM = new String[drdmList.size()][3];
+		 * 
+		 * int i = 0; for (TratamientoMedicoDTO drdmDTO : drdmList) {
+		 * 
+		 * Paciente paci = drdmDTO.getPaciente(); if (paci != null) { datosEMCDM[i][0] =
+		 * paci.getNombre(); } datosEMCDM[i][1] = drdmDTO.getDiagnostico();
+		 * datosEMCDM[i][2] = drdmDTO.getFecha().toString();
+		 * 
+		 * i++; } }
+		 */
+
+		JTable jtEMCDM = new JTable(datosEMCDM, titulosEMCDM);
+		jtEMCDM.setEnabled(true);
+		jtEMCDM.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(10, 10, 500, 200); // validar coordenadas
+		vf.getVentanaDirector().getPanelEspecialidadMC().add(scrollPane);
+		scrollPane.setViewportView(jtEMCDM);
 	}
 
 	// TABLA CITAS CANCELADAS DIRECTOR MEDICO
 	public void tablaCitasCanceladasDM() {
+		String titulosCCDM[] = { "Especialidad", "Paciente", "Fecha" };
+		// ArrayList<TratamientoMedicoDTO> drdmList =
+		// mf.getTratamientoMedicoDAO().getAll();
 
+		String datosCCDM[][] = new String[1][3];
+		/*
+		 * if (drdmList != null) { datosEMCDM = new String[drdmList.size()][3];
+		 * 
+		 * int i = 0; for (TratamientoMedicoDTO drdmDTO : drdmList) {
+		 * 
+		 * Paciente paci = drdmDTO.getPaciente(); if (paci != null) { datosEMCDM[i][0] =
+		 * paci.getNombre(); } datosEMCDM[i][1] = drdmDTO.getDiagnostico();
+		 * datosEMCDM[i][2] = drdmDTO.getFecha().toString();
+		 * 
+		 * i++; } }
+		 */
+
+		JTable jtCC = new JTable(datosCCDM, titulosCCDM);
+		jtCC.setEnabled(true);
+		jtCC.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(10, 10, 500, 200); // validar coordenadas
+		vf.getVentanaDirector().getPanelCitasCanceladas().add(scrollPane);
+		scrollPane.setViewportView(jtCC);
 	}
 
 	// TABLA REPORTE MENSUAL DIRECTOR MEDICO
 	public void tablaReporteMensualDM() {
+		ArrayList<EspecialistaContadorT> contadorTurnos = new ArrayList<>();
+		ArrayList<TurnoDTO> emncList = mf.getTurnoDAO().getAll();
+		String nombreEspecialistaT = "";
 
+		for (TurnoDTO turnDTO : emncList) {
+			nombreEspecialistaT = turnDTO.getEspecialista().getNombre();
+			// buscar especialista en el arraylist contador de citas
+			// si existe entonces le añado una cita
+			// si no existe, añado el especialista al arraylist y lo inicio con 1
+
+			// recorrer el arraylist contador de citas
+			int ti = 0;
+			boolean debeAgregarItemT = false;
+			for (EspecialistaContadorT especialistaContadorT : contadorTurnos) {
+				if (especialistaContadorT.getNombreEspecialista().equals(nombreEspecialistaT)) {
+					// lo encontró, entonces trae el contador que tenga actualmente y le añade 1
+					int cantTurno = especialistaContadorT.getCantidadTurnos(); // recupera cantidadActual
+					cantTurno++; // le añade 1
+					// nuevo Valor a ingresar -- es el mismo update
+					EspecialistaContador espContadorActualizado = new EspecialistaContador(nombreEspecialistaT,
+							cantTurno);
+					contadorTurnos.set(ti, especialistaContadorT);
+				} else {
+					debeAgregarItemT = true;
+
+				}
+
+			}
+			if (contadorTurnos.size() == 0) // esto sucede cuando no hay ningún item creado
+				debeAgregarItemT = true;
+
+			if (debeAgregarItemT) {
+				// no lo encontró, entonces crea un nuevo item y lo añade al arreglo de
+				// acumulación
+				EspecialistaContadorT espContadorAgregarTur = new EspecialistaContadorT(nombreEspecialistaT, 1);
+				contadorTurnos.add(espContadorAgregarTur);
+			}
+
+			// contadorCitas.contains(nombreEspecialista)
+		}
+		// recorrer arreglo de citas
+
+		String titulosRMDM[] = { "Especialista", "Cantidad de Turnos" };
+
+		String datosRMDM[][] = new String[1][2];
+		if (contadorTurnos != null) {
+			datosRMDM = new String[contadorTurnos.size()][2];
+
+			int i = 0;
+
+			for (EspecialistaContadorT espContT : contadorTurnos) {
+
+				datosRMDM[i][0] = espContT.getNombreEspecialista();
+				datosRMDM[i][1] = String.valueOf(espContT.getCantidadTurnos());
+
+				i++;
+			}
+		}
+
+		JTable jtDirectorRMDM = new JTable(datosRMDM, titulosRMDM);
+		jtDirectorRMDM.setEnabled(true);
+		jtDirectorRMDM.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(10, 10, 500, 200); // validar coordenadas
+		vf.getVentanaDirector().getPanelReporteMensual().add(scrollPane);
+		scrollPane.setViewportView(jtDirectorRMDM);
 	}
 
 	public void cargarComboBoxAgendarCita() {
@@ -1257,14 +1540,14 @@ public class Controller implements ActionListener {
 
 		ArrayList<TurnoDTO> listaT = mf.getTurnoDAO().getAll();
 		for (TurnoDTO turnoDTO : listaT) {
-			
+
 			SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 			Date fecTurno = turnoDTO.getFecha();
 			String SFecTurno = sdf.format(fecTurno);
-			
+
 			vf.getVentanaEspecialista().getCmbFechaTurno()
 					.addItem(String.valueOf(turnoDTO.getNumId()) + " : " + SFecTurno);
-			
+
 		}
 		vf.getVentanaEspecialista().getCmbFechaTurno().addActionListener(new ActionListener() {
 
@@ -1277,22 +1560,25 @@ public class Controller implements ActionListener {
 					String turnoSelec = vf.getVentanaEspecialista().getCmbFechaTurno().getSelectedItem().toString();
 					String[] turnoSplit = turnoSelec.split(" : ");
 					if (turnoSplit != null && turnoSplit.length >= 0) {
-						int iDTurno = Integer.parseInt(turnoSplit[0]);
-						Turno turnoTemp = new Turno(null, null, iDTurno);
-						Turno tEncontrado = mf.getTurnoDAO().find(turnoTemp);
-						if (tEncontrado != null) {
-							vf.getVentanaEspecialista().getCmbEspecialistaActual()
-									.addItem(tEncontrado.getEspecialista().getNombre());
+						if (!turnoSplit[0].trim().equals("")) {
+							int iDTurno = Integer.parseInt(turnoSplit[0]);
+							Turno turnoTemp = new Turno(null, null, iDTurno);
+							Turno tEncontrado = mf.getTurnoDAO().find(turnoTemp);
+							if (tEncontrado != null) {
+								vf.getVentanaEspecialista().getCmbEspecialistaActual()
+										.addItem(tEncontrado.getEspecialista().getNombre());
 
-							String espeTempActua = tEncontrado.getEspecialista().getEspecialidad();
+								String espeTempActua = tEncontrado.getEspecialista().getEspecialidad();
 
-							ArrayList<EspecialistaDTO> listTempEsp = mf.getEspecialistaDAO().getAll();
-							for (EspecialistaDTO espTemp : listTempEsp) {
-								if (espTemp.getEspecialidad().equals(espeTempActua)) {
-									vf.getVentanaEspecialista().getCmbNuevoEspecialista().addItem(espTemp.getNombre());
+								ArrayList<EspecialistaDTO> listTempEsp = mf.getEspecialistaDAO().getAll();
+								for (EspecialistaDTO espTemp : listTempEsp) {
+									if (espTemp.getEspecialidad().equals(espeTempActua)) {
+										vf.getVentanaEspecialista().getCmbNuevoEspecialista()
+												.addItem(espTemp.getNombre());
+									}
 								}
-							}
 
+							}
 						}
 					}
 				}
@@ -1300,7 +1586,6 @@ public class Controller implements ActionListener {
 
 		});
 	}
-
 
 	public boolean verifyMail(String mail) {
 		try {
@@ -1320,13 +1605,13 @@ public class Controller implements ActionListener {
 		}
 	}
 
-	public int verifyNumber(int num) {
+	public boolean verifyNumber(int num) {
 		try {
 			ExceptionChecker.notValidNumberException(num);
+			return true;
 		} catch (PositiveIntegerException e) {
-
+			return false;
 		}
-		return num;
 	}
 
 	public boolean verifyTxt(String txt) {
@@ -1370,4 +1655,4 @@ public class Controller implements ActionListener {
 		return (int) (Math.random() * 10000 + 100);
 	}
 
-} //a
+}

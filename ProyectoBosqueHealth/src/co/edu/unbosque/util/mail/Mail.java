@@ -116,8 +116,8 @@ public class Mail {
      * @param s Asunto del correo.
      * @param c Contenido del correo en formato HTML.
      */
-	public void enviarC(String et, String s, String c) {
-		createEmail(et, s, c);
+	public void enviarC(String to, String subject, String content) {
+		createEmail(to, subject, content);
 		sendEmail();
 	}
 
